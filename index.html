@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./styles.css" />
   <link rel="stylesheet" href="./service-flow.css" />
 </head>
@@ -85,7 +85,7 @@
     <section class="intro-section">
       <div class="container intro-grid">
         <p class="eyebrow">ABOUT JEONGWOLJAE</p>
-        <div>
+        <div class="intro-copy">
           <h2>감으로 말하지 않고,<br />구조로 읽습니다.</h2>
           <p class="lead-copy">
             정월재는 전통 사주명리의 이론과 해석 체계, 축적된 명리 자료를 구조화해
@@ -102,154 +102,182 @@
             <p class="eyebrow">SERVICES</p>
             <h2 id="services-title">무엇이 궁금한가요.</h2>
           </div>
-          <p>하나를 고르면 필요한 정보만 간단히 입력하고 바로 해당 흐름을 살펴볼 수 있습니다.</p>
+          <p>하나의 사주 원본에서 출발해, 보고 싶은 주제에 따라 해석의 초점을 달리합니다.</p>
         </div>
 
-        <div class="service-grid">
-          <article class="service-card" data-service-target="saju" tabindex="0" role="button">
+        <div class="service-list">
+          <button class="service-row" type="button" data-service-target="saju">
             <span class="service-index">01</span>
-            <div><h3>종합 사주</h3><p>기질, 성향, 기본 명식과 삶의 큰 구조를 살펴봅니다.</p></div>
-            <span class="service-meta">기질 · 성향 · 기본 명식</span>
-          </article>
-          <article class="service-card" data-service-target="elements" tabindex="0" role="button">
+            <span class="service-content"><strong>종합 사주</strong><small>기질, 성향, 기본 명식과 삶의 큰 구조</small></span>
+            <span class="service-meta">기질 · 성향</span>
+            <span class="service-arrow" aria-hidden="true">↗</span>
+          </button>
+          <button class="service-row" type="button" data-service-target="elements">
             <span class="service-index">02</span>
-            <div><h3>오행 분석</h3><p>목·화·토·금·수의 분포와 균형, 과다와 부족을 읽습니다.</p></div>
+            <span class="service-content"><strong>오행 분석</strong><small>목·화·토·금·수의 분포와 균형</small></span>
             <span class="service-meta">木 · 火 · 土 · 金 · 水</span>
-          </article>
-          <article class="service-card" data-service-target="fortune" tabindex="0" role="button">
+            <span class="service-arrow" aria-hidden="true">↗</span>
+          </button>
+          <button class="service-row" type="button" data-service-target="fortune">
             <span class="service-index">03</span>
-            <div><h3>오늘 · 월운 · 연운</h3><p>나의 사주와 현재 시기의 기운이 만나는 흐름을 봅니다.</p></div>
+            <span class="service-content"><strong>오늘 · 월운 · 연운</strong><small>나의 사주와 현재 시기의 기운이 만나는 흐름</small></span>
             <span class="service-meta">오늘 · 이번 달 · 올해</span>
-          </article>
-          <article class="service-card" data-service-target="love" tabindex="0" role="button">
+            <span class="service-arrow" aria-hidden="true">↗</span>
+          </button>
+          <button class="service-row" type="button" data-service-target="love">
             <span class="service-index">04</span>
-            <div><h3>연애와 인연</h3><p>관계를 맺는 방식과 반복되는 패턴, 인연의 흐름을 살펴봅니다.</p></div>
+            <span class="service-content"><strong>연애와 인연</strong><small>관계를 맺는 방식과 반복되는 패턴</small></span>
             <span class="service-meta">관계 · 연애 성향</span>
-          </article>
-          <article class="service-card" data-service-target="compatibility" tabindex="0" role="button">
+            <span class="service-arrow" aria-hidden="true">↗</span>
+          </button>
+          <button class="service-row" type="button" data-service-target="compatibility">
             <span class="service-index">05</span>
-            <div><h3>궁합</h3><p>두 사람의 사주와 오행을 함께 비교해 관계의 특징을 읽습니다.</p></div>
+            <span class="service-content"><strong>궁합</strong><small>두 사람의 사주와 오행을 함께 비교</small></span>
             <span class="service-meta">두 사람의 관계</span>
-          </article>
-          <article class="service-card" data-service-target="work" tabindex="0" role="button">
+            <span class="service-arrow" aria-hidden="true">↗</span>
+          </button>
+          <button class="service-row" type="button" data-service-target="work">
             <span class="service-index">06</span>
-            <div><h3>일과 재물</h3><p>업무 성향, 조직과 독립의 방향, 재물을 다루는 기질을 봅니다.</p></div>
-            <span class="service-meta">직업 · 재물 흐름</span>
-          </article>
+            <span class="service-content"><strong>일과 재물</strong><small>업무 성향, 조직과 독립, 재물 흐름</small></span>
+            <span class="service-meta">직업 · 재물</span>
+            <span class="service-arrow" aria-hidden="true">↗</span>
+          </button>
         </div>
       </div>
     </section>
 
     <section class="reading-section" id="reading" aria-labelledby="reading-title">
-      <div class="container reading-grid">
+      <div class="container reading-layout">
         <div class="reading-heading">
           <p class="eyebrow">START READING</p>
-          <h2 id="reading-title">보고 싶은 흐름을 고르고,<br />간단한 정보를 알려주세요.</h2>
-          <p>출생 시간을 모르는 경우 비워두어도 됩니다. 궁합을 선택했을 때만 상대방 정보를 추가로 받습니다.</p>
-          <div class="reading-aside-note">
-            <span>정월재의 기준</span>
-            <p>모든 서비스는 같은 사주 원본과 음양오행 구조를 바탕으로 연결됩니다.</p>
-          </div>
+          <h2 id="reading-title">보고 싶은 흐름을 고르고,<br />필요한 정보만 입력합니다.</h2>
+          <p>입력 항목을 한꺼번에 늘어놓지 않고 분석에 필요한 순서대로 정리했습니다. 출생 시간을 모르면 비워두어도 됩니다.</p>
+          <dl class="reading-facts">
+            <div><dt>기준</dt><dd>사주팔자 · 음양오행</dd></div>
+            <div><dt>선택 입력</dt><dd>출생 시간 · 성별 · 지역</dd></div>
+            <div><dt>궁합 선택 시</dt><dd>상대방 정보 추가</dd></div>
+          </dl>
         </div>
 
-        <form class="reading-form" data-reading-form novalidate>
-          <fieldset class="service-picker">
-            <legend>
-              <span class="flow-step-number">01</span>
-              <span class="flow-step-title">서비스 선택</span>
-            </legend>
-            <div class="service-options">
-              <label class="service-option"><input type="radio" name="serviceType" value="saju" checked /><span><strong>종합 사주</strong><small>기질 · 성향</small></span></label>
-              <label class="service-option"><input type="radio" name="serviceType" value="elements" /><span><strong>오행 분석</strong><small>오행의 균형</small></span></label>
-              <label class="service-option"><input type="radio" name="serviceType" value="fortune" /><span><strong>운의 흐름</strong><small>오늘 · 월 · 연</small></span></label>
-              <label class="service-option"><input type="radio" name="serviceType" value="love" /><span><strong>연애와 인연</strong><small>관계 성향</small></span></label>
-              <label class="service-option"><input type="radio" name="serviceType" value="compatibility" /><span><strong>궁합</strong><small>두 사람</small></span></label>
-              <label class="service-option"><input type="radio" name="serviceType" value="work" /><span><strong>일과 재물</strong><small>직업 · 재물</small></span></label>
-            </div>
-          </fieldset>
-
-          <div class="selected-service-note" aria-live="polite">
-            <span>SELECTED</span>
-            <p data-selected-service-description></p>
+        <div class="form-shell">
+          <div class="form-progress" aria-label="입력 단계">
+            <span class="is-active">01 서비스</span>
+            <span>02 내 정보</span>
+            <span>03 확인</span>
           </div>
 
-          <div class="profile-step">
-            <span class="flow-step-number">02</span>
-            <span class="flow-step-title">나의 정보</span>
-          </div>
-
-          <div class="field">
-            <label for="profile-name">이름 또는 닉네임 <span>*</span></label>
-            <input id="profile-name" name="profileName" type="text" autocomplete="name" placeholder="예: 정월" required />
-            <p class="field-message" data-error-for="profile-name"></p>
-          </div>
-
-          <div class="form-row form-row-2">
-            <div class="field">
-              <label for="birth-date">생년월일 <span>*</span></label>
-              <input id="birth-date" name="birthDate" type="date" required />
-              <p class="field-message" data-error-for="birth-date"></p>
-            </div>
-            <div class="field">
-              <label for="birth-time">태어난 시간 <em>선택</em></label>
-              <input id="birth-time" name="birthTime" type="time" />
-            </div>
-          </div>
-
-          <div class="form-row form-row-2">
-            <div class="field">
-              <label for="calendar-type">달력 기준</label>
-              <select id="calendar-type" name="calendarType">
-                <option value="solar">양력</option>
-                <option value="lunar">음력</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="gender">성별 <em>선택</em></label>
-              <select id="gender" name="gender">
-                <option value="">선택하지 않음</option>
-                <option value="male">남성</option>
-                <option value="female">여성</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="field">
-            <label for="birth-place">출생 지역 <em>선택</em></label>
-            <input id="birth-place" name="birthPlace" type="text" autocomplete="address-level1" placeholder="예: 서울" />
-          </div>
-
-          <section class="partner-panel" hidden data-partner-panel>
-            <div class="profile-step partner-step">
-              <span class="flow-step-number">03</span>
-              <span class="flow-step-title">상대방 정보</span>
-            </div>
-            <div class="field">
-              <label for="partner-name">이름 또는 닉네임 <span>*</span></label>
-              <input id="partner-name" name="partnerName" type="text" placeholder="예: 상대방" />
-              <p class="field-message" data-error-for="partner-name"></p>
-            </div>
-            <div class="form-row form-row-2">
-              <div class="field">
-                <label for="partner-birth-date">생년월일 <span>*</span></label>
-                <input id="partner-birth-date" name="partnerBirthDate" type="date" />
-                <p class="field-message" data-error-for="partner-birth-date"></p>
+          <form class="reading-form" data-reading-form novalidate>
+            <fieldset class="service-picker">
+              <legend>
+                <span class="flow-step-number">01</span>
+                <span class="flow-step-title">어떤 흐름이 궁금한가요?</span>
+                <span class="flow-step-description">하나를 선택해주세요.</span>
+              </legend>
+              <div class="service-options">
+                <label class="service-option"><input type="radio" name="serviceType" value="saju" checked /><span><strong>종합 사주</strong><small>기질 · 성향</small><i aria-hidden="true"></i></span></label>
+                <label class="service-option"><input type="radio" name="serviceType" value="elements" /><span><strong>오행 분석</strong><small>오행의 균형</small><i aria-hidden="true"></i></span></label>
+                <label class="service-option"><input type="radio" name="serviceType" value="fortune" /><span><strong>운의 흐름</strong><small>오늘 · 월 · 연</small><i aria-hidden="true"></i></span></label>
+                <label class="service-option"><input type="radio" name="serviceType" value="love" /><span><strong>연애와 인연</strong><small>관계 성향</small><i aria-hidden="true"></i></span></label>
+                <label class="service-option"><input type="radio" name="serviceType" value="compatibility" /><span><strong>궁합</strong><small>두 사람</small><i aria-hidden="true"></i></span></label>
+                <label class="service-option"><input type="radio" name="serviceType" value="work" /><span><strong>일과 재물</strong><small>직업 · 재물</small><i aria-hidden="true"></i></span></label>
               </div>
-              <div class="field">
-                <label for="partner-birth-time">태어난 시간 <em>선택</em></label>
-                <input id="partner-birth-time" name="partnerBirthTime" type="time" />
-              </div>
+            </fieldset>
+
+            <div class="selected-service-note" aria-live="polite">
+              <span>선택한 분석</span>
+              <p data-selected-service-description></p>
             </div>
-          </section>
 
-          <label class="consent-row">
-            <input type="checkbox" name="consent" required />
-            <span>분석을 위해 입력 정보가 사용되는 것에 동의합니다.</span>
-          </label>
+            <section class="profile-section" aria-labelledby="profile-step-title">
+              <div class="form-section-heading">
+                <span class="flow-step-number">02</span>
+                <div>
+                  <h3 id="profile-step-title">나의 정보</h3>
+                  <p>분석에 필요한 기본 정보입니다.</p>
+                </div>
+              </div>
 
-          <p class="form-status" role="status" aria-live="polite" data-form-status></p>
-          <button class="button button-primary button-large" type="submit">종합 사주 살펴보기</button>
-        </form>
+              <div class="field field-name">
+                <label for="profile-name">이름 또는 닉네임 <span class="required">필수</span></label>
+                <input id="profile-name" name="profileName" type="text" autocomplete="name" placeholder="예: 정월" required />
+                <p class="field-message" data-error-for="profile-name"></p>
+              </div>
+
+              <div class="field-grid birth-grid">
+                <div class="field field-date">
+                  <label for="birth-date">생년월일 <span class="required">필수</span></label>
+                  <input id="birth-date" name="birthDate" type="date" required />
+                  <p class="field-message" data-error-for="birth-date"></p>
+                </div>
+                <div class="field field-time">
+                  <label for="birth-time">태어난 시간 <span class="optional">선택</span></label>
+                  <input id="birth-time" name="birthTime" type="time" />
+                </div>
+              </div>
+
+              <div class="field-grid detail-grid">
+                <div class="field field-calendar">
+                  <label for="calendar-type">달력 기준</label>
+                  <select id="calendar-type" name="calendarType">
+                    <option value="solar">양력</option>
+                    <option value="lunar">음력</option>
+                  </select>
+                </div>
+                <div class="field field-gender">
+                  <label for="gender">성별 <span class="optional">선택</span></label>
+                  <select id="gender" name="gender">
+                    <option value="">선택하지 않음</option>
+                    <option value="male">남성</option>
+                    <option value="female">여성</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="field field-place">
+                <label for="birth-place">출생 지역 <span class="optional">선택</span></label>
+                <input id="birth-place" name="birthPlace" type="text" autocomplete="address-level1" placeholder="예: 서울" />
+                <p class="helper-text">정밀 시간 보정 기능을 연결할 때 사용됩니다.</p>
+              </div>
+            </section>
+
+            <section class="partner-panel" hidden data-partner-panel aria-labelledby="partner-step-title">
+              <div class="form-section-heading">
+                <span class="flow-step-number">03</span>
+                <div>
+                  <h3 id="partner-step-title">상대방 정보</h3>
+                  <p>궁합 분석을 선택했을 때만 필요합니다.</p>
+                </div>
+              </div>
+
+              <div class="field field-name">
+                <label for="partner-name">이름 또는 닉네임 <span class="required">필수</span></label>
+                <input id="partner-name" name="partnerName" type="text" placeholder="예: 상대방" />
+                <p class="field-message" data-error-for="partner-name"></p>
+              </div>
+
+              <div class="field-grid birth-grid">
+                <div class="field field-date">
+                  <label for="partner-birth-date">생년월일 <span class="required">필수</span></label>
+                  <input id="partner-birth-date" name="partnerBirthDate" type="date" />
+                  <p class="field-message" data-error-for="partner-birth-date"></p>
+                </div>
+                <div class="field field-time">
+                  <label for="partner-birth-time">태어난 시간 <span class="optional">선택</span></label>
+                  <input id="partner-birth-time" name="partnerBirthTime" type="time" />
+                </div>
+              </div>
+            </section>
+
+            <div class="form-submit-area">
+              <label class="consent-row">
+                <input type="checkbox" name="consent" required />
+                <span>분석을 위해 입력 정보가 사용되는 것에 동의합니다.</span>
+              </label>
+              <p class="form-status" role="status" aria-live="polite" data-form-status></p>
+              <button class="button button-primary button-large" type="submit">종합 사주 살펴보기</button>
+            </div>
+          </form>
+        </div>
       </div>
     </section>
 
@@ -258,61 +286,61 @@
         <div class="section-heading split-heading">
           <div>
             <p class="eyebrow">FIVE ELEMENTS</p>
-            <h2 id="elements-title">나를 이루는 다섯 기운.</h2>
+            <h2 id="elements-title">나를 이루는<br />다섯 가지 기운.</h2>
           </div>
-          <p>오행은 좋고 나쁨을 나누는 점수가 아니라, 각 기운의 강약과 서로의 관계를 읽는 기본 구조입니다.</p>
+          <p>목·화·토·금·수의 양을 단순히 세는 데서 끝내지 않고, 서로 돕고 제어하는 관계까지 함께 봅니다.</p>
         </div>
 
-        <div class="element-grid">
-          <article><span>木</span><h3>목</h3><p>성장 · 시작 · 확장</p></article>
-          <article><span>火</span><h3>화</h3><p>표현 · 열기 · 상승</p></article>
-          <article><span>土</span><h3>토</h3><p>균형 · 안정 · 중재</p></article>
-          <article><span>金</span><h3>금</h3><p>판단 · 정리 · 결단</p></article>
-          <article><span>水</span><h3>수</h3><p>지혜 · 유연 · 저장</p></article>
+        <div class="element-table" role="list">
+          <div class="element-row" role="listitem"><span>木</span><strong>목 · 성장</strong><p>시작, 확장, 관계, 자라나는 힘</p></div>
+          <div class="element-row" role="listitem"><span>火</span><strong>화 · 표현</strong><p>열정, 표현, 상승, 드러나는 힘</p></div>
+          <div class="element-row" role="listitem"><span>土</span><strong>토 · 균형</strong><p>안정, 중재, 수용, 중심을 잡는 힘</p></div>
+          <div class="element-row" role="listitem"><span>金</span><strong>금 · 정리</strong><p>판단, 규칙, 결단, 경계를 세우는 힘</p></div>
+          <div class="element-row" role="listitem"><span>水</span><strong>수 · 흐름</strong><p>지혜, 유연함, 저장, 움직이는 힘</p></div>
         </div>
       </div>
     </section>
 
     <section class="method-section" id="method" aria-labelledby="method-title">
-      <div class="wide-container method-shell">
-        <div class="method-art" aria-hidden="true">
-          <div class="moon-line moon-line-a"></div>
-          <div class="moon-line moon-line-b"></div>
-          <span>陰</span><span>陽</span>
+      <div class="container method-layout">
+        <div class="method-visual" aria-hidden="true">
+          <span class="orbit orbit-a"></span>
+          <span class="orbit orbit-b"></span>
+          <span class="orbit-dot"></span>
+          <span class="method-mark">陰陽<br />五行</span>
         </div>
 
         <div class="method-copy">
-          <p class="eyebrow light">METHOD</p>
-          <h2 id="method-title">하나의 사주,<br />하나의 기준.</h2>
-          <p class="method-lead">
-            결과마다 말을 바꾸지 않습니다. 사주팔자와 음양오행을 공통 원본으로 두고,
-            각 서비스는 같은 데이터에서 다른 관점을 읽습니다.
-          </p>
+          <p class="eyebrow">METHOD</p>
+          <h2 id="method-title">하나의 기준으로<br />끝까지 연결합니다.</h2>
+          <p class="lead-copy">오늘의 운세, 궁합, 재물운이 서로 다른 문장 생성기가 되지 않도록 하나의 원본 명식에서 모든 해석을 파생합니다.</p>
+
           <ol class="method-steps">
-            <li><span>01</span><strong>사주팔자 계산</strong><p>생년월일과 출생 시간을 기준으로 명식을 구성합니다.</p></li>
-            <li><span>02</span><strong>음양오행 분석</strong><p>강한 기운, 부족한 기운, 상생과 상극을 구조화합니다.</p></li>
-            <li><span>03</span><strong>명리 관계 해석</strong><p>일간, 십성, 천간·지지와 시기의 흐름을 연결합니다.</p></li>
-            <li><span>04</span><strong>정월재 문장으로 정리</strong><p>좋은 말만 늘어놓지 않고 강점과 부담 요인을 함께 전달합니다.</p></li>
+            <li><span>01</span><div><strong>사주팔자 계산</strong><p>생년월일과 출생 시간을 기준으로 원본 명식을 구성합니다.</p></div></li>
+            <li><span>02</span><div><strong>음양오행 분석</strong><p>오행의 분포와 균형, 상생·상극 관계를 확인합니다.</p></div></li>
+            <li><span>03</span><div><strong>명리 구조 해석</strong><p>일간, 십성, 천간·지지 관계와 시기의 흐름을 연결합니다.</p></div></li>
+            <li><span>04</span><div><strong>해석 데이터 적용</strong><p>축적된 명리 자료와 정월재의 해석 규칙을 함께 적용합니다.</p></div></li>
           </ol>
         </div>
       </div>
     </section>
 
-    <section class="principle-section">
-      <div class="container principle-grid">
-        <p class="eyebrow">OUR PRINCIPLE</p>
-        <blockquote>
-          “운명을 단정하기보다,<br />지금의 구조와 흐름을 읽습니다.”
-        </blockquote>
-        <p>정월재의 콘텐츠는 전통 명리학을 기반으로 한 해석 콘텐츠이며 과학적·의학적·법률적 판단이나 결과를 보장하지 않습니다.</p>
+    <section class="closing-section">
+      <div class="container closing-inner">
+        <p class="eyebrow light">正月齋</p>
+        <h2>운명을 단정하기보다,<br />나의 흐름을 이해하는 일.</h2>
+        <a class="button button-light" href="#reading">나의 흐름 읽기</a>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="wide-container footer-grid">
-      <div><p class="footer-brand">正月齋 <span>정월재</span></p><p>삶의 흐름을 읽는 곳.</p></div>
-      <div class="footer-links"><a href="#services">서비스</a><a href="#method">해석 방식</a><a href="#reading">사주 보기</a></div>
+    <div class="container footer-grid">
+      <div>
+        <p class="footer-brand">正月齋 <span>정월재</span></p>
+        <p class="footer-copy">삶의 흐름을 읽는 곳.</p>
+      </div>
+      <p class="footer-note">정월재의 콘텐츠는 전통 명리학을 기반으로 한 해석 콘텐츠이며 과학적·의학적·법률적 판단이나 결과를 보장하지 않습니다.</p>
       <p class="footer-copyright">© <span data-year></span> JEONGWOLJAE</p>
     </div>
   </footer>
