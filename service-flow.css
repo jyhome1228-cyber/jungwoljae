@@ -1,0 +1,227 @@
+/* Service-first reading flow — extends the shared design tokens in styles.css */
+.service-reading-form {
+  position: relative;
+}
+
+.service-picker {
+  margin: 0 0 var(--space-32);
+  padding: 0 0 var(--space-32);
+  border: 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.service-picker legend {
+  width: 100%;
+  margin: 0 0 var(--space-16);
+  padding: 0;
+}
+
+.flow-step {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-10);
+  margin-bottom: var(--space-6);
+}
+
+.flow-step-number {
+  color: var(--text-secondary);
+  font-size: 11px;
+  line-height: 15px;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: .08em;
+}
+
+.flow-step-title {
+  margin: 0;
+  color: var(--text-primary);
+  font-family: var(--font-serif);
+  font-size: 22px;
+  line-height: 30px;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: -.025em;
+}
+
+.flow-step-description {
+  margin: 0 0 var(--space-16);
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 19px;
+}
+
+.service-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-8);
+}
+
+.service-option {
+  position: relative;
+  display: block;
+  min-width: 0;
+  cursor: pointer;
+}
+
+.service-option input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.service-option-content {
+  display: flex;
+  min-height: 96px;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-12);
+  padding: var(--space-14);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-8);
+  background: var(--background);
+  transition:
+    border-color var(--motion-fast) var(--motion-ease),
+    background var(--motion-fast) var(--motion-ease),
+    transform var(--motion-fast) var(--motion-ease);
+}
+
+.service-option:hover .service-option-content {
+  border-color: var(--brand-600);
+  background: var(--surface);
+}
+
+.service-option input:focus-visible + .service-option-content {
+  outline: 2px solid var(--brand-600);
+  outline-offset: 3px;
+}
+
+.service-option input:checked + .service-option-content {
+  border-color: var(--brand-900);
+  background: var(--brand-900);
+  color: var(--text-inverse);
+}
+
+.service-option input:checked + .service-option-content .service-option-meta {
+  color: color-mix(in srgb, var(--text-inverse) 68%, transparent);
+}
+
+.service-option-title {
+  display: block;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: var(--font-weight-bold);
+}
+
+.service-option-meta {
+  display: block;
+  color: var(--text-secondary);
+  font-size: 11px;
+  line-height: 15px;
+}
+
+.profile-step {
+  margin-bottom: var(--space-20);
+}
+
+.profile-name-field {
+  margin-bottom: var(--space-20);
+}
+
+.selected-service-note {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: var(--space-12);
+  align-items: start;
+  margin: 0 0 var(--space-24);
+  padding: var(--space-14) 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.selected-service-note strong {
+  color: var(--text-primary);
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.selected-service-note p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.partner-panel {
+  margin: var(--space-8) 0 var(--space-24);
+  padding: var(--space-20) 0 0;
+  border-top: 1px solid var(--border-strong);
+}
+
+.partner-panel[hidden] {
+  display: none;
+}
+
+.partner-panel-header {
+  margin-bottom: var(--space-16);
+}
+
+.partner-panel-header h3 {
+  margin-bottom: var(--space-4);
+  font-family: var(--font-serif);
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: var(--font-weight-medium);
+}
+
+.partner-panel-header p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.service-card[data-service-target] {
+  cursor: pointer;
+}
+
+.service-card[data-service-target]:focus-visible {
+  outline: 2px solid var(--brand-600);
+  outline-offset: -3px;
+}
+
+.service-card-action {
+  display: inline-flex;
+  margin-top: auto;
+  padding-top: var(--space-16);
+  color: var(--text-primary);
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: var(--font-weight-bold);
+}
+
+@media (min-width: 768px) {
+  .service-options {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .service-option-content {
+    min-height: 104px;
+    padding: var(--space-16);
+  }
+}
+
+@media (max-width: 479px) {
+  .service-options {
+    grid-template-columns: 1fr;
+  }
+
+  .service-option-content {
+    min-height: 76px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-option-content {
+    transition: none;
+  }
+}
