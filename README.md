@@ -33,6 +33,19 @@
 6. 정월재 해석 규칙 및 데이터베이스 적용
 7. 사용자에게 이해하기 쉬운 언어로 결과 구성
 
+## Interpretation Principle
+
+정월재의 결과는 사용자를 기분 좋게 만들기 위한 긍정형 운세 문구를 목표로 하지 않습니다.
+
+- 강점과 부담 요인을 함께 제시합니다.
+- 불리한 흐름도 숨기지 않되 공포를 유도하지 않습니다.
+- 동일한 사주 원본에서 모든 서비스 결과를 파생해 서로 모순되지 않도록 합니다.
+- 계산된 명리 데이터가 먼저이며 AI는 문장을 정리하는 역할만 맡습니다.
+- 자기계발식 위로, 과도한 긍정, 반복적인 GPT식 표현을 피합니다.
+- 결과는 상담 문구보다 관찰 기록에 가까운 차분한 문체로 작성합니다.
+
+세부 기준은 [`docs/interpretation-guide.md`](./docs/interpretation-guide.md)를 따릅니다.
+
 ## Service Roadmap
 
 ### Phase 1 — MVP
@@ -60,6 +73,9 @@
 ├── index.html
 ├── styles.css
 ├── app.js
+├── service-flow.css
+├── docs/
+│   └── interpretation-guide.md
 └── README.md
 ```
 
