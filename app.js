@@ -15,7 +15,7 @@ document.head.appendChild(polishLink);
 
 const footerFixLink = document.createElement('link');
 footerFixLink.rel = 'stylesheet';
-footerFixLink.href = './footer-fix.css';
+footerFixLink.href = './footer-fix.css?v=20260907-1548';
 document.head.appendChild(footerFixLink);
 
 if (document.body?.classList.contains('about-page')) {
@@ -174,5 +174,5 @@ if(document.querySelector('#reviews') && document.body.dataset.reviewsPage!=='tr
 }
 
 const footerScript=document.createElement('script');
-footerScript.src='./footer.js';
+footerScript.src='./footer.js?v=20260907-1548';
 document.body.appendChild(footerScript);
