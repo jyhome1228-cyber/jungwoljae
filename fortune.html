@@ -18,6 +18,12 @@
     .fortune-form .field.full{grid-column:1/-1}
     .birth-date-grid{display:grid;grid-template-columns:1.35fr .8fr .8fr;gap:8px}
     .birth-weekday{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:8px;padding:10px 12px;border:1px solid #eee5e1;border-radius:10px;background:#faf8f7;color:#8a7f7b;font-size:10px;line-height:16px}.birth-weekday strong{color:#543a3a;font-size:11px}
+    .birth-time-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+    .fortune-time-check{display:flex!important;align-items:center!important;gap:10px!important;margin-top:10px!important;cursor:pointer!important;color:#756b67!important;font-size:11px!important;line-height:18px!important}
+    .fortune-time-check input[type="checkbox"]{appearance:none!important;-webkit-appearance:none!important;flex:0 0 24px!important;width:24px!important;height:24px!important;min-width:24px!important;min-height:24px!important;margin:0!important;padding:0!important;border:1px solid #d5cac5!important;border-radius:6px!important;background:#fff!important;box-sizing:border-box!important;position:relative!important}
+    .fortune-time-check input[type="checkbox"]:checked{border-color:#543a3a!important;background:#543a3a!important}
+    .fortune-time-check input[type="checkbox"]:checked::after{content:"";position:absolute;left:8px;top:4px;width:6px;height:11px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+    .fortune-time-check span{display:inline-block!important;color:#756b67!important;font-size:11px!important;font-weight:500!important}
     .zodiac-grid{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:8px!important;width:100%!important;margin-top:2px}
     .zodiac-chip{position:relative!important;display:block!important;width:100%!important;min-width:0!important;margin:0!important;cursor:pointer!important}
     .zodiac-chip input[type="radio"]{position:absolute!important;width:1px!important;height:1px!important;margin:0!important;opacity:0!important;pointer-events:none!important}
@@ -29,7 +35,7 @@
     .fortune-profile-state,.fortune-helper{margin:6px 0 0!important;color:#9b918d!important;font-size:10px!important;line-height:16px!important}.fortune-profile-state[data-state="ok"]{color:#6e514f!important}
     .today-badge{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px;padding:14px 16px;border:1px solid #e8dfdb;border-radius:12px;background:#faf8f7}.today-badge strong{color:#2b2524;font-size:13px}.today-badge span{color:#8b817d;font-size:10px}
     @media(max-width:900px){.zodiac-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
-    @media(max-width:767px){.fortune-form .page-field-row{grid-template-columns:1fr!important}.zodiac-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}.zodiac-chip span{min-height:62px!important}.birth-date-grid{grid-template-columns:1.25fr .8fr .8fr}}
+    @media(max-width:767px){.fortune-form .page-field-row{grid-template-columns:1fr!important}.zodiac-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}.zodiac-chip span{min-height:62px!important}.birth-date-grid{grid-template-columns:1.25fr .8fr .8fr}.birth-time-grid{grid-template-columns:1fr 1fr 1fr}}
   </style>
 </head>
 <body>
@@ -49,7 +55,7 @@
         <div class="breadcrumb"><a href="./index.html">정월재</a><span>/</span><span>오늘의 운세</span></div>
         <p class="eyebrow">TODAY'S FORTUNE</p>
         <h1>오늘의 기운과<br />나의 띠가 만나는 날.</h1>
-        <p class="sub-lead">띠와 태어난 날짜를 기준으로 오늘의 일진과 관계를 살펴보고, 일·재물·관계·생활에서 어떤 선택에 무게를 둘지 정리합니다.</p>
+        <p class="sub-lead">띠와 태어난 날짜·시간을 기준으로 오늘의 일진과 관계를 살펴보고, 일·재물·관계·생활에서 어떤 선택에 무게를 둘지 정리합니다.</p>
       </div>
     </section>
 
@@ -57,11 +63,11 @@
       <div class="container page-layout">
         <div class="page-copy">
           <p class="eyebrow">ZODIAC · TODAY</p>
-          <h2>같은 띠라도<br />태어난 날짜에 따라 다르게 봅니다.</h2>
-          <p>태어난 날짜에서 연주의 띠와 천간을 확인하고 오늘의 일진과 비교해, 오늘 자연스럽게 맞물리는 부분과 조금 조심해서 다룰 부분을 함께 읽습니다.</p>
+          <h2>같은 띠라도<br />태어난 정보에 따라 다르게 봅니다.</h2>
+          <p>태어난 날짜에서 연주의 띠와 천간을 확인하고 출생시간까지 함께 기록해 오늘의 일진과 비교합니다. 오늘 자연스럽게 맞물리는 부분과 조금 조심해서 다룰 부분을 함께 읽습니다.</p>
           <ul class="detail-list">
             <li><span>01</span><div><strong>띠의 관계</strong><p>오늘의 지지와 내 띠 사이의 합·충·형·파·해 관계를 살펴봅니다.</p></div></li>
-            <li><span>02</span><div><strong>태어난 날짜</strong><p>연·월·일과 출생 요일까지 함께 기록하고 연주의 천간·지지를 확인합니다.</p></div></li>
+            <li><span>02</span><div><strong>태어난 날짜와 시간</strong><p>연·월·일과 출생 요일, 태어난 시간을 함께 기록하고 연주의 천간·지지를 확인합니다.</p></div></li>
             <li><span>03</span><div><strong>오늘 하루의 팁</strong><p>결과 마지막에는 정월재가 오늘 바로 적용해볼 수 있는 생활 팁을 정리해드립니다.</p></div></li>
           </ul>
         </div>
@@ -71,7 +77,7 @@
             <div class="form-page-title">
               <span class="flow-step-number">01</span>
               <h2><span data-member-name>회원님</span>의 오늘 흐름을 봅니다.</h2>
-              <p>로그인 회원은 저장된 생년월일과 띠를 자동으로 불러옵니다.</p>
+              <p>로그인 회원은 저장된 생년월일·출생시간과 띠를 자동으로 불러옵니다.</p>
               <p class="fortune-profile-state" data-profile-state>회원정보 확인 중…</p>
             </div>
 
@@ -90,6 +96,18 @@
                   <select id="fortune-day" name="birthDay" required aria-label="태어난 일"><option value="">일</option></select>
                 </div>
                 <div class="birth-weekday"><span>출생 요일</span><strong data-birth-weekday>날짜를 선택해주세요</strong></div>
+              </div>
+            </div>
+
+            <div class="page-field-row">
+              <div class="field full">
+                <label>태어난 시간 <span class="optional">선택</span></label>
+                <div class="birth-time-grid">
+                  <select id="fortune-meridiem" aria-label="오전 또는 오후"><option value="">오전/오후</option><option value="am">오전</option><option value="pm">오후</option></select>
+                  <select id="fortune-hour" aria-label="태어난 시"><option value="">시</option></select>
+                  <select id="fortune-minute" aria-label="태어난 분"><option value="">분</option></select>
+                </div>
+                <label class="fortune-time-check"><input id="fortune-time-unknown" type="checkbox" /><span>태어난 시간을 모릅니다</span></label>
               </div>
             </div>
 
@@ -127,6 +145,6 @@
 
   <footer class="site-footer"></footer>
   <script src="./app.js" defer></script>
-  <script type="module" src="./fortune-form.js?v=20260907-03"></script>
+  <script type="module" src="./fortune-form.js?v=20260907-04"></script>
 </body>
 </html>
