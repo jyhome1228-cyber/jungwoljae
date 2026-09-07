@@ -14,16 +14,12 @@ service cloud.firestore {
         && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
     }
 
-    // Admin membership is created manually in Firebase Console.
-    // The browser can never grant itself admin permission.
     match /admins/{uid} {
       allow get: if signedIn() && request.auth.uid == uid;
       allow list: if false;
       allow write: if false;
     }
 
-    // Private member profile. Owners may manage their own document;
-    // admins can read profiles for service-operation statistics only.
     match /users/{uid} {
       allow create, update, delete: if isOwner(uid);
       allow read: if isOwner(uid) || isAdmin();
@@ -34,7 +30,6 @@ service cloud.firestore {
       }
     }
 
-    // Username reservation used to guarantee uniqueness.
     match /usernames/{username} {
       allow get: if signedIn() || isAdmin();
       allow list: if isAdmin();
@@ -45,8 +40,6 @@ service cloud.firestore {
       allow delete: if signedIn() && resource.data.uid == request.auth.uid;
     }
 
-    // Reviews are public. Signed-in members may create their own review.
-    // Admins may delete a review for moderation if needed.
     match /reviews/{reviewId} {
       allow read: if true;
       allow create: if signedIn()
@@ -63,8 +56,8 @@ service cloud.firestore {
       allow delete: if isAdmin() || (signedIn() && resource.data.uid == request.auth.uid);
     }
 
-    // Anonymous operational analytics.
-    // No IP, user-agent, referrer or real member identity is stored here.
+    // Anonymous operational analytics: page counts + browser-level daily uniques.
+    // No IP, user-agent, referrer, location or account identity is stored.
     match /analytics_daily/{dateKey} {
       allow read: if isAdmin();
       allow create: if request.resource.data.keys().hasOnly(['pageViews', 'updatedAt'])
@@ -74,7 +67,8 @@ service cloud.firestore {
       allow delete: if false;
 
       match /visitors/{visitorId} {
-        allow read: if isAdmin();
+        allow get: if true;
+        allow list: if isAdmin();
         allow create: if request.resource.data.keys().hasOnly(['visitorId', 'createdAt'])
                       && request.resource.data.visitorId == visitorId;
         allow update, delete: if false;
