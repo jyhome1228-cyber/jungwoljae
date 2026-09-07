@@ -13,6 +13,13 @@ polishLink.rel = 'stylesheet';
 polishLink.href = './theme-polish.css';
 document.head.appendChild(polishLink);
 
+if (document.body?.classList.contains('about-page')) {
+  const aboutLink = document.createElement('link');
+  aboutLink.rel = 'stylesheet';
+  aboutLink.href = './about.css';
+  document.head.appendChild(aboutLink);
+}
+
 const themeMeta = document.querySelector('meta[name="theme-color"]');
 if (themeMeta) themeMeta.setAttribute('content', '#ffffff');
 
@@ -28,30 +35,31 @@ function applyBrandLogo(){
 applyBrandLogo();
 
 function normalizeNavigation(){
-  document.querySelectorAll('.desktop-nav, .mobile-menu nav, .secondary-nav .container').forEach((nav)=>{
-    let links=[...nav.querySelectorAll('a')];
-    const fortune=links.find(a=>a.getAttribute('href')?.includes('fortune.html'));
-    if(fortune) fortune.textContent='오늘의 운세';
+  const primaryLinks = [
+    ['./saju.html','사주'],
+    ['./ohaeng.html','오행'],
+    ['./fortune.html','오늘의 운세'],
+    ['./relationship.html','인연'],
+    ['./work-money.html','일·재물'],
+    ['./archive.html','정월록'],
+    ['./reviews.html','후기'],
+    ['./about.html','소개']
+  ];
 
-    let archive=links.find(a=>a.getAttribute('href')?.includes('archive.html'));
-    if(!archive && !nav.closest('.secondary-nav')){
-      archive=document.createElement('a');
-      archive.href='./archive.html';
-      archive.textContent='정월록';
-      const review=links.find(a=>a.getAttribute('href')?.includes('reviews.html'));
-      const about=links.find(a=>a.getAttribute('href')?.includes('about.html'));
-      if(review) nav.insertBefore(archive,review); else if(about) nav.insertBefore(archive,about); else nav.appendChild(archive);
-      links=[...nav.querySelectorAll('a')];
-    }
-    if(archive) archive.textContent='정월록';
+  const currentPath = location.pathname.split('/').pop() || 'index.html';
 
-    if(!nav.closest('.secondary-nav') && !links.some(a=>a.getAttribute('href')?.includes('reviews.html'))){
-      const review=document.createElement('a');
-      review.href='./reviews.html';
-      review.textContent='후기';
-      const about=links.find(a=>a.getAttribute('href')?.includes('about.html'));
-      if(about) nav.insertBefore(review,about); else nav.appendChild(review);
-    }
+  document.querySelectorAll('.desktop-nav, .mobile-menu nav').forEach((nav)=>{
+    nav.innerHTML = primaryLinks.map(([href,label])=>{
+      const file = href.replace('./','');
+      const current = currentPath === file ? ' aria-current="page"' : '';
+      return `<a href="${href}"${current}>${label}</a>`;
+    }).join('');
+  });
+
+  document.querySelectorAll('.secondary-nav .container').forEach((nav)=>{
+    [...nav.querySelectorAll('a')].forEach((link)=>{
+      if(link.getAttribute('href')?.includes('fortune.html')) link.textContent='오늘의 운세';
+    });
   });
 
   document.querySelectorAll('.header-cta').forEach((cta)=>{
