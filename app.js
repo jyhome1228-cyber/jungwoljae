@@ -70,6 +70,11 @@ if(currentFile.endsWith('-result.html')){
   readabilityLink.rel='stylesheet';
   readabilityLink.href='./result-readability.css?v=20260907-2257';
   document.head.appendChild(readabilityLink);
+
+  const methodologyCss=document.createElement('link');
+  methodologyCss.rel='stylesheet';
+  methodologyCss.href='./result-methodology.css?v=20260908-0640';
+  document.head.appendChild(methodologyCss);
 }
 
 if (document.body?.classList.contains('about-page')) {
@@ -207,6 +212,10 @@ if(currentFile.endsWith('-result.html')){
   plainReadingScript.src='./plain-reading.js?v=20260908-0247';
   plainReadingScript.defer=true;
   document.body.appendChild(plainReadingScript);
+
+  const methodologyScript=document.createElement('script');
+  methodologyScript.src='./result-methodology.js?v=20260908-0640';
+  document.body.appendChild(methodologyScript);
 
   setTimeout(()=>{
     const friendlyScript=document.createElement('script');
