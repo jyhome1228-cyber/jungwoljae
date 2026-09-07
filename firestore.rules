@@ -18,13 +18,15 @@ service cloud.firestore {
       }
     }
 
-    // Username reservation used only to guarantee uniqueness.
-    // The document contains uid only, never email or profile details.
+    // Username reservation used to guarantee uniqueness.
+    // Only authenticated users may check a single username document.
+    // Listing the whole username collection is never allowed.
     match /usernames/{username} {
+      allow get: if signedIn();
+      allow list: if false;
       allow create: if signedIn()
                     && request.resource.data.keys().hasOnly(['uid', 'createdAt'])
                     && request.resource.data.uid == request.auth.uid;
-      allow read: if signedIn() && resource.data.uid == request.auth.uid;
       allow update: if false;
       allow delete: if signedIn() && resource.data.uid == request.auth.uid;
     }
