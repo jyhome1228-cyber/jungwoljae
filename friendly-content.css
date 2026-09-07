@@ -1,0 +1,102 @@
+/* Jungwoljae friendly-reading layer: easier forms, larger copy, safe contrast */
+
+.guide-form .guide-field label{font-size:14px!important;line-height:21px!important;margin-bottom:8px!important}
+.guide-form .guide-field input:not([type="checkbox"]),
+.guide-form .guide-field select{
+  height:52px!important;
+  padding:0 42px 0 14px!important;
+  border:1px solid #d9ceca!important;
+  border-radius:10px!important;
+  background-color:#fff!important;
+  color:#2b2524!important;
+  font-size:15px!important;
+  line-height:1!important;
+  box-shadow:none!important;
+  appearance:none!important;
+  -webkit-appearance:none!important;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1.5 7 7.5 13 1.5' fill='none' stroke='%23543a3a' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")!important;
+  background-repeat:no-repeat!important;
+  background-position:right 14px center!important;
+  background-size:14px 9px!important;
+}
+.guide-form .guide-field input:not([type="checkbox"]){padding-right:14px!important;background-image:none!important}
+.guide-form .guide-field select:focus,
+.guide-form .guide-field input:focus{border-color:#543a3a!important;box-shadow:0 0 0 3px rgba(84,58,58,.08)!important;outline:none!important}
+.guide-form .guide-check{display:flex!important;align-items:center!important;gap:10px!important;margin-top:11px!important}
+.guide-form .guide-check input[type="checkbox"]{position:relative!important;display:block!important;flex:0 0 24px!important;width:24px!important;height:24px!important;min-width:24px!important;min-height:24px!important;max-width:24px!important;max-height:24px!important;margin:0!important;padding:0!important;border:1.5px solid #d5cac5!important;border-radius:7px!important;background:#fff!important;appearance:none!important;-webkit-appearance:none!important;box-sizing:border-box!important}
+.guide-form .guide-check input[type="checkbox"]:checked{border-color:#543a3a!important;background:#543a3a url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.2 6.4 11 12.5 4.9' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px 16px no-repeat!important}
+.guide-form .guide-check span{font-size:13px!important;line-height:20px!important;color:#6f6561!important}
+.guide-form .consent-row{display:flex!important;align-items:center!important;gap:10px!important}
+.guide-form .consent-row input[type="checkbox"]{flex:0 0 24px!important;width:24px!important;height:24px!important;margin:0!important}
+.guide-form .consent-row span{font-size:13px!important;line-height:20px!important;color:#756b67!important}
+.guide-profile-state,.guide-step-head p,.guide-form-head p{font-size:12.5px!important;line-height:20px!important}
+.guide-choice strong{font-size:15px!important;line-height:22px!important}.guide-choice em{font-size:12.5px!important;line-height:20px!important}
+.guide-keyword span{font-size:13px!important;line-height:19px!important}.guide-preview p{font-size:14px!important;line-height:23px!important}
+
+/* Result pages: body text should be readable without zooming. */
+.guide-result-main p,
+.saju-result-main p,
+.result-main p,
+.fortune-result-main p,
+.relationship-result-main p,
+.work-result-main p,
+.compatibility-result-main p{letter-spacing:-.02em!important}
+
+.guide-result-main .guide-personal-card p,
+.guide-result-main .guide-check-card p,
+.guide-result-main .guide-action-card p,
+.guide-result-main .guide-reason-copy p,
+.guide-result-main .guide-warning-copy p,
+.guide-result-main .guide-answer p,
+.saju-result-main .ten-god-card p,
+.saju-result-main .life-card p,
+.saju-result-main .focus-reading-card p,
+.saju-result-main .summary-prose p,
+.result-main .element-card p,
+.result-main .insight-card p,
+.result-main .life-card p,
+.result-main .key-card p,
+.result-main .total-summary-copy p,
+.fortune-result-main .fortune-card p,
+.fortune-result-main .fortune-story p,
+.fortune-result-main .fortune-time-card p,
+.fortune-result-main .fortune-tip-card p,
+.fortune-result-main .fortune-total p,
+.relationship-result-main .relationship-core-card p,
+.relationship-result-main .relationship-condition-card p,
+.relationship-result-main .relationship-insight p,
+.relationship-result-main .relationship-pattern p,
+.relationship-result-main .relationship-status-box p,
+.relationship-result-main .relationship-guide-card p,
+.relationship-result-main .relationship-total p,
+.work-result-main .work-core-card p,
+.work-result-main .work-insight p,
+.work-result-main .money-card p,
+.work-result-main .year-card p,
+.work-result-main .focus-result-card p,
+.work-result-main .work-guide-card p,
+.work-result-main .work-total p{
+  font-size:15px!important;
+  line-height:1.82!important;
+}
+
+/* Dark result panels always keep strong contrast. */
+.work-summary-section,.relationship-pattern-section,.flow-section,.daymaster-section,.summary-prose,.fortune-signal,.fortune-tip-final,.guide-answer-section{color:#fff!important}
+.work-summary-section h2,.relationship-pattern-section h2,.flow-section h2,.daymaster-section h2,.daymaster-section h3,.guide-answer-section h2{color:#fff!important}
+.work-summary-section p,.relationship-pattern-section p,.flow-section p,.daymaster-section p,.summary-prose p,.fortune-signal p,.fortune-tip-final p,.guide-answer-section p{color:rgba(255,255,255,.9)!important}
+.work-summary-section .work-label,.relationship-pattern-section .relationship-label,.flow-section .section-label,.daymaster-section .saju-label,.guide-answer-section .guide-result-label{color:rgba(255,255,255,.7)!important}
+
+/* Friendly term helper: traditional vocabulary is supporting information only. */
+.friendly-term-note{display:block;margin-top:7px;color:#978b86;font-size:11.5px;line-height:18px;font-style:normal;font-weight:500}
+.dark-friendly .friendly-term-note{color:rgba(255,255,255,.65)}
+.friendly-explain{margin-top:12px!important;padding-top:12px;border-top:1px solid #eee6e2;color:#6a605c!important}
+
+@media(max-width:767px){
+  .guide-form .guide-field input:not([type="checkbox"]),.guide-form .guide-field select{height:50px!important;font-size:14px!important}
+  .guide-result-main .guide-personal-card p,.guide-result-main .guide-check-card p,.guide-result-main .guide-action-card p,.guide-result-main .guide-reason-copy p,.guide-result-main .guide-warning-copy p,.guide-result-main .guide-answer p,
+  .saju-result-main .ten-god-card p,.saju-result-main .life-card p,.saju-result-main .focus-reading-card p,.saju-result-main .summary-prose p,
+  .result-main .element-card p,.result-main .insight-card p,.result-main .life-card p,.result-main .key-card p,.result-main .total-summary-copy p,
+  .fortune-result-main .fortune-card p,.fortune-result-main .fortune-story p,.fortune-result-main .fortune-time-card p,.fortune-result-main .fortune-tip-card p,.fortune-result-main .fortune-total p,
+  .relationship-result-main .relationship-core-card p,.relationship-result-main .relationship-condition-card p,.relationship-result-main .relationship-insight p,.relationship-result-main .relationship-pattern p,.relationship-result-main .relationship-status-box p,.relationship-result-main .relationship-guide-card p,.relationship-result-main .relationship-total p,
+  .work-result-main .work-core-card p,.work-result-main .work-insight p,.work-result-main .money-card p,.work-result-main .year-card p,.work-result-main .focus-result-card p,.work-result-main .work-guide-card p,.work-result-main .work-total p{font-size:14.5px!important;line-height:1.8!important}
+}
