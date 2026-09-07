@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
   <link rel="stylesheet" href="./styles.css" />
   <link rel="stylesheet" href="./page.css" />
-  <link rel="stylesheet" href="./auth.css?v=20260907-03" />
+  <link rel="stylesheet" href="./auth.css?v=20260907-04" />
   <style>.firebase-warning:empty{display:none!important}</style>
 </head>
 <body>
@@ -31,9 +31,13 @@
       <p class="firebase-warning" data-mypage-status>회원 정보를 불러오는 중입니다.</p>
 
       <div class="mypage-grid">
-        <section class="mypage-card">
-          <h2>회원 정보</h2>
-          <dl class="profile-list">
+        <section class="mypage-card profile-card">
+          <div class="mypage-card-head">
+            <div><p class="eyebrow">PROFILE</p><h2>회원 정보</h2></div>
+            <button class="mypage-edit-button" type="button" data-profile-edit>회원정보 수정</button>
+          </div>
+
+          <dl class="profile-list" data-profile-view>
             <div class="profile-row"><dt>아이디</dt><dd data-profile="userId">—</dd></div>
             <div class="profile-row"><dt>이메일</dt><dd data-profile="email">—</dd></div>
             <div class="profile-row"><dt>성함</dt><dd data-profile="name">—</dd></div>
@@ -43,6 +47,20 @@
             <div class="profile-row"><dt>성별</dt><dd data-profile="gender">—</dd></div>
             <div class="profile-row"><dt>지역</dt><dd data-profile="city">—</dd></div>
           </dl>
+
+          <form class="mypage-edit-form" data-profile-form hidden>
+            <p class="profile-edit-note">아이디와 이메일은 계정 식별 정보로 유지하고, 사주 풀이에 사용하는 기본 정보만 수정할 수 있습니다.</p>
+            <div class="profile-edit-grid">
+              <div class="profile-edit-field full"><label for="profile-edit-name">성함</label><input id="profile-edit-name" name="name" type="text" required></div>
+              <div class="profile-edit-field full"><label>태어난 날짜</label><div class="profile-date-selects"><select name="birthYear" aria-label="태어난 연도"><option value="">연도</option></select><select name="birthMonth" aria-label="태어난 월"><option value="">월</option></select><select name="birthDay" aria-label="태어난 일"><option value="">일</option></select></div></div>
+              <div class="profile-edit-field full"><label>태어난 시간 <span>선택</span></label><div class="profile-time-selects"><select name="birthMeridiem"><option value="">오전/오후</option><option value="am">오전</option><option value="pm">오후</option></select><select name="birthHour"><option value="">시</option></select><select name="birthMinute"><option value="">분</option></select></div><label class="profile-mini-check"><input type="checkbox" name="birthTimeUnknown"><span>태어난 시간을 모릅니다</span></label></div>
+              <div class="profile-edit-field"><label for="profile-edit-calendar">달력 기준</label><select id="profile-edit-calendar" name="calendarType"><option value="solar">양력</option><option value="lunar">음력</option></select></div>
+              <div class="profile-edit-field"><label for="profile-edit-gender">성별</label><select id="profile-edit-gender" name="gender"><option value="male">남성</option><option value="female">여성</option></select></div>
+              <div class="profile-edit-field full"><label for="profile-edit-city">지역 <span>시 단위</span></label><input id="profile-edit-city" name="city" type="text" placeholder="예: 인천광역시"></div>
+            </div>
+            <p class="profile-edit-status" data-profile-edit-status></p>
+            <div class="profile-edit-actions"><button type="button" class="mypage-edit-cancel" data-profile-cancel>취소</button><button type="submit" class="mypage-edit-save">변경사항 저장</button></div>
+          </form>
         </section>
 
         <aside class="mypage-card mypage-history-card">
@@ -57,6 +75,7 @@
             <a class="mypage-link" href="./ohaeng.html">오행 분석 새로 보기</a>
             <a class="mypage-link" href="./saju.html">종합 사주 보기</a>
             <a class="mypage-link" href="./fortune.html">오늘의 운세 보기</a>
+            <a class="mypage-link" href="./reviews.html">후기 남기기</a>
           </div>
           <button class="mypage-logout" type="button" data-logout>로그아웃</button>
         </aside>
@@ -67,5 +86,6 @@
   <footer class="site-footer"></footer>
   <script src="./app.js" defer></script>
   <script type="module" src="./mypage-readings.js?v=20260907-01"></script>
+  <script type="module" src="./mypage-profile.js?v=20260907-01"></script>
 </body>
 </html>
