@@ -2,7 +2,7 @@
 // Public client configuration from Firebase Console.
 // Do not place service-account keys or private credentials in this file.
 export const firebaseConfig = {
-  apiKey: "AIzaSyCDa5JBrt1Dr1-cL30qJ-GCmXeN5pUprMo",
+  apiKey: "AIzaSyCDa5JBrt1Dr1-cL3OqJ-GCmXeN5pUprMo",
   authDomain: "jungwoljae.firebaseapp.com",
   projectId: "jungwoljae",
   storageBucket: "jungwoljae.firebasestorage.app",
