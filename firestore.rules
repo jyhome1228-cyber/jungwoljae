@@ -19,8 +19,6 @@ service cloud.firestore {
     }
 
     // Username reservation used to guarantee uniqueness.
-    // Only authenticated users may check a single username document.
-    // Listing the whole username collection is never allowed.
     match /usernames/{username} {
       allow get: if signedIn();
       allow list: if false;
@@ -31,18 +29,21 @@ service cloud.firestore {
       allow delete: if signedIn() && resource.data.uid == request.auth.uid;
     }
 
-    // Reviews: signed-in users can submit their own review as pending.
-    // Public visitors can only read approved/published reviews.
+    // Reviews are public, but only signed-in members may create them.
+    // Real names/emails are never stored in a review document.
     match /reviews/{reviewId} {
-      allow read: if resource.data.status == 'published'
-                  || (signedIn() && resource.data.uid == request.auth.uid);
+      allow read: if true;
       allow create: if signedIn()
+                    && request.resource.data.keys().hasOnly([
+                      'uid', 'authorLabel', 'service', 'rating', 'content', 'status', 'createdAt'
+                    ])
                     && request.resource.data.uid == request.auth.uid
-                    && request.resource.data.status == 'pending';
-      allow update: if signedIn()
-                    && resource.data.uid == request.auth.uid
-                    && request.resource.data.uid == resource.data.uid
-                    && request.resource.data.status == resource.data.status;
+                    && request.resource.data.status == 'published'
+                    && request.resource.data.rating >= 1
+                    && request.resource.data.rating <= 5
+                    && request.resource.data.content.size() >= 10
+                    && request.resource.data.content.size() <= 500;
+      allow update: if false;
       allow delete: if signedIn() && resource.data.uid == request.auth.uid;
     }
   }
