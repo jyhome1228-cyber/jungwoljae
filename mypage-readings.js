@@ -18,7 +18,7 @@ function formatDate(value){
   }catch(e){return '';}
 }
 function typeLabel(type){
-  return ({ohaeng:'오행 분석',saju:'종합 사주',fortune:'오늘의 운세',relationship:'연애와 인연',compatibility:'궁합',work:'일과 재물'})[type]||'정월재 분석';
+  return ({ohaeng:'오행 분석',saju:'종합 사주',fortune:'오늘의 운세',relationship:'연애와 인연',compatibility:'궁합',work:'일과 재물',guide:'정월도감'})[type]||'정월재 분석';
 }
 
 onAuthStateChanged(auth,async user=>{
