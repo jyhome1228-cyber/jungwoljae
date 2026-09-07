@@ -149,6 +149,38 @@
 .signup-card .button{width:100%;margin-top:8px}
 .signup-note{margin-top:10px;font-size:11px!important;line-height:17px!important}
 
+/* Service pages: one header only + representative image hero */
+.secondary-nav{display:none!important}
+.sub-hero{
+  position:relative!important;
+  display:flex!important;
+  width:min(calc(100% - 64px),1280px)!important;
+  min-height:390px!important;
+  align-items:flex-end!important;
+  margin:32px auto 0!important;
+  padding:0!important;
+  overflow:hidden!important;
+  border:0!important;
+  border-radius:20px!important;
+  background-color:#543a3a!important;
+  background-size:cover!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+}
+.sub-hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(35,24,24,.72) 0%,rgba(35,24,24,.36) 48%,rgba(35,24,24,.12) 100%);pointer-events:none}
+.sub-hero>.container{position:relative!important;z-index:1!important;width:100%!important;margin:0!important;padding:48px!important}
+.sub-hero .breadcrumb,.sub-hero .breadcrumb a{color:rgba(255,255,255,.66)!important}
+.sub-hero .eyebrow{color:rgba(255,255,255,.78)!important}
+.sub-hero h1{max-width:640px!important;color:#fff!important;font-size:34px!important;line-height:44px!important}
+.sub-hero .sub-lead{max-width:620px!important;color:rgba(255,255,255,.78)!important}
+body:has(a[aria-current="page"][href*="saju.html"]) .sub-hero{background-image:url('https://nineworksdatabase.planus253.workers.dev/cdn/test/20260907-060437-1-6ea6ea3f.webp')!important}
+body:has(a[aria-current="page"][href*="ohaeng.html"]) .sub-hero{background-image:url('https://nineworksdatabase.planus253.workers.dev/cdn/test/20260907-060438-2-b3ce5dc2.webp')!important}
+body:has(a[aria-current="page"][href*="fortune.html"]) .sub-hero{background-image:url('https://nineworksdatabase.planus253.workers.dev/cdn/test/20260907-060438-3-2cdbfb70.webp')!important}
+body:has(a[aria-current="page"][href*="relationship.html"]) .sub-hero{background-image:url('https://nineworksdatabase.planus253.workers.dev/cdn/test/20260907-060439-4-e2399ab7.webp')!important}
+body:has(a[aria-current="page"][href*="compatibility.html"]) .sub-hero{background-image:url('https://nineworksdatabase.planus253.workers.dev/cdn/test/20260907-060440-5-677398ac.webp')!important}
+body:has(a[aria-current="page"][href*="work-money.html"]) .sub-hero{background-image:url('https://nineworksdatabase.planus253.workers.dev/cdn/test/20260907-060440-6-ef49b21c.webp')!important}
+body:has(a[aria-current="page"][href*="archive.html"]) .sub-hero{background-image:url('https://nineworksdatabase.planus253.workers.dev/cdn/test/20260907-060441-7-9ce562e0.webp')!important}
+
 @media(max-width:1100px){.service-visual-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.service-visual-card:nth-child(7){grid-column:auto}.signup-shell{grid-template-columns:1fr;gap:32px}}
 @media(max-width:767px){
   .header-inner{min-height:60px!important}
@@ -160,4 +192,7 @@
   .service-visual-card{min-height:260px}
   .home-service-visuals{margin:52px 0!important}
   .signup-main{padding:52px 0 72px}
+  .sub-hero{width:min(calc(100% - 32px),1280px)!important;min-height:320px!important;margin-top:16px!important;border-radius:16px!important}
+  .sub-hero>.container{padding:28px 22px!important}
+  .sub-hero h1{font-size:29px!important;line-height:38px!important}
 }
