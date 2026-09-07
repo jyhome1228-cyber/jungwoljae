@@ -63,3 +63,5 @@ if(excluded.has(file)){
   if(document.visibilityState==='visible')recordVisit();
   else document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')recordVisit();},{once:true});
 }
+
+import('./member-usage.js?v=20260907-01').catch(()=>{});
