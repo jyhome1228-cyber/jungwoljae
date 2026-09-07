@@ -76,7 +76,7 @@
   if(!document.querySelector('script[data-auth-module]')){
     const authScript=document.createElement('script');
     authScript.type='module';
-    authScript.src='./auth.js?v=20260907-01';
+    authScript.src='./auth.js?v=20260907-02';
     authScript.dataset.authModule='true';
     document.body.appendChild(authScript);
   }
