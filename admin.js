@@ -2,9 +2,19 @@ import { firebaseConfig } from './firebase-config.js?v=20260907-1645';
 import { initializeApp, getApps, getApp } from 'https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js';
 import { getFirestore, doc, getDoc, getDocs, collection, getCountFromServer } from 'https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js';
 
+const ADMIN_CODE='1228';
+const SESSION_KEY='jungwoljae_admin_unlocked_v1';
+
 const app=getApps().length?getApp():initializeApp(firebaseConfig);
 const db=getFirestore(app);
 const refreshBtn=document.querySelector('[data-admin-refresh]');
+const lockBtn=document.querySelector('[data-admin-lock]');
+const gate=document.querySelector('[data-admin-pass-gate]');
+const dashboard=document.querySelector('[data-admin-dashboard]');
+const passForm=document.querySelector('[data-admin-pass-form]');
+const passInput=document.querySelector('[data-admin-pass-input]');
+const passStatus=document.querySelector('[data-admin-pass-status]');
+let dashboardLoaded=false;
 
 const esc=(v='')=>String(v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 const toDate=value=>value?.toDate?value.toDate():value?new Date(value):null;
@@ -19,6 +29,47 @@ const resultServices={
   '/compatibility-result.html':'궁합',
   '/work-money-result.html':'일과 재물'
 };
+
+function isUnlocked(){
+  try{return sessionStorage.getItem(SESSION_KEY)==='1';}catch(e){return false;}
+}
+function setUnlocked(value){
+  try{
+    if(value)sessionStorage.setItem(SESSION_KEY,'1');
+    else sessionStorage.removeItem(SESSION_KEY);
+  }catch(e){}
+}
+async function openDashboard(){
+  setUnlocked(true);
+  document.body.classList.add('admin-unlocked');
+  gate.hidden=true;
+  dashboard.hidden=false;
+  passStatus.textContent='';
+  if(!dashboardLoaded){dashboardLoaded=true;await loadDashboard();}
+}
+function closeDashboard(){
+  setUnlocked(false);
+  document.body.classList.remove('admin-unlocked');
+  dashboard.hidden=true;
+  gate.hidden=false;
+  passInput.value='';
+  passStatus.textContent='';
+  setTimeout(()=>passInput.focus(),50);
+}
+
+passForm?.addEventListener('submit',async event=>{
+  event.preventDefault();
+  const value=String(passInput.value||'').trim();
+  if(value!==ADMIN_CODE){
+    passStatus.textContent='운영 코드가 맞지 않습니다.';
+    passInput.select();
+    return;
+  }
+  passStatus.textContent='확인되었습니다.';
+  await openDashboard();
+});
+
+lockBtn?.addEventListener('click',closeDashboard);
 
 function seoulDateKey(offsetDays=0){
   const now=new Date(Date.now()+offsetDays*86400000);
@@ -79,6 +130,7 @@ function renderReviews(reviewDocs){
 }
 
 async function loadDashboard(){
+  if(!isUnlocked())return;
   refreshBtn.disabled=true;
   refreshBtn.textContent='집계 중…';
   try{
@@ -115,5 +167,12 @@ async function loadDashboard(){
   }
 }
 
-refreshBtn?.addEventListener('click',loadDashboard);
-loadDashboard();
+refreshBtn?.addEventListener('click',()=>{if(isUnlocked())loadDashboard();});
+
+if(isUnlocked())openDashboard();
+else{
+  document.body.classList.remove('admin-unlocked');
+  gate.hidden=false;
+  dashboard.hidden=true;
+  setTimeout(()=>passInput?.focus(),50);
+}
