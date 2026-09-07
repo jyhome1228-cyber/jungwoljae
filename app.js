@@ -174,5 +174,5 @@ if(document.querySelector('#reviews') && document.body.dataset.reviewsPage!=='tr
 }
 
 const footerScript=document.createElement('script');
-footerScript.src='./footer.js?v=20260907-02';
+footerScript.src='./footer.js?v=20260907-03';
 document.body.appendChild(footerScript);
