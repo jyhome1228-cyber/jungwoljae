@@ -49,12 +49,12 @@ document.head.appendChild(mobileLink);
 
 const uiFixLink = document.createElement('link');
 uiFixLink.rel = 'stylesheet';
-uiFixLink.href = './ui-fixes.css?v=20260907-2130';
+uiFixLink.href = './ui-fixes.css?v=20260907-2132';
 document.head.appendChild(uiFixLink);
 
 const realismLink = document.createElement('link');
 realismLink.rel = 'stylesheet';
-realismLink.href = './reading-realism.css?v=20260907-2130';
+realismLink.href = './reading-realism.css?v=20260907-2132';
 document.head.appendChild(realismLink);
 
 if (document.body?.classList.contains('about-page')) {
@@ -166,12 +166,12 @@ document.body.appendChild(authScript);
 
 const analyticsScript=document.createElement('script');
 analyticsScript.type='module';
-analyticsScript.src='./analytics.js?v=20260907-01';
+analyticsScript.src='./analytics.js?v=20260907-02';
 document.body.appendChild(analyticsScript);
 
 if(currentFile.endsWith('-result.html')){
   const realismScript=document.createElement('script');
-  realismScript.src='./reading-realism.js?v=20260907-2130';
+  realismScript.src='./reading-realism.js?v=20260907-2132';
   realismScript.defer=true;
   document.body.appendChild(realismScript);
 }
