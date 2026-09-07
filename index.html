@@ -3,195 +3,135 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="정월재 — 사주팔자와 음양오행을 바탕으로 삶의 흐름을 읽는 현대적인 명리 해석 서비스" />
-  <meta name="theme-color" content="#443534" />
-  <title>정월재 正月齋 — 삶의 흐름을 읽는 곳</title>
+  <meta name="description" content="정월재 — 사주팔자와 음양오행을 바탕으로 삶의 흐름을 읽는 명리 해석 서비스" />
+  <meta name="theme-color" content="#ffffff" />
+  <title>정월재 — 삶의 흐름을 읽는 곳</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
   <link rel="stylesheet" href="./styles.css" />
   <link rel="stylesheet" href="./page.css" />
+  <style>
+    .home-main{padding-bottom:96px;background:#fff}
+    .home-image-hero{margin:32px auto 0;width:min(calc(100% - 64px),1280px);min-height:540px;position:relative;overflow:hidden;border-radius:20px;background:url('https://nineworksdatabase.planus253.workers.dev/cdn/test/20260907-061515-3-30b351f3.webp') center/cover no-repeat!important}
+    .home-image-hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(36,24,24,.72) 0%,rgba(36,24,24,.34) 48%,rgba(36,24,24,.08) 100%)}
+    .home-image-hero-inner{position:relative;z-index:2;display:flex;min-height:540px;align-items:flex-end;padding:54px}
+    .home-image-hero-copy{max-width:570px;color:#fff}
+    .home-image-hero-copy .eyebrow{color:rgba(255,255,255,.72)!important}
+    .home-image-hero-copy h1{margin:0 0 14px;color:#fff!important;font-size:38px!important;line-height:48px!important;letter-spacing:-.02em!important}
+    .home-image-hero-copy p{max-width:520px;margin:0 0 24px;color:rgba(255,255,255,.78)!important;font-size:14px!important;line-height:23px!important}
+    .home-image-hero-actions{display:flex;flex-wrap:wrap;gap:8px}
+    .home-image-hero .button{background:#fff!important;color:#543a3a!important;border-color:#fff!important}
+    .home-image-hero .button.secondary{background:rgba(255,255,255,.10)!important;color:#fff!important;border-color:rgba(255,255,255,.45)!important}
+
+    .home-services{margin-top:80px}
+    .home-services .section-head{margin-bottom:26px!important}
+    .home-services .section-head h2{font-size:28px!important;line-height:38px!important}
+    .home-services .section-head>p:last-child{max-width:620px;font-size:14px!important;line-height:22px!important}
+    .service-visual-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+    .service-visual-card{position:relative;display:flex;min-height:310px;overflow:hidden;align-items:flex-end;padding:20px;border-radius:16px;background:#f3efed center/cover no-repeat;color:#fff;isolation:isolate;transition:transform .16s ease}
+    .service-visual-card::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(to top,rgba(38,27,27,.84) 0%,rgba(38,27,27,.28) 54%,rgba(38,27,27,.04) 100%)}
+    .service-visual-card:hover{transform:translateY(-2px)}
+    .service-visual-card .visual-index{position:absolute;top:16px;left:16px;padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.92);color:#543a3a;font-size:10px;font-weight:800}
+    .service-visual-card h3{margin:0 0 5px!important;color:#fff!important;font-size:19px!important;line-height:27px!important}
+    .service-visual-card p{margin:0!important;color:rgba(255,255,255,.78)!important;font-size:12px!important;line-height:19px!important}
+    .service-visual-card.wide{grid-column:span 2}
+
+    .home-about-banner{margin-top:80px}
+    .home-about-banner a{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;padding:34px 38px;border:1px solid #e8dfdb;border-radius:18px;background:#faf8f7}
+    .home-about-banner h2{margin:0 0 8px!important;font-size:24px!important;line-height:33px!important;color:#2b2524!important}
+    .home-about-banner p{margin:0!important;max-width:720px;font-size:13px!important;line-height:21px!important}
+    .home-about-arrow{display:grid;width:48px;height:48px;place-items:center;border-radius:50%;background:#543a3a;color:#fff;font-size:18px}
+
+    @media(max-width:1100px){
+      .service-visual-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .service-visual-card.wide{grid-column:auto}
+    }
+    @media(max-width:767px){
+      .home-main{padding-bottom:72px}
+      .home-image-hero{width:min(calc(100% - 32px),1280px);min-height:460px;margin-top:16px;border-radius:16px}
+      .home-image-hero-inner{min-height:460px;padding:28px 22px}
+      .home-image-hero-copy h1{font-size:30px!important;line-height:39px!important}
+      .home-services,.home-about-banner{margin-top:56px}
+      .service-visual-grid{grid-template-columns:1fr}
+      .service-visual-card{min-height:260px}
+      .home-about-banner a{grid-template-columns:1fr;padding:26px 22px}
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">본문 바로가기</a>
 
   <header class="site-header">
     <div class="wide-container header-inner">
-      <a class="brand" href="./index.html" aria-label="정월재 홈">
-        <span class="brand-hanja">正月齋</span>
-        <span class="brand-korean">정월재</span>
-      </a>
+      <a class="brand" href="./index.html" aria-label="정월재 홈"><span class="brand-hanja">正月齋</span><span class="brand-korean">정월재</span></a>
       <nav class="desktop-nav" aria-label="주요 메뉴">
-        <a href="#featured">대표 풀이</a>
         <a href="./saju.html">사주</a>
-        <a href="./fortune.html">운세</a>
-        <a href="./relationship.html">인연·궁합</a>
+        <a href="./ohaeng.html">오행</a>
+        <a href="./fortune.html">오늘의 운세</a>
+        <a href="./relationship.html">인연</a>
         <a href="./work-money.html">일·재물</a>
-        <a href="#reviews">후기</a>
+        <a href="./archive.html">정월록</a>
+        <a href="./reviews.html">후기</a>
         <a href="./about.html">소개</a>
       </nav>
-      <a class="header-cta" href="./saju.html">나의 흐름 읽기</a>
+      <a class="header-cta" href="./signup.html">회원등록</a>
       <button class="menu-button" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu" data-menu-button><span></span><span></span></button>
     </div>
     <div class="mobile-menu" id="mobile-menu" hidden data-mobile-menu>
       <nav class="container" aria-label="모바일 메뉴">
-        <a href="#featured">대표 풀이</a><a href="./saju.html">사주</a><a href="./fortune.html">운세</a><a href="./relationship.html">인연·궁합</a><a href="./work-money.html">일·재물</a><a href="#reviews">후기</a><a href="./about.html">정월재 소개</a>
+        <a href="./saju.html">사주</a><a href="./ohaeng.html">오행</a><a href="./fortune.html">오늘의 운세</a><a href="./relationship.html">인연</a><a href="./work-money.html">일·재물</a><a href="./archive.html">정월록</a><a href="./reviews.html">후기</a><a href="./about.html">소개</a>
       </nav>
     </div>
   </header>
 
-  <main id="main">
-    <section class="hero brown-hero" id="top">
-      <div class="hero-orbit" aria-hidden="true"></div>
-      <div class="wide-container hero-grid">
-        <div class="hero-copy">
-          <span class="hero-kicker">사주 · 음양오행 · 운의 흐름</span>
-          <h1>내 삶의 흐름,<br />한 번에 펼쳐보세요.</h1>
-          <p class="hero-description">태어난 순간의 사주팔자와 음양오행을 공통 기준으로 기질, 관계, 일, 재물과 시기의 흐름을 하나의 구조 안에서 읽습니다.</p>
-          <div class="hero-actions">
-            <a class="button button-accent" href="./saju.html">종합 사주 시작하기</a>
-            <a class="button button-ghost" href="#featured">대표 풀이 둘러보기</a>
-          </div>
-          <div class="hero-points" aria-label="정월재 특징">
-            <span>하나의 사주 원본</span><span>음양오행 기반</span><span>좋은 말만 하지 않는 해석</span>
+  <main id="main" class="home-main">
+    <section class="home-image-hero" aria-labelledby="home-title">
+      <div class="home-image-hero-inner">
+        <div class="home-image-hero-copy">
+          <p class="eyebrow">正月齋 · JEONGWOLJAE</p>
+          <h1 id="home-title">삶의 흐름을 읽는 곳,<br />정월재.</h1>
+          <p>사주팔자와 음양오행을 공통 기준으로 기질, 관계, 일, 재물과 오늘의 흐름을 하나의 구조 안에서 차분히 읽습니다.</p>
+          <div class="home-image-hero-actions">
+            <a class="button" href="./saju.html">나의 사주 보기</a>
+            <a class="button secondary" href="./about.html">정월재 소개</a>
           </div>
         </div>
-        <div class="hero-seal" aria-hidden="true">
-          <div class="seal-box"><span>正</span><span>月</span><span>齋</span></div>
-          <p>JEONGWOLJAE<br />FORTUNE ARCHIVE</p>
-        </div>
       </div>
     </section>
 
-    <section class="reviews-section" id="reviews">
-      <div class="container">
-        <div class="section-head center-head">
-          <p class="section-label">REVIEW</p>
-          <h2>후기는 실제 이용 기록만<br />차곡차곡 쌓습니다.</h2>
-          <p>오픈 이후 실제 서비스를 이용한 분들의 후기만 이곳에 공개할 예정입니다.</p>
-        </div>
-        <div class="review-overview">
-          <div><span>누적 후기</span><strong>—</strong><small>오픈 후 집계</small></div>
-          <div><span>평균 평점</span><strong>—</strong><small>실제 후기 기준</small></div>
-          <div><span>후기 원칙</span><strong class="review-word">REAL</strong><small>샘플 후기 미사용</small></div>
-        </div>
-        <div class="review-list">
-          <article class="review-card review-empty"><span class="review-type">종합 사주</span><p>정월재 오픈 후 첫 실제 이용 후기가 이 자리에 표시됩니다.</p><small>실제 이용 후기만 노출</small></article>
-          <article class="review-card review-empty"><span class="review-type">오행 분석</span><p>후기 수치와 평점도 실제 이용 데이터가 생긴 뒤에만 공개합니다.</p><small>임의 후기·평점 없음</small></article>
-          <article class="review-card review-empty"><span class="review-type">인연 · 궁합</span><p>서비스별 후기 흐름을 한눈에 비교할 수 있도록 구성할 예정입니다.</p><small>오픈 준비 중</small></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="featured-section" id="featured">
-      <div class="container">
-        <div class="section-head center-head">
-          <p class="section-label">대표 풀이</p>
-          <h2>정월재, 이것부터 보세요.</h2>
-          <p>처음이라면 가장 많이 찾는 풀이부터 시작해보세요.</p>
-        </div>
-        <div class="featured-scroll">
-          <a class="featured-card featured-a" href="./saju.html">
-            <span class="best-badge">BEST 1</span>
-            <div class="card-orbit" aria-hidden="true"></div>
-            <div class="featured-copy"><small>평생 총운 · 기본 명식</small><h3>타고난 내 흐름을<br />처음부터 끝까지</h3><p>기질, 오행, 관계, 일과 재물의 큰 구조를 한 번에 읽습니다.</p><span class="card-cta">종합 사주 보기 →</span></div>
-          </a>
-          <a class="featured-card featured-b" href="./ohaeng.html">
-            <span class="best-badge">BEST 2</span>
-            <div class="five-mark" aria-hidden="true"><span>木</span><span>火</span><span>土</span><span>金</span><span>水</span></div>
-            <div class="featured-copy"><small>오행 정밀 분석</small><h3>내 안의 다섯 기운,<br />무엇이 넘치고 부족할까</h3><p>목·화·토·금·수의 균형과 상생·상극을 구조적으로 봅니다.</p><span class="card-cta">오행 분석 보기 →</span></div>
-          </a>
-          <a class="featured-card featured-c" href="./fortune.html">
-            <span class="best-badge">BEST 3</span>
-            <div class="month-wheel" aria-hidden="true"><span>01</span><span>04</span><span>07</span><span>10</span></div>
-            <div class="featured-copy"><small>오늘 · 월운 · 연운</small><h3>지금 내게 들어오는<br />시간의 기운</h3><p>현재 시기의 기운이 내 사주와 어떻게 만나고 흘러가는지 봅니다.</p><span class="card-cta">운의 흐름 보기 →</span></div>
-          </a>
-          <a class="featured-card featured-d" href="./compatibility.html">
-            <span class="best-badge">BEST 4</span>
-            <div class="relation-rings" aria-hidden="true"></div>
-            <div class="featured-copy"><small>두 사람의 명식 비교</small><h3>우리 둘은<br />어디서 맞고 부딪힐까</h3><p>오행과 천간·지지 관계를 비교해 관계의 특징과 부담을 봅니다.</p><span class="card-cta">궁합 보기 →</span></div>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="catalog-section">
+    <section class="home-services">
       <div class="container">
         <div class="section-head">
-          <p class="section-label">제공중인 풀이</p>
-          <h2>지금, 어떤 흐름이 궁금한가요?</h2>
-          <p>사주 원본은 하나지만 궁금한 주제에 따라 보는 관점을 달리합니다.</p>
+          <p class="section-label">SERVICES</p>
+          <h2>보고 싶은 흐름을 골라보세요.</h2>
+          <p>필요한 주제부터 가볍게 시작하고, 같은 사주 원본을 기준으로 이어서 볼 수 있습니다.</p>
         </div>
-
-        <div class="catalog-block">
-          <div class="catalog-title"><span>01</span><div><small>사주풀이</small><h3>나를 먼저 알고 싶다면</h3></div></div>
-          <div class="catalog-grid">
-            <a class="catalog-card" href="./saju.html"><span class="catalog-tag">추천</span><h4>종합 사주</h4><p>기질·성향·기본 명식과 삶의 큰 구조</p><small>기본 명식 · 일간 · 십성</small></a>
-            <a class="catalog-card" href="./ohaeng.html"><h4>오행 분석</h4><p>강한 기운과 부족한 기운, 상생과 상극</p><small>木 · 火 · 土 · 金 · 水</small></a>
-            <a class="catalog-card" href="./fortune.html"><h4>시기별 운세</h4><p>오늘, 이번 달, 올해의 흐름</p><small>일운 · 월운 · 연운</small></a>
-          </div>
-        </div>
-
-        <div class="catalog-block">
-          <div class="catalog-title"><span>02</span><div><small>인연과 관계</small><h3>사람 사이의 흐름이 궁금하다면</h3></div></div>
-          <div class="catalog-grid">
-            <a class="catalog-card" href="./relationship.html"><span class="catalog-tag">인기</span><h4>연애와 인연</h4><p>관계를 맺는 방식과 반복되는 패턴</p><small>관계 성향 · 인연 흐름</small></a>
-            <a class="catalog-card" href="./compatibility.html"><h4>두 사람의 궁합</h4><p>서로 보완되는 부분과 충돌하는 지점</p><small>오행 · 천간 · 지지 비교</small></a>
-            <a class="catalog-card" href="./relationship.html"><h4>현재 관계 흐름</h4><p>지금 관계가 편한지 부담스러운지 시기의 흐름까지</p><small>관계 · 시기</small></a>
-          </div>
-        </div>
-
-        <div class="catalog-block">
-          <div class="catalog-title"><span>03</span><div><small>일과 재물</small><h3>일하는 방식과 돈의 흐름을 보고 싶다면</h3></div></div>
-          <div class="catalog-grid">
-            <a class="catalog-card" href="./work-money.html"><span class="catalog-tag">추천</span><h4>직업 성향</h4><p>조직, 독립, 리더십과 업무 방식</p><small>직업 · 업무 성향</small></a>
-            <a class="catalog-card" href="./work-money.html"><h4>재물 흐름</h4><p>돈을 다루는 기질과 재물 흐름의 특징</p><small>재물 · 소비 · 판단</small></a>
-            <a class="catalog-card" href="./work-money.html"><h4>이직 · 사업 흐름</h4><p>변화를 선택할 때 봐야 할 시기와 부담</p><small>이직 · 독립 · 사업</small></a>
-          </div>
+        <div class="service-visual-grid">
+          <a class="service-visual-card" href="./saju.html" style="background-image:url('https://nineworksdatabase.planus253.workers.dev/cdn/test/20260907-060437-1-6ea6ea3f.webp')"><span class="visual-index">01</span><div><h3>종합 사주</h3><p>기질과 삶의 큰 구조</p></div></a>
+          <a class="service-visual-card" href="./ohaeng.html" style="background-image:url('https://nineworksdatabase.planus253.workers.dev/cdn/test/20260907-060438-2-b3ce5dc2.webp')"><span class="visual-index">02</span><div><h3>오행 분석</h3><p>목·화·토·금·수의 균형</p></div></a>
+          <a class="service-visual-card" href="./fortune.html" style="background-image:url('https://nineworksdatabase.planus253.workers.dev/cdn/test/20260907-060438-3-2cdbfb70.webp')"><span class="visual-index">03</span><div><h3>오늘의 운세</h3><p>오늘 들어오는 기운의 흐름</p></div></a>
+          <a class="service-visual-card" href="./relationship.html" style="background-image:url('https://nineworksdatabase.planus253.workers.dev/cdn/test/20260907-060439-4-e2399ab7.webp')"><span class="visual-index">04</span><div><h3>연애와 인연</h3><p>관계를 맺는 방식과 반복 패턴</p></div></a>
+          <a class="service-visual-card" href="./compatibility.html" style="background-image:url('https://nineworksdatabase.planus253.workers.dev/cdn/test/20260907-060440-5-677398ac.webp')"><span class="visual-index">05</span><div><h3>궁합</h3><p>두 사람의 흐름과 관계의 특징</p></div></a>
+          <a class="service-visual-card" href="./work-money.html" style="background-image:url('https://nineworksdatabase.planus253.workers.dev/cdn/test/20260907-060440-6-ef49b21c.webp')"><span class="visual-index">06</span><div><h3>일과 재물</h3><p>업무 성향과 재물 흐름</p></div></a>
+          <a class="service-visual-card wide" href="./archive.html" style="background-image:url('https://nineworksdatabase.planus253.workers.dev/cdn/test/20260907-060441-7-9ce562e0.webp')"><span class="visual-index">07</span><div><h3>정월록</h3><p>내가 본 풀이와 흐름을 한곳에 기록</p></div></a>
         </div>
       </div>
     </section>
 
-    <section class="daily-section">
-      <div class="container daily-grid">
-        <div class="daily-copy">
-          <p class="section-label">DAILY FORTUNE</p>
-          <h2>매일 달라지는 운도<br />내 사주를 기준으로.</h2>
-          <p>랜덤 문구가 아니라 나의 사주와 그날의 기운이 만나는 흐름을 기준으로 봅니다.</p>
-          <a class="button button-accent" href="./fortune.html">오늘의 흐름 보기</a>
-        </div>
-        <div class="daily-board" aria-hidden="true">
-          <span class="daily-date">TODAY</span><strong>日</strong><div class="daily-lines"><i></i><i></i><i></i><i></i></div><small>今日의 흐름</small>
-        </div>
-      </div>
-    </section>
-
-    <section class="method-section dark-method">
-      <div class="container method-layout">
-        <div class="method-visual" aria-hidden="true"><span class="orbit orbit-a"></span><span class="orbit orbit-b"></span><span class="orbit-dot"></span><span class="method-mark">正<br />月<br />齋</span></div>
-        <div class="method-copy">
-          <p class="section-label">METHOD</p>
-          <h2>좋은 말보다<br />일관된 해석.</h2>
-          <p class="lead-copy">강점만 강조하지 않고 부족한 기운, 충돌하는 관계, 부담이 커지는 시기도 함께 봅니다. 하나의 사주 원본에서 모든 해석이 연결되도록 설계합니다.</p>
-          <div class="method-mini-grid"><span><b>01</b> 사주팔자 계산</span><span><b>02</b> 음양오행 분석</span><span><b>03</b> 명리 구조 해석</span><span><b>04</b> 현대적인 언어로 정리</span></div>
-          <a class="text-link light-link" href="./about.html">해석 원칙 자세히 보기</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="archive-cta-section">
-      <div class="container archive-cta">
-        <div><p class="section-label">正月錄</p><h2>내가 본 흐름은<br />정월록에 모아두세요.</h2><p>사주, 운세, 궁합과 이후의 기록을 하나의 개인 아카이브로 이어갑니다.</p></div>
-        <a class="round-arrow" href="./archive.html" aria-label="정월록 보기">→</a>
+    <section class="home-about-banner">
+      <div class="container">
+        <a href="./about.html">
+          <div>
+            <p class="section-label">ABOUT JEONGWOLJAE</p>
+            <h2>많은 해석 사이에서, 바른 기준을 만들고 싶었습니다.</h2>
+            <p>정월재가 어떤 이론과 태도로 사주를 읽고 정리하는지 소개 페이지에서 확인해보세요.</p>
+          </div>
+          <span class="home-about-arrow">→</span>
+        </a>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div><p class="footer-brand">正月齋 <span>정월재</span></p><p class="footer-copy">삶의 흐름을 읽는 곳.</p></div>
-      <p class="footer-note">정월재의 콘텐츠는 전통 명리학을 기반으로 한 해석 콘텐츠이며 과학적·의학적·법률적 판단이나 결과를 보장하지 않습니다.</p>
-      <p class="footer-copyright">© <span data-year></span> JEONGWOLJAE</p>
-    </div>
-  </footer>
+  <footer class="site-footer"><div class="container footer-grid"><div><p class="footer-brand">正月齋 <span>정월재</span></p><p class="footer-copy">삶의 흐름을 읽는 곳.</p></div><p class="footer-note">정월재의 콘텐츠는 전통 명리학을 기반으로 한 해석 콘텐츠이며 결과를 보장하지 않습니다.</p><p class="footer-copyright">© <span data-year></span> JEONGWOLJAE</p></div></footer>
   <script src="./app.js" defer></script>
 </body>
 </html>
