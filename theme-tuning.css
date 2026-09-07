@@ -1,0 +1,151 @@
+/* Final typography + section rhythm tuning
+   Goal: smaller, calmer type and clear breathing room between sections. */
+
+:root{
+  --section-gap:72px;
+  --section-gap-mobile:48px;
+}
+
+/* Global type hierarchy */
+body{font-size:15px;line-height:24px}
+h1{font-size:40px!important;line-height:50px!important;font-weight:700!important}
+h2{font-size:28px!important;line-height:38px!important;font-weight:700!important}
+h3{font-size:20px!important;line-height:29px!important;font-weight:700!important}
+h4{font-size:17px!important;line-height:25px!important;font-weight:700!important}
+p{font-size:15px;line-height:24px}
+.section-label,.eyebrow{font-size:10px!important;line-height:15px!important;margin-bottom:8px!important}
+
+/* Hero: deliberately restrained */
+.hero{min-height:auto!important;border-bottom:0!important}
+.hero-grid{min-height:520px!important;padding-block:64px!important}
+.hero-copy{max-width:620px!important}
+.hero h1{max-width:620px!important;font-size:44px!important;line-height:54px!important;letter-spacing:-.025em!important}
+.hero-description{max-width:560px!important;margin:18px 0 24px!important;font-size:15px!important;line-height:25px!important}
+.hero-kicker{margin-bottom:14px!important;padding:6px 10px!important;font-size:11px!important}
+.hero-points{margin-top:24px!important;padding-top:16px!important}
+.hero-points span{font-size:11px!important}
+.seal-box{width:300px!important;border-radius:20px!important}
+.seal-box span{font-size:48px!important}
+
+/* Real separation between sections: no glued full-bleed bands */
+main>.reviews-section,
+main>.featured-section,
+main>.catalog-section,
+main>.daily-section,
+main>.method-section,
+main>.archive-cta-section{
+  padding-block:0!important;
+  margin-block:var(--section-gap)!important;
+  border:0!important;
+  background:transparent!important;
+}
+main>.hero+section{margin-top:80px!important}
+main>.archive-cta-section{margin-bottom:80px!important}
+.section-head{margin-bottom:26px!important}
+.section-head h2{font-size:28px!important;line-height:38px!important}
+.section-head>p:last-child{margin-top:8px!important;font-size:14px!important;line-height:22px!important}
+
+/* Content cards */
+.review-overview>div{min-height:104px!important;padding:18px!important;border-radius:16px!important}
+.review-overview strong{font-size:26px!important}
+.review-list{gap:12px!important}
+.review-card{min-height:156px!important;padding:18px!important;border-radius:16px!important}
+.review-card p{margin:22px 0 14px!important;font-size:14px!important;line-height:22px!important}
+.review-type{font-size:10px!important}
+
+.featured-scroll{grid-auto-columns:minmax(300px,380px)!important;gap:14px!important}
+.featured-card{min-height:430px!important;padding:22px!important;border-radius:18px!important}
+.featured-copy h3{margin:8px 0 10px!important;font-size:22px!important;line-height:30px!important}
+.featured-copy p{font-size:13px!important;line-height:21px!important;margin-bottom:16px!important}
+.best-badge{top:16px!important;left:16px!important;padding:6px 9px!important;font-size:10px!important}
+.card-cta{padding:9px 13px!important;font-size:11px!important}
+.card-orbit{width:220px!important;right:30px!important;top:58px!important}
+.five-mark{top:82px!important;left:22px!important;right:22px!important}
+.five-mark span{font-size:18px!important}
+.month-wheel{width:224px!important;right:24px!important;top:60px!important}
+.relation-rings{width:220px!important;height:160px!important;top:82px!important}
+.relation-rings::before,.relation-rings::after{width:132px!important}
+
+.catalog-block{padding:24px 0!important}
+.catalog-title{margin-bottom:14px!important}
+.catalog-title h3{font-size:20px!important;line-height:28px!important}
+.catalog-grid{gap:12px!important}
+.catalog-card{min-height:154px!important;padding:18px!important;border-radius:16px!important}
+.catalog-card h4{font-size:17px!important;line-height:25px!important}
+.catalog-card p{font-size:13px!important;line-height:21px!important;margin-bottom:24px!important}
+.catalog-card>small{left:18px!important;bottom:16px!important;font-size:10px!important}
+
+.daily-grid{padding:32px!important;border-radius:18px!important;gap:36px!important}
+.daily-copy h2{font-size:28px!important;line-height:38px!important}
+.daily-copy p{font-size:14px!important;line-height:22px!important}
+.daily-board{min-height:220px!important;border-radius:16px!important}
+.daily-board>strong{font-size:58px!important}
+
+.method-layout{gap:44px!important}
+.method-visual{max-width:340px!important;border-radius:18px!important}
+.method-copy h2{font-size:28px!important;line-height:38px!important}
+.method-copy>.lead-copy{font-size:14px!important;line-height:23px!important}
+.method-mini-grid span{padding:11px 0!important;font-size:12px!important}
+
+.archive-cta{padding:32px!important;border-radius:18px!important}
+.archive-cta h2{font-size:28px!important;line-height:38px!important}
+.archive-cta p:not(.section-label){font-size:14px!important;line-height:22px!important}
+.round-arrow{width:54px!important;height:54px!important}
+
+/* Buttons */
+.button{min-height:42px!important;padding:0 16px!important;font-size:13px!important;border-radius:10px!important}
+.button-large{min-height:46px!important;font-size:13px!important}
+
+/* Sub pages: smaller heading + actual separation */
+.secondary-nav{margin-bottom:0!important}
+.sub-hero{padding:56px 0 44px!important;border-bottom:0!important}
+.sub-hero h1{max-width:660px!important;font-size:34px!important;line-height:44px!important}
+.sub-lead{max-width:600px!important;margin-top:12px!important;font-size:14px!important;line-height:23px!important}
+.breadcrumb{margin-bottom:20px!important;font-size:11px!important}
+.page-section{padding:0!important;margin:64px 0 80px!important;border:0!important}
+.page-layout{gap:56px!important}
+.page-copy h2{font-size:26px!important;line-height:36px!important}
+.page-copy>p:not(.eyebrow){font-size:14px!important;line-height:22px!important}
+.detail-list{margin-top:20px!important}
+.detail-list li{padding:13px 0!important}
+.detail-list strong{font-size:14px!important;line-height:21px!important}
+.detail-list p{font-size:12px!important;line-height:19px!important}
+
+/* Forms */
+.form-page-title h2{font-size:19px!important;line-height:27px!important}
+.form-page-title p{font-size:12px!important;line-height:19px!important}
+.form-group-title{font-size:13px!important}
+.service-form-wrap .field label{font-size:12px!important;line-height:18px!important}
+.service-form-wrap input,.service-form-wrap select{height:46px!important;font-size:13px!important}
+.choice-chip span{min-height:38px!important;font-size:12px!important}
+.form-submit-area{margin-top:20px!important;padding-top:18px!important}
+.service-form-wrap .reading-form .button-large{min-width:190px!important;min-height:46px!important}
+
+/* Reviews page */
+.review-page-hero{padding:58px 0 36px!important}
+.review-page-hero h1{font-size:34px!important;line-height:44px!important}
+.review-page-hero p{font-size:14px!important;line-height:22px!important}
+.review-page{padding:56px 0 80px!important}
+.review-toolbar h2{font-size:24px!important;line-height:33px!important}
+.review-stat{padding:20px!important;border-radius:16px!important}
+.review-stat strong{font-size:32px!important}
+.review-entry{min-height:166px!important;padding:20px!important;border-radius:16px!important}
+.review-entry p{font-size:14px!important;line-height:22px!important}
+
+@media(max-width:767px){
+  :root{--section-gap:var(--section-gap-mobile)}
+  h1{font-size:32px!important;line-height:40px!important}
+  h2{font-size:26px!important;line-height:35px!important}
+  .hero-grid{min-height:auto!important;padding-block:52px!important}
+  .hero h1{font-size:34px!important;line-height:43px!important}
+  .hero-description{font-size:14px!important;line-height:22px!important}
+  main>.hero+section{margin-top:56px!important}
+  .section-head h2,.daily-copy h2,.method-copy h2,.archive-cta h2{font-size:25px!important;line-height:34px!important}
+  .featured-card{min-height:400px!important}
+  .featured-copy h3{font-size:21px!important;line-height:29px!important}
+  .daily-grid,.archive-cta{padding:22px!important}
+  .sub-hero{padding:44px 0 34px!important}
+  .sub-hero h1{font-size:30px!important;line-height:39px!important}
+  .page-section{margin:48px 0 64px!important}
+  .page-copy h2{font-size:24px!important;line-height:33px!important}
+}
