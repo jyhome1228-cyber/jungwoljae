@@ -83,6 +83,7 @@ function normalizeNavigation(){
     ['./fortune.html','오늘의 운세'],
     ['./relationship.html','인연'],
     ['./work-money.html','일·재물'],
+    ['./guide.html','정월도감'],
     ['./archive.html','정월록'],
     ['./reviews.html','후기'],
     ['./about.html','소개']
