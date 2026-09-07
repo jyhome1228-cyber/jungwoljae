@@ -21,6 +21,7 @@ function applyBrandFavicon(){
 applyBrandFavicon();
 
 const currentFile = location.pathname.split('/').pop() || 'index.html';
+const profilePages = new Set(['saju.html','ohaeng.html','fortune.html','relationship.html','work-money.html','guide.html']);
 
 const themeLink = document.createElement('link');
 themeLink.rel = 'stylesheet';
@@ -56,6 +57,13 @@ const friendlyCss=document.createElement('link');
 friendlyCss.rel='stylesheet';
 friendlyCss.href='./friendly-content.css?v=20260907-2344';
 document.head.appendChild(friendlyCss);
+
+if(profilePages.has(currentFile)){
+  const basicProfileCss=document.createElement('link');
+  basicProfileCss.rel='stylesheet';
+  basicProfileCss.href='./basic-profile.css?v=20260908-0247';
+  document.head.appendChild(basicProfileCss);
+}
 
 if(currentFile.endsWith('-result.html')){
   const readabilityLink=document.createElement('link');
@@ -177,11 +185,23 @@ analyticsScript.type='module';
 analyticsScript.src='./analytics.js?v=20260907-02';
 document.body.appendChild(analyticsScript);
 
+if(profilePages.has(currentFile)){
+  const profileScript=document.createElement('script');
+  profileScript.type='module';
+  profileScript.src='./basic-profile.js?v=20260908-0247';
+  document.body.appendChild(profileScript);
+}
+
 if(currentFile.endsWith('-result.html')){
   const clarityScript=document.createElement('script');
   clarityScript.src='./result-clarity.js?v=20260907-2257';
   clarityScript.defer=true;
   document.body.appendChild(clarityScript);
+
+  const plainReadingScript=document.createElement('script');
+  plainReadingScript.src='./plain-reading.js?v=20260908-0247';
+  plainReadingScript.defer=true;
+  document.body.appendChild(plainReadingScript);
 
   setTimeout(()=>{
     const friendlyScript=document.createElement('script');
