@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
   <link rel="stylesheet" href="./styles.css" />
   <link rel="stylesheet" href="./page.css" />
-  <link rel="stylesheet" href="./fortune-result.css?v=20260907-02" />
+  <link rel="stylesheet" href="./fortune-result.css?v=20260907-03" />
 </head>
 <body>
   <header class="site-header no-print">
@@ -46,24 +46,52 @@
         </div>
       </section>
 
-      <section class="fortune-report">
-        <p class="fortune-label">02 · DAILY AREAS</p>
-        <h2>오늘은 이렇게 써보세요.</h2>
-        <div class="fortune-grid" data-area-grid></div>
+      <section class="fortune-report fortune-story-section">
+        <p class="fortune-label">02 · TODAY'S FLOW</p>
+        <h2>오늘의 흐름을 조금 더 길게 읽어보면</h2>
+        <div class="fortune-story" data-fortune-story></div>
       </section>
 
       <section class="fortune-report">
-        <p class="fortune-label">03 · KEY POINTS</p>
+        <p class="fortune-label">03 · DAILY AREAS</p>
+        <h2>분야별로 보면 이런 하루입니다.</h2>
+        <div class="fortune-grid" data-area-grid></div>
+      </section>
+
+      <section class="fortune-report fortune-time-section">
+        <p class="fortune-label">04 · TIME OF DAY</p>
+        <h2>하루의 시간대별 흐름</h2>
+        <p class="fortune-section-lead">같은 날이라도 초반과 후반에 쓰기 좋은 에너지가 다를 수 있습니다. 오늘의 흐름을 세 구간으로 나누어 정리했습니다.</p>
+        <div class="fortune-time-grid" data-time-grid></div>
+      </section>
+
+      <section class="fortune-report fortune-choice-section">
+        <p class="fortune-label">05 · DO & DON'T</p>
+        <h2>오늘은 이것을 살리고, 이것은 줄여보세요.</h2>
+        <div class="fortune-choice-grid">
+          <article class="fortune-choice-card positive"><span>오늘 잘 맞는 행동</span><ul data-do-list></ul></article>
+          <article class="fortune-choice-card caution"><span>오늘 줄이면 좋은 행동</span><ul data-dont-list></ul></article>
+        </div>
+      </section>
+
+      <section class="fortune-report">
+        <p class="fortune-label">06 · KEY POINTS</p>
         <h2>오늘 기억할 세 가지</h2>
         <div class="fortune-key-grid" data-key-grid></div>
       </section>
 
       <section class="fortune-report fortune-tip-section">
-        <p class="fortune-label">04 · JUNGWOLJAE TIP</p>
+        <p class="fortune-label">07 · JUNGWOLJAE TIP</p>
         <h2>정월재가 드리는 오늘 하루의 팁</h2>
         <p class="fortune-tip-lead">오늘의 흐름을 생활에서 바로 써볼 수 있도록 세 가지로 정리했습니다.</p>
         <div class="fortune-tip-grid" data-tip-grid></div>
         <div class="fortune-tip-final"><span>오늘의 마무리</span><strong data-tip-final></strong></div>
+      </section>
+
+      <section class="fortune-report fortune-total-section">
+        <p class="fortune-label">08 · TOTAL SUMMARY</p>
+        <h2>오늘 하루 총 요약</h2>
+        <div class="fortune-total" data-total-summary></div>
       </section>
 
       <section class="fortune-report fortune-evidence">
@@ -88,5 +116,6 @@
   <footer class="site-footer no-print"></footer>
   <script src="./app.js" defer></script>
   <script type="module" src="./fortune-result.js?v=20260907-02"></script>
+  <script type="module" src="./fortune-detail.js?v=20260907-01"></script>
 </body>
 </html>
