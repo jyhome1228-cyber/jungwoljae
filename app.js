@@ -46,9 +46,7 @@ function normalizeNavigation(){
     ['./reviews.html','후기'],
     ['./about.html','소개']
   ];
-
   const currentPath = location.pathname.split('/').pop() || 'index.html';
-
   document.querySelectorAll('.desktop-nav, .mobile-menu nav').forEach((nav)=>{
     nav.innerHTML = primaryLinks.map(([href,label])=>{
       const file = href.replace('./','');
@@ -56,18 +54,15 @@ function normalizeNavigation(){
       return `<a href="${href}"${current}>${label}</a>`;
     }).join('');
   });
-
   document.querySelectorAll('.secondary-nav .container').forEach((nav)=>{
     [...nav.querySelectorAll('a')].forEach((link)=>{
       if(link.getAttribute('href')?.includes('fortune.html')) link.textContent='오늘의 운세';
     });
   });
-
   document.querySelectorAll('.header-cta').forEach((cta)=>{
     cta.href='./signup.html';
     cta.textContent='회원등록';
   });
-
   document.querySelectorAll('a[href="#reviews"]').forEach((link)=>link.setAttribute('href','./reviews.html'));
 }
 normalizeNavigation();
@@ -77,9 +72,7 @@ const mobileMenu = document.querySelector('[data-mobile-menu]');
 const yearNode = document.querySelector('[data-year]');
 const readingForm = document.querySelector('[data-reading-form]');
 const formStatus = document.querySelector('[data-form-status]');
-
 if (yearNode) yearNode.textContent = new Date().getFullYear();
-
 function setMenu(open){
   if(!menuButton||!mobileMenu)return;
   menuButton.setAttribute('aria-expanded',String(open));
@@ -101,7 +94,6 @@ const serviceConfig={
   compatibility:{title:'궁합',description:'두 사람의 사주와 오행을 비교해 서로 보완되는 부분과 관계의 특징을 봅니다.',button:'두 사람의 궁합 살펴보기',needsPartner:true},
   work:{title:'일과 재물',description:'업무 성향, 조직과 독립의 방향, 재물을 다루는 기질과 흐름을 살펴봅니다.',button:'일과 재물 살펴보기'}
 };
-
 function setFieldError(input,message){
   if(!input)return;
   const target=document.querySelector(`[data-error-for="${input.id}"]`);
@@ -114,7 +106,6 @@ function clearFieldError(input){
   input.removeAttribute('aria-invalid');
   if(target)target.textContent='';
 }
-
 if(readingForm){
   const serviceRadios=[...readingForm.querySelectorAll('input[name="serviceType"]')];
   const descriptionNode=readingForm.querySelector('[data-selected-service-description]');
@@ -126,7 +117,6 @@ if(readingForm){
   const partnerBirthDate=readingForm.querySelector('#partner-birth-date');
   const consent=readingForm.querySelector('input[name="consent"]');
   const selectedServiceKey=()=>readingForm.querySelector('input[name="serviceType"]:checked')?.value||'saju';
-
   const syncService=()=>{
     const service=serviceConfig[selectedServiceKey()]||serviceConfig.saju;
     if(descriptionNode)descriptionNode.textContent=service.description;
@@ -137,42 +127,30 @@ if(readingForm){
     if(!service.needsPartner){clearFieldError(partnerName);clearFieldError(partnerBirthDate)}
     if(formStatus)formStatus.textContent='';
   };
-
   serviceRadios.forEach(radio=>radio.addEventListener('change',syncService));
   [profileName,birthDate,partnerName,partnerBirthDate].forEach(input=>input?.addEventListener('input',()=>clearFieldError(input)));
   consent?.addEventListener('change',()=>{if(consent.checked&&formStatus)formStatus.textContent=''});
-
   readingForm.addEventListener('submit',(event)=>{
-    event.preventDefault();
-    let valid=true;
-    const service=serviceConfig[selectedServiceKey()]||serviceConfig.saju;
-
+    event.preventDefault();let valid=true;const service=serviceConfig[selectedServiceKey()]||serviceConfig.saju;
     if(!profileName?.value.trim()){setFieldError(profileName,'이름 또는 닉네임을 입력해주세요.');valid=false}else clearFieldError(profileName);
     if(!birthDate?.value){setFieldError(birthDate,'생년월일을 입력해주세요.');valid=false}else clearFieldError(birthDate);
-
     if(service.needsPartner){
       if(!partnerName?.value.trim()){setFieldError(partnerName,'상대방의 이름 또는 닉네임을 입력해주세요.');valid=false}else clearFieldError(partnerName);
       if(!partnerBirthDate?.value){setFieldError(partnerBirthDate,'상대방의 생년월일을 입력해주세요.');valid=false}else clearFieldError(partnerBirthDate);
     }
-
     if(!consent?.checked){if(formStatus)formStatus.textContent='분석을 진행하려면 입력 정보 사용에 동의해주세요.';valid=false}
     if(!valid){readingForm.querySelector('[aria-invalid="true"]')?.focus();return}
-
-    const data=new FormData(readingForm);
-    const birthTime=data.get('birthTime')||'출생 시간 미입력';
-    const calendarType=data.get('calendarType')==='lunar'?'음력':'양력';
+    const data=new FormData(readingForm);const birthTime=data.get('birthTime')||'출생 시간 미입력';const calendarType=data.get('calendarType')==='lunar'?'음력':'양력';
     if(formStatus)formStatus.textContent=`${data.get('profileName')}님의 ${service.title} 분석 정보가 확인되었습니다. ${data.get('birthDate')} · ${birthTime} · ${calendarType} 기준으로 분석합니다.`;
   });
   syncService();
 }
-
 if(document.querySelector('#reviews') && document.body.dataset.reviewsPage!=='true'){
   const reviewScript=document.createElement('script');
   reviewScript.src='./reviews.js';
   reviewScript.defer=true;
   document.body.appendChild(reviewScript);
 }
-
 const footerScript=document.createElement('script');
-footerScript.src='./footer.js?v=20260907-03';
+footerScript.src='./footer.js?v=20260907-1637';
 document.body.appendChild(footerScript);
