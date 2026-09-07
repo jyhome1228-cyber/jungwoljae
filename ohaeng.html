@@ -11,16 +11,15 @@
   <link rel="stylesheet" href="./page.css" />
   <style>
     .ohaeng-form .field>label{display:block;margin-bottom:7px;font-size:12px;font-weight:700;color:#2b2524}
-    .ohaeng-form input:not([type="checkbox"]),.ohaeng-form select,.ohaeng-form textarea{width:100%;border:1px solid #ddd2cd;border-radius:10px;background:#fff;color:#2b2524;font:inherit;outline:none;box-shadow:none}
+    .ohaeng-form input:not([type="checkbox"]),.ohaeng-form select{width:100%;border:1px solid #ddd2cd;border-radius:10px;background:#fff;color:#2b2524;font:inherit;outline:none;box-shadow:none}
     .ohaeng-form input:not([type="checkbox"]),.ohaeng-form select{height:46px;padding:0 13px;font-size:13px;appearance:none;-webkit-appearance:none}
     .ohaeng-form select{padding-right:36px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' fill='none' stroke='%23543a3a' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;background-size:12px 8px}
-    .ohaeng-form textarea{min-height:112px;padding:13px;resize:vertical;font-size:13px;line-height:21px}
-    .ohaeng-form input:focus,.ohaeng-form select:focus,.ohaeng-form textarea:focus{border-color:#543a3a;box-shadow:0 0 0 3px rgba(84,58,58,.07)}
+    .ohaeng-form input:focus,.ohaeng-form select:focus{border-color:#543a3a;box-shadow:0 0 0 3px rgba(84,58,58,.07)}
     .ohaeng-form .date-selects{display:grid;grid-template-columns:1.45fr .8fr .8fr;gap:8px}
     .ohaeng-form .time-selects{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
     .ohaeng-form .field.full{grid-column:1/-1}
     .ohaeng-form .page-field-row{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important}
-    .ohaeng-form .question-helper,.ohaeng-form .profile-state{margin:6px 0 0!important;color:#9b918d!important;font-size:10px!important;line-height:16px!important}
+    .ohaeng-form .profile-state{margin:6px 0 0!important;color:#9b918d!important;font-size:10px!important;line-height:16px!important}
     .ohaeng-form .profile-state[data-state="ok"]{color:#6e514f!important}
     .ohaeng-form .mini-check{display:flex!important;align-items:center!important;gap:9px!important;margin-top:9px!important;cursor:pointer}
     .ohaeng-form .mini-check input{flex:0 0 18px!important;width:18px!important;height:18px!important;margin:0!important;border:1px solid #d5cac5!important;border-radius:5px!important;background:#fff!important;appearance:none!important;-webkit-appearance:none!important}
@@ -57,7 +56,7 @@
         <div class="page-copy">
           <p class="eyebrow">BALANCE</p>
           <h2>많고 적음보다<br />관계가 중요합니다.</h2>
-          <p>오행은 단순 점수표가 아니라 사주팔자의 네 기둥과 계절의 흐름 속에서 읽습니다. 질문을 남기면 계산값은 바꾸지 않고, 같은 결과에서 무엇을 더 깊게 설명할지만 달라집니다.</p>
+          <p>오행은 단순 점수표가 아니라 사주팔자의 네 기둥과 계절의 흐름 속에서 읽습니다. 개인 질문에 맞춘 답변보다, 명식에서 확인되는 오행 구조 자체를 일관된 기준으로 정리합니다.</p>
           <ul class="detail-list">
             <li><span>01</span><div><strong>명식 계산</strong><p>연주·월주·일주·시주를 먼저 계산해 오행의 원본을 만듭니다.</p></div></li>
             <li><span>02</span><div><strong>상대 강도</strong><p>보이는 여덟 글자의 오행과 월지의 계절 가중을 함께 봅니다.</p></div></li>
@@ -129,14 +128,6 @@
               </div>
             </div>
 
-            <div class="page-field-row">
-              <div class="field full">
-                <label for="ohaeng-question">지금 가장 궁금한 점이 있나요? <span class="optional">선택</span></label>
-                <textarea id="ohaeng-question" name="question" maxlength="300" placeholder="예: 최근 새로운 일을 시작할지, 지금 하던 일을 더 이어갈지 고민입니다."></textarea>
-                <p class="question-helper">질문은 오행 계산값을 바꾸지 않습니다. 같은 분석 결과에서 어떤 부분을 더 자세히 설명할지 정하는 데만 사용합니다. · 최대 300자</p>
-              </div>
-            </div>
-
             <div class="form-submit-area">
               <label class="consent-row"><input type="checkbox" name="consent" required /><span>분석을 위해 입력 정보가 사용되는 것에 동의합니다.</span></label>
               <p class="form-status" role="status" aria-live="polite" data-ohaeng-status></p>
@@ -150,6 +141,6 @@
 
   <footer class="site-footer"></footer>
   <script src="./app.js" defer></script>
-  <script type="module" src="./ohaeng-form.js?v=20260907-01"></script>
+  <script type="module" src="./ohaeng-form.js?v=20260907-02"></script>
 </body>
 </html>
