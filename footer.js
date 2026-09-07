@@ -1,6 +1,7 @@
 (()=>{
   const footer=document.querySelector('.site-footer');
-  if(!footer || footer.dataset.enhanced==='true') return;
+  if(!footer) return;
+  if(footer.dataset.enhanced==='true' && footer.children.length) return;
 
   footer.dataset.enhanced='true';
   const year=new Date().getFullYear();
