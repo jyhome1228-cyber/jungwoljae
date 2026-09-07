@@ -13,65 +13,20 @@
 </head>
 <body data-reviews-page="true">
   <a class="skip-link" href="#main">본문 바로가기</a>
-  <header class="site-header">
-    <div class="wide-container header-inner">
-      <a class="brand" href="./index.html" aria-label="정월재 홈"><span class="brand-hanja">正月齋</span><span class="brand-korean">정월재</span></a>
-      <nav class="desktop-nav"></nav>
-      <a class="header-cta" href="./signup.html">회원등록</a>
-      <button class="menu-button" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu" data-menu-button><span></span><span></span></button>
-    </div>
-    <div class="mobile-menu" id="mobile-menu" hidden data-mobile-menu><nav class="container"></nav></div>
-  </header>
+  <header class="site-header"><div class="wide-container header-inner"><a class="brand" href="./index.html" aria-label="정월재 홈"><span class="brand-hanja">正月齋</span><span class="brand-korean">정월재</span></a><nav class="desktop-nav"></nav><a class="header-cta" href="./signup.html">회원등록</a><button class="menu-button" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu" data-menu-button><span></span><span></span></button></div><div class="mobile-menu" id="mobile-menu" hidden data-mobile-menu><nav class="container"></nav></div></header>
 
   <main id="main">
-    <section class="review-page-hero">
-      <div class="container">
-        <p class="section-label">REVIEW ARCHIVE</p>
-        <h1>정월재 이용 후기</h1>
-        <p>실제 회원이 남긴 후기만 시간순으로 쌓입니다. 이름과 이메일은 공개하지 않고, 출생연도와 성별만 익명 정보로 표시합니다.</p>
-      </div>
-    </section>
+    <section class="review-page-hero"><div class="container"><p class="section-label">REVIEW ARCHIVE</p><h1>정월재 이용 후기</h1><p>실제 회원이 남긴 후기만 시간순으로 쌓입니다. 이름과 이메일은 공개하지 않고, 출생연도와 성별만 익명 정보로 표시합니다.</p></div></section>
+    <section class="review-page"><div class="container">
+      <div class="review-stats"><div class="review-stat"><strong data-review-count>0</strong><span>누적 후기</span></div><div class="review-stat is-accent"><strong data-review-average>—</strong><span>평균 평점</span></div><div class="review-stat"><strong>7</strong><span>후기 카테고리</span></div></div>
 
-    <section class="review-page">
-      <div class="container">
-        <div class="review-stats">
-          <div class="review-stat"><strong data-review-count>0</strong><span>누적 후기</span></div>
-          <div class="review-stat is-accent"><strong data-review-average>—</strong><span>평균 평점</span></div>
-          <div class="review-stat"><strong>6</strong><span>후기 카테고리</span></div>
-        </div>
+      <section class="review-composer" data-review-composer hidden><div class="review-toolbar"><div><p class="section-label">WRITE REVIEW</p><h2>후기 등록</h2><p class="review-write-copy">회원정보의 성함은 공개되지 않습니다. 후기에는 ‘90년생 여성’처럼 익명 정보만 표시됩니다.</p></div><button class="button button-ghost" type="button" data-review-close>닫기</button></div><form data-review-form><div class="review-form-grid"><div class="field"><label for="review-service">이용 서비스</label><select id="review-service" name="service"><option>종합 사주</option><option>오행 분석</option><option>오늘의 운세</option><option>연애와 인연</option><option>궁합</option><option>일과 재물</option><option>정월도감</option></select></div><div class="field"><label for="review-rating">평점</label><select id="review-rating" name="rating"><option value="5">5점 · 매우 만족</option><option value="4">4점 · 만족</option><option value="3">3점 · 보통</option><option value="2">2점 · 아쉬움</option><option value="1">1점 · 매우 아쉬움</option></select></div><div class="field full"><label for="review-content">후기 내용</label><textarea id="review-content" name="content" maxlength="500" placeholder="이용하면서 느낀 점을 10자 이상 적어주세요." required></textarea><p class="review-helper">후기는 등록 즉시 누적되며 다른 방문자에게도 익명으로 표시됩니다.</p></div></div><div class="review-form-actions"><button class="button button-ghost" type="button" data-review-close>취소</button><button class="button button-accent" type="submit">후기 등록하기</button></div></form></section>
 
-        <section class="review-composer" data-review-composer hidden>
-          <div class="review-toolbar">
-            <div><p class="section-label">WRITE REVIEW</p><h2>후기 등록</h2><p class="review-write-copy">회원정보의 성함은 공개되지 않습니다. 후기에는 ‘90년생 여성’처럼 익명 정보만 표시됩니다.</p></div>
-            <button class="button button-ghost" type="button" data-review-close>닫기</button>
-          </div>
-          <form data-review-form>
-            <div class="review-form-grid">
-              <div class="field"><label for="review-service">이용 서비스</label><select id="review-service" name="service"><option>종합 사주</option><option>오행 분석</option><option>오늘의 운세</option><option>연애와 인연</option><option>궁합</option><option>일과 재물</option></select></div>
-              <div class="field"><label for="review-rating">평점</label><select id="review-rating" name="rating"><option value="5">5점 · 매우 만족</option><option value="4">4점 · 만족</option><option value="3">3점 · 보통</option><option value="2">2점 · 아쉬움</option><option value="1">1점 · 매우 아쉬움</option></select></div>
-              <div class="field full"><label for="review-content">후기 내용</label><textarea id="review-content" name="content" maxlength="500" placeholder="이용하면서 느낀 점을 10자 이상 적어주세요." required></textarea><p class="review-helper">후기는 등록 즉시 누적되며 다른 방문자에게도 익명으로 표시됩니다.</p></div>
-            </div>
-            <div class="review-form-actions"><button class="button button-ghost" type="button" data-review-close>취소</button><button class="button button-accent" type="submit">후기 등록하기</button></div>
-          </form>
-        </section>
-
-        <div class="review-toolbar">
-          <div><p class="section-label">ALL REVIEWS</p><h2>후기 모아보기</h2></div>
-          <div class="review-toolbar-actions">
-            <select class="review-filter" data-review-filter aria-label="후기 서비스 필터"><option value="all">전체 서비스</option><option>종합 사주</option><option>오행 분석</option><option>오늘의 운세</option><option>연애와 인연</option><option>궁합</option><option>일과 재물</option></select>
-            <button class="button button-accent" type="button" data-review-open>후기 등록</button>
-          </div>
-        </div>
-
-        <p class="form-status" role="status" aria-live="polite" data-review-status></p>
-        <div class="review-grid" data-review-grid></div>
-        <div class="review-pagination"><button type="button" aria-label="이전 후기" data-review-prev>‹</button><span data-review-page>1 / 1</span><button type="button" aria-label="다음 후기" data-review-next>›</button></div>
-      </div>
-    </section>
+      <div class="review-toolbar"><div><p class="section-label">ALL REVIEWS</p><h2>후기 모아보기</h2></div><div class="review-toolbar-actions"><select class="review-filter" data-review-filter aria-label="후기 서비스 필터"><option value="all">전체 서비스</option><option>종합 사주</option><option>오행 분석</option><option>오늘의 운세</option><option>연애와 인연</option><option>궁합</option><option>일과 재물</option><option>정월도감</option></select><button class="button button-accent" type="button" data-review-open>후기 등록</button></div></div>
+      <p class="form-status" role="status" aria-live="polite" data-review-status></p><div class="review-grid" data-review-grid></div><div class="review-pagination"><button type="button" aria-label="이전 후기" data-review-prev>‹</button><span data-review-page>1 / 1</span><button type="button" aria-label="다음 후기" data-review-next>›</button></div>
+    </div></section>
   </main>
-
   <footer class="site-footer"></footer>
-  <script src="./app.js" defer></script>
-  <script type="module" src="./reviews.js?v=20260907-02"></script>
+  <script src="./app.js" defer></script><script type="module" src="./reviews.js?v=20260907-02"></script>
 </body>
 </html>
