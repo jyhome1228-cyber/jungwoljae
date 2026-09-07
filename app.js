@@ -55,7 +55,7 @@ document.head.appendChild(uiFixLink);
 if(currentFile.endsWith('-result.html')){
   const readabilityLink=document.createElement('link');
   readabilityLink.rel='stylesheet';
-  readabilityLink.href='./result-readability.css?v=20260907-2155';
+  readabilityLink.href='./result-readability.css?v=20260907-2215';
   document.head.appendChild(readabilityLink);
 }
 
@@ -173,7 +173,7 @@ document.body.appendChild(analyticsScript);
 
 if(currentFile.endsWith('-result.html')){
   const clarityScript=document.createElement('script');
-  clarityScript.src='./result-clarity.js?v=20260907-2155';
+  clarityScript.src='./result-clarity.js?v=20260907-2215';
   clarityScript.defer=true;
   document.body.appendChild(clarityScript);
 }
