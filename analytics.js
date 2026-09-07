@@ -1,12 +1,10 @@
 import { firebaseConfig } from './firebase-config.js?v=20260907-1645';
 import { initializeApp, getApps, getApp } from 'https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js';
-import { getFirestore, doc, getDoc, setDoc, increment, serverTimestamp } from 'https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js';
+import { getFirestore, doc, getDoc, setDoc, runTransaction, serverTimestamp } from 'https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js';
 
 const file=(location.pathname.split('/').pop()||'index.html').toLowerCase();
 const excluded=new Set(['admin.html','firebase-debug.html']);
-if(excluded.has(file)){
-  // Admin/debug traffic is intentionally excluded from public visitor statistics.
-}else{
+if(!excluded.has(file)){
   const app=getApps().length?getApp():initializeApp(firebaseConfig);
   const db=getFirestore(app);
 
@@ -26,42 +24,43 @@ if(excluded.has(file)){
     const get=t=>parts.find(p=>p.type===t)?.value||'';
     return `${get('year')}-${get('month')}-${get('day')}`;
   }
-
   function randomId(){
     if(globalThis.crypto?.randomUUID)return crypto.randomUUID().replaceAll('-','');
     return `v${Date.now().toString(36)}${Math.random().toString(36).slice(2,14)}`;
   }
-
   function visitorId(){
-    try{
-      let id=localStorage.getItem('jungwoljae_visitor_id');
-      if(!id){id=randomId();localStorage.setItem('jungwoljae_visitor_id',id);}
-      return id;
-    }catch(e){return randomId();}
+    try{let id=localStorage.getItem('jungwoljae_visitor_id');if(!id){id=randomId();localStorage.setItem('jungwoljae_visitor_id',id);}return id;}
+    catch(e){return randomId();}
   }
-
+  async function bumpCounter(ref,extra={}){
+    await runTransaction(db,async tx=>{
+      const snap=await tx.get(ref);
+      const current=snap.exists()?Number(snap.data().pageViews||0):0;
+      tx.set(ref,{...extra,pageViews:current+1,updatedAt:serverTimestamp()},{merge:true});
+    });
+  }
   async function recordVisit(){
-    const dateKey=seoulDateKey();
-    const id=visitorId();
-    const path=`/${file}`;
+    const dateKey=seoulDateKey(),id=visitorId(),path=`/${file}`;
     const pageId=file.replace(/\.html$/,'').replace(/[^a-z0-9_-]/g,'-')||'index';
     const label=pageLabels[file]||file.replace('.html','');
     const dailyRef=doc(db,'analytics_daily',dateKey);
     const pageRef=doc(db,'analytics_daily',dateKey,'pages',pageId);
     const visitorRef=doc(db,'analytics_daily',dateKey,'visitors',id);
 
-    await Promise.allSettled([
-      setDoc(dailyRef,{pageViews:increment(1),updatedAt:serverTimestamp()},{merge:true}),
-      setDoc(pageRef,{path,label,pageViews:increment(1),updatedAt:serverTimestamp()},{merge:true}),
-      (async()=>{
-        const existing=await getDoc(visitorRef);
-        if(!existing.exists())await setDoc(visitorRef,{visitorId:id,createdAt:serverTimestamp()});
-      })()
-    ]);
+    const tasks=[
+      bumpCounter(dailyRef),
+      bumpCounter(pageRef,{path,label}),
+      (async()=>{const existing=await getDoc(visitorRef);if(!existing.exists())await setDoc(visitorRef,{visitorId:id,createdAt:serverTimestamp()});})()
+    ];
+    const results=await Promise.allSettled(tasks);
+    const failed=results.filter(x=>x.status==='rejected');
+    if(failed.length)console.warn('[Jungwoljae analytics] 일부 집계 실패',failed.map(x=>x.reason?.code||x.reason?.message));
   }
 
-  if(document.visibilityState==='visible')recordVisit();
-  else document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')recordVisit();},{once:true});
+  let recorded=false;
+  const runOnce=()=>{if(recorded)return;recorded=true;recordVisit().catch(error=>console.warn('[Jungwoljae analytics]',error?.code||error?.message));};
+  if(document.visibilityState==='visible')runOnce();
+  else document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')runOnce();},{once:true});
 }
 
 import('./member-usage.js?v=20260907-01').catch(()=>{});
