@@ -52,10 +52,12 @@ uiFixLink.rel = 'stylesheet';
 uiFixLink.href = './ui-fixes.css?v=20260907-2132';
 document.head.appendChild(uiFixLink);
 
-const realismLink = document.createElement('link');
-realismLink.rel = 'stylesheet';
-realismLink.href = './reading-realism.css?v=20260907-2132';
-document.head.appendChild(realismLink);
+if(currentFile.endsWith('-result.html')){
+  const readabilityLink=document.createElement('link');
+  readabilityLink.rel='stylesheet';
+  readabilityLink.href='./result-readability.css?v=20260907-2155';
+  document.head.appendChild(readabilityLink);
+}
 
 if (document.body?.classList.contains('about-page')) {
   const aboutLink = document.createElement('link');
@@ -170,15 +172,10 @@ analyticsScript.src='./analytics.js?v=20260907-02';
 document.body.appendChild(analyticsScript);
 
 if(currentFile.endsWith('-result.html')){
-  const realismScript=document.createElement('script');
-  realismScript.src='./reading-realism.js?v=20260907-2132';
-  realismScript.defer=true;
-  document.body.appendChild(realismScript);
-
-  const detailScript=document.createElement('script');
-  detailScript.src='./reading-detail.js?v=20260907-2133';
-  detailScript.defer=true;
-  document.body.appendChild(detailScript);
+  const clarityScript=document.createElement('script');
+  clarityScript.src='./result-clarity.js?v=20260907-2155';
+  clarityScript.defer=true;
+  document.body.appendChild(clarityScript);
 }
 
 function fieldError(form,name,message=''){
