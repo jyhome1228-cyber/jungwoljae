@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
   <link rel="stylesheet" href="./styles.css" />
   <link rel="stylesheet" href="./page.css" />
-  <link rel="stylesheet" href="./ohaeng-result.css?v=20260907-02" />
+  <link rel="stylesheet" href="./ohaeng-result.css?v=20260907-03" />
 </head>
 <body>
   <header class="site-header no-print">
@@ -53,24 +53,15 @@
         <div class="life-grid" data-life-grid></div>
       </section>
 
-      <section class="report-section question-section" data-question-section hidden>
-        <p class="section-label">06 · YOUR QUESTION</p>
-        <h2>남겨주신 질문에 먼저 답을 드리면</h2>
-        <blockquote data-question></blockquote>
-        <div class="question-direct">
-          <span>정월재의 답</span>
-          <strong data-question-direct></strong>
-        </div>
-        <div class="question-detail">
-          <span>왜 이렇게 읽었나요</span>
-          <p data-question-answer></p>
-        </div>
-        <p class="question-note">오행 분석은 특정 사건의 발생 여부나 정확한 시점을 예언하지 않습니다. 대신 현재 명식에서 어떤 방식으로 선택할 때 흐름이 더 안정되는지를 분명하게 정리합니다.</p>
+      <section class="report-section key-section">
+        <div class="section-title-row"><div><p class="section-label">06 · KEY POINTS</p><h2>이번 분석에서 기억할 세 가지</h2></div></div>
+        <div class="key-grid" data-key-grid></div>
       </section>
 
-      <section class="report-section key-section">
-        <div class="section-title-row"><div><p class="section-label">07 · KEY POINTS</p><h2>이번 분석에서 기억할 세 가지</h2></div></div>
-        <div class="key-grid" data-key-grid></div>
+      <section class="report-section total-summary-section">
+        <p class="section-label">07 · TOTAL SUMMARY</p>
+        <h2><span data-summary-name>회원</span>님의 오행 분석 총 요약</h2>
+        <div class="total-summary-copy" data-total-summary></div>
       </section>
 
       <section class="report-section evidence-section">
@@ -94,6 +85,6 @@
 
   <footer class="site-footer no-print"></footer>
   <script src="./app.js" defer></script>
-  <script type="module" src="./ohaeng-result.js?v=20260907-02"></script>
+  <script type="module" src="./ohaeng-result.js?v=20260907-03"></script>
 </body>
 </html>
