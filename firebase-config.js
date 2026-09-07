@@ -1,11 +1,11 @@
 // Firebase Web App configuration.
-// Firebase Console > Project settings > General > Your apps > Web app > SDK setup and configuration
-// Copy only the public web config values here. Never put a service-account private key in this file.
+// Public client configuration from Firebase Console.
+// Do not place service-account keys or private credentials in this file.
 export const firebaseConfig = {
-  apiKey: "",
-  authDomain: "",
-  projectId: "",
-  storageBucket: "",
-  messagingSenderId: "",
-  appId: ""
+  apiKey: "AIzaSyCDa5JBrt1Dr1-cL30qJ-GCmXeN5pUprMo",
+  authDomain: "jungwoljae.firebaseapp.com",
+  projectId: "jungwoljae",
+  storageBucket: "jungwoljae.firebasestorage.app",
+  messagingSenderId: "495887657408",
+  appId: "1:495887657408:web:11abcd152c1140577b0025"
 };
