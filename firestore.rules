@@ -1,0 +1,47 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+    // Private member profile. Each user can only access their own document.
+    match /users/{uid} {
+      allow create, read, update, delete: if isOwner(uid);
+
+      match /readings/{readingId} {
+        allow create, read, update, delete: if isOwner(uid);
+      }
+    }
+
+    // Username reservation used only to guarantee uniqueness.
+    // The document contains uid only, never email or profile details.
+    match /usernames/{username} {
+      allow create: if signedIn()
+                    && request.resource.data.keys().hasOnly(['uid', 'createdAt'])
+                    && request.resource.data.uid == request.auth.uid;
+      allow read: if signedIn() && resource.data.uid == request.auth.uid;
+      allow update: if false;
+      allow delete: if signedIn() && resource.data.uid == request.auth.uid;
+    }
+
+    // Reviews: signed-in users can submit their own review as pending.
+    // Public visitors can only read approved/published reviews.
+    match /reviews/{reviewId} {
+      allow read: if resource.data.status == 'published'
+                  || (signedIn() && resource.data.uid == request.auth.uid);
+      allow create: if signedIn()
+                    && request.resource.data.uid == request.auth.uid
+                    && request.resource.data.status == 'pending';
+      allow update: if signedIn()
+                    && resource.data.uid == request.auth.uid
+                    && request.resource.data.uid == resource.data.uid
+                    && request.resource.data.status == resource.data.status;
+      allow delete: if signedIn() && resource.data.uid == request.auth.uid;
+    }
+  }
+}
