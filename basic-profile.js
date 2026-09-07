@@ -8,7 +8,7 @@ const supported=new Set(['saju.html','ohaeng.html','fortune.html','relationship.
 if(!supported.has(file)){
   // 이 모듈은 반복 입력이 있는 개인 분석 폼에서만 동작합니다.
 }else{
-  const form=document.querySelector('[data-saju-form],[data-ohaeng-form],[data-fortune-form],[data-relationship-form],[data-work-money-form],[data-guide-form],.work-money-form');
+  const form=document.querySelector('[data-saju-form],[data-ohaeng-form],[data-fortune-form],[data-relationship-form],[data-work-form],[data-guide-form],.work-form');
   if(form){
     const LOCAL_KEY='jungwoljae_basic_profile_v1';
     const app=getApps().length?getApp():initializeApp(firebaseConfig);
