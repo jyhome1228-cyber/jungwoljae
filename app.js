@@ -28,15 +28,24 @@ function applyBrandLogo(){
 applyBrandLogo();
 
 function normalizeNavigation(){
-  document.querySelectorAll('.desktop-nav, .mobile-menu nav').forEach((nav)=>{
-    const links=[...nav.querySelectorAll('a')];
+  document.querySelectorAll('.desktop-nav, .mobile-menu nav, .secondary-nav .container').forEach((nav)=>{
+    let links=[...nav.querySelectorAll('a')];
     const fortune=links.find(a=>a.getAttribute('href')?.includes('fortune.html'));
     if(fortune) fortune.textContent='오늘의 운세';
 
-    const archive=links.find(a=>a.getAttribute('href')?.includes('archive.html'));
+    let archive=links.find(a=>a.getAttribute('href')?.includes('archive.html'));
+    if(!archive && !nav.closest('.secondary-nav')){
+      archive=document.createElement('a');
+      archive.href='./archive.html';
+      archive.textContent='정월록';
+      const review=links.find(a=>a.getAttribute('href')?.includes('reviews.html'));
+      const about=links.find(a=>a.getAttribute('href')?.includes('about.html'));
+      if(review) nav.insertBefore(archive,review); else if(about) nav.insertBefore(archive,about); else nav.appendChild(archive);
+      links=[...nav.querySelectorAll('a')];
+    }
     if(archive) archive.textContent='정월록';
 
-    if(!links.some(a=>a.getAttribute('href')?.includes('reviews.html'))){
+    if(!nav.closest('.secondary-nav') && !links.some(a=>a.getAttribute('href')?.includes('reviews.html'))){
       const review=document.createElement('a');
       review.href='./reviews.html';
       review.textContent='후기';
