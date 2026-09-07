@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="description" content="정월도감 — 고민을 선택하고 사주와 현재 상황을 함께 보아 현실적인 선택 기준을 정리하는 정월재 고민 해결 서비스" />
+  <title>정월도감 — 정월재</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./page.css" />
+  <link rel="stylesheet" href="./guide.css?v=20260907-01" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wide-container header-inner">
+      <a class="brand" href="./index.html" aria-label="정월재 홈"><span class="brand-hanja">正月齋</span><span class="brand-korean">정월재</span></a>
+      <nav class="desktop-nav"></nav>
+      <a class="header-cta" href="./signup.html">회원등록</a>
+      <button class="menu-button" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu" data-menu-button><span></span><span></span></button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu" hidden data-mobile-menu><nav class="container"></nav></div>
+  </header>
+
+  <main>
+    <section class="guide-hero">
+      <div class="container">
+        <p class="eyebrow">正月圖鑑 · JUNGWOL DOGAM</p>
+        <h1>막연한 고민을<br />선택의 기준으로 바꿉니다.</h1>
+        <p>고민의 종류와 지금 상황, 가장 걸리는 지점을 차례로 고르면 정월재가 사주에서 보이는 판단 방식과 현실 조건을 함께 정리해드립니다. 답을 대신 정하기보다, 어떤 기준으로 움직여야 할지 더 선명하게 만드는 서비스입니다.</p>
+      </div>
+    </section>
+
+    <section class="guide-shell">
+      <div class="container guide-layout">
+        <aside class="guide-copy">
+          <p class="eyebrow">HOW IT WORKS</p>
+          <h2>질문을 길게 쓰지 않아도<br />고민의 핵심을 좁혀갑니다.</h2>
+          <p>자유 질문 대신 선택형 흐름으로 구성해, 해석이 엇나가지 않도록 고민의 맥락을 먼저 정리합니다.</p>
+          <div class="guide-points">
+            <div class="guide-point"><span>01</span><strong>고민 영역 선택</strong><p>일, 돈, 연애, 사람, 변화, 마음, 선택 중 지금 가장 큰 고민을 고릅니다.</p></div>
+            <div class="guide-point"><span>02</span><strong>현재 상황 선택</strong><p>이직 고민인지, 썸인지, 큰 지출인지처럼 실제 상황을 한 단계 더 좁힙니다.</p></div>
+            <div class="guide-point"><span>03</span><strong>걸리는 이유 선택</strong><p>돈, 안정성, 후회, 관계, 타이밍 등 실제로 결정을 막는 요소를 최대 2개 고릅니다.</p></div>
+            <div class="guide-point"><span>04</span><strong>현실적인 해답</strong><p>사주 성향을 어려운 용어 대신 생활 언어로 풀고, 지금 확인할 조건과 행동 기준을 제안합니다.</p></div>
+          </div>
+        </aside>
+
+        <form class="guide-form" data-guide-form novalidate>
+          <div class="guide-form-head">
+            <span>JUNGWOL DOGAM</span>
+            <h2>지금 가장 크게 걸리는 고민부터 골라주세요.</h2>
+            <p>선택에 따라 다음 질문이 달라집니다.</p>
+          </div>
+
+          <section class="guide-step" data-step="domain">
+            <div class="guide-step-head"><span class="guide-step-num">1</span><div><h3>어떤 고민인가요?</h3><p>가장 가까운 한 가지를 선택해주세요.</p></div></div>
+            <div class="guide-choice-grid" data-domain-grid></div>
+          </section>
+
+          <section class="guide-step" data-step="situation" hidden>
+            <div class="guide-step-head"><span class="guide-step-num">2</span><div><h3>지금 상황은 어디에 가장 가깝나요?</h3><p>선택한 고민에 맞춰 보기 항목이 달라집니다.</p></div></div>
+            <div class="guide-choice-grid" data-situation-grid></div>
+          </section>
+
+          <section class="guide-step" data-step="blockers" hidden>
+            <div class="guide-step-head"><span class="guide-step-num">3</span><div><h3>무엇이 가장 걸리나요?</h3><p>최대 2개까지 선택할 수 있습니다.</p></div></div>
+            <div class="guide-keyword-grid" data-blocker-grid></div>
+            <p class="guide-limit">현재 <strong data-blocker-count>0</strong>/2 선택</p>
+            <div class="guide-preview" data-guide-preview hidden><span>지금 고민을 이렇게 보고 있습니다.</span><p data-guide-preview-text></p></div>
+          </section>
+
+          <section class="guide-step" data-step="profile" hidden>
+            <div class="guide-step-head"><span class="guide-step-num">4</span><div><h3>사주 기본 정보를 확인해주세요.</h3><p>로그인 회원은 저장된 정보를 자동으로 불러옵니다.</p><p class="guide-profile-state" data-profile-state>회원정보 확인 중…</p></div></div>
+            <div class="guide-fields">
+              <div class="guide-field full"><label for="guide-name">이름 또는 닉네임</label><input id="guide-name" name="name" type="text" required placeholder="예: 정월" /></div>
+              <div class="guide-field full"><label>태어난 날짜</label><div class="guide-date-selects"><select id="guide-year"><option value="">연도</option></select><select id="guide-month"><option value="">월</option></select><select id="guide-day"><option value="">일</option></select></div></div>
+              <div class="guide-field full"><label>태어난 시간 <span class="optional">선택</span></label><div class="guide-time-selects"><select id="guide-meridiem"><option value="">오전/오후</option><option value="am">오전</option><option value="pm">오후</option></select><select id="guide-hour"><option value="">시</option></select><select id="guide-minute"><option value="">분</option></select></div><label class="guide-check"><input id="guide-time-unknown" type="checkbox" /><span>태어난 시간을 모릅니다</span></label></div>
+              <div class="guide-field"><label for="guide-calendar">달력 기준</label><select id="guide-calendar"><option value="solar">양력</option><option value="lunar">음력</option></select></div>
+              <div class="guide-field"><label for="guide-gender">성별</label><select id="guide-gender"><option value="">선택하지 않음</option><option value="male">남성</option><option value="female">여성</option></select></div>
+              <div class="guide-field full" data-lunar-extra hidden><label class="guide-check"><input id="guide-leap" type="checkbox" /><span>입력한 음력 월이 윤달입니다.</span></label></div>
+              <div class="guide-field full"><label for="guide-city">출생 지역 <span class="optional">시 단위</span></label><input id="guide-city" type="text" placeholder="예: 서울특별시, 인천광역시" /></div>
+            </div>
+          </section>
+
+          <div class="guide-submit" data-guide-submit hidden>
+            <label class="consent-row"><input type="checkbox" name="consent" required /><span>분석을 위해 입력 정보와 선택한 고민 정보가 사용되는 것에 동의합니다.</span></label>
+            <p class="guide-status" role="status" aria-live="polite" data-guide-status></p>
+            <button class="button button-primary button-large" type="submit">정월도감 해답 보기</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"></footer>
+  <script src="./app.js" defer></script>
+  <script type="module" src="./guide-form.js?v=20260907-01"></script>
+</body>
+</html>
