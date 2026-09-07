@@ -129,8 +129,8 @@ document.addEventListener('click',(event)=>{
 const reviewsSection=document.querySelector('#reviews');
 if(reviewsSection){
   const reviewsScript=document.createElement('script');
-  reviewsScript.src='./reviews.js?v=20260907-01';
-  reviewsScript.defer=true;
+  reviewsScript.type='module';
+  reviewsScript.src='./reviews.js?v=20260907-02';
   document.body.appendChild(reviewsScript);
 }
 
@@ -147,6 +147,11 @@ const authScript=document.createElement('script');
 authScript.type='module';
 authScript.src='./auth.js?v=20260907-08';
 document.body.appendChild(authScript);
+
+const analyticsScript=document.createElement('script');
+analyticsScript.type='module';
+analyticsScript.src='./analytics.js?v=20260907-01';
+document.body.appendChild(analyticsScript);
 
 function fieldError(form,name,message=''){
   const node=form.querySelector(`[data-error-for="${name}"]`);
