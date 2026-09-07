@@ -17,6 +17,10 @@ const monthSelect=form.querySelector('#fortune-month');
 const daySelect=form.querySelector('#fortune-day');
 const weekdayNode=form.querySelector('[data-birth-weekday]');
 const nameInput=form.querySelector('#fortune-name');
+const meridiemSelect=form.querySelector('#fortune-meridiem');
+const hourSelect=form.querySelector('#fortune-hour');
+const minuteSelect=form.querySelector('#fortune-minute');
+const timeUnknown=form.querySelector('#fortune-time-unknown');
 
 const zodiacOrder=['rat','ox','tiger','rabbit','dragon','snake','horse','goat','monkey','rooster','dog','pig'];
 const branchToZodiac={자:'rat',축:'ox',인:'tiger',묘:'rabbit',진:'dragon',사:'snake',오:'horse',미:'goat',신:'monkey',유:'rooster',술:'dog',해:'pig'};
@@ -35,6 +39,8 @@ document.querySelector('[data-today-label]').textContent=seoulToday().label;
 const currentYear=seoulToday().year;
 for(let y=currentYear;y>=1930;y--) yearSelect.insertAdjacentHTML('beforeend',`<option value="${y}">${y}년</option>`);
 for(let m=1;m<=12;m++) monthSelect.insertAdjacentHTML('beforeend',`<option value="${String(m).padStart(2,'0')}">${m}월</option>`);
+for(let h=1;h<=12;h++) hourSelect.insertAdjacentHTML('beforeend',`<option value="${String(h).padStart(2,'0')}">${h}시</option>`);
+for(let min=0;min<60;min+=10) minuteSelect.insertAdjacentHTML('beforeend',`<option value="${String(min).padStart(2,'0')}">${String(min).padStart(2,'0')}분</option>`);
 
 function fillDays(){
   const previous=daySelect.value;
@@ -55,6 +61,31 @@ function weekdayFromDate(dateString){
   const date=new Date(`${dateString}T12:00:00`);
   if(Number.isNaN(date.getTime()))return '';
   return new Intl.DateTimeFormat('ko-KR',{weekday:'long'}).format(date);
+}
+function birthTimeValue(){
+  if(timeUnknown.checked)return '';
+  if(!(meridiemSelect.value&&hourSelect.value&&minuteSelect.value))return '';
+  let hour=Number(hourSelect.value)%12;
+  if(meridiemSelect.value==='pm')hour+=12;
+  return `${String(hour).padStart(2,'0')}:${minuteSelect.value}`;
+}
+function syncTimeUnknown(){
+  const disabled=timeUnknown.checked;
+  [meridiemSelect,hourSelect,minuteSelect].forEach(el=>{
+    el.disabled=disabled;
+    if(disabled)el.value='';
+  });
+}
+function fillBirthTime(value,unknown=false){
+  timeUnknown.checked=Boolean(unknown);
+  syncTimeUnknown();
+  if(unknown||!value)return;
+  const [hRaw,mRaw]=String(value).split(':');
+  const h=Number(hRaw);
+  meridiemSelect.value=h>=12?'pm':'am';
+  hourSelect.value=String((h%12)||12).padStart(2,'0');
+  const minute=Math.min(50,Math.round(Number(mRaw||0)/10)*10);
+  minuteSelect.value=String(minute).padStart(2,'0');
 }
 function selectZodiac(key){
   const radio=form.querySelector(`input[name="zodiac"][value="${key}"]`);
@@ -92,9 +123,11 @@ function fillBirthDate(dateString,{isLunar=false,gender}={}){
 yearSelect.addEventListener('change',()=>{fillDays();syncBirthMeta();});
 monthSelect.addEventListener('change',()=>{fillDays();syncBirthMeta();});
 daySelect.addEventListener('change',()=>syncBirthMeta());
+timeUnknown.addEventListener('change',syncTimeUnknown);
+syncTimeUnknown();
 
 onAuthStateChanged(auth,async user=>{
-  if(!user){profileState.textContent='비회원은 태어난 날짜와 띠를 직접 입력해주세요.';return;}
+  if(!user){profileState.textContent='비회원은 태어난 날짜·시간과 띠를 직접 입력해주세요.';return;}
   try{
     const snap=await getDoc(doc(db,'users',user.uid));
     if(!snap.exists()){profileState.textContent='저장된 사주 기본 정보가 없어 직접 입력해주세요.';return;}
@@ -105,9 +138,11 @@ onAuthStateChanged(auth,async user=>{
       fillBirthDate(p.birthDate,{isLunar:profileCalendarType==='lunar',gender:p.gender});
       selectZodiac(zodiacFromBirthDate(p.birthDate,{isLunar:profileCalendarType==='lunar',gender:p.gender}));
     }
+    fillBirthTime(p.birthTime,p.birthTimeUnknown);
     const zName=zodiacKo[form.querySelector('input[name="zodiac"]:checked')?.value]||'띠';
+    const timeLabel=p.birthTimeUnknown?'출생시간 모름':(p.birthTime||'출생시간 미입력');
     profileState.dataset.state='ok';
-    profileState.textContent=`회원정보에서 ${p.birthDate||'생년월일'} · ${weekdayFromDate(p.birthDate)||'출생요일'} · ${zName}를 불러왔습니다.`;
+    profileState.textContent=`회원정보에서 ${p.birthDate||'생년월일'} · ${weekdayFromDate(p.birthDate)||'출생요일'} · ${timeLabel} · ${zName}를 불러왔습니다.`;
   }catch(e){
     profileState.textContent='회원정보를 불러오지 못했습니다. 직접 입력해주세요.';
   }
@@ -120,10 +155,12 @@ form.addEventListener('submit',(event)=>{
   const birthDate=birthDateValue();
   const birthWeekday=weekdayFromDate(birthDate);
   const birthYear=Number(yearSelect.value);
+  const birthTime=birthTimeValue();
   const zodiac=form.querySelector('input[name="zodiac"]:checked')?.value||'';
   const consent=form.elements.consent.checked;
   if(!name){status.textContent='이름 또는 닉네임을 입력해주세요.';nameInput.focus();return;}
   if(!birthDate){status.textContent='태어난 연·월·일을 모두 선택해주세요.';yearSelect.focus();return;}
+  if(!timeUnknown.checked&&(meridiemSelect.value||hourSelect.value||minuteSelect.value)&&!birthTime){status.textContent='태어난 시간을 입력하려면 오전/오후·시·분을 모두 선택해주세요.';return;}
   if(!zodiac){status.textContent='나의 띠를 선택해주세요.';return;}
   if(!consent){status.textContent='분석을 위한 정보 사용에 동의해주세요.';return;}
   const today=seoulToday();
@@ -132,6 +169,8 @@ form.addEventListener('submit',(event)=>{
     birthYear,
     birthDate,
     birthWeekday,
+    birthTime,
+    birthTimeUnknown:timeUnknown.checked,
     zodiac,
     targetDate:`${today.year}-${String(today.month).padStart(2,'0')}-${String(today.day).padStart(2,'0')}`,
     createdAt:Date.now()
