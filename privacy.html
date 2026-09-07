@@ -10,95 +10,44 @@
   <link rel="stylesheet" href="./styles.css" />
   <link rel="stylesheet" href="./page.css" />
   <style>
-    .privacy-main{padding:64px 0 96px;background:#fff}
-    .privacy-shell{max-width:900px;margin:0 auto}
-    .privacy-head{margin-bottom:44px}
-    .privacy-head h1{margin:0 0 12px!important;font-size:34px!important;line-height:44px!important}
-    .privacy-head p{max-width:720px;font-size:14px!important;line-height:23px!important}
-    .privacy-card{padding:30px;border:1px solid #e8dfdb;border-radius:18px;background:#fff}
-    .privacy-section+.privacy-section{margin-top:30px;padding-top:26px;border-top:1px solid #eee7e3}
-    .privacy-section h2{margin:0 0 12px!important;font-size:19px!important;line-height:27px!important}
-    .privacy-section p,.privacy-section li{color:#665d5a;font-size:13px;line-height:22px}
-    .privacy-section ul{margin:0;padding-left:20px}
-    .privacy-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:12px}
-    .privacy-table th,.privacy-table td{padding:12px;border-top:1px solid #eee7e3;vertical-align:top;text-align:left;line-height:19px}
-    .privacy-table th{width:150px;color:#543a3a;background:#faf8f7}
-    .privacy-note{margin-top:28px;padding:18px;border-radius:12px;background:#faf8f7;color:#665d5a;font-size:12px;line-height:20px}
-    @media(max-width:767px){.privacy-main{padding:46px 0 72px}.privacy-card{padding:22px 18px}.privacy-head h1{font-size:29px!important;line-height:38px!important}.privacy-table th{width:110px}}
+    .privacy-main{padding:64px 0 96px;background:#fff}.privacy-shell{max-width:900px;margin:0 auto}.privacy-head{margin-bottom:44px}.privacy-head h1{margin:0 0 12px!important;font-size:34px!important;line-height:44px!important}.privacy-head p{max-width:720px;font-size:14px!important;line-height:23px!important}.privacy-card{padding:30px;border:1px solid #e8dfdb;border-radius:18px;background:#fff}.privacy-section+.privacy-section{margin-top:30px;padding-top:26px;border-top:1px solid #eee7e3}.privacy-section h2{margin:0 0 12px!important;font-size:19px!important;line-height:27px!important}.privacy-section p,.privacy-section li{color:#665d5a;font-size:13px;line-height:22px}.privacy-section ul{margin:0;padding-left:20px}.privacy-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:12px}.privacy-table th,.privacy-table td{padding:12px;border-top:1px solid #eee7e3;vertical-align:top;text-align:left;line-height:19px}.privacy-table th{width:150px;color:#543a3a;background:#faf8f7}.privacy-note{margin-top:28px;padding:18px;border-radius:12px;background:#faf8f7;color:#665d5a;font-size:12px;line-height:20px}@media(max-width:767px){.privacy-main{padding:46px 0 72px}.privacy-card{padding:22px 18px}.privacy-head h1{font-size:29px!important;line-height:38px!important}.privacy-table th{width:110px}}
   </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="wide-container header-inner">
-      <a class="brand" href="./index.html" aria-label="정월재 홈"><span class="brand-hanja">正月齋</span><span class="brand-korean">정월재</span></a>
-      <nav class="desktop-nav"></nav>
-      <a class="header-cta" href="./signup.html">회원등록</a>
-      <button class="menu-button" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu" data-menu-button><span></span><span></span></button>
-    </div>
-    <div class="mobile-menu" id="mobile-menu" hidden data-mobile-menu><nav class="container"></nav></div>
-  </header>
+  <header class="site-header"><div class="wide-container header-inner"><a class="brand" href="./index.html" aria-label="정월재 홈"><span class="brand-hanja">正月齋</span><span class="brand-korean">정월재</span></a><nav class="desktop-nav"></nav><a class="header-cta" href="./signup.html">회원등록</a><button class="menu-button" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu" data-menu-button><span></span><span></span></button></div><div class="mobile-menu" id="mobile-menu" hidden data-mobile-menu><nav class="container"></nav></div></header>
 
-  <main class="privacy-main">
-    <div class="container privacy-shell">
-      <div class="privacy-head">
-        <p class="eyebrow">PRIVACY POLICY</p>
-        <h1>개인정보처리방침</h1>
-        <p>정월재는 회원이 입력한 개인정보를 회원관리와 사주·운세 풀이를 제공하기 위한 범위 안에서만 사용합니다. 광고 타기팅이나 별도의 마케팅 목적으로 이용하지 않는 것을 원칙으로 합니다.</p>
-      </div>
+  <main class="privacy-main"><div class="container privacy-shell">
+    <div class="privacy-head"><p class="eyebrow">PRIVACY POLICY</p><h1>개인정보처리방침</h1><p>정월재는 회원이 입력한 개인정보를 회원관리와 사주·운세 풀이 제공에 필요한 범위에서 사용합니다. 광고 타기팅이나 외부 판매를 목적으로 이용하지 않습니다.</p></div>
 
-      <article class="privacy-card">
-        <section class="privacy-section">
-          <h2>1. 수집하는 개인정보</h2>
-          <table class="privacy-table">
-            <tr><th>계정 정보</th><td>아이디, 비밀번호</td></tr>
-            <tr><th>사주 기본 정보</th><td>성함, 태어난 날짜, 태어난 시간(선택), 양력·음력 기준, 성별, 시 단위의 거주·출생 지역</td></tr>
-            <tr><th>서비스 이용 정보</th><td>회원이 저장한 사주·운세 풀이 및 정월록 기록</td></tr>
-          </table>
-          <p>정월재는 상세 주소를 수집하지 않으며, 지역 정보는 시 단위까지만 받습니다.</p>
-        </section>
+    <article class="privacy-card">
+      <section class="privacy-section"><h2>1. 수집하는 정보</h2><table class="privacy-table">
+        <tr><th>계정 정보</th><td>아이디, 이메일, 인증을 위한 비밀번호 정보</td></tr>
+        <tr><th>사주 기본 정보</th><td>성함, 태어난 날짜, 태어난 시간(선택), 양력·음력 기준, 성별, 시 단위의 지역 정보</td></tr>
+        <tr><th>서비스 이용 정보</th><td>회원이 저장한 사주·운세 풀이, 정월록 기록, 작성한 후기</td></tr>
+        <tr><th>운영 통계</th><td>방문 날짜, 열어본 페이지, 브라우저에 무작위로 생성한 익명 방문 식별값</td></tr>
+      </table><p>정월재는 방문 통계를 위해 IP 주소, 정확한 위치, 브라우저 지문, 기기 고유번호를 별도로 저장하지 않으며 방문 통계 식별값을 회원 계정과 연결하지 않습니다.</p></section>
 
-        <section class="privacy-section">
-          <h2>2. 개인정보 이용 목적</h2>
-          <ul>
-            <li>회원 계정 생성 및 로그인 관리</li>
-            <li>생년월일, 출생시간, 음양오행 등 사주 분석에 필요한 기준값 구성</li>
-            <li>종합 사주, 오늘의 운세, 인연, 궁합, 일·재물 등 개인 맞춤형 풀이 제공</li>
-            <li>정월록 등 회원별 풀이 기록의 저장 및 이어보기</li>
-            <li>서비스 오류 확인과 회원 문의 대응</li>
-          </ul>
-        </section>
+      <section class="privacy-section"><h2>2. 이용 목적</h2><ul>
+        <li>회원 계정 생성 및 로그인 관리</li><li>생년월일, 출생시간, 음양오행 등 사주 분석 기준값 구성</li><li>종합 사주, 오늘의 운세, 인연, 궁합, 일·재물 등 개인 맞춤형 풀이 제공</li><li>정월록 등 회원별 풀이 기록 저장 및 이어보기</li><li>실제 이용 후기 제공과 서비스 품질 확인</li><li>페이지 방문량, 일일 방문자 수, 서비스별 이용량 등 운영 통계 확인</li><li>서비스 오류 확인과 회원 문의 대응</li>
+      </ul></section>
 
-        <section class="privacy-section">
-          <h2>3. 목적 외 이용 제한</h2>
-          <p>회원이 입력한 정보는 정월재의 회원관리와 사주·운세 풀이 제공을 위한 목적으로만 사용합니다. 별도의 동의 없이 광고 타기팅, 외부 판매, 제3자 마케팅 데이터로 사용하지 않습니다.</p>
-        </section>
+      <section class="privacy-section"><h2>3. 목적 외 이용 제한</h2><p>회원이 입력한 개인정보는 정월재의 회원관리와 풀이 제공, 서비스 운영을 위한 범위에서 사용합니다. 별도의 동의 없이 광고 타기팅, 외부 판매, 제3자 마케팅 데이터로 사용하지 않습니다.</p></section>
 
-        <section class="privacy-section">
-          <h2>4. 보유 기간과 삭제</h2>
-          <p>개인정보는 회원이 서비스를 이용하는 동안 보관할 수 있으며, 회원 탈퇴 또는 삭제 요청 시 법령상 별도 보관 의무가 있는 경우를 제외하고 지체 없이 삭제하는 것을 원칙으로 합니다.</p>
-        </section>
+      <section class="privacy-section"><h2>4. 방문 통계 집계 방식</h2><p>정월재는 사이트 운영 현황을 확인하기 위해 페이지뷰와 일일 순방문 수를 집계합니다. 일일 순방문 수는 브라우저에 무작위로 생성해 저장한 식별값을 기준으로 계산하며, 해당 값은 이름·이메일·회원 UID와 연결하지 않습니다. 브라우저 저장정보 삭제, 여러 기기 이용 등에 따라 실제 사람 수와 통계가 다를 수 있습니다.</p></section>
 
-        <section class="privacy-section">
-          <h2>5. 제3자 제공 및 처리 위탁</h2>
-          <p>정월재는 원칙적으로 개인정보를 제3자에게 판매하거나 제공하지 않습니다. 다만 서비스 운영을 위해 Firebase 등 인증·데이터베이스 인프라를 사용할 경우 필요한 범위에서 처리 업무가 위탁될 수 있으며, 실제 연동 시 관련 사업자와 처리 내용을 이 방침에 명확히 고지합니다.</p>
-        </section>
+      <section class="privacy-section"><h2>5. 보유 기간과 삭제</h2><p>회원 개인정보는 회원이 서비스를 이용하는 동안 보관할 수 있으며, 회원 탈퇴 또는 삭제 요청 시 법령상 별도 보관 의무가 있는 경우를 제외하고 지체 없이 삭제하는 것을 원칙으로 합니다. 방문 통계는 서비스 운영 추세 확인을 위한 집계 자료로 보관될 수 있습니다.</p></section>
 
-        <section class="privacy-section">
-          <h2>6. 회원의 권리</h2>
-          <p>회원은 자신의 개인정보 열람, 수정, 삭제 및 회원 탈퇴를 요청할 수 있습니다. 필수 정보 제공에 동의하지 않을 수 있으나, 이 경우 개인화된 사주 풀이 및 회원 기능 이용이 제한될 수 있습니다.</p>
-        </section>
+      <section class="privacy-section"><h2>6. 제3자 제공 및 처리 위탁</h2><p>정월재는 원칙적으로 개인정보를 제3자에게 판매하지 않습니다. 인증·데이터베이스와 서비스 운영을 위해 Firebase 등 클라우드 인프라를 사용할 수 있으며, 필요한 범위에서 해당 서비스 사업자가 데이터를 처리할 수 있습니다.</p></section>
 
-        <section class="privacy-section">
-          <h2>7. 안전한 처리</h2>
-          <p>비밀번호는 서비스 운영자가 그대로 열람할 수 있는 형태로 보관하지 않는 구조를 전제로 하며, 실제 Firebase Authentication 연결 시 해당 인증 시스템의 안전한 방식으로 처리하도록 구성합니다. 사주 기본 정보 역시 필요한 서비스 기능 범위 안에서만 접근하도록 설계합니다.</p>
-        </section>
+      <section class="privacy-section"><h2>7. 회원의 권리</h2><p>회원은 자신의 개인정보 열람, 수정, 삭제 및 회원 탈퇴를 요청할 수 있습니다. 필수 정보 제공에 동의하지 않을 수 있으나, 이 경우 개인화된 사주 풀이 및 회원 기능 이용이 제한될 수 있습니다.</p></section>
 
-        <div class="privacy-note">본 개인정보처리방침은 정월재 서비스 오픈 전 기본 운영 원칙을 정리한 초안입니다. 실제 Firebase 연동, 결제 기능, 외부 서비스 연동 등이 추가될 경우 해당 처리 내용에 맞춰 고지 항목을 업데이트해야 합니다.</div>
-      </article>
-    </div>
-  </main>
+      <section class="privacy-section"><h2>8. 안전한 처리</h2><p>비밀번호는 운영자가 그대로 열람할 수 있는 형태로 보관하지 않고 Firebase Authentication을 통해 처리하며, 회원의 사주 기본 정보와 저장된 풀이 기록은 본인 및 운영상 필요한 권한을 가진 관리자만 접근할 수 있도록 보안 규칙을 적용합니다.</p></section>
 
-  <footer class="site-footer"><div class="container footer-grid"><div><p class="footer-brand">正月齋 <span>정월재</span></p><p class="footer-copy">삶의 흐름을 읽는 곳.</p></div><p class="footer-note">전통 명리학 기반의 해석 콘텐츠이며 결과를 보장하지 않습니다.</p><p class="footer-copyright">© <span data-year></span> JEONGWOLJAE</p></div></footer>
+      <div class="privacy-note">본 방침은 현재 정월재의 Firebase 기반 회원·풀이·후기·운영 통계 구조를 기준으로 작성했습니다. 결제나 외부 연동 기능이 추가되면 실제 처리 내용에 맞춰 고지 항목을 업데이트합니다.</div>
+    </article>
+  </div></main>
+
+  <footer class="site-footer"></footer>
   <script src="./app.js" defer></script>
 </body>
 </html>
