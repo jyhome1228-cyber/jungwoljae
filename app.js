@@ -54,7 +54,7 @@ document.head.appendChild(uiFixLink);
 
 const friendlyCss=document.createElement('link');
 friendlyCss.rel='stylesheet';
-friendlyCss.href='./friendly-content.css?v=20260907-2342';
+friendlyCss.href='./friendly-content.css?v=20260907-2344';
 document.head.appendChild(friendlyCss);
 
 if(currentFile.endsWith('-result.html')){
@@ -183,10 +183,11 @@ if(currentFile.endsWith('-result.html')){
   clarityScript.defer=true;
   document.body.appendChild(clarityScript);
 
-  const friendlyScript=document.createElement('script');
-  friendlyScript.src='./friendly-content.js?v=20260907-2342';
-  friendlyScript.defer=true;
-  document.body.appendChild(friendlyScript);
+  setTimeout(()=>{
+    const friendlyScript=document.createElement('script');
+    friendlyScript.src='./friendly-content.js?v=20260907-2344';
+    document.body.appendChild(friendlyScript);
+  },420);
 }
 
 function fieldError(form,name,message=''){
