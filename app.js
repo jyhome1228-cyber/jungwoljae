@@ -3,6 +3,11 @@ themeLink.rel = 'stylesheet';
 themeLink.href = './theme-dark.css';
 document.head.appendChild(themeLink);
 
+const tuningLink = document.createElement('link');
+tuningLink.rel = 'stylesheet';
+tuningLink.href = './theme-tuning.css';
+document.head.appendChild(tuningLink);
+
 const themeMeta = document.querySelector('meta[name="theme-color"]');
 if (themeMeta) themeMeta.setAttribute('content', '#ffffff');
 
