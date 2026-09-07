@@ -1,0 +1,64 @@
+/* Jungwoljae about page */
+.about-page main{background:#fff}
+.about-hero{padding:72px 0 0}
+.about-hero-copy{max-width:760px;margin-bottom:34px}
+.about-hero-copy h1{margin:0 0 14px!important;font-size:36px!important;line-height:46px!important;color:var(--text)!important}
+.about-hero-copy>p:last-child{max-width:680px;margin:0;font-size:14px!important;line-height:23px!important;color:var(--muted)!important}
+.about-hero-media{position:relative;margin:0;overflow:hidden;border-radius:22px;background:var(--surface-soft)}
+.about-hero-media img{width:100%;height:520px;object-fit:cover}
+.about-hero-mark{position:absolute;left:24px;bottom:22px;padding:8px 11px;border-radius:10px;background:rgba(255,255,255,.9);color:var(--brand);font-size:11px;font-weight:800;backdrop-filter:blur(8px)}
+
+.about-story-section{padding:92px 0}
+.about-story-grid{display:grid;grid-template-columns:280px minmax(0,1fr);gap:88px;align-items:start}
+.about-story-side{position:sticky;top:104px;max-width:260px}
+.about-story-side h2{margin:0 0 12px!important;font-size:26px!important;line-height:36px!important}
+.about-story-side>p:last-child{font-size:13px!important;line-height:21px!important;margin:0}
+.about-story-copy{max-width:720px}
+.about-story-copy>p{margin:0 0 18px;font-size:15px!important;line-height:28px!important;color:#514846!important}
+.about-story-image{margin:38px 0 40px;overflow:hidden;border-radius:18px;background:var(--surface-soft)}
+.about-story-image img{width:100%;height:420px;object-fit:cover}
+.about-quote{margin:42px 0;padding:28px 30px;border-left:3px solid var(--brand);background:var(--accent-faint);color:var(--brand);font-size:22px;line-height:34px;font-weight:700;letter-spacing:-.02em}
+
+.about-principles-section{padding:0 0 92px}
+.about-principles-section .section-head{margin-bottom:24px!important}
+.about-principles-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.about-principles-grid article{min-height:210px;padding:22px;border:1px solid var(--line);border-radius:16px;background:#fff}
+.about-principles-grid span{display:block;margin-bottom:42px;color:var(--brand);font-size:10px;font-weight:800}
+.about-principles-grid h3{margin:0 0 8px!important;font-size:17px!important;line-height:25px!important}
+.about-principles-grid p{margin:0;font-size:12px!important;line-height:20px!important}
+
+.about-ending-section{padding:0 0 96px}
+.about-ending{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:64px;align-items:center;padding:42px 46px;border-radius:20px;background:var(--surface-soft);border:1px solid var(--line)}
+.about-ending h2{margin:0 0 12px!important;font-size:28px!important;line-height:38px!important}
+.about-ending p:not(.eyebrow){margin:0;color:var(--muted)!important;font-size:14px!important;line-height:22px!important}
+.about-ending-actions{display:flex;gap:8px;margin-top:22px}
+.about-seal{position:relative;display:grid;width:132px;height:132px;place-items:center;border:1px solid rgba(84,58,58,.22);border-radius:28px;transform:rotate(-4deg);background:#fff}
+.about-seal::before{content:"";position:absolute;inset:7px;border:1px solid rgba(84,58,58,.18);border-radius:22px}
+.about-seal img{width:92px;height:92px;object-fit:contain;opacity:.9}
+
+@media(max-width:1023px){
+  .about-story-grid{grid-template-columns:1fr;gap:34px}
+  .about-story-side{position:static;max-width:620px}
+  .about-principles-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+@media(max-width:767px){
+  .about-hero{padding-top:52px}
+  .about-hero-copy h1{font-size:30px!important;line-height:40px!important}
+  .about-hero-media{border-radius:16px}
+  .about-hero-media img{height:320px}
+  .about-story-section{padding:64px 0}
+  .about-story-copy>p{font-size:14px!important;line-height:26px!important;margin-bottom:16px}
+  .about-story-image{margin:30px 0 32px;border-radius:14px}
+  .about-story-image img{height:300px}
+  .about-quote{margin:34px 0;padding:22px 20px;font-size:18px;line-height:29px}
+  .about-principles-section{padding-bottom:64px}
+  .about-principles-grid{grid-template-columns:1fr}
+  .about-principles-grid article{min-height:170px}
+  .about-ending-section{padding-bottom:72px}
+  .about-ending{grid-template-columns:1fr;padding:28px 22px;gap:28px}
+  .about-ending h2{font-size:24px!important;line-height:33px!important}
+  .about-ending-actions{flex-wrap:wrap}
+  .about-seal{width:108px;height:108px;border-radius:22px}
+  .about-seal img{width:74px;height:74px}
+}
