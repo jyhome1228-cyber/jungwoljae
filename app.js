@@ -193,6 +193,11 @@ if(profilePages.has(currentFile)){
 }
 
 if(currentFile.endsWith('-result.html')){
+  const readingEventScript=document.createElement('script');
+  readingEventScript.type='module';
+  readingEventScript.src='./reading-event.js?v=20260908-0620';
+  document.body.appendChild(readingEventScript);
+
   const clarityScript=document.createElement('script');
   clarityScript.src='./result-clarity.js?v=20260907-2257';
   clarityScript.defer=true;
