@@ -51,6 +51,7 @@
               <a href="./archive.html">정월록</a>
               <a href="./reviews.html">후기</a>
               <a href="./about.html">소개</a>
+              <a href="./login.html">로그인</a>
               <a href="./signup.html">회원등록</a>
             </nav>
           </section>
@@ -71,4 +72,12 @@
         <div class="footer-legal"><a href="./privacy.html">개인정보처리방침</a><span>© ${year} JEONGWOLJAE</span></div>
       </div>
     </div>`;
+
+  if(!document.querySelector('script[data-auth-module]')){
+    const authScript=document.createElement('script');
+    authScript.type='module';
+    authScript.src='./auth.js?v=20260907-01';
+    authScript.dataset.authModule='true';
+    document.body.appendChild(authScript);
+  }
 })();
