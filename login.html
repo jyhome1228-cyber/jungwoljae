@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="description" content="정월재 로그인" />
+  <title>로그인 — 정월재</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./page.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wide-container header-inner">
+      <a class="brand" href="./index.html" aria-label="정월재 홈"><span class="brand-hanja">正月齋</span><span class="brand-korean">정월재</span></a>
+      <nav class="desktop-nav"></nav>
+      <a class="header-cta" href="./signup.html">회원등록</a>
+      <button class="menu-button" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu" data-menu-button><span></span><span></span></button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu" hidden data-mobile-menu><nav class="container"></nav></div>
+  </header>
+
+  <main class="auth-page">
+    <div class="container auth-shell">
+      <section class="auth-copy">
+        <p class="eyebrow">LOGIN</p>
+        <h1>정월재에 다시<br />이어 들어오세요.</h1>
+        <p>회원으로 저장한 사주 기본 정보와 정월록 기록을 이어서 볼 수 있습니다.</p>
+      </section>
+      <form class="auth-card" data-login-form novalidate>
+        <div class="field"><label for="login-email">이메일</label><input id="login-email" name="email" type="email" autocomplete="email" required placeholder="name@example.com" /></div>
+        <div class="field"><label for="login-password">비밀번호</label><input id="login-password" name="password" type="password" autocomplete="current-password" required placeholder="비밀번호 입력" /></div>
+        <button class="button button-primary" type="submit">로그인</button>
+        <p class="auth-status" data-login-status role="status" aria-live="polite"></p>
+        <p class="auth-footnote">아직 회원이 아니라면 <a href="./signup.html">회원등록</a></p>
+      </form>
+    </div>
+  </main>
+
+  <footer class="site-footer"></footer>
+  <script src="./app.js" defer></script>
+</body>
+</html>
