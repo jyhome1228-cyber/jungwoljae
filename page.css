@@ -211,6 +211,140 @@ body,main{background:#fff}
 .archive-grid{gap:12px;border:0;background:transparent}
 .archive-item{border:1px solid var(--panel-border);border-radius:16px;background:#fff}
 
+/* Form polish */
+.service-form-wrap{max-width:720px}
+.service-form-wrap .reading-form{
+  padding:30px;
+  border-color:#e8e2dc;
+  border-radius:18px;
+  box-shadow:0 10px 30px rgba(33,25,20,.035);
+}
+.form-page-title{
+  display:grid;
+  grid-template-columns:32px minmax(0,1fr);
+  column-gap:12px;
+  align-items:start;
+  margin-bottom:24px;
+  padding-bottom:22px;
+}
+.form-page-title .flow-step-number{
+  display:grid;
+  width:28px;
+  height:28px;
+  place-items:center;
+  margin:0;
+  border-radius:50%;
+  background:#f2eeea;
+  color:#7f736b;
+  font-size:11px;
+  line-height:1;
+}
+.form-page-title h2{font-size:20px;line-height:28px}
+.form-page-title p{grid-column:2;margin-top:5px;color:#81756d}
+.form-group-title{
+  margin:24px 0 14px;
+  padding-top:20px;
+  font-size:13px;
+  line-height:20px;
+}
+.page-field-row{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px 16px;
+}
+.page-field-row .field{
+  width:auto;
+  max-width:none;
+  min-width:0;
+  margin:0;
+}
+.page-field-row+.page-field-row{margin-top:14px}
+.service-form-wrap .field-name,
+.service-form-wrap .field-date,
+.service-form-wrap .field-time,
+.service-form-wrap .field-calendar,
+.service-form-wrap .field-gender,
+.service-form-wrap .field-place{width:auto;max-width:none}
+.service-form-wrap .field{gap:7px}
+.service-form-wrap .field label{font-size:13px;line-height:19px;font-weight:700}
+.service-form-wrap input,
+.service-form-wrap select{
+  width:100%;
+  height:50px;
+  padding-inline:14px;
+  border-color:#e2dcd6;
+  border-radius:12px;
+  background:#fbfaf8;
+  font-size:14px;
+}
+.service-form-wrap input:hover,
+.service-form-wrap select:hover{border-color:#c9beb5;background:#fff}
+.service-form-wrap input:focus,
+.service-form-wrap select:focus{background:#fff;box-shadow:0 0 0 3px rgba(112,87,72,.075)}
+.choice-chip span{
+  min-height:40px;
+  padding-inline:14px;
+  border-radius:10px;
+  background:#fbfaf8;
+  font-size:13px;
+}
+.form-submit-area{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  grid-template-rows:auto auto;
+  column-gap:20px;
+  row-gap:8px;
+  align-items:center;
+  margin-top:24px;
+  padding-top:22px;
+  border-top:1px solid #ebe5df;
+}
+.form-submit-area .consent-row{
+  grid-column:1;
+  grid-row:1;
+  margin:0;
+  align-items:center;
+  color:#756a62;
+  font-size:12px;
+  line-height:18px;
+}
+.form-submit-area .consent-row input{
+  width:20px;
+  height:20px;
+  margin:0;
+  border:1px solid #d4cbc4;
+  border-radius:6px;
+  background:#fff;
+}
+.form-submit-area .consent-row input:checked{
+  border-color:var(--brand-900);
+  background-color:var(--brand-900);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 10.2 8.3 13.5 15 6.8' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-position:center;
+  background-repeat:no-repeat;
+  background-size:16px;
+  box-shadow:none;
+}
+.form-submit-area .form-status{
+  grid-column:1;
+  grid-row:2;
+  min-height:16px;
+  margin:0;
+  font-size:11px;
+  line-height:16px;
+}
+.service-form-wrap .reading-form .button-large{
+  grid-column:2;
+  grid-row:1 / span 2;
+  width:auto;
+  min-width:220px;
+  min-height:50px;
+  padding-inline:24px;
+  border-radius:12px;
+  align-self:center;
+  font-size:14px;
+}
+
 @media(min-width:1024px){
   .page-layout{grid-template-columns:minmax(320px,.82fr) minmax(0,1.18fr);gap:64px}
   .page-copy{position:sticky;top:88px}
@@ -248,9 +382,13 @@ body,main{background:#fff}
   .page-copy h2{font-size:26px;line-height:34px}
   .service-form-wrap .reading-form{padding:22px 18px;border-radius:14px}
   .page-field-row{display:block}
-  .page-field-row .field{width:100%;max-width:none;margin-bottom:16px}
+  .page-field-row .field{width:100%;max-width:none;margin-bottom:14px}
   .page-field-row+.page-field-row{margin-top:0}
   .form-inline-options{display:grid;grid-template-columns:1fr 1fr}
   .choice-chip span{width:100%;justify-content:center}
+  .form-submit-area{grid-template-columns:1fr;grid-template-rows:auto auto auto;gap:10px;margin-top:20px;padding-top:18px}
+  .form-submit-area .consent-row{grid-column:1;grid-row:1}
+  .form-submit-area .form-status{grid-column:1;grid-row:2}
+  .service-form-wrap .reading-form .button-large{grid-column:1;grid-row:3;width:100%;min-width:0}
   .archive-grid{grid-template-columns:1fr}
 }
