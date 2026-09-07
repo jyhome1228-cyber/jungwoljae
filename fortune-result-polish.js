@@ -65,7 +65,8 @@
 
   function renderList(selector,items){
     const ul=$(selector);if(!ul)return;
-    ul.innerHTML=items.map(([title,copy],i)=>`<li data-index="${String(i+1).padStart(2,'0')}"><div><strong>${title}</strong><span>${copy}</span></div></li>`).join('');
+    const html=items.map(([title,copy],i)=>`<li data-index="${String(i+1).padStart(2,'0')}"><div><strong>${title}</strong><span>${copy}</span></div></li>`).join('');
+    if(ul.innerHTML!==html)ul.innerHTML=html;
   }
 
   function areaCopy(title){
@@ -88,22 +89,24 @@
       :m==='check'
         ?'오늘은 멈추라는 뜻보다, 중요한 결정을 한 번 더 확인하고 불필요한 변수를 줄인 뒤 움직이는 편이 안정적이라는 의미에 가깝습니다.'
         :'오늘은 크게 밀거나 멈추는 한쪽의 선택보다, 진행 중인 일을 정리하고 사람·돈·일정의 균형을 맞추는 데 초점을 두는 편이 좋습니다.';
-    box.innerHTML=`
+    const html=`
       <p><span class="fortune-summary-label">OVERALL</span><strong>${headline}</strong>${signal}</p>
       <p><span class="fortune-summary-label">WORK · MONEY</span><strong>일과 돈에서는 기준을 먼저 확인하세요.</strong>${work} ${money}</p>
       <p><span class="fortune-summary-label">RELATIONSHIP · RHYTHM</span><strong>관계와 생활에서는 속도를 조절하는 것이 중요합니다.</strong>${people} ${rhythm}</p>
       <p class="fortune-summary-closing"><span class="fortune-summary-label">TODAY'S GUIDE</span><strong>${final||'오늘의 선택은 크기보다 순서가 중요합니다.'}</strong>${closing}</p>`;
+    if(box.innerHTML!==html)box.innerHTML=html;
   }
 
   function retitleChoice(){
     const section=$('.fortune-choice-section');if(!section)return;
-    const label=section.querySelector('.fortune-label');if(label)label.textContent='05 · HELPFUL & AVOID';
-    const h2=section.querySelector('h2');if(h2)h2.textContent='오늘은 이렇게 움직이면 좋습니다.';
+    const label=section.querySelector('.fortune-label');if(label&&label.textContent!=='05 · HELPFUL & AVOID')label.textContent='05 · HELPFUL & AVOID';
+    const h2=section.querySelector('h2');if(h2&&h2.textContent!=='오늘은 이렇게 움직이면 좋습니다.')h2.textContent='오늘은 이렇게 움직이면 좋습니다.';
     let lead=section.querySelector('.fortune-section-lead');
     if(!lead){lead=document.createElement('p');lead.className='fortune-section-lead';h2?.insertAdjacentElement('afterend',lead);}
-    lead.textContent='오늘의 흐름을 생활에 바로 적용할 수 있도록 도움이 되는 행동과 피하면 좋은 행동을 구체적으로 정리했습니다.';
-    const positive=section.querySelector('.fortune-choice-card.positive>span');if(positive)positive.textContent='도움이 되는 것';
-    const caution=section.querySelector('.fortune-choice-card.caution>span');if(caution)caution.textContent='피하면 좋은 것';
+    const leadText='오늘의 흐름을 생활에 바로 적용할 수 있도록 도움이 되는 행동과 피하면 좋은 행동을 구체적으로 정리했습니다.';
+    if(lead.textContent!==leadText)lead.textContent=leadText;
+    const positive=section.querySelector('.fortune-choice-card.positive>span');if(positive&&positive.textContent!=='도움이 되는 것')positive.textContent='도움이 되는 것';
+    const caution=section.querySelector('.fortune-choice-card.caution>span');if(caution&&caution.textContent!=='피하면 좋은 것')caution.textContent='피하면 좋은 것';
   }
 
   function apply(){
@@ -114,8 +117,18 @@
     expandSummary();
   }
 
-  let timer=0;
-  const schedule=()=>{clearTimeout(timer);timer=setTimeout(apply,20);};
-  new MutationObserver(schedule).observe(root,{subtree:true,childList:true,characterData:true});
-  apply();setTimeout(apply,250);setTimeout(apply,700);
+  let timer=0,observer=null;
+  const observe=()=>observer.observe(root,{subtree:true,childList:true,characterData:true});
+  const schedule=()=>{
+    clearTimeout(timer);
+    timer=setTimeout(()=>{
+      observer.disconnect();
+      try{apply();}finally{observe();}
+    },20);
+  };
+  observer=new MutationObserver(schedule);
+  observe();
+  observer.disconnect();apply();observe();
+  setTimeout(schedule,250);
+  setTimeout(schedule,700);
 })();
