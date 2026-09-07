@@ -3,6 +3,20 @@ themeLink.rel = 'stylesheet';
 themeLink.href = './theme-dark.css';
 document.head.appendChild(themeLink);
 
+const themeMeta = document.querySelector('meta[name="theme-color"]');
+if (themeMeta) themeMeta.setAttribute('content', '#ffffff');
+
+function applyBrandLogo(){
+  document.querySelectorAll('.brand').forEach((brand)=>{
+    brand.innerHTML = '<img class="brand-logo" src="./logo.svg" alt="" aria-hidden="true"><span class="brand-name">정월재</span>';
+  });
+
+  document.querySelectorAll('.footer-brand').forEach((brand)=>{
+    brand.innerHTML = '<span class="footer-logo-wrap"><img class="footer-logo" src="./logo.svg" alt="" aria-hidden="true"></span><span class="footer-brand-name">정월재</span>';
+  });
+}
+applyBrandLogo();
+
 const menuButton = document.querySelector('[data-menu-button]');
 const mobileMenu = document.querySelector('[data-mobile-menu]');
 const yearNode = document.querySelector('[data-year]');
