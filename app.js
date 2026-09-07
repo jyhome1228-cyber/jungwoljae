@@ -52,6 +52,11 @@ uiFixLink.rel = 'stylesheet';
 uiFixLink.href = './ui-fixes.css?v=20260907-2132';
 document.head.appendChild(uiFixLink);
 
+const friendlyCss=document.createElement('link');
+friendlyCss.rel='stylesheet';
+friendlyCss.href='./friendly-content.css?v=20260907-2342';
+document.head.appendChild(friendlyCss);
+
 if(currentFile.endsWith('-result.html')){
   const readabilityLink=document.createElement('link');
   readabilityLink.rel='stylesheet';
@@ -177,6 +182,11 @@ if(currentFile.endsWith('-result.html')){
   clarityScript.src='./result-clarity.js?v=20260907-2257';
   clarityScript.defer=true;
   document.body.appendChild(clarityScript);
+
+  const friendlyScript=document.createElement('script');
+  friendlyScript.src='./friendly-content.js?v=20260907-2342';
+  friendlyScript.defer=true;
+  document.body.appendChild(friendlyScript);
 }
 
 function fieldError(form,name,message=''){
