@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="description" content="정월부적 — 정월재의 상징 부적 카드. 개운, 재물, 인연, 평안, 이동, 성취, 수호의 의미를 담은 이미지를 저장하고 설명을 살펴보세요." />
+  <title>정월부적 — 정월재</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./page.css" />
+  <link rel="stylesheet" href="./talisman.css?v=20260908-0805" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wide-container header-inner">
+      <a class="brand" href="./index.html" aria-label="정월재 홈"><span class="brand-hanja">正月齋</span><span class="brand-korean">정월재</span></a>
+      <nav class="desktop-nav"></nav>
+      <a class="header-cta" href="./signup.html">회원등록</a>
+      <button class="menu-button" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu" data-menu-button><span></span><span></span></button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu" hidden data-mobile-menu><nav class="container"></nav></div>
+  </header>
+
+  <main class="talisman-main">
+    <section class="talisman-hero">
+      <div class="container talisman-hero-inner">
+        <div>
+          <p class="eyebrow">正月符 · JUNGWOL TALISMAN</p>
+          <h1>오늘의 마음을<br />하나의 상징으로 남깁니다.</h1>
+          <p class="talisman-hero-lead">정월부적은 전통 도상과 길상 문양을 정월재의 시각 언어로 재해석한 상징 카드입니다. 미래의 결과를 보장하는 물건이라기보다, 지금 지키고 싶은 마음과 생활의 기준을 눈에 보이는 형태로 기억하는 데 목적이 있습니다.</p>
+        </div>
+        <div class="talisman-hero-note">
+          <span>HOW TO USE</span>
+          <strong>마음에 드는 부적을 저장해 자주 꺼내보세요.</strong>
+          <p>휴대폰 갤러리나 정월부적 보관함에 두고, 중요한 선택이나 하루를 시작할 때 한 번씩 바라보며 내가 지키려는 기준을 다시 떠올리는 방식으로 활용해보세요.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="talisman-gallery-section">
+      <div class="container">
+        <div class="talisman-section-head">
+          <div>
+            <p class="eyebrow">TALISMAN GALLERY</p>
+            <h2>정월부적 일곱 가지</h2>
+            <p>개운·재물·인연·평안·이동·성취·수호의 주제를 각각 다른 상징과 문장으로 정리했습니다.</p>
+          </div>
+          <div class="talisman-tools">
+            <button type="button" class="talisman-saved-toggle" data-saved-toggle>저장한 부적 <strong data-saved-count>0</strong></button>
+          </div>
+        </div>
+
+        <div class="talisman-filter" role="group" aria-label="부적 주제 필터">
+          <button type="button" class="is-active" data-filter="all">전체</button>
+          <button type="button" data-filter="work">일·성취</button>
+          <button type="button" data-filter="money">재물</button>
+          <button type="button" data-filter="relationship">인연</button>
+          <button type="button" data-filter="peace">평안·수호</button>
+          <button type="button" data-filter="change">변화·이동</button>
+        </div>
+
+        <div class="talisman-grid" data-talisman-grid></div>
+        <p class="talisman-empty" data-talisman-empty hidden>저장해둔 부적이 아직 없습니다. 마음에 드는 부적의 ‘보관하기’를 눌러보세요.</p>
+      </div>
+    </section>
+
+    <section class="talisman-guide-section">
+      <div class="container talisman-guide-grid">
+        <article><span>01</span><strong>보관하기</strong><p>마음에 드는 부적을 정월부적 보관함에 저장하면 이 브라우저에서 다시 빠르게 찾아볼 수 있습니다.</p></article>
+        <article><span>02</span><strong>이미지 저장</strong><p>이미지 파일을 휴대폰이나 컴퓨터에 저장해 배경화면, 개인 기록, 다이어리 이미지 등으로 활용할 수 있습니다.</p></article>
+        <article><span>03</span><strong>의미 기억하기</strong><p>부적의 효과를 단정하기보다, 카드에 담긴 문장과 상징을 오늘의 행동 기준을 상기시키는 장치로 사용합니다.</p></article>
+      </div>
+    </section>
+  </main>
+
+  <div class="talisman-modal" data-talisman-modal hidden aria-hidden="true">
+    <div class="talisman-modal-backdrop" data-modal-close></div>
+    <article class="talisman-modal-card" role="dialog" aria-modal="true" aria-labelledby="talisman-modal-title">
+      <button type="button" class="talisman-modal-close" data-modal-close aria-label="닫기">×</button>
+      <div class="talisman-modal-image-wrap"><img data-modal-image alt="" /></div>
+      <div class="talisman-modal-content">
+        <p class="talisman-modal-kicker" data-modal-kicker></p>
+        <h2 id="talisman-modal-title" data-modal-title></h2>
+        <p class="talisman-modal-summary" data-modal-summary></p>
+        <div class="talisman-detail-list" data-modal-details></div>
+        <blockquote data-modal-phrase></blockquote>
+        <div class="talisman-modal-actions">
+          <button type="button" class="talisman-action secondary" data-modal-save>보관하기</button>
+          <button type="button" class="talisman-action primary" data-modal-download>이미지 저장</button>
+        </div>
+        <p class="talisman-modal-note">정월부적은 전통 상징을 현대적으로 재해석한 콘텐츠이며 특정 효험이나 미래의 결과를 보장하지 않습니다.</p>
+      </div>
+    </article>
+  </div>
+
+  <footer class="site-footer"></footer>
+  <script src="./app.js?v=20260908-0805" defer></script>
+  <script src="./talisman.js?v=20260908-0805" defer></script>
+</body>
+</html>
