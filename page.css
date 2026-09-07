@@ -86,3 +86,59 @@
   .form-submit-area .button-large{width:100%;min-width:0}
   .archive-grid{grid-template-columns:1fr}
 }
+
+/* Signup controls: override global theme select/input rules */
+.signup-card input:not([type="checkbox"]),
+.signup-card select{
+  width:100%!important;
+  height:46px!important;
+  padding:0 13px!important;
+  border:1px solid #ddd2cd!important;
+  border-radius:10px!important;
+  background-color:#fff!important;
+  color:#2b2524!important;
+  font-size:13px!important;
+  line-height:20px!important;
+  box-shadow:none!important;
+  appearance:none!important;
+  -webkit-appearance:none!important;
+}
+.signup-card select{
+  padding-right:38px!important;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' fill='none' stroke='%23543a3a' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")!important;
+  background-repeat:no-repeat!important;
+  background-position:right 14px center!important;
+  background-size:12px 8px!important;
+}
+.signup-card select:hover,
+.signup-card input:not([type="checkbox"]):hover{border-color:#c9bbb5!important}
+.signup-card select:focus,
+.signup-card input:not([type="checkbox"]):focus{border-color:#543a3a!important;box-shadow:0 0 0 3px rgba(84,58,58,.07)!important}
+.signup-card .mini-check input[type="checkbox"],
+.signup-card .privacy-check input[type="checkbox"]{
+  flex:0 0 auto!important;
+  width:18px!important;
+  height:18px!important;
+  min-width:18px!important;
+  min-height:18px!important;
+  margin:0!important;
+  padding:0!important;
+  border:1px solid #d5cac5!important;
+  border-radius:5px!important;
+  background-color:#fff!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  appearance:none!important;
+  -webkit-appearance:none!important;
+}
+.signup-card .mini-check input[type="checkbox"]:checked,
+.signup-card .privacy-check input[type="checkbox"]:checked{
+  border-color:#543a3a!important;
+  background-color:#543a3a!important;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Cpath d='M3 7.2 5.7 9.8 11 4.5' fill='none' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")!important;
+  background-repeat:no-repeat!important;
+  background-position:center!important;
+  background-size:14px 14px!important;
+}
+.signup-card input[type="date"],
+.signup-card input[type="time"]{background-color:#fff!important;color-scheme:light!important}
