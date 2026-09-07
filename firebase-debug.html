@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Firebase 연결 진단 — 정월재</title>
+  <style>
+    body{margin:0;background:#fff;color:#2b2524;font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:-.02em}
+    main{width:min(calc(100% - 40px),720px);margin:80px auto;padding:28px;border:1px solid #e8dfdb;border-radius:18px}
+    h1{margin:0 0 10px;font-size:24px} p{color:#786f6c;line-height:1.7}.box{margin-top:22px;padding:16px;border-radius:12px;background:#faf8f7;border:1px solid #eee7e3}.ok{color:#3f6d49}.bad{color:#a64f46}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;word-break:break-all}.button{display:inline-flex;margin-top:18px;padding:12px 16px;border:0;border-radius:10px;background:#543a3a;color:#fff;font-weight:700;cursor:pointer}
+  </style>
+</head>
+<body>
+<main>
+  <h1>Firebase 연결 진단</h1>
+  <p>회원가입을 만들지 않고 현재 사이트가 불러오는 Firebase Web 설정과 Authentication API 응답만 확인합니다.</p>
+  <div id="info" class="box">설정 불러오는 중…</div>
+  <button id="test" class="button" type="button">Authentication API 테스트</button>
+  <div id="result" class="box">테스트 전</div>
+</main>
+<script type="module">
+  import { firebaseConfig } from './firebase-config.js?v=20260907-1636';
+  const info=document.querySelector('#info');
+  const result=document.querySelector('#result');
+  const test=document.querySelector('#test');
+  const suffix=(firebaseConfig.apiKey||'').slice(-8);
+  info.innerHTML=`<strong>현재 로드된 설정</strong><br><span class="mono">projectId: ${firebaseConfig.projectId}<br>appId: ${firebaseConfig.appId}<br>apiKey 끝 8자리: ${suffix}</span>`;
+  test.addEventListener('click',async()=>{
+    result.textContent='확인 중…';
+    try{
+      const res=await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${encodeURIComponent(firebaseConfig.apiKey)}`,{
+        method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({email:'firebase-diagnostic-nobody@example.com',password:'not-a-real-password-1234',returnSecureToken:true})
+      });
+      const data=await res.json().catch(()=>({}));
+      const message=data?.error?.message||`HTTP_${res.status}`;
+      const validKey=!/API_KEY_INVALID|API key not valid/i.test(message);
+      result.className=`box ${validKey?'ok':'bad'}`;
+      result.innerHTML=validKey
+        ? `<strong>API 키는 Firebase Authentication에서 인식됩니다.</strong><br><span class="mono">${message}</span><br><br>이 경우 회원가입 페이지의 로딩/캐시 또는 SDK 연결 경로를 수정하면 됩니다.`
+        : `<strong>Firebase Authentication 서버가 현재 키를 유효하지 않은 키로 판단하고 있습니다.</strong><br><span class="mono">${message}</span>`;
+    }catch(e){
+      result.className='box bad';
+      result.innerHTML=`<strong>네트워크 요청 실패</strong><br><span class="mono">${String(e)}</span>`;
+    }
+  });
+</script>
+</body>
+</html>
