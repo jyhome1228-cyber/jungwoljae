@@ -64,6 +64,40 @@ service cloud.firestore {
       allow delete: if isAdmin() || (signedIn() && resource.data.uid == request.auth.uid);
     }
 
+    // A result page may append one privacy-restricted reading event after the user submitted
+    // a reading form. The public client can create only this narrow shape; only admins can read it.
+    match /reading_events/{eventId} {
+      allow create: if request.resource.data.keys().hasOnly([
+                      'service', 'serviceLabel', 'name', 'birthDate', 'birthTime',
+                      'birthTimeUnknown', 'calendarType', 'gender', 'city', 'focus',
+                      'domain', 'situation', 'blockers', 'partnerName', 'partnerBirthDate',
+                      'uid', 'createdAt'
+                    ])
+                    && request.resource.data.service in [
+                      'saju', 'ohaeng', 'fortune', 'relationship', 'compatibility', 'work-money', 'guide'
+                    ]
+                    && request.resource.data.serviceLabel.size() <= 40
+                    && request.resource.data.name.size() <= 120
+                    && request.resource.data.birthDate.size() <= 20
+                    && request.resource.data.birthTime.size() <= 20
+                    && request.resource.data.calendarType.size() <= 20
+                    && request.resource.data.gender.size() <= 20
+                    && request.resource.data.city.size() <= 120
+                    && request.resource.data.focus.size() <= 4
+                    && request.resource.data.blockers.size() <= 4
+                    && request.resource.data.domain.size() <= 120
+                    && request.resource.data.situation.size() <= 120
+                    && request.resource.data.partnerName.size() <= 120
+                    && request.resource.data.partnerBirthDate.size() <= 20
+                    && request.resource.data.createdAt == request.time
+                    && (
+                      (signedIn() && request.resource.data.uid == request.auth.uid)
+                      || (!signedIn() && request.resource.data.uid == null)
+                    );
+      allow read, delete: if isAdmin();
+      allow update: if false;
+    }
+
     // Public, aggregate-only operational analytics used by the login-free dashboard.
     // No account identity, IP, location, referrer, user-agent or fingerprint is stored here.
     match /analytics_daily/{dateKey} {
