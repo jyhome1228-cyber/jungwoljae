@@ -1,1 +1,122 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#201914"><title>운의 흐름 — 정월재</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="./styles.css"><link rel="stylesheet" href="./page.css"></head><body><header class="site-header"><div class="wide-container header-inner"><a class="brand" href="./index.html"><span class="brand-hanja">正月齋</span><span class="brand-korean">정월재</span></a><nav class="desktop-nav"><a href="./saju.html">사주</a><a href="./ohaeng.html">오행</a><a href="./fortune.html">운세</a><a href="./relationship.html">인연</a><a href="./work-money.html">일·재물</a><a href="./about.html">소개</a></nav><a class="header-cta" href="./archive.html">정월록</a><button class="menu-button" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu" data-menu-button><span></span><span></span></button></div><div class="mobile-menu" id="mobile-menu" hidden data-mobile-menu><nav class="container"><a href="./saju.html">사주</a><a href="./ohaeng.html">오행</a><a href="./fortune.html">운세</a><a href="./relationship.html">인연</a><a href="./compatibility.html">궁합</a><a href="./work-money.html">일·재물</a><a href="./archive.html">정월록</a><a href="./about.html">소개</a></nav></div></header><main><nav class="secondary-nav"><div class="container"><a href="./saju.html">종합 사주</a><a href="./ohaeng.html">오행 분석</a><a aria-current="page" href="./fortune.html">운의 흐름</a><a href="./relationship.html">연애와 인연</a><a href="./compatibility.html">궁합</a><a href="./work-money.html">일과 재물</a></div></nav><section class="sub-hero"><div class="container"><div class="breadcrumb"><a href="./index.html">정월재</a><span>/</span><span>운의 흐름</span></div><p class="eyebrow">FORTUNE FLOW</p><h1>지금 들어오는 기운과<br>내 사주가 만나는 지점.</h1><p class="sub-lead">오늘, 이번 달, 올해의 흐름을 내 사주 원본과 함께 비교해 시기별로 강해지는 기운과 부담이 커지는 구간을 봅니다.</p></div></section><section class="page-section"><div class="container page-layout"><div class="page-copy"><p class="eyebrow">TIMING</p><h2>운세를 따로 만들지 않고<br>내 사주 위에 겹쳐 봅니다.</h2><p>같은 날이라도 사람마다 받아들이는 흐름이 다른 이유를 사주와 시기의 관계에서 읽습니다.</p><ul class="detail-list"><li><span>01</span><div><strong>오늘의 흐름</strong><p>일진과 내 사주의 관계를 바탕으로 하루의 강약을 살펴봅니다.</p></div></li><li><span>02</span><div><strong>월운</strong><p>이번 달에 반복되기 쉬운 기운과 관계의 변화를 봅니다.</p></div></li><li><span>03</span><div><strong>연운</strong><p>한 해 전체의 방향과 중요한 전환 구간을 정리합니다.</p></div></li></ul></div><div class="service-form-wrap"><form class="reading-form" data-reading-form novalidate><input type="radio" name="serviceType" value="fortune" checked hidden><div class="form-page-title"><span class="flow-step-number">01</span><h2>어느 흐름을 볼까요?</h2><p>기간을 선택한 뒤 기본 정보를 입력해주세요.</p></div><div class="form-inline-options"><label class="choice-chip"><input type="radio" name="fortuneRange" value="today" checked><span>오늘</span></label><label class="choice-chip"><input type="radio" name="fortuneRange" value="month"><span>이번 달</span></label><label class="choice-chip"><input type="radio" name="fortuneRange" value="year"><span>올해</span></label></div><div class="form-group-title">나의 정보</div><div class="page-field-row"><div class="field field-name"><label for="profile-name">이름 또는 닉네임 <span class="required">필수</span></label><input id="profile-name" name="profileName" type="text" placeholder="예: 정월" required><p class="field-message" data-error-for="profile-name"></p></div></div><div class="page-field-row"><div class="field field-date"><label for="birth-date">생년월일 <span class="required">필수</span></label><input id="birth-date" name="birthDate" type="date" required><p class="field-message" data-error-for="birth-date"></p></div><div class="field field-time"><label for="birth-time">태어난 시간 <span class="optional">선택</span></label><input id="birth-time" name="birthTime" type="time"></div></div><div class="page-field-row"><div class="field field-calendar"><label for="calendar-type">달력 기준</label><select id="calendar-type" name="calendarType"><option value="solar">양력</option><option value="lunar">음력</option></select></div></div><div class="form-submit-area"><label class="consent-row"><input type="checkbox" name="consent" required><span>분석을 위해 입력 정보가 사용되는 것에 동의합니다.</span></label><p class="form-status" role="status" aria-live="polite" data-form-status></p><button class="button button-primary button-large" type="submit">운의 흐름 살펴보기</button></div></form></div></div></section></main><footer class="site-footer"><div class="container footer-grid"><div><p class="footer-brand">正月齋 <span>정월재</span></p><p class="footer-copy">삶의 흐름을 읽는 곳.</p></div><p class="footer-note">전통 명리학 기반의 해석 콘텐츠이며 결과를 보장하지 않습니다.</p><p class="footer-copyright">© <span data-year></span> JEONGWOLJAE</p></div></footer><script src="./app.js" defer></script></body></html>
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="description" content="정월재 오늘의 운세" />
+  <title>오늘의 운세 — 정월재</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./page.css" />
+  <style>
+    .fortune-form .field>label{display:block;margin-bottom:7px;font-size:12px;font-weight:700;color:#2b2524}
+    .fortune-form input:not([type="checkbox"]),.fortune-form select,.fortune-form textarea{width:100%;border:1px solid #ddd2cd;border-radius:10px;background:#fff;color:#2b2524;font:inherit;outline:none;box-shadow:none}
+    .fortune-form input:not([type="checkbox"]),.fortune-form select{height:46px;padding:0 13px;font-size:13px;appearance:none;-webkit-appearance:none}
+    .fortune-form select{padding-right:36px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' fill='none' stroke='%23543a3a' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;background-size:12px 8px}
+    .fortune-form textarea{min-height:112px;padding:13px;resize:vertical;font-size:13px;line-height:21px}
+    .fortune-form input:focus,.fortune-form select:focus,.fortune-form textarea:focus{border-color:#543a3a;box-shadow:0 0 0 3px rgba(84,58,58,.07)}
+    .fortune-form .page-field-row{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important}
+    .fortune-form .field.full{grid-column:1/-1}
+    .zodiac-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:7px}
+    .zodiac-chip{position:relative;cursor:pointer}.zodiac-chip input{position:absolute;opacity:0;pointer-events:none}.zodiac-chip span{display:grid;min-height:50px;place-items:center;border:1px solid #e2d8d4;border-radius:10px;background:#fff;color:#716662;font-size:11px;font-weight:700;transition:.15s ease}.zodiac-chip input:checked+span{border-color:#543a3a;background:#543a3a;color:#fff}.zodiac-chip span b{font-size:15px;line-height:18px;font-weight:700}.zodiac-chip span em{font-style:normal;font-size:9px;opacity:.72}
+    .fortune-profile-state,.fortune-helper{margin:6px 0 0!important;color:#9b918d!important;font-size:10px!important;line-height:16px!important}.fortune-profile-state[data-state="ok"]{color:#6e514f!important}
+    .today-badge{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px;padding:14px 16px;border:1px solid #e8dfdb;border-radius:12px;background:#faf8f7}.today-badge strong{color:#2b2524;font-size:13px}.today-badge span{color:#8b817d;font-size:10px}
+    @media(max-width:767px){.fortune-form .page-field-row{grid-template-columns:1fr!important}.zodiac-grid{grid-template-columns:repeat(4,1fr)}}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wide-container header-inner">
+      <a class="brand" href="./index.html" aria-label="정월재 홈"><span class="brand-hanja">正月齋</span><span class="brand-korean">정월재</span></a>
+      <nav class="desktop-nav"></nav>
+      <a class="header-cta" href="./signup.html">회원등록</a>
+      <button class="menu-button" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu" data-menu-button><span></span><span></span></button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu" hidden data-mobile-menu><nav class="container"></nav></div>
+  </header>
+
+  <main>
+    <section class="sub-hero">
+      <div class="container">
+        <div class="breadcrumb"><a href="./index.html">정월재</a><span>/</span><span>오늘의 운세</span></div>
+        <p class="eyebrow">TODAY'S FORTUNE</p>
+        <h1>오늘의 기운과<br />나의 띠가 만나는 날.</h1>
+        <p class="sub-lead">띠와 출생연도를 기준으로 오늘의 일진과 관계를 살펴보고, 일·재물·관계·생활에서 어떤 선택에 무게를 둘지 정리합니다.</p>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="container page-layout">
+        <div class="page-copy">
+          <p class="eyebrow">ZODIAC · TODAY</p>
+          <h2>같은 띠라도<br />출생연도에 따라 다르게 봅니다.</h2>
+          <p>띠의 지지와 출생연도의 천간을 오늘의 일진과 비교해, 오늘 자연스럽게 맞물리는 부분과 조금 조심해서 다룰 부분을 함께 읽습니다.</p>
+          <ul class="detail-list">
+            <li><span>01</span><div><strong>띠의 관계</strong><p>오늘의 지지와 내 띠 사이의 합·충·형·파·해 관계를 살펴봅니다.</p></div></li>
+            <li><span>02</span><div><strong>출생연도</strong><p>같은 띠 안에서도 연도의 천간이 어떤 오행을 갖는지 함께 비교합니다.</p></div></li>
+            <li><span>03</span><div><strong>오늘의 선택</strong><p>무조건 좋다·나쁘다가 아니라 오늘 어떤 방식으로 움직일 때 부담이 줄어드는지 정리합니다.</p></div></li>
+          </ul>
+        </div>
+
+        <div class="service-form-wrap">
+          <form class="reading-form fortune-form" data-fortune-form novalidate>
+            <div class="form-page-title">
+              <span class="flow-step-number">01</span>
+              <h2><span data-member-name>회원님</span>의 오늘 흐름을 봅니다.</h2>
+              <p>로그인 회원은 저장된 출생연도와 띠를 자동으로 불러옵니다.</p>
+              <p class="fortune-profile-state" data-profile-state>회원정보 확인 중…</p>
+            </div>
+
+            <div class="today-badge"><strong data-today-label>오늘</strong><span>오늘 날짜의 일진과 비교합니다</span></div>
+
+            <div class="page-field-row">
+              <div class="field"><label for="fortune-name">이름 또는 닉네임</label><input id="fortune-name" name="name" type="text" required placeholder="예: 정월" /></div>
+              <div class="field"><label for="fortune-year">출생연도</label><select id="fortune-year" name="birthYear" required><option value="">연도 선택</option></select></div>
+            </div>
+
+            <div class="page-field-row">
+              <div class="field full">
+                <label>나의 띠</label>
+                <div class="zodiac-grid" data-zodiac-grid>
+                  <label class="zodiac-chip"><input type="radio" name="zodiac" value="rat"><span><b>子</b><em>쥐띠</em></span></label>
+                  <label class="zodiac-chip"><input type="radio" name="zodiac" value="ox"><span><b>丑</b><em>소띠</em></span></label>
+                  <label class="zodiac-chip"><input type="radio" name="zodiac" value="tiger"><span><b>寅</b><em>호랑이띠</em></span></label>
+                  <label class="zodiac-chip"><input type="radio" name="zodiac" value="rabbit"><span><b>卯</b><em>토끼띠</em></span></label>
+                  <label class="zodiac-chip"><input type="radio" name="zodiac" value="dragon"><span><b>辰</b><em>용띠</em></span></label>
+                  <label class="zodiac-chip"><input type="radio" name="zodiac" value="snake"><span><b>巳</b><em>뱀띠</em></span></label>
+                  <label class="zodiac-chip"><input type="radio" name="zodiac" value="horse"><span><b>午</b><em>말띠</em></span></label>
+                  <label class="zodiac-chip"><input type="radio" name="zodiac" value="goat"><span><b>未</b><em>양띠</em></span></label>
+                  <label class="zodiac-chip"><input type="radio" name="zodiac" value="monkey"><span><b>申</b><em>원숭이띠</em></span></label>
+                  <label class="zodiac-chip"><input type="radio" name="zodiac" value="rooster"><span><b>酉</b><em>닭띠</em></span></label>
+                  <label class="zodiac-chip"><input type="radio" name="zodiac" value="dog"><span><b>戌</b><em>개띠</em></span></label>
+                  <label class="zodiac-chip"><input type="radio" name="zodiac" value="pig"><span><b>亥</b><em>돼지띠</em></span></label>
+                </div>
+                <p class="fortune-helper">1~2월생처럼 띠 경계가 애매한 경우에는 알고 있는 실제 띠를 직접 선택해주세요.</p>
+              </div>
+            </div>
+
+            <div class="page-field-row">
+              <div class="field full">
+                <label for="fortune-question">오늘 특히 궁금한 일이 있나요? <span class="optional">선택</span></label>
+                <textarea id="fortune-question" name="question" maxlength="300" placeholder="예: 오늘 중요한 계약 이야기를 꺼내도 괜찮을지 궁금합니다."></textarea>
+                <p class="fortune-helper">질문은 오늘의 계산값을 바꾸지 않고, 결과에서 어떤 영역을 더 직접적으로 설명할지 정하는 데 사용합니다.</p>
+              </div>
+            </div>
+
+            <div class="form-submit-area">
+              <label class="consent-row"><input type="checkbox" name="consent" required><span>분석을 위해 입력 정보가 사용되는 것에 동의합니다.</span></label>
+              <p class="form-status" role="status" aria-live="polite" data-fortune-status></p>
+              <button class="button button-primary button-large" type="submit">오늘의 운세 보기</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"></footer>
+  <script src="./app.js" defer></script>
+  <script type="module" src="./fortune-form.js?v=20260907-01"></script>
+</body>
+</html>
