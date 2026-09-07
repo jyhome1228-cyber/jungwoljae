@@ -1,94 +1,60 @@
-/* Shared result readability pass — clearer type hierarchy and larger body copy. */
+/* Shared result readability — large, readable and service-safe. */
+.realism-note{display:none!important}
 
-/* Global result body copy */
-.saju-result-main p,
-.result-main p,
-.fortune-result-main p,
-.relationship-result-main p,
-.work-result-main p,
-.compatibility-result-main p{
-  letter-spacing:-.02em!important;
-}
+.saju-result-main,.result-main,.fortune-result-main,.relationship-result-main,.work-result-main,.compatibility-result-main{word-break:keep-all}
+.saju-result-main p,.result-main p,.fortune-result-main p,.relationship-result-main p,.work-result-main p,.compatibility-result-main p{letter-spacing:-.02em!important}
 
-/* Small labels / kickers */
-.saju-kicker,.saju-label,
-.result-kicker,.section-label,
-.fortune-kicker,.fortune-label,
-.relationship-kicker,.relationship-label,
-.work-kicker,.work-label,
-.compatibility-kicker,.compatibility-label{
-  font-size:11px!important;
-  line-height:17px!important;
-}
+.saju-kicker,.saju-label,.result-kicker,.section-label,.fortune-kicker,.fortune-label,.relationship-kicker,.relationship-label,.work-kicker,.work-label,.compatibility-kicker,.compatibility-label{font-size:11.5px!important;line-height:18px!important;font-weight:800!important}
 
-/* Metadata pills */
-.saju-meta span,.result-meta span,.fortune-meta span,.relationship-meta span,.work-meta span,.compatibility-meta span{
-  font-size:12px!important;
-  min-height:32px!important;
-}
+.saju-meta span,.result-meta span,.fortune-meta span,.relationship-meta span,.work-meta span,.compatibility-meta span{font-size:12.5px!important;min-height:33px!important}
 
-/* Card eyebrow / index text */
-.saju-result-main article>span,
-.result-main article>span,
-.fortune-result-main article>span,
-.relationship-result-main article>span,
-.work-result-main article>span,
-.compatibility-result-main article>span{
-  font-size:11px!important;
-  line-height:17px!important;
-}
+.saju-result-main article>span,.result-main article>span,.fortune-result-main article>span,.relationship-result-main article>span,.work-result-main article>span,.compatibility-result-main article>span{font-size:11.5px!important;line-height:18px!important}
 
-/* Primary card copy */
-.relationship-core-card p,.relationship-condition-card p,.relationship-status-box p,.relationship-guide-card p,
-.relationship-insight p,.relationship-pattern p,.relationship-year-copy p,.relationship-total p,
+.relationship-core-card p,.relationship-condition-card p,.relationship-status-box p,.relationship-guide-card p,.relationship-insight p,.relationship-year-copy p,.relationship-total p,
 .fortune-card p,.fortune-key p,.fortune-tip-card p,.fortune-time-card p,.fortune-story p,.fortune-choice-card li,.fortune-total p,
-.work-result-main article p,.work-result-main .work-total p,.work-result-main .work-axis-copy p,.work-result-main .work-evidence-content,
+.work-result-main article p,.work-result-main .work-total p,.work-result-main .work-axis-copy p,
 .result-main .life-card p,.result-main .key-card p,.result-main .total-summary-copy p,.result-main .insight-card p,.result-main .flow-copy,
-.saju-result-main .life-card p,.saju-result-main .ten-god-card p,.saju-result-main .summary-prose p,.saju-result-main .focus-reading-card p,.saju-result-main .balance-copy,
+.saju-result-main .life-card p,.saju-result-main .ten-god-card p,.saju-result-main .summary-prose p,.saju-result-main .focus-reading-card p,.saju-result-main .balance-copy,.saju-result-main .ten-god-summary,.saju-result-main .year-card p,
 .compatibility-result-main article p,.compatibility-result-main .compatibility-total p{
-  font-size:13.5px!important;
-  line-height:1.8!important;
-  color:#6b615d!important;
-}
-
-/* Important value titles */
-.relationship-core-card strong,.relationship-condition-card strong,.relationship-status-box strong,
-.fortune-key strong,.fortune-tip-card h3,.fortune-time-card strong,
-.work-result-main article strong,.result-main article strong,.saju-result-main article strong,.compatibility-result-main article strong{
   font-size:15px!important;
-  line-height:22px!important;
+  line-height:1.82!important;
+  color:#625955!important;
 }
 
-/* Evidence and helper copy should still be readable */
-.relationship-evidence-content,.fortune-evidence-content,.work-evidence-content,.evidence-content,.result-main .evidence-content,
-.action-status,.relationship-action-status,.fortune-action-status,.work-action-status{
-  font-size:12px!important;
-  line-height:1.75!important;
-}
+.relationship-core-card p+p,.relationship-condition-card p+p,.relationship-status-box p+p,.relationship-guide-card p+p,.relationship-insight p+p,.relationship-year-copy p+p,.relationship-total p+p,
+.fortune-story p+p,.fortune-total p+p,.work-result-main p+p,.result-main .total-summary-copy p+p,.saju-result-main .summary-prose p+p{margin-top:14px!important}
 
-.relationship-evidence summary,.fortune-evidence summary,.work-evidence summary,.evidence-report summary,.evidence-section summary{
-  font-size:14px!important;
-}
+.relationship-core-card strong,.relationship-condition-card strong,.relationship-status-box strong,.relationship-guide-card h3,
+.fortune-key strong,.fortune-tip-card h3,.fortune-time-card strong,.fortune-card h3,
+.work-result-main article strong,.work-result-main article h3,.result-main article strong,.result-main article h3,.saju-result-main article strong,.saju-result-main article h3,.compatibility-result-main article strong{font-size:16px!important;line-height:24px!important}
 
-/* Result action helper copy */
-.action-copy p,.relationship-action-copy p,.fortune-action-copy p,.work-action-copy p{
-  font-size:12.5px!important;
-  line-height:1.7!important;
-}
+.relationship-lead,.fortune-lead,.work-lead,.result-lead,.saju-lead,.compatibility-lead{font-size:16px!important;line-height:1.75!important;color:#5d5450!important}
+
+.relationship-evidence-content,.fortune-evidence-content,.work-evidence-content,.evidence-content,.result-main .evidence-content,.work-result-main .work-evidence-content,.action-status,.relationship-action-status,.fortune-action-status,.work-action-status{font-size:13px!important;line-height:1.75!important}
+.relationship-evidence summary,.fortune-evidence summary,.work-evidence summary,.evidence-report summary,.evidence-section summary{font-size:14.5px!important}
+.action-copy p,.relationship-action-copy p,.fortune-action-copy p,.work-action-copy p{font-size:13.5px!important;line-height:1.7!important}
+
+/* Dark relationship pattern block must remain high-contrast. */
+.relationship-pattern-section{background:#543a3a!important}
+.relationship-pattern-section h2{color:#fff!important}
+.relationship-pattern-section .relationship-label{color:rgba(255,255,255,.72)!important}
+.relationship-pattern-section .relationship-pattern p{color:rgba(255,255,255,.9)!important;font-size:15px!important;line-height:1.84!important}
+
+/* Brown action/summary surfaces */
+.fortune-signal p,.fortune-tip-final p,.fortune-tip-final strong{color:#fff!important}
 
 @media(max-width:767px){
-  .relationship-core-card p,.relationship-condition-card p,.relationship-status-box p,.relationship-guide-card p,
-  .relationship-insight p,.relationship-pattern p,.relationship-year-copy p,.relationship-total p,
+  .relationship-core-card p,.relationship-condition-card p,.relationship-status-box p,.relationship-guide-card p,.relationship-insight p,.relationship-year-copy p,.relationship-total p,
   .fortune-card p,.fortune-key p,.fortune-tip-card p,.fortune-time-card p,.fortune-story p,.fortune-choice-card li,.fortune-total p,
   .work-result-main article p,.work-result-main .work-total p,.work-result-main .work-axis-copy p,
   .result-main .life-card p,.result-main .key-card p,.result-main .total-summary-copy p,.result-main .insight-card p,.result-main .flow-copy,
-  .saju-result-main .life-card p,.saju-result-main .ten-god-card p,.saju-result-main .summary-prose p,.saju-result-main .focus-reading-card p,.saju-result-main .balance-copy,
+  .saju-result-main .life-card p,.saju-result-main .ten-god-card p,.saju-result-main .summary-prose p,.saju-result-main .focus-reading-card p,.saju-result-main .balance-copy,.saju-result-main .ten-god-summary,.saju-result-main .year-card p,
   .compatibility-result-main article p,.compatibility-result-main .compatibility-total p{
-    font-size:13px!important;
-    line-height:1.76!important;
+    font-size:14.5px!important;
+    line-height:1.78!important;
   }
-
-  .saju-kicker,.saju-label,.result-kicker,.section-label,.fortune-kicker,.fortune-label,.relationship-kicker,.relationship-label,.work-kicker,.work-label,.compatibility-kicker,.compatibility-label{
-    font-size:10.5px!important;
-  }
+  .relationship-pattern-section .relationship-pattern p{font-size:14.5px!important;line-height:1.8!important}
+  .relationship-lead,.fortune-lead,.work-lead,.result-lead,.saju-lead,.compatibility-lead{font-size:15px!important;line-height:1.72!important}
+  .saju-kicker,.saju-label,.result-kicker,.section-label,.fortune-kicker,.fortune-label,.relationship-kicker,.relationship-label,.work-kicker,.work-label,.compatibility-kicker,.compatibility-label{font-size:11px!important}
+  .saju-meta span,.result-meta span,.fortune-meta span,.relationship-meta span,.work-meta span,.compatibility-meta span{font-size:12px!important}
 }
