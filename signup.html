@@ -1,1 +1,156 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#ffffff"><meta name="description" content="정월재 회원등록"><title>회원등록 — 정월재</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"><link rel="stylesheet" href="./styles.css"><link rel="stylesheet" href="./page.css"></head><body><header class="site-header"><div class="wide-container header-inner"><a class="brand" href="./index.html" aria-label="정월재 홈"><span class="brand-hanja">正月齋</span><span class="brand-korean">정월재</span></a><nav class="desktop-nav"><a href="./saju.html">사주</a><a href="./ohaeng.html">오행</a><a href="./fortune.html">운세</a><a href="./relationship.html">인연</a><a href="./work-money.html">일·재물</a><a href="./reviews.html">후기</a><a href="./about.html">소개</a></nav><a class="header-cta" href="./signup.html">회원등록</a><button class="menu-button" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu" data-menu-button><span></span><span></span></button></div><div class="mobile-menu" id="mobile-menu" hidden data-mobile-menu><nav class="container"><a href="./saju.html">사주</a><a href="./ohaeng.html">오행</a><a href="./fortune.html">운세</a><a href="./relationship.html">인연</a><a href="./compatibility.html">궁합</a><a href="./work-money.html">일·재물</a><a href="./archive.html">정월록</a><a href="./reviews.html">후기</a><a href="./about.html">소개</a></nav></div></header><main class="signup-main"><div class="container signup-shell"><div class="signup-copy"><p class="eyebrow">MEMBERSHIP</p><h1>정월재의 기록을<br>내 계정에 모아보세요.</h1><p>회원으로 등록하면 앞으로 종합 사주, 오늘의 운세, 궁합과 다른 풀이 기록을 정월록에서 이어서 볼 수 있도록 구성할 예정입니다.</p></div><form class="signup-card" data-signup-form><div class="field"><label for="signup-name">이름 또는 닉네임</label><input id="signup-name" name="name" type="text" autocomplete="name" required placeholder="예: 정월"></div><div class="field"><label for="signup-email">이메일</label><input id="signup-email" name="email" type="email" autocomplete="email" required placeholder="name@example.com"></div><div class="field"><label for="signup-password">비밀번호</label><input id="signup-password" name="password" type="password" autocomplete="new-password" minlength="8" required placeholder="8자 이상 입력"></div><label class="consent-row"><input type="checkbox" required><span>서비스 이용을 위한 필수 약관에 동의합니다.</span></label><button class="button button-primary" type="submit">회원등록</button><p class="signup-note" data-signup-status role="status" aria-live="polite">Firebase Authentication 연결을 고려해 화면 구조를 먼저 준비한 상태입니다.</p></form></div></main><footer class="site-footer"><div class="container footer-grid"><div><p class="footer-brand">正月齋 <span>정월재</span></p><p class="footer-copy">삶의 흐름을 읽는 곳.</p></div><p class="footer-note">전통 명리학 기반의 해석 콘텐츠이며 결과를 보장하지 않습니다.</p><p class="footer-copyright">© <span data-year></span> JEONGWOLJAE</p></div></footer><script src="./app.js" defer></script></body></html>
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="description" content="정월재 회원등록" />
+  <title>회원등록 — 정월재</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./page.css" />
+  <style>
+    .signup-main{padding:68px 0 96px;background:#fff}
+    .signup-shell{display:grid;grid-template-columns:minmax(280px,.75fr) minmax(0,1.25fr);gap:72px;align-items:start}
+    .signup-copy{max-width:430px;position:sticky;top:180px}
+    .signup-copy h1{margin:0 0 14px!important;font-size:32px!important;line-height:42px!important}
+    .signup-copy>p:not(.eyebrow){font-size:14px!important;line-height:23px!important}
+    .signup-points{margin:28px 0 0;padding:0;list-style:none;border-top:1px solid #e8dfdb}
+    .signup-points li{display:grid;grid-template-columns:26px 1fr;gap:12px;padding:13px 0;border-bottom:1px solid #eee7e3}
+    .signup-points span{color:#543a3a;font-size:10px;font-weight:800}
+    .signup-points strong{display:block;font-size:13px;line-height:19px}
+    .signup-points p{margin:2px 0 0!important;font-size:11px!important;line-height:17px!important}
+
+    .signup-card{padding:30px;border:1px solid #e8dfdb;border-radius:18px;background:#fff;box-shadow:0 8px 28px rgba(84,58,58,.045)}
+    .signup-section+.signup-section{margin-top:28px;padding-top:24px;border-top:1px solid #eee7e3}
+    .signup-section-head{margin-bottom:18px}
+    .signup-section-head span{display:block;margin-bottom:5px;color:#543a3a;font-size:10px;font-weight:800}
+    .signup-section-head h2{margin:0!important;font-size:19px!important;line-height:27px!important}
+    .signup-section-head p{margin:5px 0 0!important;font-size:12px!important;line-height:19px!important}
+    .signup-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 16px}
+    .signup-grid .full{grid-column:1/-1}
+    .signup-card .field{margin:0}
+    .signup-card .field label{display:block;margin-bottom:7px;color:#2b2524;font-size:12px;font-weight:700}
+    .signup-card .field label small{margin-left:5px;color:#9b918d;font-size:10px;font-weight:500}
+    .signup-card input:not([type="checkbox"]),.signup-card select{width:100%;height:46px;padding:0 13px;border:1px solid #ddd2cd;border-radius:10px;background:#fff;color:#2b2524;font-size:13px;outline:none}
+    .signup-card select{padding-right:38px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' fill='none' stroke='%23543a3a' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-size:12px 8px}
+    .signup-card input:not([type="checkbox"]):focus,.signup-card select:focus{border-color:#543a3a;box-shadow:0 0 0 3px rgba(84,58,58,.07)}
+    .signup-card input[disabled]{background:#f7f4f2;color:#aaa}
+    .signup-helper{margin:6px 0 0!important;color:#9b918d!important;font-size:10px!important;line-height:16px!important}
+    .birth-time-row{display:flex;align-items:center;gap:9px;margin-top:8px}
+    .mini-check,.privacy-check{display:flex;align-items:flex-start;gap:9px;cursor:pointer}
+    .mini-check input,.privacy-check input{flex:0 0 auto;width:18px!important;height:18px!important;margin:0!important;border:1px solid #d5cac5!important;border-radius:5px!important;background:#fff!important;appearance:none!important;-webkit-appearance:none!important}
+    .mini-check input:checked,.privacy-check input:checked{border-color:#543a3a!important;background-color:#543a3a!important;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Cpath d='M3 7.2 5.7 9.8 11 4.5' fill='none' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")!important;background-repeat:no-repeat!important;background-position:center!important}
+    .mini-check span{font-size:11px;line-height:18px;color:#786f6c}
+    .privacy-area{margin-top:26px;padding-top:22px;border-top:1px solid #eee7e3}
+    .privacy-check span{font-size:12px;line-height:19px;color:#5f5653}
+    .privacy-check a{color:#543a3a;font-weight:700;text-decoration:underline;text-underline-offset:2px}
+    .signup-card .button{width:100%;margin-top:18px;min-height:46px!important;border-radius:10px!important}
+    .signup-note{margin:10px 0 0!important;color:#8d817d!important;font-size:11px!important;line-height:17px!important}
+    .signup-status{margin:10px 0 0!important;min-height:17px;color:#543a3a!important;font-size:11px!important;line-height:17px!important}
+    .field-error{margin:5px 0 0!important;color:#a64f46!important;font-size:10px!important;line-height:16px!important}
+
+    @media(max-width:1000px){.signup-shell{grid-template-columns:1fr;gap:34px}.signup-copy{position:static;max-width:620px}}
+    @media(max-width:767px){.signup-main{padding:48px 0 72px}.signup-card{padding:22px 18px;border-radius:14px}.signup-grid{grid-template-columns:1fr}.signup-grid .full{grid-column:auto}.signup-copy h1{font-size:28px!important;line-height:37px!important}}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wide-container header-inner">
+      <a class="brand" href="./index.html" aria-label="정월재 홈"><span class="brand-hanja">正月齋</span><span class="brand-korean">정월재</span></a>
+      <nav class="desktop-nav"></nav>
+      <a class="header-cta" href="./signup.html">회원등록</a>
+      <button class="menu-button" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu" data-menu-button><span></span><span></span></button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu" hidden data-mobile-menu><nav class="container"></nav></div>
+  </header>
+
+  <main class="signup-main">
+    <div class="container signup-shell">
+      <section class="signup-copy">
+        <p class="eyebrow">MEMBERSHIP</p>
+        <h1>한 번 등록한 정보로<br />풀이를 이어서 보세요.</h1>
+        <p>회원정보에는 사주 분석에 필요한 기본 정보만 담습니다. 출생지 주소는 상세 주소가 아니라 시 단위까지만 받고, 입력한 정보는 정월재의 사주·운세 풀이와 기록 관리에만 사용합니다.</p>
+        <ul class="signup-points">
+          <li><span>01</span><div><strong>사주 기본 정보 저장</strong><p>생년월일·출생시간·달력 기준·출생 지역을 풀이에 사용합니다.</p></div></li>
+          <li><span>02</span><div><strong>정월록과 연결</strong><p>같은 정보를 반복 입력하지 않고 풀이 기록을 이어볼 수 있게 설계합니다.</p></div></li>
+          <li><span>03</span><div><strong>목적 외 사용 없음</strong><p>광고 타기팅이나 별도의 마케팅 목적으로 사용하지 않습니다.</p></div></li>
+        </ul>
+      </section>
+
+      <form class="signup-card" data-signup-form novalidate>
+        <section class="signup-section">
+          <div class="signup-section-head"><span>01 · ACCOUNT</span><h2>계정 정보</h2><p>정월재에 로그인할 아이디와 비밀번호를 설정합니다.</p></div>
+          <div class="signup-grid">
+            <div class="field full"><label for="signup-id">아이디</label><input id="signup-id" name="userId" type="text" autocomplete="username" minlength="4" maxlength="20" pattern="[A-Za-z0-9_]{4,20}" required placeholder="영문·숫자·_ 조합 4~20자" /><p class="field-error" data-signup-error="userId"></p></div>
+            <div class="field"><label for="signup-password">비밀번호</label><input id="signup-password" name="password" type="password" autocomplete="new-password" minlength="8" required placeholder="8자 이상 입력" /><p class="field-error" data-signup-error="password"></p></div>
+            <div class="field"><label for="signup-password-confirm">비밀번호 확인</label><input id="signup-password-confirm" name="passwordConfirm" type="password" autocomplete="new-password" minlength="8" required placeholder="비밀번호 다시 입력" /><p class="field-error" data-signup-error="passwordConfirm"></p></div>
+          </div>
+        </section>
+
+        <section class="signup-section">
+          <div class="signup-section-head"><span>02 · SAJU PROFILE</span><h2>사주 기본 정보</h2><p>분석 기준이 되는 정보입니다. 출생시간을 모르면 비워둘 수 있습니다.</p></div>
+          <div class="signup-grid">
+            <div class="field full"><label for="signup-name">성함</label><input id="signup-name" name="name" type="text" autocomplete="name" required placeholder="예: 홍길동" /><p class="field-error" data-signup-error="name"></p></div>
+            <div class="field"><label for="signup-birth-date">태어난 날짜</label><input id="signup-birth-date" name="birthDate" type="date" required /><p class="field-error" data-signup-error="birthDate"></p></div>
+            <div class="field"><label for="signup-birth-time">태어난 시간 <small>선택</small></label><input id="signup-birth-time" name="birthTime" type="time" /><div class="birth-time-row"><label class="mini-check"><input id="signup-time-unknown" type="checkbox" name="birthTimeUnknown" /><span>태어난 시간을 모릅니다</span></label></div></div>
+            <div class="field"><label for="signup-calendar">달력 기준</label><select id="signup-calendar" name="calendarType" required><option value="solar">양력</option><option value="lunar">음력</option></select></div>
+            <div class="field"><label for="signup-gender">성별</label><select id="signup-gender" name="gender" required><option value="" selected disabled>선택해주세요</option><option value="male">남성</option><option value="female">여성</option></select><p class="field-error" data-signup-error="gender"></p></div>
+            <div class="field full"><label for="signup-city">사는 곳 / 출생 지역 <small>시 단위까지만</small></label><input id="signup-city" name="city" type="text" required placeholder="예: 서울특별시, 수원시, 인천광역시" /><p class="signup-helper">상세 주소는 받지 않습니다. 사주 계산 및 지역 기준 보정에 필요한 시 단위까지만 입력해주세요.</p><p class="field-error" data-signup-error="city"></p></div>
+          </div>
+        </section>
+
+        <div class="privacy-area">
+          <label class="privacy-check"><input id="signup-privacy" name="privacyConsent" type="checkbox" required /><span><a href="./privacy.html" target="_blank" rel="noopener">개인정보처리방침</a>을 확인했으며, 위 정보를 정월재의 회원관리와 사주·운세 풀이를 위해 사용하는 것에 동의합니다.</span></label>
+          <p class="field-error" data-signup-error="privacyConsent"></p>
+        </div>
+
+        <button class="button button-primary" type="submit">회원등록</button>
+        <p class="signup-status" data-signup-status role="status" aria-live="polite"></p>
+        <p class="signup-note">현재는 화면과 검증 구조를 먼저 준비한 단계이며, Firebase Authentication / Firestore 연결 후 실제 계정 생성과 저장 기능을 활성화할 수 있습니다.</p>
+      </form>
+    </div>
+  </main>
+
+  <footer class="site-footer"><div class="container footer-grid"><div><p class="footer-brand">正月齋 <span>정월재</span></p><p class="footer-copy">삶의 흐름을 읽는 곳.</p></div><p class="footer-note">전통 명리학 기반의 해석 콘텐츠이며 결과를 보장하지 않습니다.</p><p class="footer-copyright">© <span data-year></span> JEONGWOLJAE</p></div></footer>
+  <script src="./app.js" defer></script>
+  <script>
+    (()=>{
+      const form=document.querySelector('[data-signup-form]');
+      if(!form)return;
+      const status=form.querySelector('[data-signup-status]');
+      const birthTime=form.querySelector('#signup-birth-time');
+      const timeUnknown=form.querySelector('#signup-time-unknown');
+      const field=(name)=>form.elements[name];
+      const error=(name,msg='')=>{const el=form.querySelector(`[data-signup-error="${name}"]`);if(el)el.textContent=msg;};
+
+      timeUnknown?.addEventListener('change',()=>{
+        if(timeUnknown.checked){birthTime.value='';birthTime.disabled=true;}else{birthTime.disabled=false;}
+      });
+
+      form.addEventListener('submit',(event)=>{
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        ['userId','password','passwordConfirm','name','birthDate','gender','city','privacyConsent'].forEach(k=>error(k));
+        status.textContent='';
+        let valid=true;
+        const userId=field('userId');
+        const password=field('password');
+        const passwordConfirm=field('passwordConfirm');
+
+        if(!/^[A-Za-z0-9_]{4,20}$/.test(userId.value)){error('userId','아이디는 영문, 숫자, _ 조합 4~20자로 입력해주세요.');valid=false;}
+        if(password.value.length<8){error('password','비밀번호는 8자 이상 입력해주세요.');valid=false;}
+        if(passwordConfirm.value!==password.value){error('passwordConfirm','비밀번호가 서로 일치하지 않습니다.');valid=false;}
+        if(!field('name').value.trim()){error('name','성함을 입력해주세요.');valid=false;}
+        if(!field('birthDate').value){error('birthDate','태어난 날짜를 입력해주세요.');valid=false;}
+        if(!field('gender').value){error('gender','성별을 선택해주세요.');valid=false;}
+        if(!field('city').value.trim()){error('city','시 단위의 지역을 입력해주세요.');valid=false;}
+        if(!field('privacyConsent').checked){error('privacyConsent','개인정보처리방침 동의가 필요합니다.');valid=false;}
+
+        if(!valid){status.textContent='입력 내용을 다시 확인해주세요.';return;}
+        status.textContent='입력 정보가 확인되었습니다. Firebase 연결 후 이 정보로 실제 회원등록이 진행되도록 연결할 수 있습니다.';
+      },true);
+    })();
+  </script>
+</body>
+</html>
