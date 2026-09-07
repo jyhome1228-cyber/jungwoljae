@@ -1,0 +1,35 @@
+:root{--auth-brand:#543a3a;--auth-line:#e8dfdb;--auth-muted:#817673;--auth-soft:#faf8f7}
+
+/* Header auth controls */
+.auth-login-link,.auth-logout-button{display:none;align-items:center;justify-content:center;min-height:38px;padding:0 14px;border:1px solid var(--auth-line);border-radius:10px;background:#fff;color:#543a3a;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
+.auth-login-link:hover,.auth-logout-button:hover{border-color:#bfaeaa;background:#faf8f7}
+@media(min-width:1280px){.auth-login-link,.auth-logout-button{display:inline-flex;grid-row:2;align-self:center}.auth-login-link,.auth-logout-button{grid-column:3;justify-self:end;margin-right:96px}}
+
+/* Mobile auth links */
+.mobile-auth-item{font-weight:700!important;color:#543a3a!important}
+.mobile-auth-logout{width:100%;min-height:52px;padding:0 2px;border:0;border-bottom:1px solid #eee7e3;background:#fff;color:#543a3a;text-align:left;font-size:15px;font-weight:700;cursor:pointer}
+
+/* Login */
+.auth-page{padding:68px 0 96px;background:#fff}
+.auth-shell{display:grid;grid-template-columns:minmax(280px,.8fr) minmax(0,1.2fr);gap:72px;align-items:start}
+.auth-copy{max-width:430px;position:sticky;top:180px}
+.auth-copy h1{margin:0 0 14px!important;font-size:32px!important;line-height:42px!important;color:#2b2524!important}
+.auth-copy>p:not(.eyebrow){font-size:14px!important;line-height:23px!important;color:#776d69!important}
+.auth-card{padding:30px;border:1px solid var(--auth-line);border-radius:18px;background:#fff;box-shadow:0 8px 28px rgba(84,58,58,.045)}
+.auth-card .field{margin-bottom:16px}.auth-card label{display:block;margin-bottom:7px;color:#2b2524;font-size:12px;font-weight:700}
+.auth-card input{width:100%;height:46px;padding:0 13px;border:1px solid #ddd2cd;border-radius:10px;background:#fff;color:#2b2524;font-size:13px;outline:none}
+.auth-card input:focus{border-color:var(--auth-brand);box-shadow:0 0 0 3px rgba(84,58,58,.07)}
+.auth-card .button{width:100%;min-height:46px!important;margin-top:6px;border-radius:10px!important}
+.auth-status{min-height:18px;margin:10px 0 0!important;color:#9a4f48!important;font-size:11px!important;line-height:18px!important}
+.auth-footnote{margin:16px 0 0!important;color:#8b817d!important;font-size:11px!important;line-height:18px!important;text-align:center}
+.auth-footnote a{color:#543a3a;font-weight:700;text-decoration:underline;text-underline-offset:2px}
+
+/* My page */
+.mypage-main{padding:64px 0 96px;background:#fff}
+.mypage-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:28px}.mypage-head h1{margin:0!important;font-size:32px!important;line-height:42px!important;color:#2b2524!important}.mypage-head p{margin:6px 0 0!important;color:#837975!important;font-size:13px!important}
+.mypage-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}.mypage-card{padding:26px;border:1px solid var(--auth-line);border-radius:16px;background:#fff}.mypage-card h2{margin:0 0 18px!important;font-size:18px!important;line-height:26px!important;color:#2b2524!important}.profile-list{display:grid;margin:0}.profile-row{display:grid;grid-template-columns:140px 1fr;gap:16px;padding:13px 0;border-bottom:1px solid #eee7e3}.profile-row:last-child{border-bottom:0}.profile-row dt{color:#938985;font-size:11px;font-weight:600}.profile-row dd{margin:0;color:#2b2524;font-size:13px;font-weight:600}.mypage-links{display:grid;gap:10px}.mypage-link{display:flex;align-items:center;justify-content:space-between;min-height:54px;padding:0 16px;border:1px solid #e8dfdb;border-radius:12px;background:#faf8f7;color:#543a3a;font-size:13px;font-weight:700}.mypage-link::after{content:'→';font-size:13px}.mypage-logout{width:100%;min-height:44px;margin-top:14px;border:1px solid #d8cbc6;border-radius:10px;background:#fff;color:#543a3a;font-size:12px;font-weight:700;cursor:pointer}
+
+.firebase-warning{margin:16px 0 0;padding:12px 14px;border:1px solid #ead9d2;border-radius:10px;background:#fff9f6;color:#8a5f53;font-size:11px;line-height:18px}
+
+@media(max-width:1000px){.auth-shell,.mypage-grid{grid-template-columns:1fr}.auth-copy{position:static;max-width:620px}}
+@media(max-width:767px){.auth-page,.mypage-main{padding:48px 0 72px}.auth-card,.mypage-card{padding:22px 18px;border-radius:14px}.auth-copy h1,.mypage-head h1{font-size:28px!important;line-height:37px!important}.mypage-head{display:block}.profile-row{grid-template-columns:110px 1fr}.auth-login-link,.auth-logout-button{display:none!important}}
