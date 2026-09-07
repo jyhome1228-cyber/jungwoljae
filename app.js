@@ -40,6 +40,11 @@ footerFixLink.rel = 'stylesheet';
 footerFixLink.href = './footer-fix.css?v=20260907-1548';
 document.head.appendChild(footerFixLink);
 
+const mobileLink = document.createElement('link');
+mobileLink.rel = 'stylesheet';
+mobileLink.href = './site-mobile.css?v=20260907-2018';
+document.head.appendChild(mobileLink);
+
 if (document.body?.classList.contains('about-page')) {
   const aboutLink = document.createElement('link');
   aboutLink.rel = 'stylesheet';
