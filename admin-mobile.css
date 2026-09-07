@@ -1,0 +1,125 @@
+/* Jungwoljae Admin · mobile optimization */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{min-width:0;overflow-x:hidden}
+.admin-header{padding-top:env(safe-area-inset-top)}
+.admin-main{padding-bottom:calc(72px + env(safe-area-inset-bottom))}
+.admin-header-inner,.admin-shell{min-width:0}
+.admin-panel,.admin-metric,.admin-notice,.admin-pass-card{min-width:0}
+.admin-table-wrap{-webkit-overflow-scrolling:touch}
+
+@media(max-width:900px){
+  .admin-header-inner,.admin-shell{width:min(calc(100% - 32px),1440px)}
+  .admin-header-inner{min-height:64px;gap:12px}
+  .admin-brand{gap:9px;min-width:0}
+  .admin-brand img{width:30px;height:30px;flex:0 0 auto}
+  .admin-brand strong{font-size:13px}
+  .admin-brand small{font-size:8px}
+  .admin-header-actions{gap:6px;flex:0 0 auto}
+  .admin-ghost,.admin-dark{min-height:36px;padding:0 11px;border-radius:9px;font-size:10px}
+
+  .admin-main{padding-top:30px}
+  .admin-title-row{align-items:flex-start}
+  .admin-title-row h1{font-size:28px;line-height:37px}
+  .admin-title-row>div>p:not(.admin-eyebrow){font-size:12px;line-height:20px}
+
+  .admin-metrics{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+  .admin-metric{min-height:116px;padding:17px}
+  .admin-metric strong{font-size:28px}
+
+  .admin-two-column{grid-template-columns:1fr;gap:0}
+  .admin-panel{padding:20px}
+  .traffic-chart{min-width:0}
+}
+
+@media(max-width:640px){
+  .admin-header-inner,.admin-shell{width:min(calc(100% - 24px),1440px)}
+  .admin-header-inner{min-height:58px}
+  .admin-brand span small{display:none}
+  .admin-brand img{width:28px;height:28px}
+  .admin-brand strong{font-size:12px}
+  .admin-header-actions .admin-ghost:first-child{display:none}
+  .admin-header-actions{gap:5px}
+  .admin-ghost,.admin-dark{min-height:34px;padding:0 9px;font-size:9px}
+
+  .admin-main{padding-top:22px}
+  .admin-title-row{display:block;margin-bottom:18px}
+  .admin-title-row h1{font-size:24px;line-height:32px;letter-spacing:-.035em}
+  .admin-title-row>div>p:not(.admin-eyebrow){margin-top:6px;font-size:11px;line-height:18px}
+  .admin-updated{margin-top:10px;text-align:left;grid-template-columns:auto 1fr;align-items:center;gap:8px}
+  .admin-updated span,.admin-updated strong{font-size:9px}
+
+  .admin-metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:12px}
+  .admin-metric{min-height:104px;padding:14px;border-radius:13px}
+  .admin-metric span{font-size:9px;line-height:14px}
+  .admin-metric strong{margin-top:10px;font-size:26px}
+  .admin-metric small{margin-top:7px;font-size:8px;line-height:13px}
+
+  .admin-panel{margin-bottom:12px;padding:16px 13px;border-radius:15px}
+  .admin-panel-head{margin-bottom:14px;gap:10px;align-items:center}
+  .admin-panel-head h2{font-size:16px;line-height:23px}
+  .admin-eyebrow{font-size:8px;margin-bottom:4px}
+  .admin-soft-badge{min-height:26px;padding:0 8px;font-size:8px}
+  .admin-caption{font-size:8px;line-height:14px}
+
+  /* 7-day chart: keep all days readable without crushing labels */
+  .traffic-chart{display:grid;grid-template-columns:repeat(7,minmax(42px,1fr));gap:5px;min-height:180px;height:180px;overflow-x:auto;overscroll-behavior-x:contain;padding:8px 0 2px;scrollbar-width:none}
+  .traffic-chart::-webkit-scrollbar{display:none}
+  .traffic-day{height:164px;gap:6px}
+  .traffic-bar-wrap{border-radius:8px}
+  .traffic-bar{width:58%}
+  .traffic-label strong{font-size:9px}
+  .traffic-label span{font-size:7px;white-space:nowrap}
+
+  .service-usage{gap:10px}
+  .service-row{grid-template-columns:76px minmax(0,1fr) 30px;gap:7px}
+  .service-row span{font-size:9px;line-height:14px}
+  .service-track{height:7px}
+  .service-row strong{font-size:9px}
+
+  /* Page table becomes a compact 3-column mobile table */
+  .admin-table-wrap{overflow:visible;border-radius:10px}
+  .admin-table{min-width:0;width:100%;table-layout:fixed}
+  .admin-table th,.admin-table td{padding:11px 9px;font-size:9px;line-height:14px;word-break:keep-all}
+  .admin-table th{position:static;font-size:8px}
+  .admin-table th:nth-child(1),.admin-table td:nth-child(1){width:50%}
+  .admin-table th:nth-child(2),.admin-table td:nth-child(2){display:none}
+  .admin-table th:nth-child(3),.admin-table td:nth-child(3){width:25%}
+  .admin-table th:nth-child(4),.admin-table td:nth-child(4){width:25%}
+  .admin-table td strong{font-size:10px;line-height:15px}
+
+  .admin-review-list{gap:8px}
+  .admin-review{grid-template-columns:1fr;gap:8px;padding:13px;border-radius:11px}
+  .admin-review-meta{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .admin-review-meta span{font-size:9px}
+  .admin-review-meta small{margin-top:0;font-size:8px;white-space:nowrap}
+  .admin-review p{font-size:10px;line-height:17px}
+  .admin-review-actions{justify-content:flex-start}
+  .admin-review-rating{font-size:9px}
+  .admin-text-link{font-size:9px;white-space:nowrap}
+
+  .admin-notice{padding:15px 14px;border-radius:12px}
+  .admin-notice strong{font-size:10px}
+  .admin-notice p{font-size:9px;line-height:16px}
+
+  /* Passcode gate */
+  .admin-pass-gate{min-height:calc(100svh - 58px - env(safe-area-inset-top));padding:24px 12px 40px;align-items:center}
+  .admin-pass-card{width:100%;padding:30px 20px;border-radius:18px;box-shadow:none}
+  .admin-pass-card img{width:46px;height:46px}
+  .admin-pass-eyebrow{margin-top:13px;font-size:8px}
+  .admin-pass-card h1{font-size:21px;line-height:29px}
+  .admin-pass-card>p:not(.admin-pass-eyebrow){margin:8px 0 18px;font-size:11px;line-height:18px}
+  .admin-pass-input{height:54px;border-radius:11px;font-size:21px}
+  .admin-pass-button{height:48px;border-radius:11px;font-size:11px}
+}
+
+@media(max-width:390px){
+  .admin-header-inner,.admin-shell{width:min(calc(100% - 20px),1440px)}
+  .admin-brand strong{font-size:11px}
+  .admin-ghost,.admin-dark{padding:0 8px}
+  .admin-metrics{gap:6px}
+  .admin-metric{min-height:98px;padding:12px}
+  .admin-metric strong{font-size:23px}
+  .admin-panel{padding:14px 11px}
+  .service-row{grid-template-columns:68px minmax(0,1fr) 28px}
+  .traffic-chart{grid-template-columns:repeat(7,42px)}
+}
