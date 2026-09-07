@@ -102,7 +102,6 @@ form.addEventListener('submit',(event)=>{
     isLeapMonth:Boolean(form.elements.isLeapMonth?.checked),
     gender:form.elements.gender.value,
     city:form.elements.city.value.trim(),
-    question:form.elements.question.value.trim().slice(0,300),
     createdAt:new Date().toISOString()
   };
   sessionStorage.setItem('jungwoljae_ohaeng_input',JSON.stringify(payload));
