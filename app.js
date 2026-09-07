@@ -174,6 +174,11 @@ if(currentFile.endsWith('-result.html')){
   realismScript.src='./reading-realism.js?v=20260907-2132';
   realismScript.defer=true;
   document.body.appendChild(realismScript);
+
+  const detailScript=document.createElement('script');
+  detailScript.src='./reading-detail.js?v=20260907-2133';
+  detailScript.defer=true;
+  document.body.appendChild(detailScript);
 }
 
 function fieldError(form,name,message=''){
