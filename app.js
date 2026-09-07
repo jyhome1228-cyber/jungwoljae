@@ -20,6 +20,8 @@ function applyBrandFavicon(){
 }
 applyBrandFavicon();
 
+const currentFile = location.pathname.split('/').pop() || 'index.html';
+
 const themeLink = document.createElement('link');
 themeLink.rel = 'stylesheet';
 themeLink.href = './theme-dark.css';
@@ -44,6 +46,16 @@ const mobileLink = document.createElement('link');
 mobileLink.rel = 'stylesheet';
 mobileLink.href = './site-mobile.css?v=20260907-2018';
 document.head.appendChild(mobileLink);
+
+const uiFixLink = document.createElement('link');
+uiFixLink.rel = 'stylesheet';
+uiFixLink.href = './ui-fixes.css?v=20260907-2130';
+document.head.appendChild(uiFixLink);
+
+const realismLink = document.createElement('link');
+realismLink.rel = 'stylesheet';
+realismLink.href = './reading-realism.css?v=20260907-2130';
+document.head.appendChild(realismLink);
 
 if (document.body?.classList.contains('about-page')) {
   const aboutLink = document.createElement('link');
@@ -73,11 +85,10 @@ function normalizeNavigation(){
     ['./reviews.html','후기'],
     ['./about.html','소개']
   ];
-  const currentPath = location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('.desktop-nav, .mobile-menu nav').forEach((nav)=>{
     nav.innerHTML = primaryLinks.map(([href,label])=>{
       const file = href.replace('./','');
-      const current = currentPath === file ? ' aria-current="page"' : '';
+      const current = currentFile === file ? ' aria-current="page"' : '';
       return `<a href="${href}"${current}>${label}</a>`;
     }).join('');
   });
@@ -157,6 +168,13 @@ const analyticsScript=document.createElement('script');
 analyticsScript.type='module';
 analyticsScript.src='./analytics.js?v=20260907-01';
 document.body.appendChild(analyticsScript);
+
+if(currentFile.endsWith('-result.html')){
+  const realismScript=document.createElement('script');
+  realismScript.src='./reading-realism.js?v=20260907-2130';
+  realismScript.defer=true;
+  document.body.appendChild(realismScript);
+}
 
 function fieldError(form,name,message=''){
   const node=form.querySelector(`[data-error-for="${name}"]`);
