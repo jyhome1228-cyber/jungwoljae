@@ -13,6 +13,11 @@ polishLink.rel = 'stylesheet';
 polishLink.href = './theme-polish.css';
 document.head.appendChild(polishLink);
 
+const footerFixLink = document.createElement('link');
+footerFixLink.rel = 'stylesheet';
+footerFixLink.href = './footer-fix.css';
+document.head.appendChild(footerFixLink);
+
 if (document.body?.classList.contains('about-page')) {
   const aboutLink = document.createElement('link');
   aboutLink.rel = 'stylesheet';
@@ -26,10 +31,6 @@ if (themeMeta) themeMeta.setAttribute('content', '#ffffff');
 function applyBrandLogo(){
   document.querySelectorAll('.brand').forEach((brand)=>{
     brand.innerHTML = '<img class="brand-logo" src="./logo.svg" alt="" aria-hidden="true"><span class="brand-name">정월재</span>';
-  });
-
-  document.querySelectorAll('.footer-brand').forEach((brand)=>{
-    brand.innerHTML = '<span class="footer-logo-wrap"><img class="footer-logo" src="./logo.svg" alt="" aria-hidden="true"></span><span class="footer-brand-name">정월재</span>';
   });
 }
 applyBrandLogo();
@@ -165,29 +166,6 @@ if(readingForm){
   syncService();
 }
 
-function addHomeServiceVisuals(){
-  if(!document.body || !document.querySelector('.catalog-section')) return;
-  if(document.querySelector('.home-service-visuals')) return;
-
-  const items=[
-    ['01','종합 사주','기질과 삶의 큰 구조','./saju.html','https://nineworksdatabase.planus253.workers.dev/cdn/test/20260907-060437-1-6ea6ea3f.webp'],
-    ['02','오행 분석','목·화·토·금·수의 균형','./ohaeng.html','https://nineworksdatabase.planus253.workers.dev/cdn/test/20260907-060438-2-b3ce5dc2.webp'],
-    ['03','오늘의 운세','오늘 들어오는 기운의 흐름','./fortune.html','https://nineworksdatabase.planus253.workers.dev/cdn/test/20260907-060438-3-2cdbfb70.webp'],
-    ['04','연애와 인연','관계를 맺는 방식과 반복 패턴','./relationship.html','https://nineworksdatabase.planus253.workers.dev/cdn/test/20260907-060439-4-e2399ab7.webp'],
-    ['05','궁합','두 사람의 흐름과 관계의 특징','./compatibility.html','https://nineworksdatabase.planus253.workers.dev/cdn/test/20260907-060440-5-677398ac.webp'],
-    ['06','일과 재물','업무 성향과 재물 흐름','./work-money.html','https://nineworksdatabase.planus253.workers.dev/cdn/test/20260907-060440-6-ef49b21c.webp'],
-    ['07','정월록','내가 본 풀이를 한곳에 기록','./archive.html','https://nineworksdatabase.planus253.workers.dev/cdn/test/20260907-060441-7-9ce562e0.webp']
-  ];
-
-  const section=document.createElement('section');
-  section.className='home-service-visuals';
-  section.innerHTML=`<div class="container"><div class="section-head"><p class="section-label">SERVICES</p><h2>보고 싶은 흐름을 골라보세요.</h2><p>필요한 주제부터 가볍게 시작하고, 같은 사주 원본을 기준으로 이어서 볼 수 있습니다.</p></div><div class="service-visual-grid">${items.map(([n,title,desc,href,img])=>`<a class="service-visual-card" href="${href}" style="background-image:url('${img}')"><span class="visual-index">${n}</span><div><h3>${title}</h3><p>${desc}</p></div></a>`).join('')}</div></div>`;
-
-  const catalog=document.querySelector('.catalog-section');
-  catalog.parentNode.insertBefore(section,catalog);
-}
-addHomeServiceVisuals();
-
 if(document.querySelector('#reviews') && document.body.dataset.reviewsPage!=='true'){
   const reviewScript=document.createElement('script');
   reviewScript.src='./reviews.js';
@@ -195,11 +173,6 @@ if(document.querySelector('#reviews') && document.body.dataset.reviewsPage!=='tr
   document.body.appendChild(reviewScript);
 }
 
-const signupForm=document.querySelector('[data-signup-form]');
-if(signupForm){
-  const status=signupForm.querySelector('[data-signup-status]');
-  signupForm.addEventListener('submit',(event)=>{
-    event.preventDefault();
-    if(status) status.textContent='회원등록 화면은 준비되었습니다. Firebase Authentication 연결 후 실제 계정 생성 기능을 활성화할 수 있습니다.';
-  });
-}
+const footerScript=document.createElement('script');
+footerScript.src='./footer.js';
+document.body.appendChild(footerScript);
