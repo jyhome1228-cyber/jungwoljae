@@ -24,14 +24,6 @@ const elementInfo={
   water:{key:'수',hanja:'水',name:'수',keywords:'관찰 · 유연 · 저장',base:'흐름을 읽고 멈춰서 관찰하며 정보를 축적하는 힘입니다.',strong:'상황을 오래 관찰하고 여러 가능성을 비교하며 유연하게 움직이는 힘이 잘 쓰입니다. 과해지면 생각이 길어져 실행 시점을 놓칠 수 있습니다.',weak:'충분히 살핀 뒤 움직이기보다 먼저 실행하는 쪽이 편할 수 있습니다. 기록하고 한 번 더 검토하는 시간을 의도적으로 두는 것이 균형에 도움이 됩니다.'}
 };
 
-const guidanceByElement={
-  wood:{action:'새로운 방향 하나를 정하고 작은 시작을 실제 일정으로 옮기는 것',caution:'시작만 늘리기보다 무엇을 키울지 한 방향을 정하는 것'},
-  fire:{action:'생각을 밖으로 표현하고 실행 시점을 분명하게 정하는 것',caution:'감정과 속도에 밀려 너무 빨리 결정하지 않는 것'},
-  earth:{action:'유지할 수 있는 구조와 반복 루틴을 먼저 만드는 것',caution:'익숙함만 지키다가 변화 시점을 놓치지 않는 것'},
-  metal:{action:'선택지를 줄이고 우선순위와 중단 기준을 명확하게 정하는 것',caution:'완벽한 기준을 만들 때까지 결정을 미루지 않는 것'},
-  water:{action:'정보를 충분히 모으고 기록한 뒤 한 번 더 검토하는 것',caution:'생각을 너무 오래 끌지 않도록 실행 날짜를 정하는 것'}
-};
-
 const stemMap={갑:'wood',을:'wood',병:'fire',정:'fire',무:'earth',기:'earth',경:'metal',신:'metal',임:'water',계:'water'};
 const branchMap={인:'wood',묘:'wood',사:'fire',오:'fire',진:'earth',술:'earth',축:'earth',미:'earth',신:'metal',유:'metal',자:'water',해:'water'};
 const pillarLabels={year:'연주',month:'월주',day:'일주',hour:'시주'};
@@ -107,45 +99,22 @@ function lifeCards(data){
     ['04','돈과 생활',`재물의 많고 적음을 오행 하나로 단정할 수는 없습니다. 다만 생활 습관에서는 ${s.name}의 방식이 자연스럽고 ${w.name}의 역할이 약해질 수 있으므로, 지출·저축·계획을 감각보다 기록과 기준으로 남기는 것이 유리합니다.`]
   ];
 }
-
-function questionInsight(data){
-  const q=(input.question||'').trim();
-  const sKey=data.strongest[0],wKey=data.weakest;
-  const s=elementInfo[sKey],w=elementInfo[wKey],guide=guidanceByElement[wKey];
-  const isWork=/일|회사|직장|사업|창업|퇴사|이직|업무|취업|시험|합격/.test(q);
-  const isRelation=/연애|관계|사람|인연|결혼|재회|헤어|남자|여자|친구/.test(q);
-  const isMoney=/돈|재물|투자|수입|지출|매출|부자|재산/.test(q);
-  const isFuture=/미래|앞으로|향후|장래|운명|인생|어떻게 될|어떻게될/.test(q);
-  let domain=isWork?'일과 선택':isRelation?'관계':isMoney?'재물과 생활':isFuture?'앞으로의 흐름':'현재 고민';
-  let direct='';
-
-  if(isWork && /퇴사|이직|옮기|그만/.test(q)){
-    direct=`오행 기준으로는 ‘준비 없이 바로 움직이기’보다 ${guide.action}을 먼저 만든 뒤 이동하는 쪽에 더 무게가 실립니다. 지금 질문이 퇴사나 이직이라면, 결론부터 내리기보다 다음 선택의 조건을 구체화한 뒤 움직이는 편이 더 안정적입니다.`;
-  }else if(isWork && /사업|창업/.test(q)){
-    direct=`바로 크게 벌이기보다 작게 시작해 검증할 수 있는 구조를 먼저 만드는 쪽이 더 맞습니다. ${guide.action}을 기준으로 준비가 실제 행동으로 이어질 때 오행의 균형이 좋아집니다.`;
-  }else if(isRelation && /재회|헤어/.test(q)){
-    direct=`관계를 되돌리거나 끝내는 결론을 서두르기보다 ${guide.action}을 먼저 해보는 쪽이 더 맞습니다. 상대의 반응보다 내가 반복하는 관계 방식이 달라질 수 있는지를 먼저 확인해보는 것이 좋습니다.`;
-  }else if(isRelation){
-    direct=`관계에서는 상대를 맞추려 하기보다 ${guide.action}을 통해 내 기준과 속도를 먼저 분명히 하는 쪽이 더 안정적입니다. 현재 오행 구조에서는 관계의 결과보다 관계를 다루는 방식이 중요하게 읽힙니다.`;
-  }else if(isMoney && /투자|재산|돈|재물/.test(q)){
-    direct=`한 번에 크게 움직이는 선택보다 ${guide.action}을 먼저 적용하는 쪽이 더 안정적입니다. 재물 문제에서는 감각보다 기록과 기준을 남긴 뒤 결정하는 방식에 더 무게가 실립니다.`;
-  }else if(isFuture){
-    direct=`${input.name}님의 오행 구조만 놓고 보면, 앞으로는 ${s.name}의 강점을 그대로 쓰면서 ${w.name}의 역할을 의식적으로 키우는 방향이 더 좋습니다. 특히 ${guide.action}을 생활에 넣을수록 앞으로의 선택이 한쪽으로 치우치지 않고 더 안정적으로 이어질 가능성이 큽니다.`;
-  }else{
-    direct=`지금 고민에서는 ${guide.action}을 먼저 해본 뒤 결정하는 쪽이 더 안정적입니다. 현재 오행 구조에서는 익숙한 ${s.name}의 방식만 밀어붙이기보다 ${w.name}의 역할을 의식적으로 넣는 것이 핵심입니다.`;
-  }
-
-  const detail=`${domain}의 관점에서 보면, ${input.name}님은 ${s.name}의 방식인 ‘${s.keywords}’을 먼저 사용하는 편으로 읽힙니다. 이 힘은 현재 고민을 처리하는 데 분명한 장점이 있지만, 반복해서 같은 방식만 쓰면 판단이 한쪽으로 기울 수 있습니다. 그래서 상대적으로 약한 ${w.name}의 역할인 ‘${w.keywords}’을 의도적으로 보완하는 것이 중요합니다. 구체적으로는 ${guide.action}, 그리고 ${guide.caution}이 현재 명식의 균형과 가장 잘 맞는 선택 방식입니다.`;
-  return {domain,direct,detail};
+function totalSummary(data){
+  const first=elementInfo[data.strongest[0]],second=elementInfo[data.strongest[1]],weak=elementInfo[data.weakest];
+  const balance=data.balance>=75?'다섯 기운의 편차가 비교적 크지 않은 편입니다.':data.balance>=55?'강한 기운과 약한 기운의 차이가 어느 정도 드러나는 편입니다.':'몇몇 기운에 힘이 몰려 있어 균형을 의식적으로 만드는 것이 중요한 구조입니다.';
+  return {
+    highlight:`${input.name}님은 ${first.name}(${first.hanja})와 ${second.name}(${second.hanja})의 힘을 자연스럽게 쓰고, ${weak.name}(${weak.hanja})의 역할을 생활 속에서 보완할수록 전체 흐름이 안정되는 구조로 읽힙니다.`,
+    p1:`전체적으로 보면 ${first.keywords}과 ${second.keywords}의 성향이 비교적 빠르게 드러날 가능성이 큽니다. 잘하는 방식이 분명한 만큼 같은 방식만 반복하면 판단과 행동이 한쪽으로 기울 수 있으므로, 이미 강한 힘을 더 키우는 것보다 약한 ${weak.name}의 기능을 실제 생활 습관으로 넣어주는 것이 중요합니다.`,
+    p2:`${balance} 오행 분석은 무엇이 좋고 나쁜지를 정하는 평가표가 아니라, 내가 자연스럽게 쓰는 힘과 놓치기 쉬운 역할을 확인하는 기준입니다. 따라서 중요한 선택에서는 익숙한 반응만 밀어붙이기보다 ${weak.keywords}의 관점을 한 번 더 거치는 방식이 ${input.name}님의 오행 구조에 더 잘 맞습니다.`
+  };
 }
-
 function evidence(data){
   const visible=data.timeKnown?'연·월·일·시 네 기둥의 여덟 글자':'출생시간 미입력으로 연·월·일 세 기둥만';
   const pillars=Object.entries(data.pillars).filter(([k])=>data.timeKnown||k!=='hour').map(([k,v])=>`<span class="pillar-chip">${pillarLabels[k]} ${v||'—'}</span>`).join('');
   return `<div class="pillar-row">${pillars}</div><div class="evidence-grid"><div class="evidence-item"><strong>명식 산출</strong><p>한국 만세력 계산 라이브러리의 절기·음양력 기준으로 연주·월주·일주${data.timeKnown?'·시주':''}를 계산했습니다.</p></div><div class="evidence-item"><strong>오행 원본</strong><p>${visible}의 천간·지지를 목·화·토·금·수로 분류했습니다.</p></div><div class="evidence-item"><strong>계절 가중</strong><p>월지의 오행에 추가 가중을 적용해 계절의 영향이 단순 개수보다 조금 더 반영되도록 했습니다.</p></div><div class="evidence-item"><strong>해석 범위</strong><p>현재 오행 리포트는 보이는 오행의 상대 강도와 관계를 중심으로 한 1차 분석입니다. 용신·격국 등 학파별 판단은 임의로 추가하지 않습니다.</p></div></div>`;
 }
-
 function reportText(data){
+  const total=totalSummary(data);
   const lines=['정월재 오행 분석 리포트',`대상: ${input.name}`,`기준: ${input.birthDate} · ${input.calendarType==='lunar'?'음력':'양력'} · ${data.timeKnown?input.birthTime:'출생시간 모름'}`,''];
   lines.push('1. 오행 요약',buildSummary(data),'');
   lines.push('2. 오행 상대 강도');
@@ -154,17 +123,15 @@ function reportText(data){
   lines.push('4. 의식적으로 균형을 잡을 부분',elementInfo[data.weakest].weak,'');
   lines.push('5. 오행의 흐름',buildFlow(data),'','6. 생활 해석');
   lifeCards(data).forEach(x=>lines.push(`${x[1]}: ${x[2]}`));
-  lines.push('');
-  if(input.question){
-    const qi=questionInsight(data);
-    lines.push('7. 남겨주신 질문',input.question,'정월재의 답',qi.direct,'왜 이렇게 읽었나요',qi.detail,'');
-  }
+  lines.push('','7. 총 요약',total.highlight,total.p1,total.p2,'');
   lines.push('핵심 정리',`잘 쓰이는 힘: ${elementInfo[data.strongest[0]].name} · ${elementInfo[data.strongest[1]].name}`,`균형이 필요한 힘: ${elementInfo[data.weakest].name}`,`오행 균형 지표: ${data.balance}/100`,'','※ 본 리포트는 전통 명리학 이론을 바탕으로 한 해석 콘텐츠이며 미래의 특정 결과를 보장하지 않습니다.');
   return lines.join('\n');
 }
 
 function render(data){
+  const total=totalSummary(data);
   $('[data-name]').textContent=input.name;
+  $('[data-summary-name]').textContent=input.name;
   $('[data-summary]').textContent=buildSummary(data);
   $('[data-meta]').innerHTML=`<span>${input.birthDate}</span><span>${input.calendarType==='lunar'?'음력':'양력'}</span><span>${data.timeKnown?input.birthTime:'출생시간 미입력'}</span><span>균형 지표 ${data.balance}/100</span>`;
   $('[data-element-chart]').innerHTML=data.order.map(k=>`<div class="element-bar"><div class="label"><span class="hanja">${elementInfo[k].hanja}</span>${elementInfo[k].name}</div><div class="bar-track"><div class="bar-fill" style="width:${Math.min(100,data.pct[k]*3.4)}%"></div></div><div class="score">${data.pct[k]}%</div></div>`).join('');
@@ -173,19 +140,13 @@ function render(data){
   $('[data-weak-text]').innerHTML=buildWeak(data);
   $('[data-flow-text]').textContent=buildFlow(data);
   $('[data-life-grid]').innerHTML=lifeCards(data).map(([n,t,p])=>`<article class="life-card"><span>${n}</span><h3>${t}</h3><p>${p}</p></article>`).join('');
-  if(input.question){
-    const sec=$('[data-question-section]'),qi=questionInsight(data);
-    sec.hidden=false;
-    $('[data-question]').textContent=input.question;
-    $('[data-question-direct]').textContent=qi.direct;
-    $('[data-question-answer]').textContent=qi.detail;
-  }
   const keyItems=[
     ['01','잘 쓰이고 있는 힘',`${elementInfo[data.strongest[0]].name} · ${elementInfo[data.strongest[1]].name}`,'이미 자연스럽게 쓰이는 힘은 장점이지만 과해질 때의 부담도 함께 살펴봅니다.'],
     ['02','균형이 필요한 힘',elementInfo[data.weakest].name,`${elementInfo[data.weakest].keywords}의 역할을 생활 속 구조로 보완해보세요.`],
     ['03','전체 균형',`${data.balance}/100`,'점수가 높고 낮음의 길흉이 아니라 다섯 기운의 편차를 보기 위한 참고 지표입니다.']
   ];
   $('[data-key-grid]').innerHTML=keyItems.map(([n,l,v,p])=>`<article class="key-card"><span>${n} · ${l}</span><strong>${v}</strong><p>${p}</p></article>`).join('');
+  $('[data-total-summary]').innerHTML=`<strong class="total-summary-highlight">${total.highlight}</strong><p>${total.p1}</p><p>${total.p2}</p>`;
   $('[data-evidence]').innerHTML=evidence(data);
 }
 
@@ -219,20 +180,18 @@ saveBtn.addEventListener('click',async()=>{
   saveBtn.disabled=true;
   saveBtn.textContent='저장 중…';
   try{
-    const qi=input.question?questionInsight(reportData):null;
+    const total=totalSummary(reportData);
     const data={
       type:'ohaeng',
       title:`${input.name}님의 오행 분석`,
       input,
       summary:buildSummary(reportData),
+      totalSummary:`${total.highlight} ${total.p1} ${total.p2}`,
       pillars:reportData.pillars,
       elements:reportData.pct,
       strongest:reportData.strongest.map(k=>elementInfo[k].name),
       weakest:elementInfo[reportData.weakest].name,
       balanceIndex:reportData.balance,
-      question:input.question||'',
-      questionDirect:qi?.direct||'',
-      questionDetail:qi?.detail||'',
       reportText:reportText(reportData),
       createdAt:serverTimestamp()
     };
