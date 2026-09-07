@@ -9,19 +9,35 @@ service cloud.firestore {
       return signedIn() && request.auth.uid == uid;
     }
 
-    // Private member profile. Each user can only access their own document.
+    function isAdmin() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    // Admin membership is created manually in Firebase Console.
+    // The browser can never grant itself admin permission.
+    match /admins/{uid} {
+      allow get: if signedIn() && request.auth.uid == uid;
+      allow list: if false;
+      allow write: if false;
+    }
+
+    // Private member profile. Owners may manage their own document;
+    // admins can read profiles for service-operation statistics only.
     match /users/{uid} {
-      allow create, read, update, delete: if isOwner(uid);
+      allow create, update, delete: if isOwner(uid);
+      allow read: if isOwner(uid) || isAdmin();
 
       match /readings/{readingId} {
-        allow create, read, update, delete: if isOwner(uid);
+        allow create, update, delete: if isOwner(uid);
+        allow read: if isOwner(uid) || isAdmin();
       }
     }
 
     // Username reservation used to guarantee uniqueness.
     match /usernames/{username} {
-      allow get: if signedIn();
-      allow list: if false;
+      allow get: if signedIn() || isAdmin();
+      allow list: if isAdmin();
       allow create: if signedIn()
                     && request.resource.data.keys().hasOnly(['uid', 'createdAt'])
                     && request.resource.data.uid == request.auth.uid;
@@ -29,8 +45,8 @@ service cloud.firestore {
       allow delete: if signedIn() && resource.data.uid == request.auth.uid;
     }
 
-    // Reviews are public, but only signed-in members may create them.
-    // Real names/emails are never stored in a review document.
+    // Reviews are public. Signed-in members may create their own review.
+    // Admins may delete a review for moderation if needed.
     match /reviews/{reviewId} {
       allow read: if true;
       allow create: if signedIn()
@@ -44,7 +60,36 @@ service cloud.firestore {
                     && request.resource.data.content.size() >= 10
                     && request.resource.data.content.size() <= 500;
       allow update: if false;
-      allow delete: if signedIn() && resource.data.uid == request.auth.uid;
+      allow delete: if isAdmin() || (signedIn() && resource.data.uid == request.auth.uid);
+    }
+
+    // Anonymous operational analytics.
+    // No IP, user-agent, referrer or real member identity is stored here.
+    match /analytics_daily/{dateKey} {
+      allow read: if isAdmin();
+      allow create: if request.resource.data.keys().hasOnly(['pageViews', 'updatedAt'])
+                    && request.resource.data.pageViews == 1;
+      allow update: if request.resource.data.keys().hasOnly(['pageViews', 'updatedAt'])
+                    && request.resource.data.pageViews == resource.data.pageViews + 1;
+      allow delete: if false;
+
+      match /visitors/{visitorId} {
+        allow read: if isAdmin();
+        allow create: if request.resource.data.keys().hasOnly(['visitorId', 'createdAt'])
+                      && request.resource.data.visitorId == visitorId;
+        allow update, delete: if false;
+      }
+
+      match /pages/{pageId} {
+        allow read: if isAdmin();
+        allow create: if request.resource.data.keys().hasOnly(['path', 'label', 'pageViews', 'updatedAt'])
+                      && request.resource.data.pageViews == 1;
+        allow update: if request.resource.data.keys().hasOnly(['path', 'label', 'pageViews', 'updatedAt'])
+                      && request.resource.data.path == resource.data.path
+                      && request.resource.data.label == resource.data.label
+                      && request.resource.data.pageViews == resource.data.pageViews + 1;
+        allow delete: if false;
+      }
     }
   }
 }
