@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#543a3a" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>운영 대시보드 — 정월재</title>
+  <link rel="icon" type="image/svg+xml" href="./logo.svg" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+  <link rel="stylesheet" href="./admin.css?v=20260907-01" />
+</head>
+<body>
+  <header class="admin-header">
+    <div class="admin-header-inner">
+      <a class="admin-brand" href="./admin.html"><img src="./logo.svg" alt="" /><span><strong>정월재</strong><small>ADMIN CONSOLE</small></span></a>
+      <div class="admin-header-actions">
+        <a href="./index.html" class="admin-ghost">사이트 보기</a>
+        <button type="button" class="admin-ghost" data-admin-refresh>새로고침</button>
+        <button type="button" class="admin-dark" data-admin-logout>로그아웃</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    <section class="admin-gate" data-admin-gate>
+      <div class="admin-gate-card">
+        <img src="./logo.svg" alt="" />
+        <p>JEONGWOLJAE ADMIN</p>
+        <h1>운영 권한을 확인하고 있습니다.</h1>
+        <span data-admin-gate-message>Firebase 로그인 상태를 확인하는 중입니다.</span>
+      </div>
+    </section>
+
+    <div class="admin-shell" data-admin-dashboard hidden>
+      <div class="admin-title-row">
+        <div><p class="admin-eyebrow">OVERVIEW</p><h1>정월재 운영 대시보드</h1><p>회원 이용량, 서비스별 분석 횟수, 후기와 익명 방문 통계를 한곳에서 확인합니다.</p></div>
+        <div class="admin-updated"><span>마지막 집계</span><strong data-admin-updated>—</strong></div>
+      </div>
+
+      <section class="admin-metrics">
+        <article class="admin-metric"><span>오늘 페이지뷰</span><strong data-metric-pageviews>—</strong><small>페이지를 연 총 횟수</small></article>
+        <article class="admin-metric accent"><span>오늘 방문자</span><strong data-metric-visitors>—</strong><small>브라우저 기준 일일 순방문</small></article>
+        <article class="admin-metric"><span>전체 회원</span><strong data-metric-users>—</strong><small data-metric-users-note>가입 회원 수</small></article>
+        <article class="admin-metric"><span>저장된 분석</span><strong data-metric-readings>—</strong><small>마이페이지·정월록 저장</small></article>
+        <article class="admin-metric"><span>누적 후기</span><strong data-metric-reviews>—</strong><small>실제 Firebase 후기</small></article>
+        <article class="admin-metric"><span>후기 평균</span><strong data-metric-rating>—</strong><small>5점 만점</small></article>
+      </section>
+
+      <div class="admin-two-column">
+        <section class="admin-panel">
+          <div class="admin-panel-head"><div><p class="admin-eyebrow">TRAFFIC · 7 DAYS</p><h2>최근 7일 방문 추이</h2></div></div>
+          <div class="traffic-chart" data-traffic-chart></div>
+          <p class="admin-caption">방문자는 IP가 아니라 브라우저에 생성한 익명 식별값을 기준으로 집계합니다.</p>
+        </section>
+
+        <section class="admin-panel">
+          <div class="admin-panel-head"><div><p class="admin-eyebrow">SERVICE USAGE</p><h2>서비스 이용 비중</h2></div></div>
+          <div class="service-usage" data-service-usage></div>
+        </section>
+      </div>
+
+      <section class="admin-panel">
+        <div class="admin-panel-head"><div><p class="admin-eyebrow">TODAY'S PAGES</p><h2>오늘 많이 본 페이지</h2></div><span class="admin-soft-badge" data-pages-total>—</span></div>
+        <div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>페이지</th><th>경로</th><th class="num">페이지뷰</th><th class="num">비중</th></tr></thead><tbody data-page-table><tr><td colspan="4">불러오는 중…</td></tr></tbody></table></div>
+      </section>
+
+      <section class="admin-panel">
+        <div class="admin-panel-head admin-member-head"><div><p class="admin-eyebrow">MEMBERS</p><h2>회원별 이용 현황</h2></div><input class="admin-search" type="search" placeholder="아이디·성함·이메일 검색" data-member-search /></div>
+        <div class="admin-table-wrap"><table class="admin-table member-table"><thead><tr><th>회원</th><th>가입일</th><th class="num">총 분석</th><th>주 이용 서비스</th><th>최근 이용</th></tr></thead><tbody data-member-table><tr><td colspan="5">불러오는 중…</td></tr></tbody></table></div>
+        <p class="admin-caption">회원별 이용 횟수는 각 회원의 정월록에 실제 저장된 분석 결과를 기준으로 집계합니다.</p>
+      </section>
+
+      <section class="admin-panel">
+        <div class="admin-panel-head"><div><p class="admin-eyebrow">REVIEWS</p><h2>최근 후기</h2></div><a href="./reviews.html" class="admin-text-link">후기 페이지 →</a></div>
+        <div class="admin-review-list" data-review-list></div>
+      </section>
+
+      <section class="admin-notice">
+        <strong>집계 기준 안내</strong>
+        <p>방문 통계는 IP·위치·브라우저 지문을 수집하지 않는 가벼운 운영 통계입니다. 브라우저 저장정보 삭제, 여러 기기 사용, 봇 접근 등에 따라 실제 사람 수와 차이가 날 수 있으므로 운영 추세 확인용으로 사용합니다.</p>
+      </section>
+    </div>
+  </main>
+
+  <script type="module" src="./admin.js?v=20260907-01"></script>
+</body>
+</html>
