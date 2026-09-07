@@ -1,0 +1,8 @@
+/* Brand contrast guard: prevents dark text from leaking onto brown buttons/cards. */
+.button-primary,.button-accent,.relationship-button.primary,.work-money-button.primary,.fortune-button.primary,.saju-button.primary,.ohaeng-button.primary,.compatibility-button.primary,.admin-dark,.admin-pass-button,[class*="button"][class~="primary"]{background:#543a3a!important;border-color:#543a3a!important;color:#fff!important}
+.button-primary *, .button-accent *, .relationship-button.primary *, .work-money-button.primary *, .fortune-button.primary *, .saju-button.primary *, .ohaeng-button.primary *, .compatibility-button.primary *{color:#fff!important}
+.button-ghost,.relationship-button.secondary,.work-money-button.secondary,.fortune-button.secondary,.saju-button.secondary,.ohaeng-button.secondary,.compatibility-button.secondary{background:#fff!important;color:#543a3a!important;border-color:#d8cbc6!important}
+.choice-chip input:checked+span,.focus-card input:checked+span,.relationship-status-card input:checked+span,.zodiac-chip input:checked+span{background:#543a3a!important;border-color:#543a3a!important;color:#fff!important}
+.choice-chip input:checked+span *,.focus-card input:checked+span *,.relationship-status-card input:checked+span *,.zodiac-chip input:checked+span *{color:#fff!important}
+button:disabled,.button:disabled{opacity:.55;cursor:not-allowed}
+@media(max-width:767px){.button,.relationship-button,.work-money-button,.fortune-button,.saju-button,.ohaeng-button,.compatibility-button{min-height:46px}.form-submit-area .button-primary{width:100%!important}}
