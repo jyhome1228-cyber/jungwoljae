@@ -7,13 +7,13 @@ import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/12
 const form=document.querySelector('[data-fortune-form]');
 if(!form) throw new Error('fortune form missing');
 const app=getApps().length?getApp():initializeApp(firebaseConfig);
-const auth=getAuth(app);const db=getFirestore(app);
+const auth=getAuth(app);
+const db=getFirestore(app);
 const status=form.querySelector('[data-fortune-status]');
 const profileState=form.querySelector('[data-profile-state]');
 const memberName=document.querySelector('[data-member-name]');
 const yearSelect=form.querySelector('#fortune-year');
 const nameInput=form.querySelector('#fortune-name');
-const question=form.querySelector('#fortune-question');
 
 const zodiacOrder=['rat','ox','tiger','rabbit','dragon','snake','horse','goat','monkey','rooster','dog','pig'];
 const branchToZodiac={자:'rat',축:'ox',인:'tiger',묘:'rabbit',진:'dragon',사:'snake',오:'horse',미:'goat',신:'monkey',유:'rooster',술:'dog',해:'pig'};
@@ -49,7 +49,9 @@ function exactZodiacFromProfile(profile){
     const obj=typeof result?.toObject==='function'?result.toObject():result;
     const yearPillar=pillarString(obj?.year);
     return branchToZodiac[[...yearPillar][1]]||zodiacFromYear(y);
-  }catch(e){return zodiacFromYear(String(profile.birthDate||'').slice(0,4));}
+  }catch(e){
+    return zodiacFromYear(String(profile.birthDate||'').slice(0,4));
+  }
 }
 
 onAuthStateChanged(auth,async user=>{
@@ -63,7 +65,9 @@ onAuthStateChanged(auth,async user=>{
     if(year){yearSelect.value=year;selectZodiac(exactZodiacFromProfile(p));}
     profileState.dataset.state='ok';
     profileState.textContent=`회원정보에서 ${year||'출생연도'} · ${zodiacKo[form.elements.zodiac?.value]||'띠'}를 불러왔습니다. 실제 띠가 다르면 직접 바꿔주세요.`;
-  }catch(e){profileState.textContent='회원정보를 불러오지 못했습니다. 직접 입력해주세요.';}
+  }catch(e){
+    profileState.textContent='회원정보를 불러오지 못했습니다. 직접 입력해주세요.';
+  }
 });
 
 form.addEventListener('submit',(event)=>{
@@ -78,7 +82,13 @@ form.addEventListener('submit',(event)=>{
   if(!zodiac){status.textContent='나의 띠를 선택해주세요.';return;}
   if(!consent){status.textContent='분석을 위한 정보 사용에 동의해주세요.';return;}
   const today=seoulToday();
-  const payload={name,birthYear:Number(birthYear),zodiac,question:question.value.trim(),targetDate:`${today.year}-${String(today.month).padStart(2,'0')}-${String(today.day).padStart(2,'0')}`,createdAt:Date.now()};
+  const payload={
+    name,
+    birthYear:Number(birthYear),
+    zodiac,
+    targetDate:`${today.year}-${String(today.month).padStart(2,'0')}-${String(today.day).padStart(2,'0')}`,
+    createdAt:Date.now()
+  };
   sessionStorage.setItem('jungwoljae_fortune_input',JSON.stringify(payload));
   location.href='./fortune-result.html';
 });
