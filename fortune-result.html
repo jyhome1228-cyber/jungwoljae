@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="description" content="정월재 오늘의 운세 결과" />
+  <title>오늘의 운세 결과 — 정월재</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./page.css" />
+  <link rel="stylesheet" href="./fortune-result.css?v=20260907-01" />
+</head>
+<body>
+  <header class="site-header no-print">
+    <div class="wide-container header-inner">
+      <a class="brand" href="./index.html" aria-label="정월재 홈"><span class="brand-hanja">正月齋</span><span class="brand-korean">정월재</span></a>
+      <nav class="desktop-nav"></nav>
+      <a class="header-cta" href="./signup.html">회원등록</a>
+      <button class="menu-button" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu" data-menu-button><span></span><span></span></button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu" hidden data-mobile-menu><nav class="container"></nav></div>
+  </header>
+
+  <main class="fortune-result-main" data-fortune-result>
+    <div class="fortune-result-container">
+      <section class="fortune-report fortune-hero">
+        <p class="fortune-kicker">TODAY'S FORTUNE · 正月齋</p>
+        <h1><span data-name>회원</span>님의<br />오늘 흐름을 살펴봅니다.</h1>
+        <p class="fortune-lead" data-summary>오늘의 운세를 계산하고 있습니다.</p>
+        <div class="fortune-meta" data-meta></div>
+      </section>
+
+      <section class="fortune-report">
+        <div class="fortune-overview">
+          <article class="fortune-signal">
+            <div><span>오늘의 한줄 결론</span><strong data-headline>흐름을 읽는 중입니다.</strong></div>
+            <p data-signal-note></p>
+          </article>
+          <article class="fortune-relation">
+            <p class="fortune-label">01 · TODAY × ZODIAC</p>
+            <h2>오늘의 일진과 나의 띠</h2>
+            <div class="relation-pills" data-relation-pills></div>
+            <p data-relation-text></p>
+          </article>
+        </div>
+      </section>
+
+      <section class="fortune-report">
+        <p class="fortune-label">02 · DAILY AREAS</p>
+        <h2>오늘은 이렇게 써보세요.</h2>
+        <div class="fortune-grid" data-area-grid></div>
+      </section>
+
+      <section class="fortune-report fortune-question" data-question-section hidden>
+        <p class="fortune-label">03 · YOUR QUESTION</p>
+        <h2>남겨주신 질문에 먼저 답을 드리면</h2>
+        <blockquote data-question></blockquote>
+        <div class="fortune-direct"><span>정월재의 답</span><strong data-question-direct></strong></div>
+        <div class="fortune-question-detail"><span>왜 이렇게 읽었나요</span><p data-question-detail></p></div>
+      </section>
+
+      <section class="fortune-report">
+        <p class="fortune-label">04 · KEY POINTS</p>
+        <h2>오늘 기억할 세 가지</h2>
+        <div class="fortune-key-grid" data-key-grid></div>
+      </section>
+
+      <section class="fortune-report fortune-evidence">
+        <details>
+          <summary>왜 이렇게 해석했나요? <span>해석 근거 보기</span></summary>
+          <div class="fortune-evidence-content" data-evidence></div>
+        </details>
+      </section>
+
+      <section class="fortune-actions no-print">
+        <div class="fortune-action-copy"><strong>오늘의 흐름을 남겨두세요.</strong><p>텍스트 복사, PDF 저장, 정월록 저장이 가능합니다.</p></div>
+        <div class="fortune-action-buttons">
+          <button type="button" class="fortune-button secondary" data-copy>보고서용 텍스트 복사</button>
+          <button type="button" class="fortune-button secondary" data-pdf>PDF 저장</button>
+          <button type="button" class="fortune-button primary" data-save>마이페이지에 저장</button>
+        </div>
+        <p class="fortune-action-status" data-action-status></p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer no-print"></footer>
+  <script src="./app.js" defer></script>
+  <script type="module" src="./fortune-result.js?v=20260907-01"></script>
+</body>
+</html>
