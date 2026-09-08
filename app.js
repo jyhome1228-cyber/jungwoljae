@@ -7,7 +7,7 @@ function applyBrandFavicon(){
 applyBrandFavicon();
 const currentFile=location.pathname.split('/').pop()||'index.html';
 const profilePages=new Set(['saju.html','ohaeng.html','fortune.html','relationship.html','work-money.html','guide.html']);
-[['./theme-dark.css','stylesheet'],['./theme-tuning.css','stylesheet'],['./theme-polish.css','stylesheet'],['./footer-fix.css?v=20260907-1548','stylesheet'],['./site-mobile.css?v=20260907-2018','stylesheet'],['./ui-fixes.css?v=20260907-2132','stylesheet'],['./friendly-content.css?v=20260908-1140','stylesheet']].forEach(([href])=>{const l=document.createElement('link');l.rel='stylesheet';l.href=href;document.head.appendChild(l);});
+[['./theme-dark.css','stylesheet'],['./theme-tuning.css','stylesheet'],['./theme-polish.css','stylesheet'],['./footer-fix.css?v=20260907-1548','stylesheet'],['./site-mobile.css?v=20260907-2018','stylesheet'],['./ui-fixes.css?v=20260908-1255','stylesheet'],['./friendly-content.css?v=20260908-1140','stylesheet']].forEach(([href])=>{const l=document.createElement('link');l.rel='stylesheet';l.href=href;document.head.appendChild(l);});
 if(profilePages.has(currentFile)){const l=document.createElement('link');l.rel='stylesheet';l.href='./basic-profile.css?v=20260908-0247';document.head.appendChild(l);}
 if(currentFile.endsWith('-result.html')){
   const r=document.createElement('link');r.rel='stylesheet';r.href='./result-readability.css?v=20260907-2257';document.head.appendChild(r);
@@ -18,7 +18,7 @@ if(document.body?.classList.contains('about-page')){const l=document.createEleme
 const themeMeta=document.querySelector('meta[name="theme-color"]');if(themeMeta)themeMeta.setAttribute('content','#ffffff');
 function applyBrandLogo(){document.querySelectorAll('.brand').forEach(brand=>{brand.innerHTML='<img class="brand-logo" src="./logo.svg" alt="" aria-hidden="true"><span class="brand-name">정월재</span>';});}applyBrandLogo();
 function normalizeNavigation(){
-  const primaryLinks=[['./saju.html','사주'],['./ohaeng.html','오행'],['./fortune.html','오늘의 운세'],['./relationship.html','인연'],['./work-money.html','일·재물'],['./guide.html','정월도감'],['./talisman.html','정월부적'],['./archive.html','정월록'],['./reviews.html','후기'],['./about.html','소개']];
+  const primaryLinks=[['./saju.html','사주'],['./ohaeng.html','오행'],['./fortune.html','오늘의 운세'],['./tomorrow.html','내일의 운세'],['./relationship.html','인연'],['./work-money.html','일·재물'],['./guide.html','정월도감'],['./talisman.html','정월부적'],['./lucky-number.html','행운의 숫자'],['./important-day.html','중요한 날'],['./moving-day.html','이사 택일'],['./archive.html','정월록'],['./reviews.html','후기'],['./about.html','소개']];
   document.querySelectorAll('.desktop-nav, .mobile-menu nav').forEach(nav=>{nav.innerHTML=primaryLinks.map(([href,label])=>`<a href="${href}"${currentFile===href.replace('./','')?' aria-current="page"':''}>${label}</a>`).join('');});
   document.querySelectorAll('.secondary-nav .container').forEach(nav=>{[...nav.querySelectorAll('a')].forEach(link=>{if(link.getAttribute('href')?.includes('fortune.html'))link.textContent='오늘의 운세';});});
   document.querySelectorAll('.header-cta').forEach(cta=>{cta.href='./signup.html';cta.textContent='회원등록';});
@@ -35,9 +35,9 @@ mobileMenu?.addEventListener('click',event=>{if(event.target.closest('a'))setMen
 function scrollToTarget(target){const el=document.querySelector(target);if(!el)return;const header=document.querySelector('.site-header');const offset=(header?.offsetHeight||0)+18;const top=el.getBoundingClientRect().top+window.scrollY-offset;window.scrollTo({top,behavior:'smooth'});}
 document.addEventListener('click',event=>{const anchor=event.target.closest('a[href^="#"]');if(!anchor)return;const href=anchor.getAttribute('href');if(!href||href==='#')return;const target=document.querySelector(href);if(!target)return;event.preventDefault();scrollToTarget(href);});
 const reviewsSection=document.querySelector('#reviews');if(reviewsSection){const s=document.createElement('script');s.type='module';s.src='./reviews.js?v=20260907-02';document.body.appendChild(s);}
-const footer=document.querySelector('.site-footer');if(footer&&!footer.dataset.enhanced){footer.dataset.enhanced='true';const s=document.createElement('script');s.src='./footer.js?v=20260908-0805';s.defer=true;document.body.appendChild(s);}
+const footer=document.querySelector('.site-footer');if(footer&&!footer.dataset.enhanced){footer.dataset.enhanced='true';const s=document.createElement('script');s.src='./footer.js?v=20260908-1255';s.defer=true;document.body.appendChild(s);}
 const authScript=document.createElement('script');authScript.type='module';authScript.src='./auth.js?v=20260908-0731';document.body.appendChild(authScript);
-const analyticsScript=document.createElement('script');analyticsScript.type='module';analyticsScript.src='./analytics.js?v=20260907-02';document.body.appendChild(analyticsScript);
+const analyticsScript=document.createElement('script');analyticsScript.type='module';analyticsScript.src='./analytics.js?v=20260908-1255';document.body.appendChild(analyticsScript);
 if(profilePages.has(currentFile)){const s=document.createElement('script');s.type='module';s.src='./basic-profile.js?v=20260908-0247';document.body.appendChild(s);}
 if(currentFile.endsWith('-result.html')){
   const e=document.createElement('script');e.type='module';e.src='./reading-event.js?v=20260908-0620';document.body.appendChild(e);
