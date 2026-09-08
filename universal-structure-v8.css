@@ -1,0 +1,174 @@
+:root{
+  --ui-space-2:2px;--ui-space-4:4px;--ui-space-6:6px;--ui-space-8:8px;--ui-space-10:10px;--ui-space-12:12px;--ui-space-14:14px;--ui-space-16:16px;--ui-space-18:18px;--ui-space-20:20px;--ui-space-24:24px;--ui-space-28:28px;--ui-space-32:32px;--ui-space-36:36px;--ui-space-40:40px;--ui-space-48:48px;--ui-space-52:52px;--ui-space-56:56px;--ui-space-64:64px;
+  --ui-radius-2:2px;--ui-radius-4:4px;--ui-radius-6:6px;--ui-radius-8:8px;--ui-radius-10:10px;--ui-radius-12:12px;--ui-radius-14:14px;--ui-radius-16:16px;--ui-radius-20:20px;--ui-radius-24:24px;--ui-radius-full:999px;
+  --ui-font-11:11px;--ui-font-12:12px;--ui-font-13:13px;--ui-font-14:14px;--ui-font-16:16px;--ui-font-18:18px;--ui-font-20:20px;--ui-font-22:22px;--ui-font-24:24px;--ui-font-26:26px;--ui-font-28:28px;--ui-font-32:32px;--ui-font-40:40px;--ui-font-48:48px;
+  --ui-line-15:15px;--ui-line-16:16px;--ui-line-18:18px;--ui-line-19:19px;--ui-line-22:22px;--ui-line-24:24px;--ui-line-27:27px;--ui-line-30:30px;--ui-line-32:32px;--ui-line-35:35px;--ui-line-38:38px;--ui-line-42:42px;--ui-line-52:52px;--ui-line-60:60px;
+  --ui-weight-regular:400;--ui-weight-medium:500;--ui-weight-bold:700;
+  --ui-content:1040px;--ui-wide:1280px;--ui-motion-fast:150ms;--ui-motion-medium:240ms;--ui-ease:cubic-bezier(.2,.8,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+
+/* Layout rhythm — brand colors are intentionally untouched. */
+.container{width:min(calc(100% - 64px),var(--ui-content));margin-inline:auto}
+.wide-container{width:min(calc(100% - 64px),var(--ui-wide));margin-inline:auto}
+
+/* Semantic typography roles */
+body{font-weight:var(--ui-weight-regular)}
+.eyebrow,.saju-kicker,.saju-label,.section-label,.fortune-kicker,.fortune-label,.relationship-kicker,.relationship-label,.work-kicker,.work-label,.guide-result-kicker,.guide-result-label,.quality-kicker{font-weight:var(--ui-weight-bold)!important}
+
+.result-quality-v7 .saju-label,
+.result-quality-v7 .section-label,
+.result-quality-v7 .fortune-label,
+.result-quality-v7 .relationship-label,
+.result-quality-v7 .work-label,
+.result-quality-v7 .guide-result-label,
+.result-quality-v7 .quality-kicker{margin-bottom:var(--ui-space-8)!important;font-size:var(--ui-font-12)!important;line-height:var(--ui-line-18)!important;font-weight:var(--ui-weight-bold)!important;letter-spacing:.01em!important}
+
+.result-quality-v7 .saju-report h2,
+.result-quality-v7 .report-section h2,
+.result-quality-v7 .fortune-report h2,
+.result-quality-v7 .relationship-report h2,
+.result-quality-v7 .work-report h2,
+.result-quality-v7 .guide-report h2,
+.result-quality-v7 .quality-summary h2{font-size:var(--ui-font-28)!important;line-height:var(--ui-line-38)!important;font-weight:var(--ui-weight-bold)!important;letter-spacing:-.025em!important}
+
+.result-quality-v7 .saju-report h3,
+.result-quality-v7 .report-section h3,
+.result-quality-v7 .fortune-report h3,
+.result-quality-v7 .relationship-report h3,
+.result-quality-v7 .work-report h3,
+.result-quality-v7 .guide-report h3{font-size:var(--ui-font-18)!important;line-height:var(--ui-line-27)!important;font-weight:var(--ui-weight-bold)!important;letter-spacing:-.015em!important}
+
+.result-quality-v7 .saju-report p,
+.result-quality-v7 .report-section p,
+.result-quality-v7 .fortune-report p,
+.result-quality-v7 .relationship-report p,
+.result-quality-v7 .work-report p,
+.result-quality-v7 .guide-report p,
+.result-quality-v7 .quality-summary p{font-size:var(--ui-font-16)!important;line-height:var(--ui-line-24)!important;font-weight:var(--ui-weight-regular)!important;letter-spacing:-.012em!important}
+
+.result-quality-v7 .section-heading-row>p,
+.result-quality-v7 .section-title-row>p,
+.result-quality-v7 .fortune-section-lead,
+.result-quality-v7 .fortune-tip-lead{font-size:var(--ui-font-13)!important;line-height:var(--ui-line-22)!important;font-weight:var(--ui-weight-regular)!important}
+
+.result-quality-v7 .saju-meta span,
+.result-quality-v7 .result-meta span,
+.result-quality-v7 .fortune-meta span,
+.result-quality-v7 .relationship-meta span,
+.result-quality-v7 .work-meta span,
+.result-quality-v7 .guide-result-meta span{font-size:var(--ui-font-12)!important;line-height:var(--ui-line-18)!important;font-weight:var(--ui-weight-medium)!important}
+
+/* Result layout — one consistent content system */
+.result-quality-v7 .saju-container,
+.result-quality-v7 .result-container,
+.result-quality-v7 .fortune-result-container,
+.result-quality-v7 .relationship-result-container,
+.result-quality-v7 .work-result-container,
+.result-quality-v7 .guide-result-container{width:min(calc(100% - 64px),1180px)!important;margin-inline:auto!important}
+
+.result-quality-v7 .saju-report,
+.result-quality-v7 .report-section,
+.result-quality-v7 .fortune-report,
+.result-quality-v7 .relationship-report,
+.result-quality-v7 .work-report,
+.result-quality-v7 .guide-report,
+.result-quality-v7 .quality-summary{margin-bottom:var(--ui-space-24)!important;padding:var(--ui-space-32)!important;border-radius:var(--ui-radius-16)!important;box-shadow:none!important}
+
+.result-quality-v7 .quality-summary-head{gap:var(--ui-space-32)!important;margin-bottom:var(--ui-space-24)!important}
+.result-quality-v7 .quality-summary-grid{gap:var(--ui-space-16)!important}
+.result-quality-v7 .quality-summary-card{padding:var(--ui-space-24)!important;border-radius:var(--ui-radius-14)!important;box-shadow:none!important}
+.result-quality-v7 .quality-summary-card small{margin-bottom:var(--ui-space-8)!important;font-size:var(--ui-font-12)!important;line-height:var(--ui-line-18)!important;font-weight:var(--ui-weight-medium)!important}
+.result-quality-v7 .quality-summary-card strong{margin-bottom:var(--ui-space-8)!important;font-size:var(--ui-font-18)!important;line-height:var(--ui-line-27)!important;font-weight:var(--ui-weight-bold)!important}
+.result-quality-v7 .quality-summary-card p{font-size:var(--ui-font-14)!important;line-height:var(--ui-line-24)!important}
+
+/* Cards and repeating list patterns */
+.result-quality-v7 .fortune-card,
+.result-quality-v7 .fortune-key,
+.result-quality-v7 .fortune-key-card,
+.result-quality-v7 .fortune-tip-card,
+.result-quality-v7 .fortune-time-card,
+.result-quality-v7 .guide-personal-card,
+.result-quality-v7 .guide-check-card,
+.result-quality-v7 .guide-action-card,
+.result-quality-v7 .relationship-core-card,
+.result-quality-v7 .relationship-condition-card,
+.result-quality-v7 .relationship-guide-card,
+.result-quality-v7 .work-core-card,
+.result-quality-v7 .money-card,
+.result-quality-v7 .life-card,
+.result-quality-v7 .key-card,
+.result-quality-v7 .ten-god-card,
+.result-quality-v7 .pillar-card{padding:var(--ui-space-20)!important;border-radius:var(--ui-radius-14)!important;box-shadow:none!important}
+
+.result-quality-v7 .fortune-grid,
+.result-quality-v7 .fortune-key-grid,
+.result-quality-v7 .fortune-tip-grid,
+.result-quality-v7 .fortune-time-grid,
+.result-quality-v7 .fortune-choice-grid,
+.result-quality-v7 .life-grid,
+.result-quality-v7 .year-flow-grid,
+.result-quality-v7 .relationship-core-grid,
+.result-quality-v7 .relationship-condition-grid,
+.result-quality-v7 .relationship-guide-grid,
+.result-quality-v7 .work-core-grid,
+.result-quality-v7 .money-grid,
+.result-quality-v7 .work-guide-grid,
+.result-quality-v7 .guide-personal-grid,
+.result-quality-v7 .guide-check-grid,
+.result-quality-v7 .guide-action-grid{gap:var(--ui-space-16)!important}
+
+/* Key points hierarchy from the supplied design system */
+.result-quality-v7 .fortune-key-grid{margin-top:var(--ui-space-24)!important}
+.result-quality-v7 .fortune-key{min-height:0!important}
+.result-quality-v7 .fortune-key span{display:block!important;margin-bottom:var(--ui-space-6)!important;font-size:var(--ui-font-12)!important;line-height:var(--ui-line-18)!important;font-weight:var(--ui-weight-medium)!important}
+.result-quality-v7 .fortune-key strong{display:block!important;margin-bottom:var(--ui-space-8)!important;font-size:var(--ui-font-18)!important;line-height:var(--ui-line-27)!important;font-weight:var(--ui-weight-bold)!important}
+.result-quality-v7 .fortune-key p{margin:0!important;font-size:var(--ui-font-14)!important;line-height:var(--ui-line-24)!important;font-weight:var(--ui-weight-regular)!important}
+
+/* Helpful / avoid: readable list, not tiny metadata */
+.result-quality-v7 .fortune-choice-grid{margin-top:var(--ui-space-24)!important}
+.result-quality-v7 .fortune-choice-card{border-radius:var(--ui-radius-16)!important;box-shadow:none!important}
+.result-quality-v7 .fortune-choice-card>span{min-height:48px!important;padding-inline:var(--ui-space-20)!important;font-size:var(--ui-font-14)!important;line-height:var(--ui-line-19)!important;font-weight:var(--ui-weight-bold)!important}
+.result-quality-v7 .fortune-choice-card ul{padding:var(--ui-space-8) var(--ui-space-20) var(--ui-space-12)!important}
+.result-quality-v7 .fortune-choice-card li{padding:var(--ui-space-14) 0!important;gap:var(--ui-space-10)!important;font-size:var(--ui-font-14)!important;line-height:var(--ui-line-22)!important}
+.result-quality-v7 .fortune-choice-card li strong{margin-bottom:var(--ui-space-4)!important;font-size:var(--ui-font-14)!important;line-height:var(--ui-line-22)!important;font-weight:var(--ui-weight-bold)!important}
+.result-quality-v7 .fortune-choice-card li span{font-size:var(--ui-font-13)!important;line-height:var(--ui-line-22)!important;font-weight:var(--ui-weight-regular)!important}
+
+/* Long reading measure */
+.result-quality-v7 .fortune-story,
+.result-quality-v7 .guide-reason-copy,
+.result-quality-v7 .relationship-pattern,
+.result-quality-v7 .work-axis-copy,
+.result-quality-v7 .summary-prose,
+.result-quality-v7 .total-summary-copy,
+.result-quality-v7 .relationship-total,
+.result-quality-v7 .work-total{max-width:900px!important}
+
+/* Buttons & fields: shared component sizing */
+.button,.header-cta,.auth-login-link,.auth-logout-button,
+.saju-button,.result-button,.fortune-button,.relationship-button,.work-button,.guide-button,
+.talisman-action,.talisman-card-actions button,.quick-form button,.mypage-edit-save,.mypage-edit-cancel{min-height:40px;font-weight:var(--ui-weight-bold)!important;border-radius:var(--ui-radius-8)!important;transition:transform var(--ui-motion-fast) var(--ui-ease),opacity var(--ui-motion-fast) var(--ui-ease),border-color var(--ui-motion-fast) var(--ui-ease),background-color var(--ui-motion-fast) var(--ui-ease)}
+.button-large{min-height:52px!important;border-radius:var(--ui-radius-12)!important}
+button:active,.button:active,.header-cta:active{transform:scale(.985)}
+button:disabled,.button:disabled{pointer-events:none}
+
+input:not([type="checkbox"]):not([type="radio"]),select,textarea{min-height:40px;border-radius:var(--ui-radius-8)!important;font-size:var(--ui-font-14)!important;line-height:var(--ui-line-19)!important;font-weight:var(--ui-weight-regular)!important}
+label{font-weight:var(--ui-weight-medium)}
+
+/* Focus accessibility without changing brand palette */
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+
+@media(max-width:1279px){
+  .container,.wide-container{width:min(calc(100% - 48px),var(--ui-wide))}
+  .result-quality-v7 .saju-container,.result-quality-v7 .result-container,.result-quality-v7 .fortune-result-container,.result-quality-v7 .relationship-result-container,.result-quality-v7 .work-result-container,.result-quality-v7 .guide-result-container{width:calc(100% - 48px)!important}
+}
+@media(max-width:767px){
+  .container,.wide-container{width:calc(100% - 32px)}
+  .result-quality-v7 .saju-container,.result-quality-v7 .result-container,.result-quality-v7 .fortune-result-container,.result-quality-v7 .relationship-result-container,.result-quality-v7 .work-result-container,.result-quality-v7 .guide-result-container{width:calc(100% - 32px)!important}
+  .result-quality-v7 .saju-report,.result-quality-v7 .report-section,.result-quality-v7 .fortune-report,.result-quality-v7 .relationship-report,.result-quality-v7 .work-report,.result-quality-v7 .guide-report,.result-quality-v7 .quality-summary{padding:var(--ui-space-24) var(--ui-space-20)!important;border-radius:var(--ui-radius-16)!important}
+  .result-quality-v7 .saju-report h2,.result-quality-v7 .report-section h2,.result-quality-v7 .fortune-report h2,.result-quality-v7 .relationship-report h2,.result-quality-v7 .work-report h2,.result-quality-v7 .guide-report h2,.result-quality-v7 .quality-summary h2{font-size:var(--ui-font-24)!important;line-height:var(--ui-line-32)!important}
+  .result-quality-v7 .saju-report p,.result-quality-v7 .report-section p,.result-quality-v7 .fortune-report p,.result-quality-v7 .relationship-report p,.result-quality-v7 .work-report p,.result-quality-v7 .guide-report p,.result-quality-v7 .quality-summary p{font-size:var(--ui-font-14)!important;line-height:var(--ui-line-24)!important}
+  .result-quality-v7 .fortune-key strong{font-size:var(--ui-font-16)!important;line-height:var(--ui-line-24)!important}
+  button,.button,.header-cta,.auth-login-link,.auth-logout-button,input:not([type="checkbox"]):not([type="radio"]),select{min-height:44px}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}button:active,.button:active,.header-cta:active{transform:none}}
