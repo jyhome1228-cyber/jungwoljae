@@ -6,34 +6,30 @@
   document.body.classList.add('practical-v5');
   const all=(s,r=root)=>[...r.querySelectorAll(s)];
 
-  const element={
-    목:'시작하고 키우는 힘', 화:'표현하고 움직이는 힘', 토:'안정시키고 관리하는 힘', 금:'판단하고 정리하는 힘', 수:'살피고 비교하는 힘'
-  };
-  const groups={
-    비겁:'내 기준과 주도권', 식상:'표현과 실행', 재성:'돈과 현실 감각', 관성:'책임과 조직생활', 인성:'배움과 준비'
-  };
-  const gods={
-    비견:'내 기준과 독립성', 겁재:'경쟁과 주도권', 식신:'꾸준한 표현과 생산', 상관:'자유로운 표현과 문제 해결', 편재:'기회와 거래', 정재:'안정적인 수입과 관리', 편관:'압박 속 책임과 결단', 정관:'규칙과 직책', 편인:'새로운 아이디어와 학습', 정인:'배움과 정보'
-  };
-  const relations={
-    육합:'서로 자연스럽게 맞물리는 흐름', 삼합:'연결이 부드러운 흐름', 충:'변화와 부딪힘이 큰 흐름', 형:'긴장과 반복을 점검할 흐름', 해:'말과 의도를 한 번 더 확인할 흐름', 파:'작은 어긋남을 정리할 흐름', '같은 지지':'익숙한 성향이 강해지는 흐름', '평이한 관계':'큰 충돌 없이 무난한 흐름'
-  };
+  const element={목:'시작하고 키우는 힘',화:'표현하고 움직이는 힘',토:'안정시키고 관리하는 힘',금:'판단하고 정리하는 힘',수:'살피고 비교하는 힘'};
+  const groups={비겁:'내 기준과 주도권',식상:'표현과 실행',재성:'돈과 현실 감각',관성:'책임과 조직생활',인성:'배움과 준비'};
+  const gods={비견:'내 기준과 독립성',겁재:'경쟁과 주도권',식신:'꾸준한 표현과 생산',상관:'자유로운 표현과 문제 해결',편재:'기회와 거래',정재:'안정적인 수입과 관리',편관:'압박 속 책임과 결단',정관:'규칙과 직책',편인:'새로운 아이디어와 학습',정인:'배움과 정보'};
+  const relations={육합:'서로 자연스럽게 맞물리는 흐름',삼합:'연결이 부드러운 흐름',충:'변화와 부딪힘이 큰 흐름',형:'긴장과 반복을 점검할 흐름',해:'말과 의도를 한 번 더 확인할 흐름',파:'작은 어긋남을 정리할 흐름','같은 지지':'익숙한 성향이 강해지는 흐름','평이한 관계':'큰 충돌 없이 무난한 흐름'};
+  const particlePattern='(의|이|가|은|는|을|를|에서|으로|와|과)?';
+  const left='(^|[\\s·,(])';
+  const right='(?=$|[\\s·,)])';
+  const escRe=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
 
-  const particles='(?:의|이|가|은|는|을|를|에서|으로|와|과)?';
-  function replaceTerms(t){
-    let out=String(t||'');
-    Object.entries(element).forEach(([k,v])=>{
-      out=out.replace(new RegExp(`${k}\\([木火土金水]\\)${particles}`,'g'),m=>v+particleOf(m));
-      out=out.replace(new RegExp(`[木火土金水]\\s*${k}${particles}`,'g'),m=>v+particleOf(m));
-      out=out.replace(new RegExp(`${k}${particles}`,'g'),m=>v+particleOf(m));
-    });
-    Object.entries(groups).forEach(([k,v])=>{out=out.replace(new RegExp(`${k}${particles}`,'g'),m=>v+particleOf(m));});
-    Object.entries(gods).forEach(([k,v])=>{out=out.replace(new RegExp(`${k}${particles}`,'g'),m=>v+particleOf(m));});
-    out=out.replaceAll('명식','사주 전체').replaceAll('작용','특징').replaceAll('보완','챙기기').replaceAll('기운','성향');
+  function replaceToken(out,key,value){
+    const k=escRe(key);
+    out=out.replace(new RegExp(`${left}${k}\\([木火土金水]\\)${particlePattern}${right}`,'g'),(_,pre,particle='')=>`${pre}${value}${particle||''}`);
+    out=out.replace(new RegExp(`${left}[木火土金水]\\s*${k}${particlePattern}${right}`,'g'),(_,pre,particle='')=>`${pre}${value}${particle||''}`);
+    out=out.replace(new RegExp(`${left}${k}${particlePattern}${right}`,'g'),(_,pre,particle='')=>`${pre}${value}${particle||''}`);
     return out;
   }
-  function particleOf(m){
-    const found=m.match(/(의|이|가|은|는|을|를|에서|으로|와|과)$/); return found?found[1]:'';
+
+  function replaceTerms(t){
+    let out=String(t||'');
+    Object.entries(element).forEach(([k,v])=>{out=replaceToken(out,k,v);});
+    Object.entries(groups).forEach(([k,v])=>{out=replaceToken(out,k,v);});
+    Object.entries(gods).forEach(([k,v])=>{out=replaceToken(out,k,v);});
+    out=out.replaceAll('명식','사주 전체').replaceAll('작용','특징').replaceAll('보완','챙기기').replaceAll('기운','성향');
+    return out;
   }
 
   function simplify(){
@@ -57,11 +53,7 @@
 
   function sajuLabels(){
     if(file!=='saju-result.html')return;
-    const map=[
-      ['내 사주의 중심, 일간','나는 어떤 방식으로 반응하는 사람일까?'],
-      ['음양과 오행의 균형','내가 자주 쓰는 방식과 놓치기 쉬운 방식'],
-      ['십성으로 보는 삶의 사용 방식','주도성·표현·돈·책임·배움으로 보는 생활 방식']
-    ];
+    const map=[['내 사주의 중심, 일간','나는 어떤 방식으로 반응하는 사람일까?'],['음양과 오행의 균형','내가 자주 쓰는 방식과 놓치기 쉬운 방식'],['십성으로 보는 삶의 사용 방식','주도성·표현·돈·책임·배움으로 보는 생활 방식']];
     all('h2').forEach(h=>{const hit=map.find(([a])=>h.textContent.includes(a));if(hit)h.textContent=hit[1];});
   }
 
@@ -73,9 +65,7 @@
 
   function workLabels(){
     if(file!=='work-money-result.html')return;
-    const labelMap={
-      '강하게 쓰이는 기운':'자연스럽게 잘 쓰는 힘','보완하면 좋은 기운':'놓치기 쉬워 챙기면 좋은 힘','성과를 내는 방식':'성과가 잘 나는 방식'
-    };
+    const labelMap={'강하게 쓰이는 기운':'자연스럽게 잘 쓰는 힘','보완하면 좋은 기운':'놓치기 쉬워 챙기면 좋은 힘','성과를 내는 방식':'성과가 잘 나는 방식'};
     all('.work-core-card span').forEach(n=>{Object.entries(labelMap).forEach(([a,b])=>{if(n.textContent.includes(a))n.textContent=n.textContent.replace(a,b);});});
   }
 
