@@ -12,8 +12,7 @@ if(profilePages.has(currentFile)){const l=document.createElement('link');l.rel='
 if(currentFile.endsWith('-result.html')){
   const r=document.createElement('link');r.rel='stylesheet';r.href='./result-readability.css?v=20260907-2257';document.head.appendChild(r);
   const m=document.createElement('link');m.rel='stylesheet';m.href='./result-methodology.css?v=20260908-0640';document.head.appendChild(m);
-  const f=document.createElement('link');f.rel='stylesheet';f.href='./result-friendly-v2.css?v=20260908-0958';document.head.appendChild(f);
-  const f3=document.createElement('link');f3.rel='stylesheet';f3.href='./result-friendly-v3.css?v=20260908-1008';document.head.appendChild(f3);
+  const v4=document.createElement('link');v4.rel='stylesheet';v4.href='./result-practical-v4.css?v=20260908-1230';document.head.appendChild(v4);
 }
 if(document.body?.classList.contains('about-page')){const l=document.createElement('link');l.rel='stylesheet';l.href='./about.css';document.head.appendChild(l);}
 const themeMeta=document.querySelector('meta[name="theme-color"]');if(themeMeta)themeMeta.setAttribute('content','#ffffff');
@@ -45,9 +44,8 @@ if(currentFile.endsWith('-result.html')){
   const c=document.createElement('script');c.src='./result-clarity.js?v=20260907-2257';c.defer=true;document.body.appendChild(c);
   const p=document.createElement('script');p.src='./plain-reading.js?v=20260908-0247';p.defer=true;document.body.appendChild(p);
   const m=document.createElement('script');m.src='./result-methodology.js?v=20260908-0640';document.body.appendChild(m);
-  setTimeout(()=>{const f=document.createElement('script');f.src='./friendly-content.js?v=20260907-2344';document.body.appendChild(f);},420);
-  setTimeout(()=>{const f2=document.createElement('script');f2.src='./result-friendly-v2.js?v=20260908-0958';document.body.appendChild(f2);},900);
-  setTimeout(()=>{const f3=document.createElement('script');f3.src=currentFile==='guide-result.html'?'./result-friendly-guide-v3.js?v=20260908-1008':'./result-friendly-v3.js?v=20260908-1008';document.body.appendChild(f3);},1500);
+  setTimeout(()=>{const f=document.createElement('script');f.src='./friendly-content.js?v=20260908-1140';document.body.appendChild(f);},420);
+  setTimeout(()=>{const v4=document.createElement('script');v4.src='./result-practical-v4.js?v=20260908-1230';document.body.appendChild(v4);},1550);
 }
 function fieldError(form,name,message=''){const node=form.querySelector(`[data-error-for="${name}"]`);if(node)node.textContent=message;}
 readingForm?.addEventListener('submit',event=>{
