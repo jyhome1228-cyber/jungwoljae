@@ -54,7 +54,7 @@ if(isResultLike){
 if(currentFile==='fortune-result.html'){
   const fx=document.createElement('script');fx.type='module';fx.src='./fortune-experience-v9.js?v=20260909-0516';document.body.appendChild(fx);
   const fix=document.createElement('script');fix.src='./fortune-layout-fix-v10.js?v=20260909-0516';fix.defer=true;document.body.appendChild(fix);
-  setTimeout(()=>{const daily=document.createElement('script');daily.type='module';daily.src='./fortune-daily-v10.js?v=20260909-0524';document.body.appendChild(daily);},2400);
+  setTimeout(()=>{const daily=document.createElement('script');daily.type='module';daily.src='./fortune-daily-v11.js?v=20260909-0728';document.body.appendChild(daily);},1200);
 }
 function fieldError(form,name,message=''){const node=form.querySelector(`[data-error-for="${name}"]`);if(node)node.textContent=message;}
 readingForm?.addEventListener('submit',event=>{
