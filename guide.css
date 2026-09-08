@@ -1,5 +1,5 @@
 :root{--brand:#543a3a;--ink:#2b2524;--muted:#7d726e;--line:#e8dfdb;--soft:#faf8f7}
-.guide-image-hero{position:relative;width:min(calc(100% - 64px),1280px);min-height:420px;margin:32px auto 48px;overflow:hidden;border-radius:20px;background:url('https://nineworksdatabase.planus253.workers.dev/cdn/test/20260907-061515-3-30b351f3.webp') center/cover no-repeat!important;isolation:isolate}
+.guide-image-hero{position:relative;width:min(calc(100% - 64px),1280px);min-height:420px;margin:32px auto 48px;overflow:hidden;border-radius:20px;background:url('https://nineworksdatabase.planus253.workers.dev/cdn/test/20260908-042336-996b4914-fc05-4d0f-a690-8f4b684c6a0b-d470bcc1.webp') center/cover no-repeat!important;isolation:isolate}
 .guide-image-hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(35,24,24,.76) 0%,rgba(35,24,24,.43) 45%,rgba(35,24,24,.08) 100%)}
 .guide-image-hero-inner{display:flex;min-height:420px;align-items:flex-end;padding:48px 52px}
 .guide-image-hero-copy{max-width:610px;color:#fff}
