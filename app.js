@@ -15,6 +15,8 @@ if(isResultLike){
   const r=document.createElement('link');r.rel='stylesheet';r.href='./result-readability.css?v=20260907-2257';document.head.appendChild(r);
   const q=document.createElement('link');q.rel='stylesheet';q.href='./result-quality-v7.css?v=20260908-2235';document.head.appendChild(q);
 }
+const universalUi=document.createElement('link');universalUi.rel='stylesheet';universalUi.href='./universal-structure-v8.css?v=20260909-0404';document.head.appendChild(universalUi);
+if(isResultLike){const contrast=document.createElement('link');contrast.rel='stylesheet';contrast.href='./brand-contrast-v8.css?v=20260909-0404';document.head.appendChild(contrast);}
 if(document.body?.classList.contains('about-page')){const l=document.createElement('link');l.rel='stylesheet';l.href='./about.css';document.head.appendChild(l);}
 const themeMeta=document.querySelector('meta[name="theme-color"]');if(themeMeta)themeMeta.setAttribute('content','#ffffff');
 function applyBrandLogo(){document.querySelectorAll('.brand').forEach(brand=>{brand.innerHTML='<img class="brand-logo" src="./logo.svg" alt="" aria-hidden="true"><span class="brand-name">정월재</span>';});}applyBrandLogo();
