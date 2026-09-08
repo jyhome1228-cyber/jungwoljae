@@ -11,11 +11,12 @@ if(!excluded.has(file)){
   const pageLabels={
     'index.html':'메인','saju.html':'종합 사주','saju-result.html':'종합 사주 결과',
     'ohaeng.html':'오행 분석','ohaeng-result.html':'오행 분석 결과',
-    'fortune.html':'오늘의 운세','fortune-result.html':'오늘의 운세 결과',
+    'fortune.html':'오늘의 운세','tomorrow.html':'내일의 운세','fortune-result.html':'오늘·내일 운세 결과',
     'relationship.html':'연애와 인연','relationship-result.html':'연애와 인연 결과',
     'compatibility.html':'궁합','compatibility-result.html':'궁합 결과',
     'work-money.html':'일과 재물','work-money-result.html':'일과 재물 결과',
-    'guide.html':'정월도감','guide-result.html':'정월도감 결과',
+    'guide.html':'정월도감','guide-result.html':'정월도감 결과','talisman.html':'정월부적',
+    'lucky-number.html':'행운의 숫자','important-day.html':'중요한 날','moving-day.html':'이사 택일',
     'archive.html':'정월록','reviews.html':'후기','about.html':'소개',
     'login.html':'로그인','signup.html':'회원등록','mypage.html':'마이페이지','privacy.html':'개인정보처리방침'
   };
