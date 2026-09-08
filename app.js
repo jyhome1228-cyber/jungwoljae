@@ -18,7 +18,7 @@ if(profilePages.has(currentFile))addStyle('./basic-profile.css?v=20260908-2106')
 if(isResultLike&&!isFortuneResult){addStyle('./result-readability.css?v=20260907-2257');addStyle('./result-quality-v7.css?v=20260908-2235');}
 addStyle('./universal-structure-v8.css?v=20260909-0404');
 if(isResultLike&&!isFortuneResult)addStyle('./brand-contrast-v8.css?v=20260909-0404');
-if(isFortuneResult)addStyle('./fortune-final-v12.css?v=20260909-0805');
+if(isFortuneResult)addStyle('./fortune-final-v13.css?v=20260909-0838');
 if(document.body?.classList.contains('about-page'))addStyle('./about.css');
 
 const themeMeta=document.querySelector('meta[name="theme-color"]');if(themeMeta)themeMeta.setAttribute('content','#ffffff');
@@ -66,7 +66,7 @@ if(isResultLike){
 }
 
 if(isFortuneResult){
-  setTimeout(()=>{const finalScript=document.createElement('script');finalScript.type='module';finalScript.src='./fortune-final-v12.js?v=20260909-0805';document.body.appendChild(finalScript);},180);
+  setTimeout(()=>{const finalScript=document.createElement('script');finalScript.type='module';finalScript.src='./fortune-final-v13.js?v=20260909-0838';document.body.appendChild(finalScript);},120);
 }
 
 function fieldError(form,name,message=''){const node=form.querySelector(`[data-error-for="${name}"]`);if(node)node.textContent=message;}
