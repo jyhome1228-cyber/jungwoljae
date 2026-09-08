@@ -11,18 +11,7 @@ service cloud.firestore {
 
     function isAdmin() {
       return signedIn()
-        && exists(/databases/$(database)/documents/admins/$(request.auth.uid))
-        && get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.role == 'admin';
-    }
-
-    function isValidReadingService(serviceKey) {
-      return serviceKey == 'saju'
-        || serviceKey == 'ohaeng'
-        || serviceKey == 'fortune'
-        || serviceKey == 'relationship'
-        || serviceKey == 'compatibility'
-        || serviceKey == 'work-money'
-        || serviceKey == 'guide';
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
     }
 
     match /admins/{uid} {
@@ -31,8 +20,7 @@ service cloud.firestore {
       allow write: if false;
     }
 
-    // Member profile data stays private. Owners can access their own record;
-    // only verified admin accounts can read other members' records.
+    // Member profile data remains private even though admin.html itself is login-free.
     match /users/{uid} {
       allow create, update, delete: if isOwner(uid);
       allow read: if isOwner(uid) || isAdmin();
@@ -76,22 +64,18 @@ service cloud.firestore {
       allow delete: if isAdmin() || (signedIn() && resource.data.uid == request.auth.uid);
     }
 
-    // Result pages append a privacy-restricted reading event after a submitted reading form.
-    // Public clients may only create the exact supported shape; only admins may read or delete it.
+    // A result page may append one privacy-restricted reading event after the user submitted
+    // a reading form. The public client can create only this narrow shape; only admins can read it.
     match /reading_events/{eventId} {
-      allow create: if request.resource.data.keys().hasAll([
+      allow create: if request.resource.data.keys().hasOnly([
                       'service', 'serviceLabel', 'name', 'birthDate', 'birthTime',
                       'birthTimeUnknown', 'calendarType', 'gender', 'city', 'focus',
                       'domain', 'situation', 'blockers', 'partnerName', 'partnerBirthDate',
                       'uid', 'createdAt'
                     ])
-                    && request.resource.data.keys().hasOnly([
-                      'service', 'serviceLabel', 'name', 'birthDate', 'birthTime',
-                      'birthTimeUnknown', 'calendarType', 'gender', 'city', 'focus',
-                      'domain', 'situation', 'blockers', 'partnerName', 'partnerBirthDate',
-                      'uid', 'createdAt'
-                    ])
-                    && isValidReadingService(request.resource.data.service)
+                    && request.resource.data.service in [
+                      'saju', 'ohaeng', 'fortune', 'relationship', 'compatibility', 'work-money', 'guide'
+                    ]
                     && request.resource.data.serviceLabel.size() <= 40
                     && request.resource.data.name.size() <= 120
                     && request.resource.data.birthDate.size() <= 20
@@ -114,7 +98,7 @@ service cloud.firestore {
       allow update: if false;
     }
 
-    // Public aggregate-only operational analytics.
+    // Public, aggregate-only operational analytics used by the login-free dashboard.
     // No account identity, IP, location, referrer, user-agent or fingerprint is stored here.
     match /analytics_daily/{dateKey} {
       allow read: if true;
