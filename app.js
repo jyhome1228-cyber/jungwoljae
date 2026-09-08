@@ -8,12 +8,12 @@ applyBrandFavicon();
 const currentFile=location.pathname.split('/').pop()||'index.html';
 const quickProfilePages=new Set(['tomorrow.html','lucky-number.html','important-day.html','moving-day.html']);
 const profilePages=new Set(['saju.html','ohaeng.html','fortune.html','relationship.html','work-money.html','guide.html',...quickProfilePages]);
+const isResultLike=currentFile.endsWith('-result.html')||currentFile==='compatibility-report.html';
 [['./theme-dark.css','stylesheet'],['./theme-tuning.css','stylesheet'],['./theme-polish.css','stylesheet'],['./footer-fix.css?v=20260907-1548','stylesheet'],['./site-mobile.css?v=20260908-2106','stylesheet'],['./ui-fixes.css?v=20260908-1334','stylesheet'],['./friendly-content.css?v=20260908-1140','stylesheet']].forEach(([href])=>{const l=document.createElement('link');l.rel='stylesheet';l.href=href;document.head.appendChild(l);});
 if(profilePages.has(currentFile)){const l=document.createElement('link');l.rel='stylesheet';l.href='./basic-profile.css?v=20260908-2106';document.head.appendChild(l);}
-if(currentFile.endsWith('-result.html')){
+if(isResultLike){
   const r=document.createElement('link');r.rel='stylesheet';r.href='./result-readability.css?v=20260907-2257';document.head.appendChild(r);
-  const m=document.createElement('link');m.rel='stylesheet';m.href='./result-methodology.css?v=20260908-0640';document.head.appendChild(m);
-  const v4=document.createElement('link');v4.rel='stylesheet';v4.href='./result-practical-v4.css?v=20260908-1230';document.head.appendChild(v4);
+  const q=document.createElement('link');q.rel='stylesheet';q.href='./result-quality-v7.css?v=20260908-2235';document.head.appendChild(q);
 }
 if(document.body?.classList.contains('about-page')){const l=document.createElement('link');l.rel='stylesheet';l.href='./about.css';document.head.appendChild(l);}
 const themeMeta=document.querySelector('meta[name="theme-color"]');if(themeMeta)themeMeta.setAttribute('content','#ffffff');
@@ -44,20 +44,13 @@ if(profilePages.has(currentFile)){
   s.src=quickProfilePages.has(currentFile)?'./quick-profile.js?v=20260908-1345':'./basic-profile.js?v=20260908-0247';
   document.body.appendChild(s);
 }
-if(currentFile.endsWith('-result.html')){
-  const e=document.createElement('script');e.type='module';e.src='./reading-event.js?v=20260908-0620';document.body.appendChild(e);
-  const c=document.createElement('script');c.src='./result-clarity.js?v=20260907-2257';c.defer=true;document.body.appendChild(c);
-  const p=document.createElement('script');p.src='./plain-reading.js?v=20260908-0247';p.defer=true;document.body.appendChild(p);
-  const m=document.createElement('script');m.src='./result-methodology.js?v=20260908-0640';document.body.appendChild(m);
-  setTimeout(()=>{const f=document.createElement('script');f.src='./friendly-content.js?v=20260908-1140';document.body.appendChild(f);},420);
-  if(currentFile!=='fortune-result.html')setTimeout(()=>{const v4=document.createElement('script');v4.src='./result-practical-v4.js?v=20260908-1230';document.body.appendChild(v4);},1550);
-  setTimeout(()=>{const v5=document.createElement('script');v5.src='./result-practical-v5.js?v=20260908-1300';document.body.appendChild(v5);},2200);
-  if(currentFile==='guide-result.html')setTimeout(()=>{const g=document.createElement('script');g.src='./guide-result-cleanup.js?v=20260908-1300';document.body.appendChild(g);},2700);
-  if(currentFile==='guide-result.html'||currentFile==='fortune-result.html')setTimeout(()=>{const q=document.createElement('script');q.src='./content-quality-v6.js?v=20260908-2205';document.body.appendChild(q);},3000);
+if(isResultLike){
+  if(currentFile.endsWith('-result.html')){const e=document.createElement('script');e.type='module';e.src='./reading-event.js?v=20260908-0620';document.body.appendChild(e);}
+  setTimeout(()=>{const q=document.createElement('script');q.src='./result-quality-v7.js?v=20260908-2235';q.defer=true;document.body.appendChild(q);},1800);
 }
 function fieldError(form,name,message=''){const node=form.querySelector(`[data-error-for="${name}"]`);if(node)node.textContent=message;}
 readingForm?.addEventListener('submit',event=>{
-  if(readingForm.matches('[data-saju-form],[data-ohaeng-form],[data-fortune-form],[data-relationship-form]'))return;
+  if(currentFile==='compatibility.html'||readingForm.matches('[data-saju-form],[data-ohaeng-form],[data-fortune-form],[data-relationship-form]'))return;
   event.preventDefault();formStatus.textContent='';readingForm.querySelectorAll('[data-error-for]').forEach(el=>el.textContent='');const required=[...readingForm.querySelectorAll('[required]')];let firstInvalid=null;
   required.forEach(field=>{const type=field.getAttribute('type');const invalid=(type==='checkbox'&&!field.checked)||(!type||type!=='checkbox')&&!String(field.value||'').trim();if(invalid){firstInvalid||=field;fieldError(readingForm,field.id||field.name,'필수 입력 항목입니다.');}});
   if(firstInvalid){formStatus.textContent='필수 항목을 확인해주세요.';firstInvalid.focus();return;}
