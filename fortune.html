@@ -4,147 +4,47 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#ffffff" />
-  <meta name="description" content="정월재 오늘의 운세" />
+  <meta name="description" content="정월재 오늘의 운세 — 내 일주와 오늘 일진을 맞춰 일·재물·인연·생활의 흐름을 풀이합니다." />
   <title>오늘의 운세 — 정월재</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
   <link rel="stylesheet" href="./styles.css" />
   <link rel="stylesheet" href="./page.css" />
   <style>
     .fortune-form .field>label{display:block;margin-bottom:7px;font-size:12px;font-weight:700;color:#2b2524}
-    .fortune-form input:not([type="checkbox"]):not([type="radio"]),.fortune-form select{width:100%;height:46px;padding:0 13px;border:1px solid #ddd2cd;border-radius:10px;background:#fff;color:#2b2524;font:inherit;font-size:13px;outline:none;box-shadow:none;appearance:none;-webkit-appearance:none}
+    .fortune-form input:not([type="checkbox"]),.fortune-form select{width:100%;height:46px;padding:0 13px;border:1px solid #ddd2cd;border-radius:10px;background:#fff;color:#2b2524;font:inherit;font-size:13px;outline:none;box-shadow:none;appearance:none;-webkit-appearance:none}
     .fortune-form select{padding-right:36px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' fill='none' stroke='%23543a3a' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;background-size:12px 8px}
     .fortune-form input:focus,.fortune-form select:focus{border-color:#543a3a;box-shadow:0 0 0 3px rgba(84,58,58,.07)}
-    .fortune-form .page-field-row{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important}
-    .fortune-form .field.full{grid-column:1/-1}
-    .birth-date-grid{display:grid;grid-template-columns:1.35fr .8fr .8fr;gap:8px}
-    .birth-weekday{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:8px;padding:10px 12px;border:1px solid #eee5e1;border-radius:10px;background:#faf8f7;color:#8a7f7b;font-size:10px;line-height:16px}.birth-weekday strong{color:#543a3a;font-size:11px}
+    .fortune-form .page-field-row{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important}.fortune-form .field.full{grid-column:1/-1}
+    .birth-date-grid{display:grid;grid-template-columns:1.35fr .8fr .8fr;gap:8px}.birth-weekday{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:8px;padding:10px 12px;border:1px solid #eee5e1;border-radius:10px;background:#faf8f7;color:#8a7f7b;font-size:10px;line-height:16px}.birth-weekday strong{color:#543a3a;font-size:11px}
     .birth-time-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
-    .fortune-time-check{display:flex!important;align-items:center!important;gap:10px!important;margin-top:10px!important;cursor:pointer!important;color:#756b67!important;font-size:11px!important;line-height:18px!important}
-    .fortune-time-check input[type="checkbox"]{appearance:none!important;-webkit-appearance:none!important;flex:0 0 24px!important;width:24px!important;height:24px!important;min-width:24px!important;min-height:24px!important;margin:0!important;padding:0!important;border:1px solid #d5cac5!important;border-radius:6px!important;background:#fff!important;box-sizing:border-box!important;position:relative!important}
-    .fortune-time-check input[type="checkbox"]:checked{border-color:#543a3a!important;background:#543a3a!important}
-    .fortune-time-check input[type="checkbox"]:checked::after{content:"";position:absolute;left:8px;top:4px;width:6px;height:11px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
-    .fortune-time-check span{display:inline-block!important;color:#756b67!important;font-size:11px!important;font-weight:500!important}
-    .zodiac-grid{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:8px!important;width:100%!important;margin-top:2px}
-    .zodiac-chip{position:relative!important;display:block!important;width:100%!important;min-width:0!important;margin:0!important;cursor:pointer!important}
-    .zodiac-chip input[type="radio"]{position:absolute!important;width:1px!important;height:1px!important;margin:0!important;opacity:0!important;pointer-events:none!important}
-    .zodiac-chip span{display:flex!important;width:100%!important;min-height:68px!important;padding:10px 6px!important;box-sizing:border-box!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:4px!important;border:1px solid #e2d8d4!important;border-radius:12px!important;background:#fff!important;color:#716662!important;font-weight:700!important;text-align:center!important;transition:.15s ease!important}
-    .zodiac-chip:hover span{border-color:#bfaeaa!important;background:#faf8f7!important}
-    .zodiac-chip input:checked+span{border-color:#543a3a!important;background:#543a3a!important;color:#fff!important;transform:translateY(-1px)}
-    .zodiac-chip span b{display:block!important;font-size:20px!important;line-height:23px!important;font-weight:700!important}
-    .zodiac-chip span em{display:block!important;font-style:normal!important;font-size:10px!important;line-height:14px!important;opacity:.78!important;white-space:nowrap!important}
+    .fortune-time-check{display:flex!important;align-items:center!important;gap:10px!important;margin-top:10px!important;cursor:pointer!important;color:#756b67!important;font-size:11px!important;line-height:18px!important}.fortune-time-check input[type="checkbox"]{appearance:none!important;-webkit-appearance:none!important;flex:0 0 24px!important;width:24px!important;height:24px!important;min-width:24px!important;min-height:24px!important;margin:0!important;padding:0!important;border:1px solid #d5cac5!important;border-radius:6px!important;background:#fff!important;box-sizing:border-box!important;position:relative!important}.fortune-time-check input[type="checkbox"]:checked{border-color:#543a3a!important;background:#543a3a!important}.fortune-time-check input[type="checkbox"]:checked::after{content:"";position:absolute;left:8px;top:4px;width:6px;height:11px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}.fortune-time-check span{display:inline-block!important;color:#756b67!important;font-size:11px!important;font-weight:500!important}
     .fortune-profile-state,.fortune-helper{margin:6px 0 0!important;color:#9b918d!important;font-size:10px!important;line-height:16px!important}.fortune-profile-state[data-state="ok"]{color:#6e514f!important}
     .today-badge{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px;padding:14px 16px;border:1px solid #e8dfdb;border-radius:12px;background:#faf8f7}.today-badge strong{color:#2b2524;font-size:13px}.today-badge span{color:#8b817d;font-size:10px}
-    @media(max-width:900px){.zodiac-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
-    @media(max-width:767px){.fortune-form .page-field-row{grid-template-columns:1fr!important}.zodiac-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}.zodiac-chip span{min-height:62px!important}.birth-date-grid{grid-template-columns:1.25fr .8fr .8fr}.birth-time-grid{grid-template-columns:1fr 1fr 1fr}}
+    @media(max-width:767px){.fortune-form .page-field-row{grid-template-columns:1fr!important}.birth-date-grid{grid-template-columns:1.25fr .8fr .8fr}.birth-time-grid{grid-template-columns:1fr 1fr 1fr}}
   </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="wide-container header-inner">
-      <a class="brand" href="./index.html" aria-label="정월재 홈"><span class="brand-hanja">正月齋</span><span class="brand-korean">정월재</span></a>
-      <nav class="desktop-nav"></nav>
-      <a class="header-cta" href="./signup.html">회원등록</a>
-      <button class="menu-button" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu" data-menu-button><span></span><span></span></button>
-    </div>
-    <div class="mobile-menu" id="mobile-menu" hidden data-mobile-menu><nav class="container"></nav></div>
-  </header>
+  <header class="site-header"><div class="wide-container header-inner"><a class="brand" href="./index.html" aria-label="정월재 홈"><span class="brand-hanja">正月齋</span><span class="brand-korean">정월재</span></a><nav class="desktop-nav"></nav><a class="header-cta" href="./signup.html">회원등록</a><button class="menu-button" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu" data-menu-button><span></span><span></span></button></div><div class="mobile-menu" id="mobile-menu" hidden data-mobile-menu><nav class="container"></nav></div></header>
 
   <main>
-    <section class="sub-hero">
-      <div class="container">
-        <div class="breadcrumb"><a href="./index.html">정월재</a><span>/</span><span>오늘의 운세</span></div>
-        <p class="eyebrow">TODAY'S FORTUNE</p>
-        <h1>오늘의 기운과<br />나의 띠가 만나는 날.</h1>
-        <p class="sub-lead">띠와 태어난 날짜·시간을 기준으로 오늘의 일진과 관계를 살펴보고, 일·재물·관계·생활에서 어떤 선택에 무게를 둘지 정리합니다.</p>
-      </div>
-    </section>
+    <section class="sub-hero"><div class="container"><div class="breadcrumb"><a href="./index.html">정월재</a><span>/</span><span>오늘의 운세</span></div><p class="eyebrow">TODAY'S FORTUNE</p><h1>내 사주와 오늘 일진이<br />만나는 하루.</h1><p class="sub-lead">내 일주와 오늘의 일진을 맞춰 천간의 오행과 지지의 합·충·형·해를 읽고, 오늘 일·재물·인연·생활에서 어떤 흐름이 강하게 들어오는지 풀이합니다.</p></div></section>
 
-    <section class="page-section">
-      <div class="container page-layout">
-        <div class="page-copy">
-          <p class="eyebrow">ZODIAC · TODAY</p>
-          <h2>같은 띠라도<br />태어난 정보에 따라 다르게 봅니다.</h2>
-          <p>태어난 날짜에서 연주의 띠와 천간을 확인하고 출생시간까지 함께 기록해 오늘의 일진과 비교합니다. 오늘 자연스럽게 맞물리는 부분과 조금 조심해서 다룰 부분을 함께 읽습니다.</p>
-          <ul class="detail-list">
-            <li><span>01</span><div><strong>띠의 관계</strong><p>오늘의 지지와 내 띠 사이의 합·충·형·파·해 관계를 살펴봅니다.</p></div></li>
-            <li><span>02</span><div><strong>태어난 날짜와 시간</strong><p>연·월·일과 출생 요일, 태어난 시간을 함께 기록하고 연주의 천간·지지를 확인합니다.</p></div></li>
-            <li><span>03</span><div><strong>오늘 하루의 팁</strong><p>결과 마지막에는 정월재가 오늘 바로 적용해볼 수 있는 생활 팁을 정리해드립니다.</p></div></li>
-          </ul>
-        </div>
+    <section class="page-section"><div class="container page-layout">
+      <div class="page-copy"><p class="eyebrow">MY DAY PILLAR × TODAY</p><h2>같은 생년이라도<br />생일이 다르면 운세도 달라집니다.</h2><p>띠 하나만 보는 것이 아니라 태어난 날의 일주와 오늘 날짜의 일진을 직접 비교합니다. 그래서 같은 나이와 같은 띠라도 일주가 다르면 오늘의 결과도 달라집니다.</p><ul class="detail-list"><li><span>01</span><div><strong>내 일주</strong><p>태어난 날의 천간과 지지를 오늘 운세의 중심으로 둡니다.</p></div></li><li><span>02</span><div><strong>오늘 일진</strong><p>오늘 날짜의 천간·지지와 내 일주의 생극·합충 관계를 봅니다.</p></div></li><li><span>03</span><div><strong>분야별 운세</strong><p>재물·연애·일·생활과 행운 색·숫자·방향까지 한 번에 풀이합니다.</p></div></li></ul></div>
 
-        <div class="service-form-wrap">
-          <form class="reading-form fortune-form" data-fortune-form novalidate>
-            <div class="form-page-title">
-              <span class="flow-step-number">01</span>
-              <h2><span data-member-name>회원님</span>의 오늘 흐름을 봅니다.</h2>
-              <p>로그인 회원은 저장된 생년월일·출생시간과 띠를 자동으로 불러옵니다.</p>
-              <p class="fortune-profile-state" data-profile-state>회원정보 확인 중…</p>
-            </div>
-
-            <div class="today-badge"><strong data-today-label>오늘</strong><span>오늘 날짜의 일진과 비교합니다</span></div>
-
-            <div class="page-field-row">
-              <div class="field full"><label for="fortune-name">이름 또는 닉네임</label><input id="fortune-name" name="name" type="text" required placeholder="예: 정월" /></div>
-            </div>
-
-            <div class="page-field-row">
-              <div class="field full">
-                <label>태어난 날짜</label>
-                <div class="birth-date-grid">
-                  <select id="fortune-year" name="birthYear" required aria-label="태어난 연도"><option value="">연도</option></select>
-                  <select id="fortune-month" name="birthMonth" required aria-label="태어난 월"><option value="">월</option></select>
-                  <select id="fortune-day" name="birthDay" required aria-label="태어난 일"><option value="">일</option></select>
-                </div>
-                <div class="birth-weekday"><span>출생 요일</span><strong data-birth-weekday>날짜를 선택해주세요</strong></div>
-              </div>
-            </div>
-
-            <div class="page-field-row">
-              <div class="field full">
-                <label>태어난 시간 <span class="optional">선택</span></label>
-                <div class="birth-time-grid">
-                  <select id="fortune-meridiem" aria-label="오전 또는 오후"><option value="">오전/오후</option><option value="am">오전</option><option value="pm">오후</option></select>
-                  <select id="fortune-hour" aria-label="태어난 시"><option value="">시</option></select>
-                  <select id="fortune-minute" aria-label="태어난 분"><option value="">분</option></select>
-                </div>
-                <label class="fortune-time-check"><input id="fortune-time-unknown" type="checkbox" /><span>태어난 시간을 모릅니다</span></label>
-              </div>
-            </div>
-
-            <div class="page-field-row">
-              <div class="field full">
-                <label>나의 띠</label>
-                <div class="zodiac-grid" data-zodiac-grid>
-                  <label class="zodiac-chip"><input type="radio" name="zodiac" value="rat"><span><b>子</b><em>쥐띠</em></span></label>
-                  <label class="zodiac-chip"><input type="radio" name="zodiac" value="ox"><span><b>丑</b><em>소띠</em></span></label>
-                  <label class="zodiac-chip"><input type="radio" name="zodiac" value="tiger"><span><b>寅</b><em>호랑이띠</em></span></label>
-                  <label class="zodiac-chip"><input type="radio" name="zodiac" value="rabbit"><span><b>卯</b><em>토끼띠</em></span></label>
-                  <label class="zodiac-chip"><input type="radio" name="zodiac" value="dragon"><span><b>辰</b><em>용띠</em></span></label>
-                  <label class="zodiac-chip"><input type="radio" name="zodiac" value="snake"><span><b>巳</b><em>뱀띠</em></span></label>
-                  <label class="zodiac-chip"><input type="radio" name="zodiac" value="horse"><span><b>午</b><em>말띠</em></span></label>
-                  <label class="zodiac-chip"><input type="radio" name="zodiac" value="goat"><span><b>未</b><em>양띠</em></span></label>
-                  <label class="zodiac-chip"><input type="radio" name="zodiac" value="monkey"><span><b>申</b><em>원숭이띠</em></span></label>
-                  <label class="zodiac-chip"><input type="radio" name="zodiac" value="rooster"><span><b>酉</b><em>닭띠</em></span></label>
-                  <label class="zodiac-chip"><input type="radio" name="zodiac" value="dog"><span><b>戌</b><em>개띠</em></span></label>
-                  <label class="zodiac-chip"><input type="radio" name="zodiac" value="pig"><span><b>亥</b><em>돼지띠</em></span></label>
-                </div>
-                <p class="fortune-helper">선택한 생년월일을 기준으로 띠를 자동으로 잡습니다. 알고 있는 실제 띠와 다르면 직접 바꿀 수 있습니다.</p>
-              </div>
-            </div>
-
-            <div class="form-submit-area">
-              <label class="consent-row"><input type="checkbox" name="consent" required><span>분석을 위해 입력 정보가 사용되는 것에 동의합니다.</span></label>
-              <p class="form-status" role="status" aria-live="polite" data-fortune-status></p>
-              <button class="button button-primary button-large" type="submit">오늘의 운세 보기</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </section>
+      <div class="service-form-wrap"><form class="reading-form fortune-form" data-fortune-form novalidate>
+        <div class="form-page-title"><span class="flow-step-number">01</span><h2><span data-member-name>회원님</span>의 오늘 운세를 봅니다.</h2><p>태어난 정보로 내 일주를 계산한 뒤 오늘의 일진과 맞춰봅니다.</p><p class="fortune-profile-state" data-profile-state>회원정보 확인 중…</p></div>
+        <div class="today-badge"><strong data-today-label>오늘</strong><span>오늘 일진과 내 일주를 비교합니다</span></div>
+        <div class="page-field-row"><div class="field full"><label for="fortune-name">이름 또는 닉네임</label><input id="fortune-name" name="name" type="text" required placeholder="예: 정월" /></div></div>
+        <div class="page-field-row"><div class="field full"><label>태어난 날짜</label><div class="birth-date-grid"><select id="fortune-year" name="birthYear" required aria-label="태어난 연도"><option value="">연도</option></select><select id="fortune-month" name="birthMonth" required aria-label="태어난 월"><option value="">월</option></select><select id="fortune-day" name="birthDay" required aria-label="태어난 일"><option value="">일</option></select></div><div class="birth-weekday"><span>출생 요일</span><strong data-birth-weekday>날짜를 선택해주세요</strong></div></div></div>
+        <div class="page-field-row"><div class="field full"><label>태어난 시간 <span class="optional">선택</span></label><div class="birth-time-grid"><select id="fortune-meridiem" aria-label="오전 또는 오후"><option value="">오전/오후</option><option value="am">오전</option><option value="pm">오후</option></select><select id="fortune-hour" aria-label="태어난 시"><option value="">시</option></select><select id="fortune-minute" aria-label="태어난 분"><option value="">분</option></select></div><label class="fortune-time-check"><input id="fortune-time-unknown" type="checkbox" /><span>태어난 시간을 모릅니다</span></label></div></div>
+        <div class="page-field-row"><div class="field"><label for="fortune-calendar">달력 기준</label><select id="fortune-calendar" name="calendarType"><option value="solar">양력</option><option value="lunar">음력</option></select><label class="fortune-time-check" data-lunar-extra hidden><input id="fortune-leap" name="isLeapMonth" type="checkbox" /><span>윤달입니다</span></label></div><div class="field"><label for="fortune-gender">성별</label><select id="fortune-gender" name="gender"><option value="">선택하지 않음</option><option value="male">남성</option><option value="female">여성</option></select></div></div>
+        <div class="form-submit-area"><label class="consent-row"><input type="checkbox" name="consent" required><span>분석을 위해 입력 정보가 사용되는 것에 동의합니다.</span></label><p class="form-status" role="status" aria-live="polite" data-fortune-status></p><button class="button button-primary button-large" type="submit">오늘의 운세 보기</button></div>
+      </form></div>
+    </div></section>
   </main>
-
   <footer class="site-footer"></footer>
-  <script src="./app.js" defer></script>
-  <script type="module" src="./fortune-form.js?v=20260907-04"></script>
+  <script src="./app.js?v=20260909-0728" defer></script>
+  <script type="module" src="./fortune-form.js?v=20260909-0728"></script>
 </body>
 </html>
