@@ -7,7 +7,7 @@ function applyBrandFavicon(){
 applyBrandFavicon();
 const currentFile=location.pathname.split('/').pop()||'index.html';
 const profilePages=new Set(['saju.html','ohaeng.html','fortune.html','relationship.html','work-money.html','guide.html']);
-[['./theme-dark.css','stylesheet'],['./theme-tuning.css','stylesheet'],['./theme-polish.css','stylesheet'],['./footer-fix.css?v=20260907-1548','stylesheet'],['./site-mobile.css?v=20260907-2018','stylesheet'],['./ui-fixes.css?v=20260907-2132','stylesheet'],['./friendly-content.css?v=20260907-2344','stylesheet']].forEach(([href])=>{const l=document.createElement('link');l.rel='stylesheet';l.href=href;document.head.appendChild(l);});
+[['./theme-dark.css','stylesheet'],['./theme-tuning.css','stylesheet'],['./theme-polish.css','stylesheet'],['./footer-fix.css?v=20260907-1548','stylesheet'],['./site-mobile.css?v=20260907-2018','stylesheet'],['./ui-fixes.css?v=20260907-2132','stylesheet'],['./friendly-content.css?v=20260908-1140','stylesheet']].forEach(([href])=>{const l=document.createElement('link');l.rel='stylesheet';l.href=href;document.head.appendChild(l);});
 if(profilePages.has(currentFile)){const l=document.createElement('link');l.rel='stylesheet';l.href='./basic-profile.css?v=20260908-0247';document.head.appendChild(l);}
 if(currentFile.endsWith('-result.html')){
   const r=document.createElement('link');r.rel='stylesheet';r.href='./result-readability.css?v=20260907-2257';document.head.appendChild(r);
