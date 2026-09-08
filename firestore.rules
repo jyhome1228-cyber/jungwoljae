@@ -73,9 +73,15 @@ service cloud.firestore {
                       'domain', 'situation', 'blockers', 'partnerName', 'partnerBirthDate',
                       'uid', 'createdAt'
                     ])
-                    && request.resource.data.service in [
-                      'saju', 'ohaeng', 'fortune', 'relationship', 'compatibility', 'work-money', 'guide'
-                    ]
+                    && (
+                      request.resource.data.service == 'saju'
+                      || request.resource.data.service == 'ohaeng'
+                      || request.resource.data.service == 'fortune'
+                      || request.resource.data.service == 'relationship'
+                      || request.resource.data.service == 'compatibility'
+                      || request.resource.data.service == 'work-money'
+                      || request.resource.data.service == 'guide'
+                    )
                     && request.resource.data.serviceLabel.size() <= 40
                     && request.resource.data.name.size() <= 120
                     && request.resource.data.birthDate.size() <= 20
