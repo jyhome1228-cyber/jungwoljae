@@ -56,6 +56,7 @@ if(currentFile==='fortune-result.html'){
   const fix=document.createElement('script');fix.src='./fortune-layout-fix-v10.js?v=20260909-0516';fix.defer=true;document.body.appendChild(fix);
   setTimeout(()=>{const daily=document.createElement('script');daily.type='module';daily.src='./fortune-daily-v11.js?v=20260909-0728';document.body.appendChild(daily);},1200);
 }
+const toneScript=document.createElement('script');toneScript.src='./saju-tone-v11.js?v=20260909-0728';toneScript.defer=true;document.body.appendChild(toneScript);
 function fieldError(form,name,message=''){const node=form.querySelector(`[data-error-for="${name}"]`);if(node)node.textContent=message;}
 readingForm?.addEventListener('submit',event=>{
   if(currentFile==='compatibility.html'||readingForm.matches('[data-saju-form],[data-ohaeng-form],[data-fortune-form],[data-relationship-form]'))return;
