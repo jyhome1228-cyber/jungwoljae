@@ -5,4 +5,8 @@
 .choice-chip input:checked+span,.focus-card input:checked+span,.relationship-status-card input:checked+span,.zodiac-chip input:checked+span{background:#543a3a!important;border-color:#543a3a!important;color:#fff!important}
 .choice-chip input:checked+span *,.focus-card input:checked+span *,.relationship-status-card input:checked+span *,.zodiac-chip input:checked+span *{color:#fff!important}
 button:disabled,.button:disabled{opacity:.55;cursor:not-allowed}
+/* Expanded service navigation */
+@media(min-width:1351px){.desktop-nav{gap:16px!important}.desktop-nav a{font-size:12px!important;white-space:nowrap}}
+@media(min-width:1121px) and (max-width:1350px){.desktop-nav{gap:10px!important}.desktop-nav a{font-size:11px!important;white-space:nowrap}.header-inner{gap:14px!important}}
+@media(max-width:1120px){.desktop-nav{display:none!important}.menu-button{display:inline-flex!important}}
 @media(max-width:767px){.button,.relationship-button,.work-money-button,.work-button,.fortune-button,.saju-button,.ohaeng-button,.result-button,.compatibility-button{min-height:46px}.form-submit-area .button-primary{width:100%!important}}
