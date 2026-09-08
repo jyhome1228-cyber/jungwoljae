@@ -46,7 +46,8 @@ if(currentFile.endsWith('-result.html')){
   const m=document.createElement('script');m.src='./result-methodology.js?v=20260908-0640';document.body.appendChild(m);
   setTimeout(()=>{const f=document.createElement('script');f.src='./friendly-content.js?v=20260908-1140';document.body.appendChild(f);},420);
   setTimeout(()=>{const v4=document.createElement('script');v4.src='./result-practical-v4.js?v=20260908-1230';document.body.appendChild(v4);},1550);
-  setTimeout(()=>{const v5=document.createElement('script');v5.src='./result-practical-v5.js?v=20260908-1236';document.body.appendChild(v5);},2200);
+  setTimeout(()=>{const v5=document.createElement('script');v5.src='./result-practical-v5.js?v=20260908-1300';document.body.appendChild(v5);},2200);
+  if(currentFile==='guide-result.html')setTimeout(()=>{const g=document.createElement('script');g.src='./guide-result-cleanup.js?v=20260908-1300';document.body.appendChild(g);},2700);
 }
 function fieldError(form,name,message=''){const node=form.querySelector(`[data-error-for="${name}"]`);if(node)node.textContent=message;}
 readingForm?.addEventListener('submit',event=>{
