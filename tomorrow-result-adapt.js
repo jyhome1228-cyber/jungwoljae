@@ -16,11 +16,10 @@
         .replaceAll('오늘로','내일로')
         .replaceAll('오늘과','내일과')
         .replaceAll('오늘이','내일이')
+        .replaceAll('오늘 안에','내일 안에')
         .replaceAll('오늘','내일');
     });
     const kicker=root.querySelector('.fortune-kicker');if(kicker)kicker.textContent="TOMORROW'S FORTUNE · 正月齋";
   }
-  setTimeout(replaceText,180);
-  setTimeout(replaceText,850);
-  setTimeout(replaceText,1800);
+  [180,850,1800,4300,6200].forEach(ms=>setTimeout(replaceText,ms));
 })();
