@@ -1,0 +1,177 @@
+:root{--fx-space-1:8px;--fx-space-2:12px;--fx-space-3:16px;--fx-space-4:20px;--fx-space-5:24px;--fx-radius:16px}
+
+/* Fortune result typography hierarchy — loaded last on purpose */
+.result-quality-v7 .fortune-report>.fortune-label,
+.result-quality-v7 .fortune-tip-section>.fortune-label,
+.result-quality-v7 .fortune-lucky-section>.fortune-label{
+  display:block!important;
+  margin:0 0 12px!important;
+  font-size:12px!important;
+  line-height:18px!important;
+  font-weight:700!important;
+  letter-spacing:.01em!important;
+}
+.result-quality-v7 .fortune-report>h2,
+.result-quality-v7 .fortune-tip-section>h2,
+.result-quality-v7 .fortune-lucky-section>h2{
+  margin:0!important;
+  font-size:28px!important;
+  line-height:38px!important;
+  font-weight:700!important;
+  letter-spacing:-.025em!important;
+  word-break:keep-all!important;
+}
+.result-quality-v7 .fortune-section-lead,
+.result-quality-v7 .fortune-tip-lead,
+.result-quality-v7 .fortune-lucky-lead{
+  max-width:780px!important;
+  margin:8px 0 0!important;
+  font-size:14px!important;
+  line-height:24px!important;
+  font-weight:400!important;
+}
+
+/* 06 KEY POINTS */
+.result-quality-v7 .fortune-key-grid{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:12px!important;
+  margin-top:24px!important;
+}
+.result-quality-v7 .fortune-key{
+  display:block!important;
+  min-width:0!important;
+  padding:22px!important;
+  border:1px solid #e8dfdb!important;
+  border-radius:15px!important;
+  background:#fff!important;
+}
+.result-quality-v7 .fortune-key>span{
+  display:block!important;
+  margin:0 0 8px!important;
+  font-size:11px!important;
+  line-height:17px!important;
+  font-weight:700!important;
+  letter-spacing:0!important;
+}
+.result-quality-v7 .fortune-key>strong{
+  display:block!important;
+  margin:0 0 9px!important;
+  font-size:18px!important;
+  line-height:27px!important;
+  font-weight:700!important;
+  letter-spacing:-.02em!important;
+  word-break:keep-all!important;
+}
+.result-quality-v7 .fortune-key>p{
+  display:block!important;
+  margin:0!important;
+  font-size:14px!important;
+  line-height:24px!important;
+  font-weight:400!important;
+  word-break:keep-all!important;
+}
+
+/* 07 LUCKY KEYWORDS */
+.result-quality-v7 .fortune-lucky-section{background:#fff!important}
+.result-quality-v7 .fortune-lucky-grid{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:12px!important;
+  margin-top:24px!important;
+}
+.result-quality-v7 .fortune-lucky-card{
+  min-width:0;
+  padding:22px;
+  border:1px solid #e8dfdb;
+  border-radius:15px;
+  background:#fff;
+}
+.result-quality-v7 .fortune-lucky-card small{
+  display:block;
+  margin-bottom:8px;
+  font-size:11px;
+  line-height:17px;
+  font-weight:700;
+}
+.result-quality-v7 .fortune-lucky-card strong{
+  display:block;
+  margin-bottom:8px;
+  font-size:18px;
+  line-height:27px;
+  font-weight:700;
+  letter-spacing:-.02em;
+  word-break:keep-all;
+}
+.result-quality-v7 .fortune-lucky-card p{
+  margin:0!important;
+  font-size:14px!important;
+  line-height:24px!important;
+  font-weight:400!important;
+  word-break:keep-all!important;
+}
+.result-quality-v7 .fortune-lucky-note{
+  margin-top:12px!important;
+  padding:14px 16px!important;
+  border:1px solid #eee7e3!important;
+  border-radius:12px!important;
+  background:#faf8f7!important;
+  font-size:12px!important;
+  line-height:20px!important;
+}
+
+/* 08 TODAY / TOMORROW GUIDE */
+.result-quality-v7 .fortune-tip-grid{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:12px!important;
+  margin-top:24px!important;
+}
+.result-quality-v7 .fortune-tip-card{
+  min-width:0!important;
+  padding:22px!important;
+  border:1px solid #e8dfdb!important;
+  border-radius:15px!important;
+  background:#fff!important;
+}
+.result-quality-v7 .fortune-tip-card>span{
+  display:block!important;
+  margin:0 0 8px!important;
+  font-size:11px!important;
+  line-height:17px!important;
+  font-weight:700!important;
+}
+.result-quality-v7 .fortune-tip-card>h3{
+  margin:0 0 9px!important;
+  font-size:17px!important;
+  line-height:26px!important;
+  font-weight:700!important;
+  letter-spacing:-.015em!important;
+}
+.result-quality-v7 .fortune-tip-card>p{
+  margin:0!important;
+  font-size:14px!important;
+  line-height:24px!important;
+  font-weight:400!important;
+}
+.result-quality-v7 .fortune-tip-final>span{font-size:11px!important;line-height:17px!important;font-weight:700!important}
+.result-quality-v7 .fortune-tip-final>strong{font-size:18px!important;line-height:29px!important;font-weight:700!important}
+
+@media(max-width:900px){
+  .result-quality-v7 .fortune-key-grid,
+  .result-quality-v7 .fortune-lucky-grid,
+  .result-quality-v7 .fortune-tip-grid{grid-template-columns:1fr!important}
+}
+@media(max-width:600px){
+  .result-quality-v7 .fortune-report>h2,
+  .result-quality-v7 .fortune-tip-section>h2,
+  .result-quality-v7 .fortune-lucky-section>h2{font-size:24px!important;line-height:33px!important}
+  .result-quality-v7 .fortune-key,
+  .result-quality-v7 .fortune-lucky-card,
+  .result-quality-v7 .fortune-tip-card{padding:20px!important}
+  .result-quality-v7 .fortune-key>strong,
+  .result-quality-v7 .fortune-lucky-card strong{font-size:17px!important;line-height:26px!important}
+  .result-quality-v7 .fortune-key>p,
+  .result-quality-v7 .fortune-lucky-card p,
+  .result-quality-v7 .fortune-tip-card>p{font-size:14px!important;line-height:24px!important}
+}
