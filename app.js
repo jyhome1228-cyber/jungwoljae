@@ -50,14 +50,14 @@ if(profilePages.has(currentFile)){
 if(isResultLike){
   if(currentFile.endsWith('-result.html')){const e=document.createElement('script');e.type='module';e.src='./reading-event.js?v=20260908-0620';document.body.appendChild(e);}
   setTimeout(()=>{const q=document.createElement('script');q.src='./result-quality-v7.js?v=20260908-2235';q.defer=true;document.body.appendChild(q);},1800);
-  const math=document.createElement('script');math.type='module';math.src='./result-calculation-v11.js?v=20260909-0728';document.body.appendChild(math);
+  const math=document.createElement('script');math.type='module';math.src='./result-calculation-v11.js?v=20260909-0740';document.body.appendChild(math);
 }
 if(currentFile==='fortune-result.html'){
   const fx=document.createElement('script');fx.type='module';fx.src='./fortune-experience-v9.js?v=20260909-0516';document.body.appendChild(fx);
   const fix=document.createElement('script');fix.src='./fortune-layout-fix-v10.js?v=20260909-0516';fix.defer=true;document.body.appendChild(fix);
-  setTimeout(()=>{const daily=document.createElement('script');daily.type='module';daily.src='./fortune-daily-v11.js?v=20260909-0728';document.body.appendChild(daily);},1200);
+  setTimeout(()=>{const daily=document.createElement('script');daily.type='module';daily.src='./fortune-daily-v11.js?v=20260909-0740';document.body.appendChild(daily);},1200);
 }
-const toneScript=document.createElement('script');toneScript.src='./saju-tone-v11.js?v=20260909-0728';toneScript.defer=true;document.body.appendChild(toneScript);
+const toneScript=document.createElement('script');toneScript.src='./saju-tone-v11.js?v=20260909-0740';toneScript.defer=true;document.body.appendChild(toneScript);
 function fieldError(form,name,message=''){const node=form.querySelector(`[data-error-for="${name}"]`);if(node)node.textContent=message;}
 readingForm?.addEventListener('submit',event=>{
   if(currentFile==='compatibility.html'||readingForm.matches('[data-saju-form],[data-ohaeng-form],[data-fortune-form],[data-relationship-form]'))return;
