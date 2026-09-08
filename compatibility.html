@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#ffffff" />
+  <meta name="description" content="정월재 궁합 — 두 사람의 사주와 오행을 같은 기준에서 비교합니다." />
   <title>궁합 — 정월재</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
   <link rel="stylesheet" href="./styles.css" />
@@ -11,7 +12,8 @@
   <style>
     .compatibility-form .form-page-title{margin-bottom:28px!important;padding-bottom:0!important;border-bottom:0!important}
     .compatibility-form .form-group-title{margin:30px 0 16px!important;padding-top:0!important;border-top:0!important}
-    .compatibility-form .partner-panel{margin-top:34px!important;padding-top:0!important;border-top:0!important}
+    .compatibility-form .partner-panel{margin-top:36px!important;padding-top:28px!important;border-top:1px solid #e7ddd8!important}
+    .compatibility-form .partner-panel .form-group-title{margin-top:0!important}
     .compatibility-form .page-field-row{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important;align-items:start!important}
     .compatibility-form .page-field-row+.page-field-row{margin-top:16px!important}
     .compatibility-form .page-field-row .field{width:auto!important;max-width:none!important;margin:0!important}
@@ -22,12 +24,14 @@
     .compatibility-form input:focus,.compatibility-form select:focus{border-color:#543a3a!important;box-shadow:0 0 0 3px rgba(84,58,58,.07)!important}
     .compatibility-form .date-selects{display:grid!important;grid-template-columns:1.45fr .8fr .8fr!important;gap:8px!important}
     .compatibility-form .time-selects{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important}
-    .compatibility-form .calendar-field{max-width:calc(50% - 7px)!important}
-    .compatibility-form .field-message{min-height:0!important;margin:6px 0 0!important}
+    .compatibility-form .field-message{min-height:0!important;margin:6px 0 0!important;color:#9a554f!important;font-size:11px!important;line-height:17px!important}
+    .compatibility-form .lunar-check{display:flex!important;align-items:center!important;gap:8px!important;margin:9px 0 0!important;color:#756b67!important;font-size:11px!important;font-weight:500!important}
+    .compatibility-form .lunar-check[hidden]{display:none!important}
+    .compatibility-form .lunar-check input{width:18px!important;height:18px!important;margin:0!important;accent-color:#543a3a!important}
+    .compatibility-note{margin:18px 0 0!important;padding:13px 14px;border-radius:10px;background:#faf7f5;color:#817571!important;font-size:11px!important;line-height:18px!important}
     @media(max-width:767px){
       .compatibility-form .page-field-row{grid-template-columns:1fr!important}
       .compatibility-form .date-selects{grid-template-columns:1.25fr .85fr .85fr!important}
-      .compatibility-form .calendar-field{max-width:none!important}
     }
   </style>
 </head>
@@ -35,7 +39,7 @@
   <header class="site-header">
     <div class="wide-container header-inner">
       <a class="brand" href="./index.html" aria-label="정월재 홈"><span class="brand-hanja">正月齋</span><span class="brand-korean">정월재</span></a>
-      <nav class="desktop-nav"><a href="./saju.html">사주</a><a href="./ohaeng.html">오행</a><a href="./fortune.html">오늘의 운세</a><a href="./tomorrow.html">내일의 운세</a><a href="./relationship.html">인연</a><a href="./compatibility.html" aria-current="page">궁합</a><a href="./work-money.html">일·재물</a><a href="./guide.html">정월도감</a><a href="./talisman.html">정월부적</a><a href="./lucky-number.html">행운의 숫자</a><a href="./important-day.html">중요한 날</a><a href="./moving-day.html">이사 택일</a><a href="./archive.html">정월록</a><a href="./reviews.html">후기</a><a href="./about.html">소개</a></nav>
+      <nav class="desktop-nav"></nav>
       <a class="header-cta" href="./signup.html">회원등록</a>
       <button class="menu-button" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu" data-menu-button><span></span><span></span></button>
     </div>
@@ -45,34 +49,47 @@
   <main>
     <nav class="secondary-nav"><div class="container"><a href="./saju.html">종합 사주</a><a href="./ohaeng.html">오행 분석</a><a href="./fortune.html">오늘의 운세</a><a href="./relationship.html">연애와 인연</a><a aria-current="page" href="./compatibility.html">궁합</a><a href="./work-money.html">일과 재물</a></div></nav>
 
-    <section class="sub-hero"><div class="container"><div class="breadcrumb"><a href="./index.html">정월재</a><span>/</span><span>궁합</span></div><p class="eyebrow">COMPATIBILITY</p><h1>두 사람의 차이를<br />같은 기준에서 봅니다.</h1><p class="sub-lead">두 사람의 사주와 오행을 함께 비교해 끌리는 지점, 부딪히는 지점, 서로 보완되는 기운을 살펴봅니다.</p></div></section>
+    <section class="sub-hero"><div class="container"><div class="breadcrumb"><a href="./index.html">정월재</a><span>/</span><span>궁합</span></div><p class="eyebrow">COMPATIBILITY</p><h1>두 사람의 차이를<br />같은 기준에서 봅니다.</h1><p class="sub-lead">두 사람의 사주와 오행을 함께 비교해 편한 지점, 부딪히는 지점, 서로 보완되는 부분을 현실적인 관계 기준으로 정리합니다.</p></div></section>
 
     <section class="page-section"><div class="container page-layout">
-      <div class="page-copy"><p class="eyebrow">TWO PEOPLE</p><h2>점수 하나보다<br />관계의 구조.</h2><p>궁합을 하나의 숫자로 단정하지 않고 서로 다른 기질이 어떻게 만나고 충돌하는지를 봅니다.</p><ul class="detail-list"><li><span>01</span><div><strong>기질 비교</strong><p>각자의 일간과 오행 구조가 관계 안에서 어떻게 드러나는지 봅니다.</p></div></li><li><span>02</span><div><strong>보완과 충돌</strong><p>서로 채워주는 부분과 반복적으로 부딪힐 수 있는 부분을 함께 읽습니다.</p></div></li><li><span>03</span><div><strong>관계의 흐름</strong><p>현재 시기의 기운이 두 사람의 관계에 어떤 영향을 주는지 봅니다.</p></div></li></ul></div>
+      <div class="page-copy">
+        <p class="eyebrow">TWO PEOPLE</p><h2>점수 하나보다<br />관계의 구조.</h2>
+        <p>궁합을 좋다·나쁘다로 단정하기보다 두 사람이 감정을 표현하고 갈등을 풀고 일상을 맞춰가는 방식이 어디서 잘 맞는지 봅니다.</p>
+        <ul class="detail-list">
+          <li><span>01</span><div><strong>두 사람의 기본 기질</strong><p>각자의 일간과 오행 분포를 같은 기준으로 계산해 비교합니다.</p></div></li>
+          <li><span>02</span><div><strong>보완과 충돌</strong><p>한쪽이 자연스럽게 채워주는 부분과 반복해서 어긋날 수 있는 부분을 함께 봅니다.</p></div></li>
+          <li><span>03</span><div><strong>실제 관계 기준</strong><p>대화, 감정 표현, 생활 리듬, 갈등 회복처럼 실제 관계에서 체감되는 방식으로 풀어드립니다.</p></div></li>
+        </ul>
+      </div>
 
       <div class="service-form-wrap">
-        <form class="reading-form compatibility-form" data-reading-form novalidate>
+        <form class="reading-form compatibility-form" data-reading-form data-compatibility-form novalidate>
           <input type="radio" name="serviceType" value="compatibility" checked hidden />
-          <input type="hidden" id="birth-date" name="birthDate" />
-          <input type="hidden" id="birth-time" name="birthTime" />
-          <input type="hidden" id="partner-birth-date" name="partnerBirthDate" />
-          <input type="hidden" id="partner-birth-time" name="partnerBirthTime" />
-
-          <div class="form-page-title"><span class="flow-step-number">01</span><h2>두 사람의 정보를 입력해주세요.</h2><p>출생 시간을 모르면 비워두어도 됩니다.</p></div>
+          <div class="form-page-title"><span class="flow-step-number">01</span><h2>두 사람의 정보를 입력해주세요.</h2><p>출생 시간을 모르면 비워두어도 됩니다. 성별과 태어난 지역까지 함께 확인해 더 정확하게 비교합니다.</p></div>
 
           <div class="form-group-title">나의 정보</div>
           <div class="page-field-row"><div class="field full"><label for="profile-name">이름 또는 닉네임 <span class="required">필수</span></label><input id="profile-name" name="profileName" type="text" required /><p class="field-message" data-error-for="profile-name"></p></div></div>
-          <div class="page-field-row"><div class="field full"><label>태어난 날짜 <span class="required">필수</span></label><div class="date-selects"><select id="birth-year" required aria-label="태어난 연도"><option value="">연도</option></select><select id="birth-month" required aria-label="태어난 월"><option value="">월</option></select><select id="birth-day" required aria-label="태어난 일"><option value="">일</option></select></div></div></div>
-          <div class="page-field-row"><div class="field full"><label>태어난 시간 <span class="optional">선택</span></label><div class="time-selects"><select id="birth-meridiem" aria-label="오전 오후"><option value="">오전/오후</option><option value="am">오전</option><option value="pm">오후</option></select><select id="birth-hour" aria-label="태어난 시"><option value="">시</option></select><select id="birth-minute" aria-label="태어난 분"><option value="">분</option></select></div></div></div>
-          <div class="page-field-row"><div class="field calendar-field"><label for="calendar-type">달력 기준</label><select id="calendar-type" name="calendarType"><option value="solar">양력</option><option value="lunar">음력</option></select></div></div>
+          <div class="page-field-row"><div class="field full"><label>태어난 날짜 <span class="required">필수</span></label><div class="date-selects"><select id="birth-year" aria-label="태어난 연도"><option value="">연도</option></select><select id="birth-month" aria-label="태어난 월"><option value="">월</option></select><select id="birth-day" aria-label="태어난 일"><option value="">일</option></select></div></div></div>
+          <div class="page-field-row"><div class="field full"><label>태어난 시간 <span class="optional">선택</span></label><div class="time-selects"><select id="birth-meridiem"><option value="">오전/오후</option><option value="am">오전</option><option value="pm">오후</option></select><select id="birth-hour"><option value="">시</option></select><select id="birth-minute"><option value="">분</option></select></div></div></div>
+          <div class="page-field-row">
+            <div class="field"><label for="birth-gender">성별 <span class="required">필수</span></label><select id="birth-gender"><option value="">선택해주세요</option><option value="male">남성</option><option value="female">여성</option></select></div>
+            <div class="field"><label for="birth-calendar">달력 기준</label><select id="birth-calendar"><option value="solar">양력</option><option value="lunar">음력</option></select><label class="lunar-check" id="birth-lunar-wrap" hidden><input id="birth-leap" type="checkbox" /><span>윤달입니다</span></label></div>
+          </div>
+          <div class="page-field-row"><div class="field full"><label for="birth-city">태어난 지역 <span class="required">필수</span></label><select id="birth-city"><option value="">지역을 선택해주세요</option></select></div></div>
 
           <section class="partner-panel" data-partner-panel>
             <div class="form-group-title">상대방 정보</div>
             <div class="page-field-row"><div class="field full"><label for="partner-name">이름 또는 닉네임 <span class="required">필수</span></label><input id="partner-name" name="partnerName" type="text" required /><p class="field-message" data-error-for="partner-name"></p></div></div>
-            <div class="page-field-row"><div class="field full"><label>태어난 날짜 <span class="required">필수</span></label><div class="date-selects"><select id="partner-birth-year" required aria-label="상대방 태어난 연도"><option value="">연도</option></select><select id="partner-birth-month" required aria-label="상대방 태어난 월"><option value="">월</option></select><select id="partner-birth-day" required aria-label="상대방 태어난 일"><option value="">일</option></select></div></div></div>
-            <div class="page-field-row"><div class="field full"><label>태어난 시간 <span class="optional">선택</span></label><div class="time-selects"><select id="partner-birth-meridiem" aria-label="상대방 오전 오후"><option value="">오전/오후</option><option value="am">오전</option><option value="pm">오후</option></select><select id="partner-birth-hour" aria-label="상대방 태어난 시"><option value="">시</option></select><select id="partner-birth-minute" aria-label="상대방 태어난 분"><option value="">분</option></select></div></div></div>
+            <div class="page-field-row"><div class="field full"><label>태어난 날짜 <span class="required">필수</span></label><div class="date-selects"><select id="partner-birth-year"><option value="">연도</option></select><select id="partner-birth-month"><option value="">월</option></select><select id="partner-birth-day"><option value="">일</option></select></div></div></div>
+            <div class="page-field-row"><div class="field full"><label>태어난 시간 <span class="optional">선택</span></label><div class="time-selects"><select id="partner-birth-meridiem"><option value="">오전/오후</option><option value="am">오전</option><option value="pm">오후</option></select><select id="partner-birth-hour"><option value="">시</option></select><select id="partner-birth-minute"><option value="">분</option></select></div></div></div>
+            <div class="page-field-row">
+              <div class="field"><label for="partner-birth-gender">성별 <span class="required">필수</span></label><select id="partner-birth-gender"><option value="">선택해주세요</option><option value="male">남성</option><option value="female">여성</option></select></div>
+              <div class="field"><label for="partner-birth-calendar">달력 기준</label><select id="partner-birth-calendar"><option value="solar">양력</option><option value="lunar">음력</option></select><label class="lunar-check" id="partner-birth-lunar-wrap" hidden><input id="partner-birth-leap" type="checkbox" /><span>윤달입니다</span></label></div>
+            </div>
+            <div class="page-field-row"><div class="field full"><label for="partner-birth-city">태어난 지역 <span class="required">필수</span></label><select id="partner-birth-city"><option value="">지역을 선택해주세요</option></select></div></div>
           </section>
 
+          <p class="compatibility-note">궁합 점수는 두 사람의 관계를 단정하는 값이 아니라, 명식의 공통점·보완점·충돌 요소를 한눈에 비교하기 위한 참고 지표로 사용합니다.</p>
           <div class="form-submit-area"><label class="consent-row"><input type="checkbox" name="consent" required /><span>분석을 위해 입력 정보가 사용되는 것에 동의합니다.</span></label><p class="form-status" role="status" aria-live="polite" data-form-status></p><button class="button button-primary button-large" type="submit">두 사람의 궁합 살펴보기</button></div>
         </form>
       </div>
@@ -80,29 +97,7 @@
   </main>
 
   <footer class="site-footer"></footer>
-
-  <script>
-    (()=>{
-      const currentYear=new Date().getFullYear();
-      const pad=n=>String(n).padStart(2,'0');
-      const fillYears=id=>{const el=document.getElementById(id);for(let y=currentYear;y>=1900;y--){el.add(new Option(`${y}년`,String(y)));}};
-      const fillMonths=id=>{const el=document.getElementById(id);for(let m=1;m<=12;m++)el.add(new Option(`${m}월`,pad(m)));};
-      const fillHours=id=>{const el=document.getElementById(id);for(let h=1;h<=12;h++)el.add(new Option(`${h}시`,pad(h)));};
-      const fillMinutes=id=>{const el=document.getElementById(id);for(let m=0;m<60;m++)el.add(new Option(`${pad(m)}분`,pad(m)));};
-      const refreshDays=(yearId,monthId,dayId)=>{const y=Number(document.getElementById(yearId).value)||2000;const m=Number(document.getElementById(monthId).value)||1;const day=document.getElementById(dayId);const keep=day.value;const max=new Date(y,m,0).getDate();day.innerHTML='<option value="">일</option>';for(let d=1;d<=max;d++)day.add(new Option(`${d}일`,pad(d)));if(keep&&Number(keep)<=max)day.value=keep;};
-      const syncDate=(yearId,monthId,dayId,targetId)=>{const y=document.getElementById(yearId).value,m=document.getElementById(monthId).value,d=document.getElementById(dayId).value;document.getElementById(targetId).value=y&&m&&d?`${y}-${m}-${d}`:'';};
-      const syncTime=(meridiemId,hourId,minuteId,targetId)=>{const mer=document.getElementById(meridiemId).value,h=document.getElementById(hourId).value,min=document.getElementById(minuteId).value;let value='';if(mer&&h&&min){let hour=Number(h)%12;if(mer==='pm')hour+=12;value=`${pad(hour)}:${min}`;}document.getElementById(targetId).value=value;};
-      const setupPerson=(prefix,targetPrefix)=>{
-        const year=`${prefix}year`,month=`${prefix}month`,day=`${prefix}day`,meridiem=`${prefix}meridiem`,hour=`${prefix}hour`,minute=`${prefix}minute`;
-        fillYears(year);fillMonths(month);fillHours(hour);fillMinutes(minute);refreshDays(year,month,day);
-        [year,month].forEach(id=>document.getElementById(id).addEventListener('change',()=>{refreshDays(year,month,day);syncDate(year,month,day,`${targetPrefix}date`);}));
-        document.getElementById(day).addEventListener('change',()=>syncDate(year,month,day,`${targetPrefix}date`));
-        [meridiem,hour,minute].forEach(id=>document.getElementById(id).addEventListener('change',()=>syncTime(meridiem,hour,minute,`${targetPrefix}time`)));
-      };
-      setupPerson('birth-','birth-');
-      setupPerson('partner-birth-','partner-birth-');
-    })();
-  </script>
+  <script src="./compatibility-form.js?v=20260908-2205"></script>
   <script src="./app.js?v=20260908-2144" defer></script>
 </body>
 </html>
