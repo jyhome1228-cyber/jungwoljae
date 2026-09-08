@@ -1,9 +1,10 @@
 (()=>{
   const tool=document.body.dataset.quickTool;
   if(!['lucky-number','important-day','moving'].includes(tool))return;
+  const form=document.querySelector('[data-quick-form]');
   const result=document.querySelector('[data-quick-result]');
   const body=document.querySelector('[data-quick-result-body]');
-  if(!result||!body)return;
+  if(!form||!result||!body)return;
 
   const purposeLabels={contract:'계약·서명',open:'개업·오픈',interview:'면접·중요 미팅',exam:'시험·평가',presentation:'발표·제안',project:'프로젝트 시작',relationship:'고백·관계 시작',travel:'여행·출발'};
   const purposeRules={
@@ -73,6 +74,6 @@
   let timer=0;
   const schedule=()=>{clearTimeout(timer);timer=setTimeout(render,60);};
   new MutationObserver(schedule).observe(result,{subtree:true,childList:true,attributes:true,attributeFilter:['hidden']});
-  form?.addEventListener('submit',()=>setTimeout(render,120));
+  form.addEventListener('submit',()=>setTimeout(render,120));
   schedule();
 })();
