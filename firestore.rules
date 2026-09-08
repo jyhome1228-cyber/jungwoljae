@@ -74,13 +74,13 @@ service cloud.firestore {
                       'uid', 'createdAt'
                     ])
                     && (
-                      request.resource.data.service == 'saju'
-                      || request.resource.data.service == 'ohaeng'
-                      || request.resource.data.service == 'fortune'
-                      || request.resource.data.service == 'relationship'
-                      || request.resource.data.service == 'compatibility'
-                      || request.resource.data.service == 'work-money'
-                      || request.resource.data.service == 'guide'
+                      request.resource.data.get('service', '') == 'saju'
+                      || request.resource.data.get('service', '') == 'ohaeng'
+                      || request.resource.data.get('service', '') == 'fortune'
+                      || request.resource.data.get('service', '') == 'relationship'
+                      || request.resource.data.get('service', '') == 'compatibility'
+                      || request.resource.data.get('service', '') == 'work-money'
+                      || request.resource.data.get('service', '') == 'guide'
                     )
                     && request.resource.data.serviceLabel.size() <= 40
                     && request.resource.data.name.size() <= 120
