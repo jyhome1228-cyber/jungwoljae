@@ -1,0 +1,43 @@
+/* Brand-specific contrast corrections. Structural rules live in universal-structure-v8.css. */
+.result-quality-v7 .fortune-signal{color:#fff!important}
+.result-quality-v7 .fortune-signal>div>span{color:rgba(255,255,255,.68)!important;opacity:1!important}
+.result-quality-v7 .fortune-signal>div>strong{color:#fff!important}
+.result-quality-v7 .fortune-signal>p{color:rgba(255,255,255,.84)!important}
+
+.result-quality-v7 .fortune-tip-final{color:#fff!important}
+.result-quality-v7 .fortune-tip-final>span{color:rgba(255,255,255,.66)!important}
+.result-quality-v7 .fortune-tip-final>strong{color:#fff!important}
+
+.result-quality-v7 .daymaster-section{color:#fff!important}
+.result-quality-v7 .daymaster-section>.daymaster-grid h2,
+.result-quality-v7 .daymaster-section>.daymaster-grid h3,
+.result-quality-v7 .daymaster-section>.daymaster-grid p,
+.result-quality-v7 .daymaster-section .daymaster-symbol{color:#fff!important}
+.result-quality-v7 .daymaster-section>.daymaster-grid p{color:rgba(255,255,255,.86)!important}
+.result-quality-v7 .daymaster-section .saju-easy-explain h3,
+.result-quality-v7 .daymaster-section .saju-explain-card strong,
+.result-quality-v7 .daymaster-section .saju-explain-note strong{color:#fff!important}
+.result-quality-v7 .daymaster-section .saju-easy-explain p,
+.result-quality-v7 .daymaster-section .saju-explain-card p,
+.result-quality-v7 .daymaster-section .saju-explain-card em,
+.result-quality-v7 .daymaster-section .saju-explain-note{color:rgba(255,255,255,.82)!important}
+
+.result-quality-v7 .summary-prose{color:#fff!important}
+.result-quality-v7 .summary-prose p{color:rgba(255,255,255,.88)!important}
+.result-quality-v7 .summary-prose strong{color:#fff!important}
+
+.result-quality-v7 .guide-answer-section{color:#fff!important}
+.result-quality-v7 .guide-answer-section h2,
+.result-quality-v7 .guide-answer-section h3,
+.result-quality-v7 .guide-answer-section strong{color:#fff!important}
+.result-quality-v7 .guide-answer-section p{color:rgba(255,255,255,.9)!important}
+
+.result-quality-v7 .yin-yang-card{color:#fff!important}
+.result-quality-v7 .yin-yang-card span,
+.result-quality-v7 .yin-yang-card strong{color:#fff!important}
+
+/* Older friendly blocks may still appear on cached result pages. */
+.result-friendly-callout,.rf3-tip{color:#fff!important}
+.result-friendly-callout span,.rf3-tip span{color:rgba(255,255,255,.65)!important}
+.result-friendly-callout strong,.rf3-tip strong{color:#fff!important}
+.result-friendly-callout p,.rf3-tip p{color:rgba(255,255,255,.84)!important}
