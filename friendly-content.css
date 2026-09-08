@@ -91,6 +91,16 @@
 .dark-friendly .friendly-term-note{color:rgba(255,255,255,.65)}
 .friendly-explain{margin-top:12px!important;padding-top:12px;border-top:1px solid #eee6e2;color:#6a605c!important}
 
+/* Jungwol Dogam uses the dedicated moonlit hanok landscape across the site. */
+.service-visual-card.guide-card,
+.guide-image-hero{
+  background-image:url('./guide-card.svg?v=20260908-1140')!important;
+  background-position:center center!important;
+  background-size:cover!important;
+  background-repeat:no-repeat!important;
+}
+.service-visual-card.guide-card::before{background:linear-gradient(to top,rgba(36,24,24,.88) 0%,rgba(36,24,24,.38) 55%,rgba(36,24,24,.08) 100%)!important}
+
 @media(max-width:767px){
   .guide-form .guide-field input:not([type="checkbox"]),.guide-form .guide-field select{height:50px!important;font-size:14px!important}
   .guide-result-main .guide-personal-card p,.guide-result-main .guide-check-card p,.guide-result-main .guide-action-card p,.guide-result-main .guide-reason-copy p,.guide-result-main .guide-warning-copy p,.guide-result-main .guide-answer p,
