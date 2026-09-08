@@ -1,0 +1,87 @@
+/* Final fortune result layer — single source of truth */
+.fortune-result-main[data-final-state="loading"]{visibility:hidden}
+.fortune-result-main[data-final-state="ready"]{visibility:visible}
+
+.fortune-result-main .fortune-report{padding:28px!important}
+.fortune-result-main .fortune-label{margin:0 0 8px!important;font-size:10px!important;line-height:15px!important;font-weight:700!important;letter-spacing:.035em!important}
+.fortune-result-main .fortune-report>h2,.fortune-result-main .fortune-relation h2,.fortune-result-main .fortune-story-section h2,.fortune-result-main .fortune-total-section h2,.fortune-result-main .fortune-tip-section h2{margin:0!important;font-size:22px!important;line-height:30px!important;font-weight:700!important;letter-spacing:-.025em!important;word-break:keep-all!important}
+.fortune-result-main .fortune-section-lead,.fortune-result-main .fortune-tip-lead,.fortune-result-main .fortune-lucky-lead{max-width:780px!important;margin:7px 0 0!important;font-size:12px!important;line-height:20px!important;color:#746a66!important}
+
+.fortune-result-main .fortune-overview{gap:14px!important}
+.fortune-result-main .fortune-signal,.fortune-result-main .fortune-relation{padding:24px!important;border-radius:15px!important}
+.fortune-result-main .fortune-signal strong{font-size:25px!important;line-height:36px!important;letter-spacing:-.03em!important}
+.fortune-result-main .fortune-signal p,.fortune-result-main .fortune-relation>p:last-child{font-size:13px!important;line-height:22px!important}
+
+.fortune-result-main .fortune-story{display:grid!important;gap:0!important;margin-top:18px!important;border:1px solid #e8dfdb!important;border-radius:14px!important;overflow:hidden!important}
+.fortune-result-main .fortune-story p{margin:0!important;padding:17px 18px!important;border-bottom:1px solid #eee7e3!important;font-size:13px!important;line-height:23px!important;color:#5f5652!important}
+.fortune-result-main .fortune-story p:last-child{border-bottom:0!important}
+
+.fortune-result-main .fortune-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;margin-top:18px!important}
+.fortune-result-main .fortune-card{min-height:0!important;padding:20px!important;border:1px solid #e8dfdb!important;border-radius:14px!important;background:#fff!important}
+.fortune-result-main .fortune-card>span{display:block!important;margin-bottom:10px!important;font-size:10px!important;line-height:15px!important;font-weight:700!important}
+.fortune-result-main .fortune-card h3{margin:0 0 9px!important;font-size:17px!important;line-height:24px!important;font-weight:700!important}
+.fortune-result-main .fortune-card p{margin:0!important;font-size:12.5px!important;line-height:22px!important;color:#665c58!important;word-break:keep-all!important}
+.fortune-result-main .fortune-card p strong{display:block!important;margin-bottom:6px!important;font-size:14px!important;line-height:21px!important;color:#332b29!important}
+.fortune-result-main .fortune-card>strong:last-child{display:inline-flex!important;margin-top:13px!important;padding:5px 8px!important;border-radius:999px!important;background:#f7f3f1!important;font-size:10px!important;line-height:14px!important}
+
+.fortune-result-main .fortune-time-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px!important;margin-top:18px!important}
+.fortune-result-main .fortune-time-card{padding:18px!important;border:1px solid #e8dfdb!important;border-radius:14px!important;background:#fff!important}
+.fortune-result-main .fortune-time-card span{font-size:10px!important;line-height:15px!important}
+.fortune-result-main .fortune-time-card strong{display:block!important;margin:7px 0!important;font-size:14px!important;line-height:21px!important}
+.fortune-result-main .fortune-time-card p{margin:0!important;font-size:12px!important;line-height:20px!important;color:#6f6561!important}
+
+.fortune-result-main .fortune-choice-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;margin-top:18px!important}
+.fortune-result-main .fortune-choice-card{overflow:hidden!important;border:1px solid #e8dfdb!important;border-radius:14px!important;background:#fff!important}
+.fortune-result-main .fortune-choice-card>span{display:flex!important;align-items:center!important;min-height:44px!important;padding:0 16px!important;border-bottom:1px solid #eee7e3!important;font-size:12px!important;font-weight:700!important}
+.fortune-result-main .fortune-choice-card ul{margin:0!important;padding:4px 18px 8px!important;list-style:none!important}
+.fortune-result-main .fortune-choice-card li{display:flex!important;gap:11px!important;padding:12px 0!important;border-bottom:1px solid #eee7e3!important}
+.fortune-result-main .fortune-choice-card li:last-child{border-bottom:0!important}
+.fortune-result-main .fortune-choice-card li:before{content:attr(data-index)!important;display:grid!important;flex:0 0 23px!important;width:23px!important;height:23px!important;place-items:center!important;border-radius:50%!important;background:#f4efec!important;font-size:9px!important;font-weight:700!important}
+.fortune-result-main .fortune-choice-card li strong{display:block!important;margin-bottom:4px!important;font-size:12.5px!important;line-height:19px!important}
+.fortune-result-main .fortune-choice-card li span{display:block!important;font-size:11.5px!important;line-height:19px!important;color:#756b67!important}
+
+.fortune-result-main .fortune-key-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px!important;margin-top:18px!important}
+.fortune-result-main .fortune-key-card{padding:18px!important;border:1px solid #e8dfdb!important;border-radius:14px!important;background:#fff!important}
+.fortune-result-main .fortune-key-card span{display:block!important;margin-bottom:6px!important;font-size:9.5px!important;line-height:15px!important}
+.fortune-result-main .fortune-key-card strong{display:block!important;margin-bottom:7px!important;font-size:14px!important;line-height:21px!important}
+.fortune-result-main .fortune-key-card p{margin:0!important;font-size:11.5px!important;line-height:19px!important;color:#716662!important}
+
+.fortune-result-main .fortune-lucky-section{background:#fff!important}
+.fortune-result-main .fortune-lucky-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px!important;margin-top:18px!important}
+.fortune-result-main .fortune-lucky-card{padding:18px!important;border:1px solid #e8dfdb!important;border-radius:14px!important;background:#fff!important}
+.fortune-result-main .fortune-lucky-card small{display:block!important;margin-bottom:6px!important;font-size:9.5px!important;line-height:15px!important}
+.fortune-result-main .fortune-lucky-card strong{display:block!important;margin-bottom:6px!important;font-size:14px!important;line-height:21px!important}
+.fortune-result-main .fortune-lucky-card p{margin:0!important;font-size:11.5px!important;line-height:19px!important;color:#716662!important}
+.fortune-result-main .fortune-lucky-note{margin-top:12px!important;padding:13px 15px!important;border:1px solid #eee7e3!important;border-radius:12px!important;background:#faf8f7!important;font-size:11.5px!important;line-height:19px!important}
+
+.fortune-result-main .fortune-tip-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px!important;margin-top:18px!important}
+.fortune-result-main .fortune-tip-card{padding:18px!important;border:1px solid #e8dfdb!important;border-radius:14px!important;background:#fff!important}
+.fortune-result-main .fortune-tip-card span{font-size:9.5px!important;line-height:15px!important}
+.fortune-result-main .fortune-tip-card h3{margin:6px 0!important;font-size:14px!important;line-height:21px!important}
+.fortune-result-main .fortune-tip-card p{margin:0!important;font-size:11.5px!important;line-height:19px!important;color:#716662!important}
+.fortune-result-main .fortune-tip-final{margin-top:12px!important;padding:16px 18px!important;border-radius:12px!important}
+.fortune-result-main .fortune-tip-final span{display:block!important;margin-bottom:5px!important;font-size:9.5px!important;line-height:15px!important}
+.fortune-result-main .fortune-tip-final strong{display:block!important;font-size:13px!important;line-height:21px!important}
+
+.fortune-result-main .fortune-total{display:grid!important;grid-template-columns:1fr!important;gap:0!important;margin-top:18px!important;border:1px solid #e8dfdb!important;border-radius:14px!important;overflow:hidden!important;background:#fff!important}
+.fortune-result-main .fortune-total p{margin:0!important;padding:16px 18px!important;border-bottom:1px solid #eee7e3!important;font-size:12px!important;line-height:21px!important;color:#665c58!important}
+.fortune-result-main .fortune-total p:last-child{border-bottom:0!important}
+.fortune-result-main .fortune-total .fortune-summary-label{display:block!important;margin-bottom:5px!important;font-size:9px!important;line-height:14px!important;font-weight:700!important;letter-spacing:.04em!important}
+.fortune-result-main .fortune-total strong{display:block!important;margin-bottom:5px!important;font-size:13.5px!important;line-height:21px!important;color:#342c2a!important}
+
+.fortune-result-main .fortune-evidence details{display:block!important}
+.fortune-result-main .fortune-evidence summary{display:none!important}
+.fortune-result-main .fortune-evidence-content{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+.fortune-result-main .fortune-evidence-item{padding:15px 16px!important;border:1px solid #e8dfdb!important;border-radius:12px!important;background:#faf8f7!important}
+.fortune-result-main .fortune-evidence-item strong{display:block!important;margin-bottom:5px!important;font-size:12px!important;line-height:18px!important}
+.fortune-result-main .fortune-evidence-item p{margin:0!important;font-size:11px!important;line-height:18px!important;color:#726864!important}
+
+@media(max-width:900px){
+  .fortune-result-main .fortune-grid,.fortune-result-main .fortune-time-grid,.fortune-result-main .fortune-key-grid,.fortune-result-main .fortune-lucky-grid,.fortune-result-main .fortune-tip-grid{grid-template-columns:1fr!important}
+  .fortune-result-main .fortune-choice-grid,.fortune-result-main .fortune-evidence-content{grid-template-columns:1fr!important}
+}
+@media(max-width:600px){
+  .fortune-result-main .fortune-report{padding:22px!important}
+  .fortune-result-main .fortune-report>h2,.fortune-result-main .fortune-relation h2,.fortune-result-main .fortune-story-section h2,.fortune-result-main .fortune-total-section h2,.fortune-result-main .fortune-tip-section h2{font-size:20px!important;line-height:28px!important}
+  .fortune-result-main .fortune-signal strong{font-size:22px!important;line-height:32px!important}
+}
