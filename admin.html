@@ -14,16 +14,15 @@
   <style>
     [hidden]{display:none!important}
     .admin-pass-gate{display:grid;min-height:calc(100vh - 150px);place-items:center;padding:40px 20px}
-    .admin-pass-card{width:min(100%,420px);padding:38px 32px;border:1px solid #e8dfdb;border-radius:22px;background:#fff;text-align:center;box-shadow:0 16px 50px rgba(84,58,58,.07)}
+    .admin-pass-card{width:min(100%,440px);padding:38px 32px;border:1px solid #e8dfdb;border-radius:22px;background:#fff;text-align:center;box-shadow:0 16px 50px rgba(84,58,58,.07)}
     .admin-pass-card img{width:52px;height:52px;object-fit:contain}
     .admin-pass-eyebrow{margin:15px 0 6px;color:#543a3a;font-size:9px;font-weight:800;letter-spacing:.09em}
     .admin-pass-card h1{margin:0;color:#2b2524;font-size:24px;line-height:34px;letter-spacing:-.03em}
     .admin-pass-card>p:not(.admin-pass-eyebrow){margin:9px 0 22px;color:#837975;font-size:12px;line-height:19px}
-    .admin-pass-form{display:grid;gap:9px}
-    .admin-pass-input{width:100%;height:52px;padding:0 16px;border:1px solid #d8cbc6;border-radius:12px;background:#fff;color:#2b2524;font-size:20px;font-weight:700;letter-spacing:.22em;text-align:center;outline:none}
-    .admin-pass-input:focus{border-color:#543a3a;box-shadow:0 0 0 3px rgba(84,58,58,.08)}
-    .admin-pass-button{height:48px;border:1px solid #543a3a;border-radius:12px;background:#543a3a;color:#fff;font-size:12px;font-weight:800;cursor:pointer}
-    .admin-pass-status{min-height:18px;margin:3px 0 0;color:#9a584f;font-size:10px;line-height:18px}
+    .admin-pass-actions{display:grid;gap:9px}
+    .admin-pass-button{display:flex;align-items:center;justify-content:center;width:100%;height:48px;border:1px solid #543a3a;border-radius:12px;background:#543a3a;color:#fff;font-size:12px;font-weight:800;text-decoration:none;cursor:pointer}
+    .admin-pass-button.secondary{background:#fff;color:#543a3a}
+    .admin-pass-status{min-height:18px;margin:12px 0 0;color:#837975;font-size:10px;line-height:18px;word-break:keep-all}
     .admin-lock{display:none}
     body.admin-unlocked .admin-lock{display:inline-flex}
     @media(max-width:720px){.admin-pass-card{padding:32px 22px}.admin-pass-card h1{font-size:22px}}
@@ -36,23 +35,23 @@
       <div class="admin-header-actions">
         <a href="./index.html" class="admin-ghost">사이트 보기</a>
         <button type="button" class="admin-ghost" data-admin-refresh>새로고침</button>
-        <button type="button" class="admin-dark admin-lock" data-admin-lock>잠금</button>
+        <button type="button" class="admin-dark admin-lock" data-admin-lock>로그아웃</button>
       </div>
     </div>
   </header>
 
   <main class="admin-main">
-    <section class="admin-pass-gate" data-admin-pass-gate>
+    <section class="admin-pass-gate" data-admin-auth-gate>
       <div class="admin-pass-card">
         <img src="./logo.svg" alt="" />
         <p class="admin-pass-eyebrow">JEONGWOLJAE ADMIN</p>
-        <h1>운영 코드 입력</h1>
-        <p>정월재 운영 대시보드를 확인하려면<br />4자리 코드를 입력해주세요.</p>
-        <form class="admin-pass-form" data-admin-pass-form autocomplete="off">
-          <input class="admin-pass-input" data-admin-pass-input type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" aria-label="운영 코드" placeholder="••••" autofocus />
-          <button class="admin-pass-button" type="submit">대시보드 들어가기</button>
-          <p class="admin-pass-status" data-admin-pass-status role="status" aria-live="polite"></p>
-        </form>
+        <h1 data-admin-auth-title>운영 계정 확인 중</h1>
+        <p data-admin-auth-description>Firebase 관리자 권한을 확인하고 있습니다.</p>
+        <div class="admin-pass-actions">
+          <a class="admin-pass-button" href="./login.html?next=./admin.html" data-admin-login-link hidden>운영 계정 로그인</a>
+          <button class="admin-pass-button secondary" type="button" data-admin-switch-account hidden>다른 계정으로 로그인</button>
+        </div>
+        <p class="admin-pass-status" data-admin-auth-status role="status" aria-live="polite"></p>
       </div>
     </section>
 
@@ -143,6 +142,6 @@
     </section>
   </div>
 
-  <script type="module" src="./admin.js?v=20260908-0620"></script>
+  <script type="module" src="./admin.js?v=20260908-1535"></script>
 </body>
 </html>
