@@ -15,14 +15,14 @@ service cloud.firestore {
         && get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.role == 'admin';
     }
 
-    function isValidReadingService(service) {
-      return service == 'saju'
-        || service == 'ohaeng'
-        || service == 'fortune'
-        || service == 'relationship'
-        || service == 'compatibility'
-        || service == 'work-money'
-        || service == 'guide';
+    function isValidReadingService(serviceKey) {
+      return serviceKey == 'saju'
+        || serviceKey == 'ohaeng'
+        || serviceKey == 'fortune'
+        || serviceKey == 'relationship'
+        || serviceKey == 'compatibility'
+        || serviceKey == 'work-money'
+        || serviceKey == 'guide';
     }
 
     match /admins/{uid} {
