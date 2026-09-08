@@ -17,6 +17,7 @@ if(isResultLike){
 }
 const universalUi=document.createElement('link');universalUi.rel='stylesheet';universalUi.href='./universal-structure-v8.css?v=20260909-0404';document.head.appendChild(universalUi);
 if(isResultLike){const contrast=document.createElement('link');contrast.rel='stylesheet';contrast.href='./brand-contrast-v8.css?v=20260909-0404';document.head.appendChild(contrast);}
+if(currentFile==='fortune-result.html'){const fx=document.createElement('link');fx.rel='stylesheet';fx.href='./fortune-experience-v9.css?v=20260909-0412';document.head.appendChild(fx);}
 if(document.body?.classList.contains('about-page')){const l=document.createElement('link');l.rel='stylesheet';l.href='./about.css';document.head.appendChild(l);}
 const themeMeta=document.querySelector('meta[name="theme-color"]');if(themeMeta)themeMeta.setAttribute('content','#ffffff');
 function applyBrandLogo(){document.querySelectorAll('.brand').forEach(brand=>{brand.innerHTML='<img class="brand-logo" src="./logo.svg" alt="" aria-hidden="true"><span class="brand-name">정월재</span>';});}applyBrandLogo();
@@ -50,6 +51,7 @@ if(isResultLike){
   if(currentFile.endsWith('-result.html')){const e=document.createElement('script');e.type='module';e.src='./reading-event.js?v=20260908-0620';document.body.appendChild(e);}
   setTimeout(()=>{const q=document.createElement('script');q.src='./result-quality-v7.js?v=20260908-2235';q.defer=true;document.body.appendChild(q);},1800);
 }
+if(currentFile==='fortune-result.html'){const fx=document.createElement('script');fx.type='module';fx.src='./fortune-experience-v9.js?v=20260909-0412';document.body.appendChild(fx);}
 function fieldError(form,name,message=''){const node=form.querySelector(`[data-error-for="${name}"]`);if(node)node.textContent=message;}
 readingForm?.addEventListener('submit',event=>{
   if(currentFile==='compatibility.html'||readingForm.matches('[data-saju-form],[data-ohaeng-form],[data-fortune-form],[data-relationship-form]'))return;
