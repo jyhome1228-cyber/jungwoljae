@@ -2,11 +2,11 @@
   'use strict';
   const pad = value => String(value).padStart(2, '0');
   const emit = (el, type = 'change') => el.dispatchEvent(new Event(type, { bubbles: true }));
-  const labelText = el => el.closest('.field,.quick-field,.profile-edit-field')?.querySelector('label')?.textContent || '';
+  const labelText = el => el.closest('.field,.quick-field,.profile-edit-field,.guide-field')?.querySelector('label')?.textContent || '';
   const isBirthTime = el => /birth|태어난 시간|출생시간/i.test(`${el.id || ''} ${el.name || ''} ${labelText(el)}`);
 
   const styleGroups = () => {
-    document.querySelectorAll('.time-selects,.birth-time-grid,.profile-time-selects').forEach(host => host.classList.add('jwj-time-selects'));
+    document.querySelectorAll('.time-selects,.birth-time-grid,.profile-time-selects,.guide-time-selects').forEach(host => host.classList.add('jwj-time-selects'));
   };
   const makeSelect = (label, options) => {
     const select = document.createElement('select');
