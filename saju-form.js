@@ -2,6 +2,7 @@ import { firebaseConfig } from './firebase-config.js?v=20260907-1645';
 import { initializeApp, getApps, getApp } from 'https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js';
 import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js';
 import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js';
+import './saju-loading.js?v=20260909-01';
 
 const form=document.querySelector('[data-saju-form]');
 if(!form) throw new Error('saju form missing');
@@ -67,9 +68,17 @@ form.addEventListener('submit',e=>{
   if(!birthDate){status.textContent='태어난 연·월·일을 모두 선택해주세요.';return;}
   if(!timeUnknown.checked&&(meridiem.value||hour.value||minute.value)&&!birthTime){status.textContent='시간을 입력하려면 오전/오후·시·분을 모두 선택해주세요.';return;}
   if(!form.elements.consent.checked){status.textContent='분석을 위한 정보 사용에 동의해주세요.';return;}
+  if(form.dataset.submitting==='true')return;
   let focus=focusInputs.filter(x=>x.checked).map(x=>x.value);
   if(focus.includes('overall'))focus=[];
   const payload={name,birthDate,birthTime,birthTimeUnknown:timeUnknown.checked,calendarType:calendar.value,isLeapMonth:Boolean(form.elements.isLeapMonth?.checked),gender:form.elements.gender.value,city:form.elements.city.value.trim(),focus,createdAt:new Date().toISOString()};
   sessionStorage.setItem('jungwoljae_saju_input',JSON.stringify(payload));
-  location.href='./saju-result.html';
+  form.dataset.submitting='true';
+  const submitButton=form.querySelector('button[type="submit"]');
+  if(submitButton)submitButton.disabled=true;
+  if(typeof window.showJungwoljaeSajuLoading==='function'){
+    window.showJungwoljaeSajuLoading().then(()=>{location.href='./saju-result.html';});
+  }else{
+    location.href='./saju-result.html';
+  }
 });
