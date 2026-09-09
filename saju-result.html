@@ -2,9 +2,18 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /><meta name="theme-color" content="#ffffff" /><meta name="description" content="정월재 종합 사주 결과" /><title>종합 사주 결과 — 정월재</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" /><link rel="stylesheet" href="./styles.css" /><link rel="stylesheet" href="./page.css" /><link rel="stylesheet" href="./saju-result.css?v=20260908-1230" /><link rel="stylesheet" href="./saju-result-guide.css?v=20260908-0900" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" /><link rel="stylesheet" href="./styles.css" /><link rel="stylesheet" href="./page.css" /><link rel="stylesheet" href="./saju-result.css?v=20260908-1230" /><link rel="stylesheet" href="./saju-result-guide.css?v=20260908-0900" /><link rel="stylesheet" href="./saju-loading.css?v=20260909-2125" />
 </head>
-<body>
+<body class="saju-loading-open">
+<div class="saju-loading-overlay is-visible" data-saju-result-loading role="status" aria-live="polite" aria-label="사주 분석 준비 중">
+  <div class="saju-loading-inner">
+    <div class="saju-loading-mark" aria-hidden="true"><span class="saju-loading-ring"></span><span class="saju-loading-ring"></span><img class="saju-loading-logo" src="./logo.svg?v=20260909-2125" alt="" /></div>
+    <p class="saju-loading-eyebrow">JUNGWOLJAE · SAJU READING</p>
+    <h2 class="saju-loading-title">사주를 신중하게 풀어보고 있습니다.</h2>
+    <p class="saju-loading-message" data-saju-result-loading-message>입력하신 사주 정보를 차분히 살펴보고 있습니다.</p>
+    <div class="saju-loading-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+  </div>
+</div>
 <header class="site-header no-print"><div class="wide-container header-inner"><a class="brand" href="./index.html" aria-label="정월재 홈"><span class="brand-hanja">正月齋</span><span class="brand-korean">정월재</span></a><nav class="desktop-nav"></nav><a class="header-cta" href="./signup.html">회원등록</a><button class="menu-button" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu" data-menu-button><span></span><span></span></button></div><div class="mobile-menu" id="mobile-menu" hidden data-mobile-menu><nav class="container"></nav></div></header>
 <main class="saju-result-main" data-saju-result><div class="saju-container">
 <section class="saju-report saju-hero"><p class="saju-kicker">COMPREHENSIVE SAJU · 正月齋</p><h1><span data-name>회원</span>님의 사주를<br />쉽게 풀어봅니다.</h1><p class="saju-lead" data-summary>사주를 계산하고 있습니다.</p><div class="saju-meta" data-meta></div></section>
@@ -20,5 +29,19 @@
 <section class="saju-actions no-print"><div class="action-copy"><strong>종합 사주를 기록으로 남겨두세요.</strong><p>보고서용 텍스트를 복사하거나 PDF로 저장하고, 로그인 회원은 정월록과 마이페이지에 보관할 수 있습니다.</p></div><div class="action-buttons"><button type="button" class="saju-button secondary" data-copy>보고서용 텍스트 복사</button><button type="button" class="saju-button secondary" data-pdf>PDF 저장</button><button type="button" class="saju-button primary" data-save>마이페이지에 저장</button></div><p class="action-status" data-action-status></p></section>
 </div></main>
 <footer class="site-footer no-print"></footer>
-<script src="./app.js?v=20260909-0750" defer></script><script type="module" src="./saju-result.js?v=20260907-01"></script><script src="./saju-result-guide.js?v=20260908-0900" defer></script><script src="./saju-result-extra.js?v=20260908-0900" defer></script>
+<script>
+(()=>{
+  const overlay=document.querySelector('[data-saju-result-loading]');
+  const message=document.querySelector('[data-saju-result-loading-message]');
+  if(!overlay)return;
+  const alreadyShown=sessionStorage.getItem('jungwoljae_saju_loader_shown')==='1';
+  sessionStorage.removeItem('jungwoljae_saju_loader_shown');
+  const finish=()=>{overlay.classList.add('is-leaving');setTimeout(()=>{overlay.hidden=true;document.body.classList.remove('saju-loading-open');},280);};
+  if(alreadyShown){overlay.hidden=true;document.body.classList.remove('saju-loading-open');return;}
+  const messages=['입력하신 사주 정보를 차분히 살펴보고 있습니다.','타고난 기운과 흐름을 하나씩 정리하고 있습니다.','내용을 다시 살피며 결과를 준비하고 있습니다.'];
+  [1100,2200].forEach((delay,i)=>setTimeout(()=>{message.classList.add('is-changing');setTimeout(()=>{message.textContent=messages[i+1];message.classList.remove('is-changing');},180);},delay));
+  setTimeout(finish,3400);
+})();
+</script>
+<script src="./app.js?v=20260909-2125" defer></script><script type="module" src="./saju-result.js?v=20260909-2125"></script><script src="./saju-result-guide.js?v=20260908-0900" defer></script><script src="./saju-result-extra.js?v=20260908-0900" defer></script>
 </body></html>
