@@ -23,7 +23,9 @@ if(isResultLike&&!isFortuneResult)addStyle('./brand-contrast-v8.css?v=20260909-0
 if(isFortuneResult)addStyle('./fortune-final-v13.css?v=20260909-0838');
 if(document.body?.classList.contains('about-page'))addStyle('./about.css');
 
-const resultMain=isResultLike?document.querySelector('main'):null;
+const existingSajuResultOverlay=currentFile==='saju-result.html'?document.querySelector('[data-saju-result-loading]'):null;
+const useUniversalResultLoader=isResultLike&&!(existingSajuResultOverlay&&!existingSajuResultOverlay.hidden);
+const resultMain=useUniversalResultLoader?document.querySelector('main'):null;
 if(resultMain){resultMain.style.visibility='hidden';document.body.classList.add('reading-result-pending');}
 const loaderCopy={
   'saju-result.html':{eyebrow:'JUNGWOLJAE · SAJU READING',title:'사주를 신중하게 풀어보고 있습니다.',messages:['입력하신 사주 정보를 차분히 살펴보고 있습니다.','타고난 기운과 흐름을 하나씩 정리하고 있습니다.','내용을 다시 살피며 결과를 준비하고 있습니다.']},
@@ -34,7 +36,7 @@ const loaderCopy={
   'guide-result.html':{eyebrow:'JUNGWOLJAE · DOGAM',title:'정월도감의 해답을 준비하고 있습니다.',messages:['선택하신 고민과 사주 흐름을 함께 살펴보고 있습니다.','지금 결정에 영향을 주는 조건을 정리하고 있습니다.','바로 이해할 수 있는 기준으로 결과를 다듬고 있습니다.']},
   'compatibility-report.html':{eyebrow:'JUNGWOLJAE · COMPATIBILITY',title:'두 사람의 관계를 함께 살펴보고 있습니다.',messages:['두 사람의 명식과 오행을 같은 기준으로 비교하고 있습니다.','편한 지점과 부딪히는 지점을 나누어 보고 있습니다.','관계의 구조가 잘 보이도록 결과를 정리하고 있습니다.']}
 };
-if(isResultLike){
+if(useUniversalResultLoader){
   import('./saju-loading.js?v=20260909-2340').then(({showSajuLoading})=>showSajuLoading({...loaderCopy[currentFile],duration:3600})).catch(error=>{console.error('reading loader failed',error);}).finally(()=>{if(resultMain)resultMain.style.visibility='';document.body.classList.remove('reading-result-pending','saju-loading-open');});
 }
 
@@ -70,7 +72,7 @@ const analyticsScript=document.createElement('script');analyticsScript.type='mod
 
 if(profilePages.has(currentFile)){
   const s=document.createElement('script');s.type='module';
-  s.src=quickProfilePages.has(currentFile)?'./quick-profile.js?v=20260908-1345':'./basic-profile.js?v=20260908-0247';
+  s.src=quickProfilePages.has(currentFile)?'./quick-profile.js?v=20260909-2340':'./basic-profile.js?v=20260908-0247';
   document.body.appendChild(s);
 }
 
