@@ -1,5 +1,12 @@
 (() => {
   'use strict';
+  if (!document.querySelector('link[data-jwj-birth-extend]')) {
+    const style = document.createElement('link');
+    style.rel = 'stylesheet';
+    style.href = './birth-input-unified-extend.css?v=20260909-2215';
+    style.dataset.jwjBirthExtend = 'true';
+    document.head.appendChild(style);
+  }
   const maxYear = new Date().getFullYear();
   const pad = value => String(value).padStart(2, '0');
   const emit = (el, type = 'change') => el.dispatchEvent(new Event(type, { bubbles: true }));
