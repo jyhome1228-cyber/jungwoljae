@@ -1,0 +1,346 @@
+/* Jungwoljae unified birth/profile input UX */
+.jwj-native-hidden{
+  position:absolute!important;
+  width:1px!important;
+  min-width:1px!important;
+  max-width:1px!important;
+  height:1px!important;
+  min-height:1px!important;
+  max-height:1px!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  opacity:0!important;
+  pointer-events:none!important;
+  overflow:hidden!important;
+  clip:rect(0 0 0 0)!important;
+  clip-path:inset(50%)!important;
+  white-space:nowrap!important;
+}
+
+.date-selects[data-jwj-date-enhanced="true"],
+.birth-date-grid[data-jwj-date-enhanced="true"],
+.profile-date-selects[data-jwj-date-enhanced="true"]{
+  display:block!important;
+  position:relative!important;
+}
+
+.jwj-native-date-host,
+.jwj-native-time-host,
+.jwj-gender-host{
+  position:relative;
+  width:100%;
+  min-width:0;
+}
+
+.jwj-date-control{
+  position:relative;
+  width:100%;
+  min-width:0;
+  font-family:inherit;
+}
+
+.jwj-date-input-row{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 46px;
+  gap:8px;
+  width:100%;
+}
+
+.jwj-date-input{
+  width:100%!important;
+  height:46px!important;
+  min-height:46px!important;
+  padding:0 13px!important;
+  border:1px solid #ddd2cd!important;
+  border-radius:10px!important;
+  background:#fff!important;
+  color:#2b2524!important;
+  font:inherit!important;
+  font-size:13px!important;
+  letter-spacing:-.02em!important;
+  outline:none!important;
+  box-shadow:none!important;
+}
+
+.jwj-date-input::placeholder{color:#aaa09c!important;opacity:1}
+.jwj-date-input:focus{
+  border-color:#543a3a!important;
+  box-shadow:0 0 0 3px rgba(84,58,58,.07)!important;
+}
+.jwj-date-input[aria-invalid="true"]{
+  border-color:#a65a52!important;
+  box-shadow:0 0 0 3px rgba(166,90,82,.07)!important;
+}
+
+.jwj-date-trigger{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:46px!important;
+  height:46px!important;
+  min-width:46px!important;
+  min-height:46px!important;
+  margin:0!important;
+  padding:0!important;
+  border:1px solid #ddd2cd!important;
+  border-radius:10px!important;
+  background:#fff!important;
+  color:#543a3a!important;
+  cursor:pointer!important;
+  box-shadow:none!important;
+  appearance:none!important;
+  -webkit-appearance:none!important;
+}
+.jwj-date-trigger:hover{border-color:#baa9a5!important;background:#faf8f7!important}
+.jwj-date-trigger:focus-visible{outline:none!important;box-shadow:0 0 0 3px rgba(84,58,58,.08)!important}
+.jwj-date-trigger svg{width:18px;height:18px;display:block}
+
+.jwj-date-helper{
+  margin:6px 0 0!important;
+  color:#9b918d!important;
+  font-size:10px!important;
+  font-weight:400!important;
+  line-height:16px!important;
+  letter-spacing:-.02em!important;
+}
+
+.jwj-date-popover{
+  position:absolute;
+  z-index:140;
+  top:calc(100% + 10px);
+  left:0;
+  width:min(390px,100%);
+  padding:16px;
+  border:1px solid #ded3ce;
+  border-radius:14px;
+  background:#fff;
+  box-shadow:0 18px 50px rgba(63,45,43,.16);
+}
+.jwj-date-popover[hidden]{display:none!important}
+
+.jwj-picker-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:14px;
+}
+.jwj-picker-head strong{
+  display:block;
+  margin:0!important;
+  color:#2b2524!important;
+  font-size:13px!important;
+  font-weight:750!important;
+  line-height:19px!important;
+}
+.jwj-picker-head span{
+  display:block;
+  margin-top:3px;
+  color:#9b918d;
+  font-size:10px;
+  line-height:16px;
+}
+.jwj-picker-close{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  flex:0 0 30px!important;
+  width:30px!important;
+  height:30px!important;
+  min-width:30px!important;
+  min-height:30px!important;
+  margin:-4px -4px 0 0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:8px!important;
+  background:transparent!important;
+  color:#7c706c!important;
+  font:inherit!important;
+  font-size:20px!important;
+  font-weight:300!important;
+  line-height:1!important;
+  cursor:pointer!important;
+}
+.jwj-picker-close:hover{background:#f5f1ef!important;color:#543a3a!important}
+
+.jwj-year-field{
+  display:grid!important;
+  grid-template-columns:44px minmax(0,1fr)!important;
+  align-items:center!important;
+  gap:10px!important;
+  margin:0 0 14px!important;
+}
+.jwj-year-field>span,
+.jwj-picker-label{
+  color:#6f625e!important;
+  font-size:10px!important;
+  font-weight:700!important;
+  line-height:16px!important;
+}
+.jwj-year-input{
+  width:100%!important;
+  height:40px!important;
+  min-height:40px!important;
+  margin:0!important;
+  padding:0 11px!important;
+  border:1px solid #e0d6d1!important;
+  border-radius:9px!important;
+  background:#fff!important;
+  color:#2b2524!important;
+  font:inherit!important;
+  font-size:12px!important;
+  outline:none!important;
+  box-shadow:none!important;
+}
+.jwj-year-input:focus{border-color:#543a3a!important;box-shadow:0 0 0 3px rgba(84,58,58,.06)!important}
+
+.jwj-picker-section+.jwj-picker-section{margin-top:14px}
+.jwj-picker-label{display:block;margin-bottom:7px}
+.jwj-month-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:6px;
+}
+.jwj-day-grid{
+  display:grid;
+  grid-template-columns:repeat(7,minmax(0,1fr));
+  gap:5px;
+}
+.jwj-month-grid button,
+.jwj-day-grid button{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:100%!important;
+  margin:0!important;
+  padding:0!important;
+  border:1px solid #eee6e2!important;
+  border-radius:8px!important;
+  background:#fff!important;
+  color:#5f5551!important;
+  font:inherit!important;
+  font-size:11px!important;
+  font-weight:600!important;
+  line-height:1!important;
+  cursor:pointer!important;
+  box-shadow:none!important;
+  transition:border-color .14s ease,background .14s ease,color .14s ease!important;
+}
+.jwj-month-grid button{height:34px!important;min-height:34px!important}
+.jwj-day-grid button{height:32px!important;min-height:32px!important}
+.jwj-month-grid button:hover,
+.jwj-day-grid button:hover{border-color:#c7b7b1!important;background:#faf8f7!important;color:#543a3a!important}
+.jwj-month-grid button.is-selected,
+.jwj-day-grid button.is-selected{
+  border-color:#543a3a!important;
+  background:#543a3a!important;
+  color:#fff!important;
+}
+.jwj-picker-message{
+  min-height:16px;
+  margin:9px 0 0!important;
+  color:#9a554f!important;
+  font-size:10px!important;
+  line-height:16px!important;
+}
+
+.time-selects.jwj-time-selects,
+.birth-time-grid.jwj-time-selects,
+.profile-time-selects.jwj-time-selects,
+.jwj-native-time-ui{
+  display:grid!important;
+  grid-template-columns:1.05fr .8fr .8fr!important;
+  gap:8px!important;
+  width:100%!important;
+}
+.jwj-time-selects>select{
+  width:100%!important;
+  height:46px!important;
+  min-height:46px!important;
+  padding:0 34px 0 12px!important;
+  border:1px solid #ddd2cd!important;
+  border-radius:10px!important;
+  background-color:#fff!important;
+  color:#2b2524!important;
+  font:inherit!important;
+  font-size:12px!important;
+  outline:none!important;
+  box-shadow:none!important;
+  appearance:none!important;
+  -webkit-appearance:none!important;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' fill='none' stroke='%23543a3a' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")!important;
+  background-repeat:no-repeat!important;
+  background-position:right 12px center!important;
+  background-size:12px 8px!important;
+}
+.jwj-time-selects>select:focus{border-color:#543a3a!important;box-shadow:0 0 0 3px rgba(84,58,58,.07)!important}
+.jwj-time-selects>select:disabled{background-color:#f5f2f0!important;color:#aaa19d!important;cursor:not-allowed!important}
+
+.jwj-gender-host{display:block!important}
+.jwj-gender-segment{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:7px;
+  width:100%;
+}
+.jwj-gender-segment button{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:100%!important;
+  height:46px!important;
+  min-height:46px!important;
+  margin:0!important;
+  padding:0 12px!important;
+  border:1px solid #ddd2cd!important;
+  border-radius:10px!important;
+  background:#fff!important;
+  color:#756b67!important;
+  font:inherit!important;
+  font-size:12px!important;
+  font-weight:650!important;
+  cursor:pointer!important;
+  box-shadow:none!important;
+  appearance:none!important;
+  -webkit-appearance:none!important;
+}
+.jwj-gender-segment button:hover{border-color:#baa9a5!important;background:#faf8f7!important;color:#543a3a!important}
+.jwj-gender-segment button.is-selected{
+  border-color:#543a3a!important;
+  background:#543a3a!important;
+  color:#fff!important;
+}
+.jwj-gender-segment button:focus-visible{outline:none!important;box-shadow:0 0 0 3px rgba(84,58,58,.08)!important}
+.jwj-gender-segment button:disabled{opacity:.48;cursor:not-allowed!important}
+
+/* Keep the custom control above adjacent cards/fields when the picker is open. */
+.field:has(.jwj-date-popover:not([hidden])),
+.quick-field:has(.jwj-date-popover:not([hidden])),
+.profile-edit-field:has(.jwj-date-popover:not([hidden])){position:relative;z-index:20}
+
+@media(max-width:767px){
+  .jwj-date-input-row{grid-template-columns:minmax(0,1fr) 44px;gap:7px}
+  .jwj-date-trigger{width:44px!important;height:46px!important;min-width:44px!important}
+  .jwj-date-popover{
+    width:100%;
+    min-width:0;
+    padding:14px;
+    border-radius:12px;
+    box-shadow:0 15px 40px rgba(63,45,43,.18);
+  }
+  .jwj-month-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
+  .jwj-day-grid{gap:4px}
+  .jwj-month-grid button{height:33px!important;min-height:33px!important;font-size:10px!important}
+  .jwj-day-grid button{height:31px!important;min-height:31px!important;font-size:10px!important}
+  .time-selects.jwj-time-selects,
+  .birth-time-grid.jwj-time-selects,
+  .profile-time-selects.jwj-time-selects,
+  .jwj-native-time-ui{grid-template-columns:1.08fr .8fr .8fr!important;gap:6px!important}
+  .jwj-time-selects>select{padding-left:10px!important;padding-right:28px!important;background-position:right 9px center!important;font-size:11px!important}
+}
+
+@media(max-width:420px){
+  .jwj-date-popover{width:calc(100vw - 36px);max-width:390px}
+  .jwj-picker-head span{max-width:220px}
+}
