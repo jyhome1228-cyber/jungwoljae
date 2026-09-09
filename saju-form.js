@@ -78,6 +78,7 @@ form.addEventListener('submit',async e=>{
   if(submitButton){submitButton.disabled=true;submitButton.setAttribute('aria-busy','true');}
   try{
     await showSajuLoading();
+    sessionStorage.setItem('jungwoljae_saju_loader_shown','1');
     location.assign('./saju-result.html');
   }catch(error){
     console.error('saju loading failed',error);
