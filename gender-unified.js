@@ -5,10 +5,14 @@
   const enhance = select => {
     if (select._jwjUnifiedGender) return;
     if (!/gender|성별/i.test(`${select.id || ''} ${select.name || ''} ${labelText(select)}`)) return;
-    const host = document.createElement('div');
-    host.className = 'jwj-gender-host';
-    select.parentNode.insertBefore(host, select);
-    host.append(select);
+    let host = select.closest('.jwj-gender-host');
+    if (host) host.querySelectorAll('.jwj-gender-segment').forEach(node => node.remove());
+    else {
+      host = document.createElement('div');
+      host.className = 'jwj-gender-host';
+      select.parentNode.insertBefore(host, select);
+      host.append(select);
+    }
     select.classList.add('jwj-native-hidden');
     const group = document.createElement('div');
     group.className = 'jwj-gender-segment';
