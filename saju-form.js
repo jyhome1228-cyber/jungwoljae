@@ -2,7 +2,7 @@ import { firebaseConfig } from './firebase-config.js?v=20260907-1645';
 import { initializeApp, getApps, getApp } from 'https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js';
 import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js';
 import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js';
-import './saju-loading.js?v=20260909-01';
+import { showSajuLoading } from './saju-loading.js?v=20260909-2119';
 
 const form=document.querySelector('[data-saju-form]');
 if(!form) throw new Error('saju form missing');
@@ -58,7 +58,7 @@ onAuthStateChanged(auth,async user=>{
   }catch(e){profileState.textContent='회원정보를 불러오지 못했습니다. 직접 입력해도 분석할 수 있습니다.';}
 });
 
-form.addEventListener('submit',e=>{
+form.addEventListener('submit',async e=>{
   e.preventDefault();status.textContent='';
   const name=form.elements.name.value.trim();
   const birthDate=year.value&&month.value&&day.value?`${year.value}-${month.value}-${day.value}`:'';
@@ -75,10 +75,14 @@ form.addEventListener('submit',e=>{
   sessionStorage.setItem('jungwoljae_saju_input',JSON.stringify(payload));
   form.dataset.submitting='true';
   const submitButton=form.querySelector('button[type="submit"]');
-  if(submitButton)submitButton.disabled=true;
-  if(typeof window.showJungwoljaeSajuLoading==='function'){
-    window.showJungwoljaeSajuLoading().then(()=>{location.href='./saju-result.html';});
-  }else{
-    location.href='./saju-result.html';
+  if(submitButton){submitButton.disabled=true;submitButton.setAttribute('aria-busy','true');}
+  try{
+    await showSajuLoading();
+    location.assign('./saju-result.html');
+  }catch(error){
+    console.error('saju loading failed',error);
+    form.dataset.submitting='false';
+    if(submitButton){submitButton.disabled=false;submitButton.removeAttribute('aria-busy');}
+    status.textContent='결과 화면을 준비하지 못했습니다. 다시 시도해주세요.';
   }
 });
