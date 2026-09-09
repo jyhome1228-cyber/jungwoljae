@@ -1,0 +1,16 @@
+.guide-date-selects[data-jwj-date-enhanced="true"]{
+  display:block!important;
+  position:relative!important;
+}
+.guide-time-selects.jwj-time-selects{
+  display:grid!important;
+  grid-template-columns:1.05fr .8fr .8fr!important;
+  gap:8px!important;
+  width:100%!important;
+}
+@media(max-width:767px){
+  .guide-time-selects.jwj-time-selects{
+    grid-template-columns:1.08fr .8fr .8fr!important;
+    gap:6px!important;
+  }
+}

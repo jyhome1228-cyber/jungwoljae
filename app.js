@@ -17,6 +17,7 @@ function addStyle(href){const l=document.createElement('link');l.rel='stylesheet
 if(profilePages.has(currentFile))addStyle('./basic-profile.css?v=20260908-2106');
 if(isResultLike&&!isFortuneResult){addStyle('./result-readability.css?v=20260907-2257');addStyle('./result-quality-v7.css?v=20260908-2235');}
 addStyle('./universal-structure-v8.css?v=20260909-0404');
+addStyle('./birth-input-unified.css?v=20260909-2205');
 if(isResultLike&&!isFortuneResult)addStyle('./brand-contrast-v8.css?v=20260909-0404');
 if(isFortuneResult)addStyle('./fortune-final-v13.css?v=20260909-0838');
 if(document.body?.classList.contains('about-page'))addStyle('./about.css');
@@ -49,6 +50,7 @@ const reviewsSection=document.querySelector('#reviews');if(reviewsSection){const
 const footer=document.querySelector('.site-footer');if(footer&&!footer.dataset.enhanced){footer.dataset.enhanced='true';const s=document.createElement('script');s.src='./footer.js?v=20260908-1255';s.defer=true;document.body.appendChild(s);}
 const authScript=document.createElement('script');authScript.type='module';authScript.src='./auth.js?v=20260908-0731';document.body.appendChild(authScript);
 const analyticsScript=document.createElement('script');analyticsScript.type='module';analyticsScript.src='./analytics.js?v=20260908-1255';document.body.appendChild(analyticsScript);
+['./birth-input-unified.js?v=20260909-2205','./birth-time-unified.js?v=20260909-2205','./gender-unified.js?v=20260909-2205'].forEach(src=>{const s=document.createElement('script');s.src=src;s.defer=true;document.body.appendChild(s);});
 
 if(profilePages.has(currentFile)){
   const s=document.createElement('script');s.type='module';
