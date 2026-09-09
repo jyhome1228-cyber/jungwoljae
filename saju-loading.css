@@ -1,4 +1,5 @@
 body.saju-loading-open{overflow:hidden}
+body.reading-result-pending main{visibility:hidden!important}
 .saju-loading-overlay[hidden]{display:none!important}
 .saju-loading-overlay{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;padding:28px;background:#f7f3f0;opacity:0;transition:opacity .28s ease}
 .saju-loading-overlay.is-visible{opacity:1}

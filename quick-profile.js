@@ -1,3 +1,4 @@
+import './quick-result-loader.js?v=20260909-2340';
 import { firebaseConfig } from './firebase-config.js?v=20260907-1645';
 import { initializeApp, getApps, getApp } from 'https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js';
 import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js';
