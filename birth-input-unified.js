@@ -60,7 +60,7 @@
     host._jwjSimpleDate = { sync };
     sync();
   };
-  const selectGroups = () => document.querySelectorAll('.date-selects,.birth-date-grid,.profile-date-selects').forEach(host => {
+  const selectGroups = () => document.querySelectorAll('.date-selects,.birth-date-grid,.profile-date-selects,.guide-date-selects').forEach(host => {
     if (host._jwjSimpleDate) return;
     const list = [...host.querySelectorAll(':scope > select')];
     if (list.length < 3) return;
@@ -78,7 +78,7 @@
   });
   const nativeDates = () => document.querySelectorAll('input[type="date"]').forEach(native => {
     if (native._jwjSimpleDate) return;
-    const field = native.closest('.field,.quick-field,.profile-edit-field');
+    const field = native.closest('.field,.quick-field,.profile-edit-field,.guide-field');
     if (!/birth|태어난|생년|출생/i.test(`${native.id} ${native.name} ${field?.querySelector('label')?.textContent || ''}`)) return;
     const host = document.createElement('div');
     host.className = 'jwj-native-date-host';
