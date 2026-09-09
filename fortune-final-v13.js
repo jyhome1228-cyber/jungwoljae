@@ -21,13 +21,33 @@ import './fortune-final-v12.js?v=20260909-0805';
     계:{first:'바로 답하지 말고 필요한 정보 두 가지만 확인한 뒤 결정하세요.',why:'작은 신호와 차이를 잘 읽는 흐름입니다. 생각을 오래 끌기보다 확인할 항목을 줄이고 답을 내리는 편이 좋습니다.',finish:'오늘 확인한 내용을 한 줄로 기록하고 더 볼 것은 내일로 넘기세요.'}
   };
 
+  const flowPacks={
+    갑:'새로운 방향을 잡는 힘이 먼저 들어옵니다. 여러 일을 동시에 시작하기보다 첫 단추가 분명한 한 가지를 고르는 편이 좋습니다.',
+    을:'큰 변화보다 작은 조정을 이어가는 쪽이 자연스럽습니다. 막히는 지점이 생겨도 다른 길을 찾아 연결하면 흐름이 끊기지 않습니다.',
+    병:'반응과 표현의 속도가 평소보다 앞서는 편입니다. 혼자 오래 정리하기보다 외부와 주고받는 과정에서 방향이 선명해질 수 있습니다.',
+    정:'섬세하게 표현하고 전달하는 힘이 살아납니다. 크게 드러내기보다 필요한 말과 결과물을 정확한 순간에 보여주는 편이 좋습니다.',
+    무:'새로운 자극보다 중심을 잡고 마무리하는 쪽에 힘이 갑니다. 이미 진행 중인 것을 안정시키면 하루가 훨씬 가벼워집니다.',
+    기:'작은 일의 순서와 생활 리듬을 정돈할수록 편해집니다. 한꺼번에 바꾸기보다 눈앞의 한 단계씩 처리하는 흐름이 잘 맞습니다.',
+    경:'판단 기준이 선명해지는 날입니다. 애매하게 남겨둔 선택지를 줄일수록 시간과 체력을 덜 쓰게 됩니다.',
+    신:'세부 차이를 알아채고 다듬는 힘이 좋아집니다. 완성도를 높이되 끝낼 기준까지 함께 정해두는 것이 중요합니다.',
+    임:'정보와 가능성이 넓게 보이는 흐름입니다. 여러 선택지를 살펴보되 실제 행동으로 이어질 한 가지를 남겨야 힘이 흩어지지 않습니다.',
+    계:'작은 신호와 차이를 읽는 감각이 좋아집니다. 바로 결론 내리기보다 필요한 사실만 확인한 뒤 조용히 방향을 잡는 편이 좋습니다.'
+  };
+
   function relationAction(label){
     if(/육합|삼합/.test(label))return ['먼저 연락하거나 제안을 꺼내보세요.','사람과의 접점이 자연스럽게 생기기 쉬운 흐름입니다. 기다리기만 하기보다 가벼운 연락, 제안, 약속처럼 먼저 문을 여는 행동이 잘 맞습니다.'];
     if(/충|형|해|파/.test(label))return ['중요한 말은 추측하지 말고 한 번 직접 확인하세요.','작은 차이도 크게 느껴질 수 있는 흐름입니다. 답장 속도나 말투만 보고 결론 내리기보다 궁금한 한 가지를 직접 묻는 편이 관계와 일 모두에서 도움이 됩니다.'];
     return ['내 기준을 한 문장으로 정하고 움직이세요.','외부 변수보다 내가 어떤 순서와 기준으로 움직이는지가 중요한 흐름입니다. “오늘은 이것부터 한다”는 기준 하나를 먼저 정해두세요.'];
   }
 
-  function enhance(){
+  function relationFlow(label){
+    if(/육합|삼합/.test(label))return '사람이나 정보와 연결되는 과정에서 예상보다 일이 쉽게 풀릴 수 있습니다. 혼자 완성한 뒤 보여주기보다 중간에 한 번 접점을 만드는 편이 유리합니다.';
+    if(label==='충')return '예상과 다른 요청이나 일정 변경이 들어올 수 있습니다. 처음 계획을 끝까지 고집하기보다 중요한 목적만 지키고 방법은 바꿀 수 있게 두세요.';
+    if(/형|해|파/.test(label))return '작은 어긋남이나 말의 차이가 평소보다 크게 느껴질 수 있습니다. 바로 결론 내리기보다 사실과 해석을 한 번 나눠보는 것이 좋습니다.';
+    return '큰 외부 변수보다 내가 무엇을 먼저 선택하는지가 하루의 체감을 좌우합니다. 순서를 정하면 생각보다 안정적으로 흘러갑니다.';
+  }
+
+  function enhanceKey(){
     const key=$('[data-key-grid]');
     if(!key||key.dataset.actionReady==='true')return;
     const oldCards=[...key.querySelectorAll('.fortune-key-card')];
@@ -38,30 +58,12 @@ import './fortune-final-v12.js?v=20260909-0805';
     const pack=packs[stem]||packs.기;
     const relationLabel=$('.fortune-relation .relation-pills span:nth-child(2)')?.textContent?.trim()||'평이';
     const [relationTitle,relationCopy]=relationAction(relationLabel);
-
     const evidence=`명리 근거 · 내 일주 ${natal||'—'} × ${dayWord} 일진 ${target} · ${relationLabel}`;
+
     key.innerHTML=`
-      <article class="fortune-key-card is-action">
-        <span>01 · 가장 먼저 할 일</span>
-        <strong>${pack.first}</strong>
-        <p>${pack.why}</p>
-        <div class="fortune-key-action"><b>${dayWord}의 행동</b><em>${pack.first}</em></div>
-        <small>${evidence}</small>
-      </article>
-      <article class="fortune-key-card is-action">
-        <span>02 · 사람·대화에서</span>
-        <strong>${relationTitle}</strong>
-        <p>${relationCopy}</p>
-        <div class="fortune-key-action"><b>${dayWord}의 행동</b><em>${relationTitle}</em></div>
-        <small>${evidence}</small>
-      </article>
-      <article class="fortune-key-card is-action">
-        <span>03 · 끝내기 전에</span>
-        <strong>${pack.finish}</strong>
-        <p>${dayWord}의 기운을 가장 쉽게 쓰는 방법은 새로운 일을 계속 늘리는 것보다, 이미 손댄 일 하나에 분명한 다음 단계나 완료 표시를 남기는 것입니다.</p>
-        <div class="fortune-key-action"><b>${dayWord}의 행동</b><em>${pack.finish}</em></div>
-        <small>${evidence}</small>
-      </article>`;
+      <article class="fortune-key-card is-action"><span>01 · 가장 먼저 할 일</span><strong>${pack.first}</strong><p>${pack.why}</p><div class="fortune-key-action"><b>${dayWord}의 행동</b><em>${pack.first}</em></div><small>${evidence}</small></article>
+      <article class="fortune-key-card is-action"><span>02 · 사람·대화에서</span><strong>${relationTitle}</strong><p>${relationCopy}</p><div class="fortune-key-action"><b>${dayWord}의 행동</b><em>${relationTitle}</em></div><small>${evidence}</small></article>
+      <article class="fortune-key-card is-action"><span>03 · 끝내기 전에</span><strong>${pack.finish}</strong><p>${dayWord}에 손댄 일 하나는 다음 단계나 완료 표시를 남겨두세요. 새 일을 늘리는 것보다 마감선을 만드는 편이 흐름을 안정시키는 데 도움이 됩니다.</p><div class="fortune-key-action"><b>${dayWord}의 행동</b><em>${pack.finish}</em></div><small>${evidence}</small></article>`;
     key.dataset.actionReady='true';
 
     const sec=key.closest('.fortune-report');
@@ -70,13 +72,60 @@ import './fortune-final-v12.js?v=20260909-0805';
       if(h2)h2.textContent=`${dayWord}은 이 세 가지만 해보세요.`;
       let lead=sec.querySelector('.fortune-key-intro');
       if(!lead){lead=document.createElement('p');lead.className='fortune-key-intro';h2?.insertAdjacentElement('afterend',lead);}
-      lead.textContent=`명리 용어는 아래에 근거로 남기고, 먼저 ${dayWord} 실제로 해볼 행동부터 정리했습니다.`;
+      lead.textContent='긴 설명보다 실제로 옮길 수 있는 행동 세 가지만 남겼습니다.';
     }
   }
 
-  if(root.dataset.finalState==='ready')enhance();
+  function polishReport(){
+    if(root.dataset.repeatPolished==='true')return;
+    const relationLabel=$('.fortune-relation .relation-pills span:nth-child(2)')?.textContent?.trim()||'평이';
+    const target=$('.fortune-relation .relation-pills span:nth-child(3)')?.textContent?.trim()||'';
+    const stem=[...target][0]||'기';
+
+    const story=$('[data-fortune-story]');
+    if(story){
+      story.innerHTML=`<p><strong>${dayWord}의 전체 흐름</strong> ${flowPacks[stem]||flowPacks.기}</p><p><strong>변수가 생긴다면</strong> ${relationFlow(relationLabel)}</p>`;
+    }
+
+    root.querySelectorAll('.fortune-choice-card ul').forEach(ul=>{
+      [...ul.querySelectorAll('li')].slice(3).forEach(li=>li.remove());
+    });
+    const choice=$('.fortune-choice-section');
+    if(choice){
+      const lead=choice.querySelector('.fortune-section-lead');
+      if(lead)lead.textContent=`${dayWord}에 바로 써볼 것 3가지와 줄이면 좋은 것 3가지만 골랐습니다.`;
+    }
+
+    $('.fortune-lucky-note')?.remove();
+
+    const tip=$('.fortune-tip-section');
+    if(tip)tip.remove();
+
+    const total=$('[data-total-summary]');
+    if(total){
+      const headline=$('[data-headline]')?.textContent?.trim()||`${dayWord}의 흐름을 확인해보세요.`;
+      const firstAction=$('[data-key-grid] .fortune-key-card:nth-child(1) strong')?.textContent?.trim()||'가장 중요한 일 하나부터 순서를 정하세요.';
+      const caution=$('.fortune-choice-card.caution li:first-child strong')?.textContent?.trim()||'한 번에 너무 많은 일을 해결하려 하지 마세요.';
+      total.innerHTML=`
+        <p><span class="fortune-summary-label">OVERALL</span><strong>${headline}</strong><span class="fortune-summary-copy">${relationLabel}의 관계를 기준으로 하루의 큰 방향만 기억하면 충분합니다.</span></p>
+        <p><span class="fortune-summary-label">FIRST</span><strong>${firstAction}</strong><span class="fortune-summary-copy">가장 먼저 움직일 한 가지입니다.</span></p>
+        <p><span class="fortune-summary-label">CHECK</span><strong>${caution}</strong><span class="fortune-summary-copy">이 부분만 한 번 더 확인하면 흐름이 훨씬 단순해집니다.</span></p>`;
+      const sec=total.closest('.fortune-report');
+      if(sec){
+        const label=sec.querySelector('.fortune-label');if(label)label.textContent='08 · TOTAL SUMMARY';
+        const h2=sec.querySelector('h2');if(h2)h2.textContent=`${dayWord} 하루를 짧게 정리하면`;
+      }
+    }
+
+    const evidence=$('[data-evidence]')?.closest('.fortune-report');
+    if(evidence){const label=evidence.querySelector('.fortune-label');if(label)label.textContent='09 · INTERPRETATION BASIS';}
+    root.dataset.repeatPolished='true';
+  }
+
+  function run(){enhanceKey();polishReport();}
+  if(root.dataset.finalState==='ready')run();
   else{
-    const observer=new MutationObserver(()=>{if(root.dataset.finalState==='ready'){observer.disconnect();enhance();}});
+    const observer=new MutationObserver(()=>{if(root.dataset.finalState==='ready'){observer.disconnect();run();}});
     observer.observe(root,{attributes:true,attributeFilter:['data-final-state']});
   }
 })();
