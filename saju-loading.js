@@ -6,6 +6,14 @@
     '내용을 다시 살피며 결과를 준비하고 있습니다.'
   ];
 
+  if (!document.querySelector('link[data-saju-loading-style]')) {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = './saju-loading.css?v=20260909-01';
+    link.dataset.sajuLoadingStyle = '';
+    document.head.appendChild(link);
+  }
+
   function ensureOverlay() {
     let overlay = document.querySelector('[data-saju-loading]');
     if (overlay) return overlay;
