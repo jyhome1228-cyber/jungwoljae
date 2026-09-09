@@ -1,0 +1,26 @@
+body.saju-loading-open{overflow:hidden}
+.saju-loading-overlay[hidden]{display:none!important}
+.saju-loading-overlay{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;padding:28px;background:#f7f3f0;opacity:0;transition:opacity .28s ease}
+.saju-loading-overlay.is-visible{opacity:1}
+.saju-loading-overlay.is-leaving{opacity:0}
+.saju-loading-inner{width:min(100%,420px);text-align:center;color:#543a3a}
+.saju-loading-mark{position:relative;display:flex;align-items:center;justify-content:center;width:118px;height:118px;margin:0 auto 32px}
+.saju-loading-ring{position:absolute;inset:0;border:1px solid rgba(84,58,58,.16);border-radius:50%}
+.saju-loading-ring::before{content:"";position:absolute;left:50%;top:-2px;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:#543a3a;box-shadow:0 0 0 5px rgba(84,58,58,.06)}
+.saju-loading-ring:first-child{animation:sajuRing 3.2s linear infinite}
+.saju-loading-ring:nth-child(2){inset:10px;border-color:rgba(84,58,58,.09);animation:sajuRingReverse 4.4s linear infinite}
+.saju-loading-logo{position:relative;z-index:1;width:62px;height:62px;object-fit:contain;animation:sajuBreath 1.9s ease-in-out infinite;filter:drop-shadow(0 4px 12px rgba(84,58,58,.08))}
+.saju-loading-eyebrow{margin:0 0 10px;font-size:10px;font-weight:700;letter-spacing:.18em;color:#9b8580}
+.saju-loading-title{margin:0;font-size:22px;font-weight:650;line-height:1.45;letter-spacing:-.025em;color:#3f302e}
+.saju-loading-message{min-height:44px;margin:13px auto 0;font-size:13px;font-weight:450;line-height:1.7;letter-spacing:-.012em;color:#897a76;transition:opacity .18s ease,transform .18s ease}
+.saju-loading-message.is-changing{opacity:0;transform:translateY(4px)}
+.saju-loading-dots{display:flex;justify-content:center;gap:6px;margin-top:24px}
+.saju-loading-dots span{width:4px;height:4px;border-radius:50%;background:#8e6e69;opacity:.28;animation:sajuDot 1.2s ease-in-out infinite}
+.saju-loading-dots span:nth-child(2){animation-delay:.16s}
+.saju-loading-dots span:nth-child(3){animation-delay:.32s}
+@keyframes sajuRing{to{transform:rotate(360deg)}}
+@keyframes sajuRingReverse{to{transform:rotate(-360deg)}}
+@keyframes sajuBreath{0%,100%{transform:scale(.96);opacity:.84}50%{transform:scale(1.035);opacity:1}}
+@keyframes sajuDot{0%,100%{opacity:.22;transform:translateY(0)}50%{opacity:.9;transform:translateY(-3px)}}
+@media(max-width:767px){.saju-loading-mark{width:104px;height:104px;margin-bottom:27px}.saju-loading-logo{width:55px;height:55px}.saju-loading-title{font-size:20px}.saju-loading-message{font-size:12px}}
+@media(prefers-reduced-motion:reduce){.saju-loading-overlay,.saju-loading-message{transition:none}.saju-loading-ring,.saju-loading-logo,.saju-loading-dots span{animation:none}}
