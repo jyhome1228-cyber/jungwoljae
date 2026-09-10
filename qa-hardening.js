@@ -12,7 +12,7 @@
     return new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(d);
   }
 
-  function addNotice(message,href=''){ 
+  function addNotice(message,href=''){
     if($('.qa-runtime-notice'))return;
     const n=document.createElement('div');n.className='qa-runtime-notice';
     n.innerHTML=`<strong>페이지를 정상 상태로 복구하고 있습니다.</strong>${message}${href?` <a href="${href}">다시 입력하기</a>`:''}`;
@@ -96,9 +96,6 @@
 
   function guardDynamicPages(){
     if(file==='guide.html'&&!$('[data-domain-grid]')?.children.length)addNotice('정월도감 선택 항목을 불러오지 못했습니다. 네트워크 연결을 확인한 뒤 새로고침해주세요.','./guide.html');
-    if(['tomorrow.html','lucky-number.html','important-day.html','moving-day.html'].includes(file)){
-      const form=$('[data-quick-form]');if(form&&!form.dataset.qaChecked){form.dataset.qaChecked='true';const submit=form.querySelector('button[type="submit"]');if(submit&&!submit.onclick&& !window.__jungwolQuickLoaded){/* primary module may still own submit; watchdog only */}}
-    }
   }
 
   function resultWatchdog(){
@@ -120,7 +117,10 @@
   }
 
   function buttonRecovery(){
-    addEventListener('pageshow',()=>all('button[aria-busy="true"],button:disabled').forEach(btn=>{if(btn.dataset.permanentDisabled)return;btn.disabled=false;btn.removeAttribute('aria-busy');}));
+    addEventListener('pageshow',()=>{
+      all('form[data-submitting="true"]').forEach(form=>{delete form.dataset.submitting;});
+      all('button[aria-busy="true"]').forEach(btn=>{btn.disabled=false;btn.removeAttribute('aria-busy');});
+    });
   }
 
   buttonRecovery();imageGuard();normalizeYears();
