@@ -21,7 +21,7 @@ const calendar=form.querySelector('#relationship-calendar');
 const lunarExtra=form.querySelector('[data-lunar-extra]');
 
 const currentYear=new Date().getFullYear();
-for(let y=currentYear;y>=1930;y--)year.insertAdjacentHTML('beforeend',`<option value="${y}">${y}년</option>`);
+for(let y=currentYear;y>=1900;y--)year.insertAdjacentHTML('beforeend',`<option value="${y}">${y}년</option>`);
 for(let m=1;m<=12;m++)month.insertAdjacentHTML('beforeend',`<option value="${String(m).padStart(2,'0')}">${m}월</option>`);
 for(let h=1;h<=12;h++)hour.insertAdjacentHTML('beforeend',`<option value="${String(h).padStart(2,'0')}">${h}시</option>`);
 for(let min=0;min<60;min+=10)minute.insertAdjacentHTML('beforeend',`<option value="${String(min).padStart(2,'0')}">${String(min).padStart(2,'0')}분</option>`);
@@ -29,15 +29,16 @@ function fillDays(){const prev=day.value;day.innerHTML='<option value="">일</op
 fillDays();year.addEventListener('change',fillDays);month.addEventListener('change',fillDays);
 
 function syncTime(){const disabled=timeUnknown.checked;[meridiem,hour,minute].forEach(el=>{el.disabled=disabled;if(disabled)el.value='';});}
-function syncCalendar(){lunarExtra.hidden=calendar.value!=='lunar';}
+function syncCalendar(){lunarExtra.hidden=calendar.value!=='lunar';if(calendar.value!=='lunar'&&form.elements.isLeapMonth)form.elements.isLeapMonth.checked=false;}
 timeUnknown.addEventListener('change',syncTime);calendar.addEventListener('change',syncCalendar);syncTime();syncCalendar();
 
 function fillProfile(p){
   if(p.name){form.elements.name.value=p.name;memberName.textContent=`${p.name}님`;}
   if(p.birthDate){const [y,m,d]=p.birthDate.split('-');year.value=y;month.value=m;fillDays();day.value=d;}
   if(p.birthTimeUnknown){timeUnknown.checked=true;syncTime();}
-  else if(p.birthTime){const [hh,mm]=p.birthTime.split(':').map(Number);meridiem.value=hh>=12?'pm':'am';hour.value=String((hh%12)||12).padStart(2,'0');minute.value=String(Math.round(mm/10)*10%60).padStart(2,'0');}
+  else if(p.birthTime){const [hh,mm]=p.birthTime.split(':').map(Number);meridiem.value=hh>=12?'pm':'am';hour.value=String((hh%12)||12).padStart(2,'0');minute.value=String(Math.min(50,Math.round((mm||0)/10)*10)).padStart(2,'0');}
   if(p.calendarType){calendar.value=p.calendarType;syncCalendar();}
+  if(form.elements.isLeapMonth)form.elements.isLeapMonth.checked=Boolean(p.isLeapMonth)&&calendar.value==='lunar';
   if(p.gender)form.elements.gender.value=p.gender;
   if(p.city)form.elements.city.value=p.city;
 }
@@ -50,7 +51,8 @@ onAuthStateChanged(auth,async user=>{
 
 function setError(name,msg=''){const el=form.querySelector(`[data-error="${name}"]`);if(el)el.textContent=msg;}
 form.addEventListener('submit',event=>{
-  event.preventDefault();['name','birthDate','birthTime'].forEach(k=>setError(k));status.textContent='';let valid=true;
+  event.preventDefault();if(form.dataset.submitting==='true')return;
+  ['name','birthDate','birthTime'].forEach(k=>setError(k));status.textContent='';let valid=true;
   const name=form.elements.name.value.trim();
   const birthDate=year.value&&month.value&&day.value?`${year.value}-${month.value}-${day.value}`:'';
   let birthTime='';
@@ -62,5 +64,6 @@ form.addEventListener('submit',event=>{
   if(!valid)return;
   const payload={name,birthDate,birthTime,birthTimeUnknown:timeUnknown.checked,calendarType:calendar.value,isLeapMonth:Boolean(form.elements.isLeapMonth?.checked),gender:form.elements.gender.value,city:form.elements.city.value.trim(),relationshipStatus:form.elements.relationshipStatus.value,createdAt:Date.now()};
   sessionStorage.setItem('jungwoljae_relationship_input',JSON.stringify(payload));
+  form.dataset.submitting='true';const submit=form.querySelector('button[type="submit"]');if(submit){submit.disabled=true;submit.setAttribute('aria-busy','true');}
   location.href='./relationship-result.html';
 });
