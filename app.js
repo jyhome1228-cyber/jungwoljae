@@ -21,7 +21,7 @@ addStyle('./birth-input-unified.css?v=20260909-2205');
 addStyle('./saju-loading.css?v=20260909-2340');
 if(isResultLike&&!isFortuneResult)addStyle('./brand-contrast-v8.css?v=20260909-0404');
 if(document.body?.classList.contains('about-page'))addStyle('./about.css');
-addStyle('./qa-hardening.css?v=20260910-2035');
+addStyle('./qa-hardening.css?v=20260910-2045');
 
 const existingSajuResultOverlay=currentFile==='saju-result.html'?document.querySelector('[data-saju-result-loading]'):null;
 const useUniversalResultLoader=isResultLike&&!(existingSajuResultOverlay&&!existingSajuResultOverlay.hidden);
@@ -29,12 +29,12 @@ const resultMain=useUniversalResultLoader?document.querySelector('main'):null;
 if(resultMain){resultMain.style.visibility='hidden';document.body.classList.add('reading-result-pending');}
 const loaderCopy={
   'saju-result.html':{eyebrow:'JUNGWOLJAE · SAJU READING',title:'사주를 신중하게 풀어보고 있습니다.',messages:['입력하신 사주 정보를 차분히 살펴보고 있습니다.','타고난 기운과 흐름을 하나씩 정리하고 있습니다.','내용을 다시 살피며 결과를 준비하고 있습니다.']},
-  'ohaeng-result.html':{eyebrow:'JUNGWOLJAE · FIVE ELEMENTS',title:'오행의 균형을 정리하고 있습니다.',messages:['목·화·토·금·수의 분포를 살펴보고 있습니다.','강한 기운과 부족한 기운의 관계를 정리하고 있습니다.','생활에서 이해하기 쉬운 결과로 다듬고 있습니다.']},
-  'fortune-result.html':{eyebrow:'JUNGWOLJAE · DAILY FORTUNE',title:'오늘의 흐름을 차분히 읽고 있습니다.',messages:['개인 명식과 오늘의 일진을 맞춰보고 있습니다.','일·재물·인연의 흐름을 각각 살펴보고 있습니다.','오늘에 필요한 핵심 내용을 정리하고 있습니다.']},
+  'ohaeng-result.html':{eyebrow:'JUNGWOLJAE · FIVE ELEMENTS',title:'생활 속 다섯 가지 힘을 정리하고 있습니다.',messages:['시작·표현·관리·판단·관찰의 비중을 살펴보고 있습니다.','자연스럽게 잘 쓰는 힘과 한 번 더 챙길 힘을 정리하고 있습니다.','생활에서 바로 이해할 수 있는 말로 결과를 다듬고 있습니다.']},
+  'fortune-result.html':{eyebrow:'JUNGWOLJAE · DAILY FORTUNE',title:'오늘의 흐름을 차분히 읽고 있습니다.',messages:['개인 사주와 오늘의 흐름을 맞춰보고 있습니다.','일·재물·인연의 흐름을 각각 살펴보고 있습니다.','오늘에 필요한 핵심 내용을 정리하고 있습니다.']},
   'relationship-result.html':{eyebrow:'JUNGWOLJAE · RELATIONSHIP',title:'인연과 관계의 흐름을 살펴보고 있습니다.',messages:['감정 표현과 관계의 리듬을 확인하고 있습니다.','반복되는 패턴과 현재의 흐름을 함께 보고 있습니다.','관계에서 중요한 기준을 차분히 정리하고 있습니다.']},
   'work-money-result.html':{eyebrow:'JUNGWOLJAE · WORK & MONEY',title:'일과 재물의 흐름을 정리하고 있습니다.',messages:['일하는 방식과 재물의 구조를 살펴보고 있습니다.','강점과 부담이 생기는 지점을 함께 확인하고 있습니다.','현실적으로 참고할 수 있도록 결과를 정리하고 있습니다.']},
   'guide-result.html':{eyebrow:'JUNGWOLJAE · DOGAM',title:'정월도감의 해답을 준비하고 있습니다.',messages:['선택하신 고민과 사주 흐름을 함께 살펴보고 있습니다.','지금 결정에 영향을 주는 조건을 정리하고 있습니다.','바로 이해할 수 있는 기준으로 결과를 다듬고 있습니다.']},
-  'compatibility-report.html':{eyebrow:'JUNGWOLJAE · COMPATIBILITY',title:'두 사람의 관계를 함께 살펴보고 있습니다.',messages:['두 사람의 명식과 오행을 같은 기준으로 비교하고 있습니다.','편한 지점과 부딪히는 지점을 나누어 보고 있습니다.','관계의 구조가 잘 보이도록 결과를 정리하고 있습니다.']}
+  'compatibility-report.html':{eyebrow:'JUNGWOLJAE · COMPATIBILITY',title:'두 사람의 관계를 함께 살펴보고 있습니다.',messages:['두 사람의 사주와 생활 성향을 같은 기준으로 비교하고 있습니다.','편한 지점과 부딪히는 지점을 나누어 보고 있습니다.','관계의 구조가 잘 보이도록 결과를 정리하고 있습니다.']}
 };
 if(useUniversalResultLoader){
   import('./saju-loading.js?v=20260909-2340').then(({showSajuLoading})=>showSajuLoading({...loaderCopy[currentFile],duration:3600})).catch(error=>{console.error('reading loader failed',error);}).finally(()=>{if(resultMain)resultMain.style.visibility='';document.body.classList.remove('reading-result-pending','saju-loading-open');});
@@ -97,4 +97,4 @@ readingForm?.addEventListener('submit',event=>{
 if(['lucky-number.html','important-day.html','moving-day.html'].includes(currentFile)){
   const quickPolish=document.createElement('script');quickPolish.src='./quick-result-polish.js?v=20260910-2035';quickPolish.defer=true;document.body.appendChild(quickPolish);
 }
-const qaScript=document.createElement('script');qaScript.src='./qa-hardening.js?v=20260910-2035';qaScript.defer=true;document.body.appendChild(qaScript);
+const qaScript=document.createElement('script');qaScript.src='./qa-hardening.js?v=20260910-2045';qaScript.defer=true;document.body.appendChild(qaScript);
