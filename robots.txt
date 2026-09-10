@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin.html
+Disallow: /firebase-debug.html
+Disallow: /login.html
+Disallow: /signup.html
+Disallow: /mypage.html
+Disallow: /archive.html
+Disallow: /saju-result.html
+Disallow: /ohaeng-result.html
+Disallow: /fortune-result.html
+Disallow: /relationship-result.html
+Disallow: /compatibility-report.html
+Disallow: /work-money-result.html
+Disallow: /guide-result.html
+
+Sitemap: https://jungwoljae.com/sitemap.xml
