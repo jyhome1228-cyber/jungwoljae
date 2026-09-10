@@ -22,6 +22,7 @@ addStyle('./saju-loading.css?v=20260909-2340');
 if(isResultLike&&!isFortuneResult)addStyle('./brand-contrast-v8.css?v=20260909-0404');
 if(isFortuneResult)addStyle('./fortune-final-v13.css?v=20260909-0838');
 if(document.body?.classList.contains('about-page'))addStyle('./about.css');
+addStyle('./qa-hardening.css?v=20260910-1935');
 
 const existingSajuResultOverlay=currentFile==='saju-result.html'?document.querySelector('[data-saju-result-loading]'):null;
 const useUniversalResultLoader=isResultLike&&!(existingSajuResultOverlay&&!existingSajuResultOverlay.hidden);
@@ -97,3 +98,5 @@ readingForm?.addEventListener('submit',event=>{
   if(firstInvalid){formStatus.textContent='필수 항목을 확인해주세요.';firstInvalid.focus();return;}
   const service=readingForm.querySelector('input[name="serviceType"]:checked')?.value||'';formStatus.textContent='입력 내용을 확인했습니다. 결과 페이지 연결을 준비하고 있습니다.';formStatus.dataset.state='success';setTimeout(()=>{formStatus.textContent=`${service||'선택한'} 분석 결과 화면을 준비 중입니다.`;},300);
 });
+
+const qaScript=document.createElement('script');qaScript.src='./qa-hardening.js?v=20260910-1935';qaScript.defer=true;document.body.appendChild(qaScript);
