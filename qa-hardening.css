@@ -1,6 +1,6 @@
 /* Jungwoljae QA hardening — conservative final-pass overrides */
 *,*::before,*::after{box-sizing:border-box}
-html{max-width:100%;overflow-x:clip;-webkit-text-size-adjust:100%}
+html{max-width:100%;overflow-x:clip;-webkit-text-size-adjust:100%;color-scheme:light}
 body{max-width:100%;overflow-x:hidden}
 img,svg,video,canvas,iframe{max-width:100%}
 img{height:auto}
@@ -27,6 +27,102 @@ button:disabled,.button:disabled{cursor:not-allowed;opacity:.58}
 .saju-report p,.report-section p,.fortune-report p,.relationship-report p,.work-report p,.guide-report p{line-height:1.78}
 .saju-report h2,.report-section h2,.fortune-report h2,.relationship-report h2,.work-report h2,.guide-report h2{text-wrap:balance}
 .saju-report h1,.result-hero h1,.fortune-hero h1,.relationship-hero h1,.work-hero h1,.guide-result-hero h1{text-wrap:balance}
+
+/* Final surface contrast rules.
+   Shared result-quality CSS intentionally normalizes cards to white, but some sections are
+   designed as dark brand surfaces. Re-assert both background and foreground together here. */
+.result-quality-v7 .daymaster-section,
+.result-quality-v7 .flow-section,
+.result-quality-v7 .guide-answer-section,
+.result-quality-v7 .fortune-signal,
+.result-quality-v7 .fortune-tip-final,
+.result-quality-v7 .yin-yang-card,
+.result-quality-v7 .summary-prose,
+.result-friendly-callout,
+.rf3-tip{
+  background:#543a3a!important;
+  border-color:#543a3a!important;
+  color:#fff!important;
+}
+.result-quality-v7 .daymaster-section h1,
+.result-quality-v7 .daymaster-section h2,
+.result-quality-v7 .daymaster-section h3,
+.result-quality-v7 .daymaster-section h4,
+.result-quality-v7 .daymaster-section p,
+.result-quality-v7 .daymaster-section strong,
+.result-quality-v7 .daymaster-section span,
+.result-quality-v7 .flow-section h1,
+.result-quality-v7 .flow-section h2,
+.result-quality-v7 .flow-section h3,
+.result-quality-v7 .flow-section h4,
+.result-quality-v7 .flow-section p,
+.result-quality-v7 .flow-section strong,
+.result-quality-v7 .flow-section span,
+.result-quality-v7 .guide-answer-section h1,
+.result-quality-v7 .guide-answer-section h2,
+.result-quality-v7 .guide-answer-section h3,
+.result-quality-v7 .guide-answer-section p,
+.result-quality-v7 .guide-answer-section strong,
+.result-quality-v7 .guide-answer-section span,
+.result-quality-v7 .fortune-signal *,
+.result-quality-v7 .fortune-tip-final *,
+.result-quality-v7 .yin-yang-card *,
+.result-quality-v7 .summary-prose *,
+.result-friendly-callout *,
+.rf3-tip *{color:#fff!important}
+.result-quality-v7 .daymaster-section .saju-label,
+.result-quality-v7 .flow-section .section-label,
+.result-quality-v7 .guide-answer-section .guide-result-label,
+.result-quality-v7 .fortune-signal>div>span,
+.result-quality-v7 .fortune-tip-final>span{color:rgba(255,255,255,.72)!important}
+.result-quality-v7 .flow-section .flow-copy{color:rgba(255,255,255,.86)!important}
+.result-quality-v7 .flow-chain{border-color:rgba(255,255,255,.18)!important}
+.result-quality-v7 .flow-chain span{border-color:rgba(255,255,255,.34)!important;background:rgba(255,255,255,.04)!important;color:#fff!important}
+.result-quality-v7 .flow-chain i{color:rgba(255,255,255,.62)!important}
+
+/* Explicit light surfaces — never inherit white text from neighboring dark blocks. */
+.result-quality-v7 .element-chart,
+.result-quality-v7 .element-card,
+.result-quality-v7 .insight-card,
+.result-quality-v7 .life-card,
+.result-quality-v7 .key-card,
+.result-quality-v7 .year-card,
+.result-quality-v7 .summary-card,
+.result-quality-v7 .quality-summary-card,
+.result-quality-v7 .fortune-relation,
+.result-quality-v7 .fortune-card,
+.result-quality-v7 .fortune-time-card,
+.result-quality-v7 .fortune-choice-card,
+.result-quality-v7 .fortune-tip-card,
+.result-quality-v7 .relationship-core-card,
+.result-quality-v7 .relationship-condition-card,
+.result-quality-v7 .relationship-guide-card,
+.result-quality-v7 .work-core-card,
+.result-quality-v7 .money-card,
+.result-quality-v7 .guide-personal-card,
+.result-quality-v7 .guide-check-card,
+.result-quality-v7 .guide-action-card{background:#fff!important;color:#2b2524!important}
+.result-quality-v7 .element-card h3,.result-quality-v7 .element-card strong,
+.result-quality-v7 .insight-card h2,.result-quality-v7 .insight-card h3,.result-quality-v7 .insight-card strong,
+.result-quality-v7 .life-card h3,.result-quality-v7 .life-card strong,
+.result-quality-v7 .key-card h3,.result-quality-v7 .key-card strong,
+.result-quality-v7 .quality-summary-card h3,.result-quality-v7 .quality-summary-card strong,
+.result-quality-v7 .fortune-relation h2,.result-quality-v7 .fortune-card h3,.result-quality-v7 .fortune-time-card strong,
+.result-quality-v7 .relationship-core-card h3,.result-quality-v7 .relationship-condition-card h3,.result-quality-v7 .relationship-guide-card h3,
+.result-quality-v7 .work-core-card h3,.result-quality-v7 .money-card h3,
+.result-quality-v7 .guide-personal-card h3,.result-quality-v7 .guide-check-card h3,.result-quality-v7 .guide-action-card h3{color:#2b2524!important}
+.result-quality-v7 .element-card p,.result-quality-v7 .insight-card p,.result-quality-v7 .life-card p,.result-quality-v7 .key-card p,
+.result-quality-v7 .quality-summary-card p,.result-quality-v7 .fortune-relation p,.result-quality-v7 .fortune-card p,.result-quality-v7 .fortune-time-card p,
+.result-quality-v7 .relationship-core-card p,.result-quality-v7 .relationship-condition-card p,.result-quality-v7 .relationship-guide-card p,
+.result-quality-v7 .work-core-card p,.result-quality-v7 .money-card p,.result-quality-v7 .guide-personal-card p,.result-quality-v7 .guide-check-card p,.result-quality-v7 .guide-action-card p{color:#665c58!important}
+
+/* Ohaeng: traditional terms are secondary; plain-language roles are primary. */
+.result-quality-v7 .element-bar .label{display:flex!important;align-items:center!important;gap:8px!important;min-width:0!important}
+.result-quality-v7 .element-bar .label .element-role{color:#2b2524!important;font-size:13px!important;line-height:20px!important;font-weight:700!important}
+.result-quality-v7 .element-bar .label .element-traditional{color:#9a8f8a!important;font-size:10px!important;line-height:16px!important;font-weight:600!important;white-space:nowrap}
+.result-quality-v7 .element-card .element-traditional{display:block;margin-top:5px;color:#9a8f8a!important;font-size:10px!important;line-height:16px!important;font-weight:600!important}
+.result-quality-v7 .flow-chain{flex-wrap:wrap!important}
+.result-quality-v7 .flow-chain span{width:auto!important;min-width:92px!important;height:auto!important;min-height:48px!important;padding:10px 14px!important;border-radius:999px!important;font-size:13px!important;line-height:20px!important}
 
 /* Quick result quality */
 .quick-result{min-width:0}
@@ -69,6 +165,11 @@ table{max-width:100%}
   .quick-polish-grid .quick-card{min-height:0}
   .date-row{grid-template-columns:34px minmax(0,1fr)!important}
   .date-row .score{grid-column:2;justify-self:start;margin-top:5px}
+  .result-quality-v7 .element-bar{grid-template-columns:minmax(118px,.8fr) minmax(80px,1fr) 44px!important;gap:9px!important}
+  .result-quality-v7 .element-bar .label{flex-direction:column!important;align-items:flex-start!important;gap:0!important}
+  .result-quality-v7 .flow-chain{gap:7px!important;padding-inline:0!important}
+  .result-quality-v7 .flow-chain span{min-width:0!important;flex:1 1 42%!important;justify-content:center!important;text-align:center!important}
+  .result-quality-v7 .flow-chain i{display:none!important}
   h1{overflow-wrap:normal}
 }
 
