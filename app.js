@@ -21,7 +21,7 @@ addStyle('./birth-input-unified.css?v=20260909-2205');
 addStyle('./saju-loading.css?v=20260909-2340');
 if(isResultLike&&!isFortuneResult)addStyle('./brand-contrast-v8.css?v=20260909-0404');
 if(document.body?.classList.contains('about-page'))addStyle('./about.css');
-addStyle('./qa-hardening.css?v=20260910-2005');
+addStyle('./qa-hardening.css?v=20260910-2035');
 
 const existingSajuResultOverlay=currentFile==='saju-result.html'?document.querySelector('[data-saju-result-loading]'):null;
 const useUniversalResultLoader=isResultLike&&!(existingSajuResultOverlay&&!existingSajuResultOverlay.hidden);
@@ -72,7 +72,7 @@ const analyticsScript=document.createElement('script');analyticsScript.type='mod
 
 if(profilePages.has(currentFile)){
   const s=document.createElement('script');s.type='module';
-  s.src=quickProfilePages.has(currentFile)?'./quick-profile.js?v=20260909-2340':'./basic-profile.js?v=20260908-0247';
+  s.src=quickProfilePages.has(currentFile)?'./quick-profile.js?v=20260909-2340':'./basic-profile.js?v=20260910-2035';
   document.body.appendChild(s);
 }
 
@@ -95,6 +95,6 @@ readingForm?.addEventListener('submit',event=>{
 });
 
 if(['lucky-number.html','important-day.html','moving-day.html'].includes(currentFile)){
-  const quickPolish=document.createElement('script');quickPolish.src='./quick-result-polish.js?v=20260910-2005';quickPolish.defer=true;document.body.appendChild(quickPolish);
+  const quickPolish=document.createElement('script');quickPolish.src='./quick-result-polish.js?v=20260910-2035';quickPolish.defer=true;document.body.appendChild(quickPolish);
 }
-const qaScript=document.createElement('script');qaScript.src='./qa-hardening.js?v=20260910-2005';qaScript.defer=true;document.body.appendChild(qaScript);
+const qaScript=document.createElement('script');qaScript.src='./qa-hardening.js?v=20260910-2035';qaScript.defer=true;document.body.appendChild(qaScript);
