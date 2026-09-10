@@ -48,5 +48,19 @@
     document.querySelectorAll('select[name="gender"],select[id*="gender"]').forEach(select => select._jwjUnifiedGender?.paint?.());
   };
   run();
-  setInterval(run, 700);
+  let scheduled = false;
+  const schedule = () => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(() => { scheduled = false; run(); });
+  };
+  const observer = new MutationObserver(schedule);
+  if (document.body) observer.observe(document.body, { childList: true, subtree: true });
+  let ticks = 0;
+  const syncTimer = setInterval(() => {
+    run();
+    ticks += 1;
+    if (ticks >= 20) clearInterval(syncTimer);
+  }, 700);
+  addEventListener('pageshow', run);
 })();
