@@ -4,8 +4,20 @@
   const result=document.querySelector('[data-quick-result]');
   const body=document.querySelector('[data-quick-result-body]');
   if(!result||!body)return;
+  const form=document.querySelector('[data-quick-form]');
+  const status=form?.querySelector('[data-quick-status]');
   const esc=s=>String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
   const text=n=>String(n?.textContent||'').replace(/\s+/g,' ').trim();
+
+  if(form&&['important-day.html','moving-day.html'].includes(file)){
+    form.addEventListener('submit',event=>{
+      const start=form.querySelector('#quick-start')?.value,end=form.querySelector('#quick-end')?.value;
+      if(!start||!end)return;
+      const a=new Date(`${start}T12:00:00`),b=new Date(`${end}T12:00:00`);
+      const days=Math.round((b-a)/86400000)+1;
+      if(days>366){event.preventDefault();event.stopImmediatePropagation();if(status)status.textContent='한 번에 비교할 수 있는 기간은 최대 366일입니다. 기간을 1년 이내로 줄여주세요.';form.querySelector('#quick-end')?.focus();}
+    },true);
+  }
 
   function appendSection(title,lead,cards,note=''){
     if(body.querySelector('[data-quick-polish]'))return;
