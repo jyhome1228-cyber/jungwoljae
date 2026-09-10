@@ -26,7 +26,7 @@ function fillDays(){
   if([...day.options].some(o=>o.value===prev))day.value=prev;
 }
 function syncTime(){const disabled=timeUnknown.checked;[meridiem,hour,minute].forEach(el=>{el.disabled=disabled;if(disabled)el.value='';});}
-function syncCalendar(){lunarExtra.hidden=calendar.value!=='lunar';}
+function syncCalendar(){lunarExtra.hidden=calendar.value!=='lunar';if(calendar.value!=='lunar'&&form.elements.isLeapMonth)form.elements.isLeapMonth.checked=false;}
 function syncFocus(changed){
   const checked=focusInputs.filter(x=>x.checked);
   if(checked.length>2&&changed){changed.checked=false;focusMessage.textContent='관심 영역은 최대 2개까지 선택할 수 있습니다.';}
@@ -39,6 +39,7 @@ function fillProfile(p){
   if(p.birthTimeUnknown){timeUnknown.checked=true;syncTime();}
   else if(p.birthTime){const [hRaw,mRaw]=p.birthTime.split(':');const h=Number(hRaw);meridiem.value=h>=12?'pm':'am';hour.value=String((h%12)||12).padStart(2,'0');minute.value=String(Math.min(50,Math.round(Number(mRaw||0)/10)*10)).padStart(2,'0');}
   if(p.calendarType){calendar.value=p.calendarType;syncCalendar();}
+  if(form.elements.isLeapMonth)form.elements.isLeapMonth.checked=Boolean(p.isLeapMonth)&&calendar.value==='lunar';
   if(p.gender)form.elements.gender.value=p.gender;
   if(p.city)form.elements.city.value=p.city;
 }
@@ -55,16 +56,17 @@ onAuthStateChanged(auth,async user=>{
 });
 
 form.addEventListener('submit',e=>{
-  e.preventDefault();status.textContent='';
+  e.preventDefault();if(form.dataset.submitting==='true')return;status.textContent='';
   const name=form.elements.name.value.trim();
   const birthDate=year.value&&month.value&&day.value?`${year.value}-${month.value}-${day.value}`:'';
   let birthTime='';
   if(!timeUnknown.checked&&meridiem.value&&hour.value&&minute.value){let h=Number(hour.value)%12;if(meridiem.value==='pm')h+=12;birthTime=`${String(h).padStart(2,'0')}:${minute.value}`;}
-  if(!name){status.textContent='이름 또는 닉네임을 입력해주세요.';return;}
-  if(!birthDate){status.textContent='태어난 연·월·일을 모두 선택해주세요.';return;}
-  if(!timeUnknown.checked&&(meridiem.value||hour.value||minute.value)&&!birthTime){status.textContent='시간을 입력하려면 오전/오후·시·분을 모두 선택해주세요.';return;}
-  if(!form.elements.consent.checked){status.textContent='분석을 위한 정보 사용에 동의해주세요.';return;}
+  if(!name){status.textContent='이름 또는 닉네임을 입력해주세요.';form.elements.name.focus();return;}
+  if(!birthDate){status.textContent='태어난 연·월·일을 모두 선택해주세요.';year.focus();return;}
+  if(!timeUnknown.checked&&(meridiem.value||hour.value||minute.value)&&!birthTime){status.textContent='시간을 입력하려면 오전/오후·시·분을 모두 선택해주세요.';meridiem.focus();return;}
+  if(!form.elements.consent.checked){status.textContent='분석을 위한 정보 사용에 동의해주세요.';form.elements.consent.focus();return;}
   const payload={name,birthDate,birthTime,birthTimeUnknown:timeUnknown.checked,calendarType:calendar.value,isLeapMonth:Boolean(form.elements.isLeapMonth?.checked),gender:form.elements.gender.value,city:form.elements.city.value.trim(),focus:focusInputs.filter(x=>x.checked).map(x=>x.value),createdAt:new Date().toISOString()};
   sessionStorage.setItem('jungwoljae_work_money_input',JSON.stringify(payload));
+  form.dataset.submitting='true';const submit=form.querySelector('button[type="submit"]');if(submit){submit.disabled=true;submit.setAttribute('aria-busy','true');}
   location.href='./work-money-result.html';
 });
