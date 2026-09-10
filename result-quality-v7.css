@@ -1,6 +1,8 @@
 :root{--rq-brand:#543a3a;--rq-ink:#2b2524;--rq-copy:#5f5652;--rq-muted:#8d827d;--rq-line:#e8dfdb;--rq-soft:#fbf8f7}
 
-/* Result pages: one shared reading hierarchy */
+/* Result pages: one shared reading hierarchy.
+   IMPORTANT: shared structure must never force surface/background/text colors.
+   Each result page owns its visual surface so dark emphasis blocks cannot be turned white. */
 .result-quality-v7 .saju-container,
 .result-quality-v7 .result-container,
 .result-quality-v7 .fortune-result-container,
@@ -14,7 +16,7 @@
 .result-quality-v7 .relationship-report,
 .result-quality-v7 .work-report,
 .result-quality-v7 .guide-report,
-.result-quality-v7 .quality-summary{margin-bottom:22px!important;padding:36px!important;border:1px solid var(--rq-line)!important;border-radius:20px!important;background:#fff!important;box-sizing:border-box!important}
+.result-quality-v7 .quality-summary{margin-bottom:22px!important;padding:36px!important;border-radius:20px!important;box-sizing:border-box!important}
 
 .result-quality-v7 .saju-label,
 .result-quality-v7 .section-label,
@@ -22,7 +24,7 @@
 .result-quality-v7 .relationship-label,
 .result-quality-v7 .work-label,
 .result-quality-v7 .guide-result-label,
-.result-quality-v7 .quality-kicker{display:block!important;margin:0 0 12px!important;color:var(--rq-brand)!important;font-size:12px!important;line-height:18px!important;font-weight:800!important;letter-spacing:.015em!important;text-transform:none!important}
+.result-quality-v7 .quality-kicker{display:block!important;margin:0 0 12px!important;font-size:12px!important;line-height:18px!important;font-weight:800!important;letter-spacing:.015em!important;text-transform:none!important}
 
 .result-quality-v7 .saju-report h2,
 .result-quality-v7 .report-section h2,
@@ -30,14 +32,14 @@
 .result-quality-v7 .relationship-report h2,
 .result-quality-v7 .work-report h2,
 .result-quality-v7 .guide-report h2,
-.result-quality-v7 .quality-summary h2{margin:0!important;color:var(--rq-ink)!important;font-size:27px!important;line-height:38px!important;font-weight:750!important;letter-spacing:-.025em!important;word-break:keep-all!important}
+.result-quality-v7 .quality-summary h2{margin:0!important;font-size:27px!important;line-height:38px!important;font-weight:750!important;letter-spacing:-.025em!important;word-break:keep-all!important}
 
 .result-quality-v7 .saju-report h3,
 .result-quality-v7 .report-section h3,
 .result-quality-v7 .fortune-report h3,
 .result-quality-v7 .relationship-report h3,
 .result-quality-v7 .work-report h3,
-.result-quality-v7 .guide-report h3{color:var(--rq-ink)!important;font-size:17px!important;line-height:26px!important;font-weight:700!important;letter-spacing:-.015em!important;word-break:keep-all!important}
+.result-quality-v7 .guide-report h3{font-size:17px!important;line-height:26px!important;font-weight:700!important;letter-spacing:-.015em!important;word-break:keep-all!important}
 
 .result-quality-v7 .saju-report p,
 .result-quality-v7 .report-section p,
@@ -45,10 +47,10 @@
 .result-quality-v7 .relationship-report p,
 .result-quality-v7 .work-report p,
 .result-quality-v7 .guide-report p,
-.result-quality-v7 .quality-summary p{color:var(--rq-copy)!important;font-size:15px!important;line-height:27px!important;letter-spacing:-.012em!important;word-break:keep-all!important}
+.result-quality-v7 .quality-summary p{font-size:15px!important;line-height:27px!important;letter-spacing:-.012em!important;word-break:keep-all!important}
 
 .result-quality-v7 .section-heading-row>p,
-.result-quality-v7 .section-title-row>p{max-width:480px!important;color:var(--rq-muted)!important;font-size:13px!important;line-height:22px!important}
+.result-quality-v7 .section-title-row>p{max-width:480px!important;font-size:13px!important;line-height:22px!important}
 
 .result-quality-v7 .fortune-story,
 .result-quality-v7 .guide-reason-copy,
@@ -67,16 +69,16 @@
 .result-quality-v7 .total-summary-copy p+ p{margin-top:15px!important}
 
 /* Shared summary block added after the hero */
-.result-quality-v7 .quality-summary{background:var(--rq-soft)!important}
+.result-quality-v7 .quality-summary{background:var(--rq-soft)!important;border:1px solid var(--rq-line)!important}
 .result-quality-v7 .quality-summary-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,.55fr);gap:28px;align-items:end;margin-bottom:22px}
 .result-quality-v7 .quality-summary-head>p{margin:0!important;color:var(--rq-muted)!important;font-size:13px!important;line-height:22px!important}
 .result-quality-v7 .quality-summary-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.result-quality-v7 .quality-summary-card{padding:22px;border:1px solid #e4dad6;border-radius:15px;background:#fff}
+.result-quality-v7 .quality-summary-card{padding:22px;border:1px solid #e4dad6;border-radius:15px;background:#fff;color:var(--rq-ink)}
 .result-quality-v7 .quality-summary-card small{display:block;margin-bottom:8px;color:#8d817c;font-size:11px;line-height:17px;font-weight:750}
 .result-quality-v7 .quality-summary-card strong{display:block;margin-bottom:9px;color:var(--rq-ink);font-size:18px;line-height:27px;letter-spacing:-.02em;word-break:keep-all}
-.result-quality-v7 .quality-summary-card p{margin:0!important;font-size:14px!important;line-height:25px!important}
+.result-quality-v7 .quality-summary-card p{margin:0!important;color:var(--rq-copy)!important;font-size:14px!important;line-height:25px!important}
 
-/* Cards: body text should read like prose rather than UI labels */
+/* Cards: spacing only. Page-specific CSS owns colors. */
 .result-quality-v7 .fortune-card,
 .result-quality-v7 .fortune-key-card,
 .result-quality-v7 .guide-personal-card,
@@ -88,7 +90,7 @@
 .result-quality-v7 .work-core-card,
 .result-quality-v7 .money-card,
 .result-quality-v7 .life-card,
-.result-quality-v7 .key-card{padding:23px!important;border-color:#e5dcd8!important;border-radius:15px!important}
+.result-quality-v7 .key-card{padding:23px!important;border-radius:15px!important}
 
 .result-quality-v7 .fortune-card p,
 .result-quality-v7 .fortune-key-card p,
@@ -120,9 +122,6 @@
 .result-quality-v7 .guide-problem-box strong{font-size:21px!important;line-height:31px!important}
 .result-quality-v7 .guide-check-grid{gap:12px!important}
 .result-quality-v7 .guide-action-card span{margin-bottom:14px!important}
-.result-quality-v7 .guide-answer-section{background:var(--rq-brand)!important;border-color:var(--rq-brand)!important}
-.result-quality-v7 .guide-answer-section h2,.result-quality-v7 .guide-answer-section strong{color:#fff!important}
-.result-quality-v7 .guide-answer-section p{color:rgba(255,255,255,.9)!important}
 
 /* Raw traditional terms stay in the evidence area only. */
 .result-quality-v7 .evidence-content,
