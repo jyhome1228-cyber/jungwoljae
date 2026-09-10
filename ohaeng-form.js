@@ -55,7 +55,7 @@ function fillProfile(data){
   else if(data.birthTime){
     const [hRaw,minRaw]=data.birthTime.split(':');
     const h=Number(hRaw);meridiem.value=h>=12?'pm':'am';hour.value=String((h%12)||12).padStart(2,'0');
-    const rounded=Math.round(Number(minRaw)/10)*10%60;minute.value=String(rounded).padStart(2,'0');
+    const rounded=Math.min(50,Math.round(Number(minRaw||0)/10)*10);minute.value=String(rounded).padStart(2,'0');
   }
   if(data.calendarType){calendar.value=data.calendarType;syncCalendar();}
   if(data.gender)form.elements.gender.value=data.gender;
@@ -79,6 +79,7 @@ onAuthStateChanged(auth,async user=>{
 
 form.addEventListener('submit',(event)=>{
   event.preventDefault();
+  if(form.dataset.submitting==='true')return;
   ['name','birthDate','birthTime'].forEach(k=>setError(k));setStatus('');
   let valid=true;
   const name=form.elements.name.value.trim();
@@ -105,5 +106,7 @@ form.addEventListener('submit',(event)=>{
     createdAt:new Date().toISOString()
   };
   sessionStorage.setItem('jungwoljae_ohaeng_input',JSON.stringify(payload));
+  form.dataset.submitting='true';
+  const submit=form.querySelector('button[type="submit"]');if(submit){submit.disabled=true;submit.setAttribute('aria-busy','true');}
   location.href='./ohaeng-result.html';
 });
