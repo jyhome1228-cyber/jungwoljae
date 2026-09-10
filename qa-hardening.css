@@ -34,6 +34,8 @@ button:disabled,.button:disabled{cursor:not-allowed;opacity:.58}
 .result-quality-v7 .daymaster-section,
 .result-quality-v7 .flow-section,
 .result-quality-v7 .guide-answer-section,
+.result-quality-v7 .relationship-pattern-section,
+.result-quality-v7 .work-summary-section,
 .result-quality-v7 .fortune-signal,
 .result-quality-v7 .fortune-tip-final,
 .result-quality-v7 .yin-yang-card,
@@ -64,6 +66,8 @@ button:disabled,.button:disabled{cursor:not-allowed;opacity:.58}
 .result-quality-v7 .guide-answer-section p,
 .result-quality-v7 .guide-answer-section strong,
 .result-quality-v7 .guide-answer-section span,
+.result-quality-v7 .relationship-pattern-section *,
+.result-quality-v7 .work-summary-section *,
 .result-quality-v7 .fortune-signal *,
 .result-quality-v7 .fortune-tip-final *,
 .result-quality-v7 .yin-yang-card *,
@@ -73,6 +77,8 @@ button:disabled,.button:disabled{cursor:not-allowed;opacity:.58}
 .result-quality-v7 .daymaster-section .saju-label,
 .result-quality-v7 .flow-section .section-label,
 .result-quality-v7 .guide-answer-section .guide-result-label,
+.result-quality-v7 .relationship-pattern-section .relationship-label,
+.result-quality-v7 .work-summary-section .work-label,
 .result-quality-v7 .fortune-signal>div>span,
 .result-quality-v7 .fortune-tip-final>span{color:rgba(255,255,255,.72)!important}
 .result-quality-v7 .flow-section .flow-copy{color:rgba(255,255,255,.86)!important}
