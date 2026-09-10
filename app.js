@@ -20,9 +20,8 @@ addStyle('./universal-structure-v8.css?v=20260909-0404');
 addStyle('./birth-input-unified.css?v=20260909-2205');
 addStyle('./saju-loading.css?v=20260909-2340');
 if(isResultLike&&!isFortuneResult)addStyle('./brand-contrast-v8.css?v=20260909-0404');
-if(isFortuneResult)addStyle('./fortune-final-v13.css?v=20260909-0838');
 if(document.body?.classList.contains('about-page'))addStyle('./about.css');
-addStyle('./qa-hardening.css?v=20260910-1935');
+addStyle('./qa-hardening.css?v=20260910-2005');
 
 const existingSajuResultOverlay=currentFile==='saju-result.html'?document.querySelector('[data-saju-result-loading]'):null;
 const useUniversalResultLoader=isResultLike&&!(existingSajuResultOverlay&&!existingSajuResultOverlay.hidden);
@@ -69,7 +68,7 @@ const reviewsSection=document.querySelector('#reviews');if(reviewsSection){const
 const footer=document.querySelector('.site-footer');if(footer&&!footer.dataset.enhanced){footer.dataset.enhanced='true';const s=document.createElement('script');s.src='./footer.js?v=20260908-1255';s.defer=true;document.body.appendChild(s);}
 const authScript=document.createElement('script');authScript.type='module';authScript.src='./auth.js?v=20260908-0731';document.body.appendChild(authScript);
 const analyticsScript=document.createElement('script');analyticsScript.type='module';analyticsScript.src='./analytics.js?v=20260908-1255';document.body.appendChild(analyticsScript);
-['./birth-input-unified.js?v=20260909-2205','./birth-time-unified.js?v=20260909-2205','./gender-unified.js?v=20260909-2205'].forEach(src=>{const s=document.createElement('script');s.src=src;s.defer=true;document.body.appendChild(s);});
+['./birth-input-unified.js?v=20260910-2005','./birth-time-unified.js?v=20260910-2005','./gender-unified.js?v=20260910-2005'].forEach(src=>{const s=document.createElement('script');s.src=src;s.defer=true;document.body.appendChild(s);});
 
 if(profilePages.has(currentFile)){
   const s=document.createElement('script');s.type='module';
@@ -86,10 +85,6 @@ if(isResultLike){
   }
 }
 
-if(isFortuneResult){
-  setTimeout(()=>{const finalScript=document.createElement('script');finalScript.type='module';finalScript.src='./fortune-final-v13.js?v=20260909-0838';document.body.appendChild(finalScript);},120);
-}
-
 function fieldError(form,name,message=''){const node=form.querySelector(`[data-error-for="${name}"]`);if(node)node.textContent=message;}
 readingForm?.addEventListener('submit',event=>{
   if(currentFile==='compatibility.html'||readingForm.matches('[data-saju-form],[data-ohaeng-form],[data-fortune-form],[data-relationship-form]'))return;
@@ -99,4 +94,7 @@ readingForm?.addEventListener('submit',event=>{
   const service=readingForm.querySelector('input[name="serviceType"]:checked')?.value||'';formStatus.textContent='입력 내용을 확인했습니다. 결과 페이지 연결을 준비하고 있습니다.';formStatus.dataset.state='success';setTimeout(()=>{formStatus.textContent=`${service||'선택한'} 분석 결과 화면을 준비 중입니다.`;},300);
 });
 
-const qaScript=document.createElement('script');qaScript.src='./qa-hardening.js?v=20260910-1935';qaScript.defer=true;document.body.appendChild(qaScript);
+if(['lucky-number.html','important-day.html','moving-day.html'].includes(currentFile)){
+  const quickPolish=document.createElement('script');quickPolish.src='./quick-result-polish.js?v=20260910-2005';quickPolish.defer=true;document.body.appendChild(quickPolish);
+}
+const qaScript=document.createElement('script');qaScript.src='./qa-hardening.js?v=20260910-2005';qaScript.defer=true;document.body.appendChild(qaScript);
