@@ -28,6 +28,22 @@ button:disabled,.button:disabled{cursor:not-allowed;opacity:.58}
 .saju-report h2,.report-section h2,.fortune-report h2,.relationship-report h2,.work-report h2,.guide-report h2{text-wrap:balance}
 .saju-report h1,.result-hero h1,.fortune-hero h1,.relationship-hero h1,.work-hero h1,.guide-result-hero h1{text-wrap:balance}
 
+/* Quick result quality */
+.quick-result{min-width:0}
+.quick-polish-section{margin-top:26px;padding-top:26px;border-top:1px solid #e9e2de}
+.quick-polish-head{max-width:760px;margin-bottom:16px}
+.quick-polish-head>span{display:block;margin-bottom:7px;color:#543a3a;font-size:10px;font-weight:800;letter-spacing:.05em}
+.quick-polish-head h3{margin:0!important;color:#2b2524!important;font-size:20px!important;line-height:30px!important;letter-spacing:-.02em!important;text-wrap:balance}
+.quick-polish-head p{margin:8px 0 0!important;color:#786f6c!important;font-size:12px!important;line-height:20px!important}
+.quick-polish-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;align-items:stretch}
+.quick-polish-grid .quick-card{height:100%;min-height:190px}
+.quick-polish-grid .quick-card strong{display:block;overflow-wrap:anywhere}
+.quick-polish-note{margin-top:14px!important;line-height:1.7!important}
+.date-row{min-width:0}
+.date-row>div{min-width:0}
+.date-row p{overflow-wrap:break-word}
+.number-set{max-width:100%;flex-wrap:wrap}
+
 /* Tables / wide content must scroll rather than force the viewport wider */
 table{max-width:100%}
 .table-wrap,.scroll-table,[class*="table-wrap"]{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
@@ -49,6 +65,10 @@ table{max-width:100%}
   .saju-actions,.report-actions,.fortune-actions,.relationship-actions,.work-actions,.guide-actions{min-width:0}
   .action-buttons,.fortune-action-buttons,.relationship-action-buttons,.work-action-buttons,.guide-action-buttons{flex-wrap:wrap}
   .action-buttons>*,.fortune-action-buttons>*,.relationship-action-buttons>*,.work-action-buttons>*,.guide-action-buttons>*{flex:1 1 140px;min-width:0}
+  .quick-polish-grid{grid-template-columns:1fr!important}
+  .quick-polish-grid .quick-card{min-height:0}
+  .date-row{grid-template-columns:34px minmax(0,1fr)!important}
+  .date-row .score{grid-column:2;justify-self:start;margin-top:5px}
   h1{overflow-wrap:normal}
 }
 
