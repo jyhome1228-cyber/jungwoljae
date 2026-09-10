@@ -1,0 +1,60 @@
+/* Jungwoljae QA hardening — conservative final-pass overrides */
+*,*::before,*::after{box-sizing:border-box}
+html{max-width:100%;overflow-x:clip;-webkit-text-size-adjust:100%}
+body{max-width:100%;overflow-x:hidden}
+img,svg,video,canvas,iframe{max-width:100%}
+img{height:auto}
+main,section,article,aside,header,footer,nav,form,fieldset,div{min-width:0}
+.container,.wide-container{max-width:1280px}
+
+/* Prevent long Korean/English strings and URLs from breaking cards */
+p,li,dd,dt,h1,h2,h3,h4,strong,span,a,button,label{overflow-wrap:break-word;word-break:keep-all}
+pre,code,.reading-report{white-space:pre-wrap;overflow-wrap:anywhere}
+
+/* Shared form stability */
+input,select,textarea,button{max-width:100%;font:inherit}
+input,select,textarea{min-width:0}
+button,.button,[role="button"]{touch-action:manipulation}
+.reading-form,.quick-form,.guide-form,.signup-card,.auth-card{min-width:0}
+.page-field-row,.date-selects,.time-selects,.birth-date-grid,.birth-time-grid,.quick-fields,.guide-fields,.signup-grid{min-width:0}
+.page-field-row>* ,.date-selects>* ,.time-selects>* ,.birth-date-grid>* ,.birth-time-grid>* ,.quick-fields>* ,.guide-fields>* ,.signup-grid>*{min-width:0}
+.form-status:not(:empty),.quick-status:not(:empty),.guide-status:not(:empty),.field-message:not(:empty),.field-error:not(:empty){display:block;margin-top:8px;line-height:1.55}
+[aria-invalid="true"]{border-color:#a64f46!important;box-shadow:0 0 0 3px rgba(166,79,70,.08)!important}
+button:disabled,.button:disabled{cursor:not-allowed;opacity:.58}
+
+/* Result readability / density */
+.saju-report,.report-section,.fortune-report,.relationship-report,.work-report,.guide-report{min-width:0}
+.saju-report p,.report-section p,.fortune-report p,.relationship-report p,.work-report p,.guide-report p{line-height:1.78}
+.saju-report h2,.report-section h2,.fortune-report h2,.relationship-report h2,.work-report h2,.guide-report h2{text-wrap:balance}
+.saju-report h1,.result-hero h1,.fortune-hero h1,.relationship-hero h1,.work-hero h1,.guide-result-hero h1{text-wrap:balance}
+
+/* Tables / wide content must scroll rather than force the viewport wider */
+table{max-width:100%}
+.table-wrap,.scroll-table,[class*="table-wrap"]{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+/* Runtime notice used only when a core script failed to initialize */
+.qa-runtime-notice{width:min(calc(100% - 32px),880px);margin:18px auto;padding:14px 16px;border:1px solid #e3d7d2;border-radius:12px;background:#fffaf8;color:#5c4945;font-size:12px;line-height:1.65}
+.qa-runtime-notice strong{display:block;margin-bottom:3px;color:#2b2524;font-size:13px}
+.qa-runtime-notice a{color:#543a3a;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+
+/* Mobile final pass */
+@media(max-width:767px){
+  .container,.wide-container{width:min(calc(100% - 32px),1280px)!important}
+  .site-header{z-index:1000}
+  .mobile-menu{max-height:calc(100dvh - 64px);overflow-y:auto;-webkit-overflow-scrolling:touch}
+  body.menu-open{overflow:hidden}
+  .reading-form,.quick-form,.guide-form,.signup-card,.auth-card{max-width:100%}
+  .page-field-row,.date-selects,.time-selects,.birth-date-grid,.birth-time-grid,.quick-fields,.guide-fields,.signup-grid{max-width:100%}
+  .saju-container [class*="grid"],.result-container [class*="grid"],.fortune-result-container [class*="grid"],.relationship-result-container [class*="grid"],.work-result-container [class*="grid"],.guide-result-container [class*="grid"]{min-width:0}
+  .saju-actions,.report-actions,.fortune-actions,.relationship-actions,.work-actions,.guide-actions{min-width:0}
+  .action-buttons,.fortune-action-buttons,.relationship-action-buttons,.work-action-buttons,.guide-action-buttons{flex-wrap:wrap}
+  .action-buttons>*,.fortune-action-buttons>*,.relationship-action-buttons>*,.work-action-buttons>*,.guide-action-buttons>*{flex:1 1 140px;min-width:0}
+  h1{overflow-wrap:normal}
+}
+
+@media(max-width:420px){
+  .container,.wide-container{width:min(calc(100% - 24px),1280px)!important}
+  input,select,textarea{font-size:16px!important} /* prevent iOS input zoom */
+}
+
+[hidden]{display:none!important}
