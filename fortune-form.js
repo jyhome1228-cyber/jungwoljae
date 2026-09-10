@@ -80,7 +80,7 @@ onAuthStateChanged(auth,async user=>{
 });
 
 form.addEventListener('submit',e=>{
-  e.preventDefault();status.textContent='';
+  e.preventDefault();if(form.dataset.submitting==='true')return;status.textContent='';
   const name=nameInput.value.trim(),date=birthDate(),time=birthTime();
   if(!name){status.textContent='이름 또는 닉네임을 입력해주세요.';nameInput.focus();return;}
   if(!date){status.textContent='태어난 연·월·일을 모두 선택해주세요.';year.focus();return;}
@@ -91,5 +91,6 @@ form.addEventListener('submit',e=>{
     calendarType:calendar.value,isLeapMonth:Boolean(leap?.checked),gender:gender.value,zodiac:zodiacFromBirth(date),targetDate:today.date,mode:'today',createdAt:Date.now()
   };
   sessionStorage.setItem('jungwoljae_fortune_input',JSON.stringify(payload));
+  form.dataset.submitting='true';const submit=form.querySelector('button[type="submit"]');if(submit){submit.disabled=true;submit.setAttribute('aria-busy','true');}
   location.href='./fortune-result.html';
 });
