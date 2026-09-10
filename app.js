@@ -83,6 +83,7 @@ if(isResultLike){
     const math=document.createElement('script');math.type='module';math.src='./result-calculation-v11.js?v=20260909-0750';document.body.appendChild(math);
     const tone=document.createElement('script');tone.src='./saju-tone-v11.js?v=20260909-0750';tone.defer=true;document.body.appendChild(tone);
   }
+  const plain=document.createElement('script');plain.src='./result-plain-language-v2.js?v=20260910-2105';plain.defer=true;document.body.appendChild(plain);
 }
 
 function fieldError(form,name,message=''){const node=form.querySelector(`[data-error-for="${name}"]`);if(node)node.textContent=message;}
