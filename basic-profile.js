@@ -96,7 +96,7 @@ if(!supported.has(file)){
           calendarType:controls.calendar?.value||'solar',
           gender:controls.gender?.value||'',
           city:(controls.city?.value||'').trim(),
-          isLeapMonth:Boolean(controls.leap?.checked)
+          isLeapMonth:Boolean(controls.calendar?.value==='lunar'&&controls.leap?.checked)
         };
       };
       const applyProfile=(p={})=>{
@@ -115,14 +115,14 @@ if(!supported.has(file)){
             setValue(controls.hour,String((rawH%12)||12).padStart(2,'0'));
           }else setValue(controls.hour,String(rawH).padStart(2,'0'));
           if(controls.minute){
-            const rounded=Math.round((rawM||0)/10)*10%60;
+            const rounded=Math.min(50,Math.round((rawM||0)/10)*10);
             setValue(controls.minute,String(rounded).padStart(2,'0'));
           }
         }
         if(p.calendarType)setValue(controls.calendar,p.calendarType);
         if(p.gender)setValue(controls.gender,p.gender);
         if(p.city)setValue(controls.city,p.city);
-        if(controls.leap)setChecked(controls.leap,Boolean(p.isLeapMonth));
+        if(controls.leap)setChecked(controls.leap,Boolean(p.isLeapMonth)&&controls.calendar?.value==='lunar');
       };
       const localRead=()=>{
         try{return JSON.parse(localStorage.getItem(LOCAL_KEY)||'null');}catch(e){return null;}
