@@ -28,9 +28,7 @@ button:disabled,.button:disabled{cursor:not-allowed;opacity:.58}
 .saju-report h2,.report-section h2,.fortune-report h2,.relationship-report h2,.work-report h2,.guide-report h2{text-wrap:balance}
 .saju-report h1,.result-hero h1,.fortune-hero h1,.relationship-hero h1,.work-hero h1,.guide-result-hero h1{text-wrap:balance}
 
-/* Final surface contrast rules.
-   Shared result-quality CSS intentionally normalizes cards to white, but some sections are
-   designed as dark brand surfaces. Re-assert both background and foreground together here. */
+/* Final surface contrast rules — background and foreground always move as one pair. */
 .result-quality-v7 .daymaster-section,
 .result-quality-v7 .flow-section,
 .result-quality-v7 .guide-answer-section,
@@ -40,6 +38,7 @@ button:disabled,.button:disabled{cursor:not-allowed;opacity:.58}
 .result-quality-v7 .fortune-tip-final,
 .result-quality-v7 .yin-yang-card,
 .result-quality-v7 .summary-prose,
+.result-quality-v7 .compatibility-score,
 .result-friendly-callout,
 .rf3-tip{
   background:#543a3a!important;
@@ -72,6 +71,7 @@ button:disabled,.button:disabled{cursor:not-allowed;opacity:.58}
 .result-quality-v7 .fortune-tip-final *,
 .result-quality-v7 .yin-yang-card *,
 .result-quality-v7 .summary-prose *,
+.result-quality-v7 .compatibility-score *,
 .result-friendly-callout *,
 .rf3-tip *{color:#fff!important}
 .result-quality-v7 .daymaster-section .saju-label,
@@ -80,7 +80,8 @@ button:disabled,.button:disabled{cursor:not-allowed;opacity:.58}
 .result-quality-v7 .relationship-pattern-section .relationship-label,
 .result-quality-v7 .work-summary-section .work-label,
 .result-quality-v7 .fortune-signal>div>span,
-.result-quality-v7 .fortune-tip-final>span{color:rgba(255,255,255,.72)!important}
+.result-quality-v7 .fortune-tip-final>span,
+.result-quality-v7 .compatibility-score>span{color:rgba(255,255,255,.72)!important}
 .result-quality-v7 .flow-section .flow-copy{color:rgba(255,255,255,.86)!important}
 .result-quality-v7 .flow-chain{border-color:rgba(255,255,255,.18)!important}
 .result-quality-v7 .flow-chain span{border-color:rgba(255,255,255,.34)!important;background:rgba(255,255,255,.04)!important;color:#fff!important}
@@ -103,6 +104,9 @@ button:disabled,.button:disabled{cursor:not-allowed;opacity:.58}
 .result-quality-v7 .relationship-core-card,
 .result-quality-v7 .relationship-condition-card,
 .result-quality-v7 .relationship-guide-card,
+.result-quality-v7 .compatibility-metric,
+.result-quality-v7 .compatibility-person-card,
+.result-quality-v7 .compatibility-compare-card,
 .result-quality-v7 .work-core-card,
 .result-quality-v7 .money-card,
 .result-quality-v7 .guide-personal-card,
@@ -115,11 +119,13 @@ button:disabled,.button:disabled{cursor:not-allowed;opacity:.58}
 .result-quality-v7 .quality-summary-card h3,.result-quality-v7 .quality-summary-card strong,
 .result-quality-v7 .fortune-relation h2,.result-quality-v7 .fortune-card h3,.result-quality-v7 .fortune-time-card strong,
 .result-quality-v7 .relationship-core-card h3,.result-quality-v7 .relationship-condition-card h3,.result-quality-v7 .relationship-guide-card h3,
+.result-quality-v7 .compatibility-metric strong,.result-quality-v7 .compatibility-person-card h3,.result-quality-v7 .compatibility-compare-card strong,
 .result-quality-v7 .work-core-card h3,.result-quality-v7 .money-card h3,
 .result-quality-v7 .guide-personal-card h3,.result-quality-v7 .guide-check-card h3,.result-quality-v7 .guide-action-card h3{color:#2b2524!important}
 .result-quality-v7 .element-card p,.result-quality-v7 .insight-card p,.result-quality-v7 .life-card p,.result-quality-v7 .key-card p,
 .result-quality-v7 .quality-summary-card p,.result-quality-v7 .fortune-relation p,.result-quality-v7 .fortune-card p,.result-quality-v7 .fortune-time-card p,
 .result-quality-v7 .relationship-core-card p,.result-quality-v7 .relationship-condition-card p,.result-quality-v7 .relationship-guide-card p,
+.result-quality-v7 .compatibility-metric p,.result-quality-v7 .compatibility-person-card p,.result-quality-v7 .compatibility-compare-card p,
 .result-quality-v7 .work-core-card p,.result-quality-v7 .money-card p,.result-quality-v7 .guide-personal-card p,.result-quality-v7 .guide-check-card p,.result-quality-v7 .guide-action-card p{color:#665c58!important}
 
 /* Ohaeng: traditional terms are secondary; plain-language roles are primary. */
@@ -176,6 +182,7 @@ table{max-width:100%}
   .result-quality-v7 .flow-chain{gap:7px!important;padding-inline:0!important}
   .result-quality-v7 .flow-chain span{min-width:0!important;flex:1 1 42%!important;justify-content:center!important;text-align:center!important}
   .result-quality-v7 .flow-chain i{display:none!important}
+  .result-quality-v7 .compatibility-score{width:122px!important;height:122px!important}
   h1{overflow-wrap:normal}
 }
 
