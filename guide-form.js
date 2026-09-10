@@ -81,22 +81,23 @@ const year=form.querySelector('#guide-year'),month=form.querySelector('#guide-mo
 const meridiem=form.querySelector('#guide-meridiem'),hour=form.querySelector('#guide-hour'),minute=form.querySelector('#guide-minute');
 const timeUnknown=form.querySelector('#guide-time-unknown'),calendar=form.querySelector('#guide-calendar'),lunarExtra=form.querySelector('[data-lunar-extra]');
 const currentYear=new Date().getFullYear();
-for(let y=currentYear;y>=1930;y--)year.insertAdjacentHTML('beforeend',`<option value="${y}">${y}년</option>`);
+for(let y=currentYear;y>=1900;y--)year.insertAdjacentHTML('beforeend',`<option value="${y}">${y}년</option>`);
 for(let m=1;m<=12;m++)month.insertAdjacentHTML('beforeend',`<option value="${String(m).padStart(2,'0')}">${m}월</option>`);
 for(let h=1;h<=12;h++)hour.insertAdjacentHTML('beforeend',`<option value="${String(h).padStart(2,'0')}">${h}시</option>`);
 for(let m=0;m<60;m+=10)minute.insertAdjacentHTML('beforeend',`<option value="${String(m).padStart(2,'0')}">${String(m).padStart(2,'0')}분</option>`);
 function fillDays(){const prev=day.value;day.innerHTML='<option value="">일</option>';const y=Number(year.value)||2000,m=Number(month.value)||1,max=new Date(y,m,0).getDate();for(let d=1;d<=max;d++)day.insertAdjacentHTML('beforeend',`<option value="${String(d).padStart(2,'0')}">${d}일</option>`);if([...day.options].some(o=>o.value===prev))day.value=prev;}
 fillDays();year.addEventListener('change',fillDays);month.addEventListener('change',fillDays);
 function syncTime(){const disabled=timeUnknown.checked;[meridiem,hour,minute].forEach(el=>{el.disabled=disabled;if(disabled)el.value='';});}
-function syncCalendar(){lunarExtra.hidden=calendar.value!=='lunar';}
+function syncCalendar(){lunarExtra.hidden=calendar.value!=='lunar';const leap=form.querySelector('#guide-leap');if(calendar.value!=='lunar'&&leap)leap.checked=false;}
 timeUnknown.addEventListener('change',syncTime);calendar.addEventListener('change',syncCalendar);syncTime();syncCalendar();
 
 function fillProfile(p){
   if(p.name)form.elements.name.value=p.name;
   if(p.birthDate){const [y,m,d]=p.birthDate.split('-');year.value=y;month.value=m;fillDays();day.value=d;}
   if(p.birthTimeUnknown){timeUnknown.checked=true;syncTime();}
-  else if(p.birthTime){const [hh,mm]=p.birthTime.split(':').map(Number);meridiem.value=hh>=12?'pm':'am';hour.value=String((hh%12)||12).padStart(2,'0');minute.value=String(Math.round(mm/10)*10%60).padStart(2,'0');}
+  else if(p.birthTime){const [hh,mm]=p.birthTime.split(':').map(Number);meridiem.value=hh>=12?'pm':'am';hour.value=String((hh%12)||12).padStart(2,'0');minute.value=String(Math.min(50,Math.round((mm||0)/10)*10)).padStart(2,'0');}
   if(p.calendarType){calendar.value=p.calendarType;syncCalendar();}
+  const leap=form.querySelector('#guide-leap');if(leap)leap.checked=Boolean(p.isLeapMonth)&&calendar.value==='lunar';
   if(p.gender)form.querySelector('#guide-gender').value=p.gender;
   if(p.city)form.querySelector('#guide-city').value=p.city;
 }
@@ -107,18 +108,19 @@ onAuthStateChanged(auth,async user=>{
 });
 
 form.addEventListener('submit',e=>{
-  e.preventDefault();status.textContent='';
+  e.preventDefault();if(form.dataset.submitting==='true')return;status.textContent='';
   if(!selectedDomain||!selectedSituation||!selectedBlockers.length){status.textContent='고민 선택 단계를 모두 완료해주세요.';return;}
   const name=form.elements.name.value.trim();
   const birthDate=year.value&&month.value&&day.value?`${year.value}-${month.value}-${day.value}`:'';
   let birthTime='';
   if(!timeUnknown.checked&&meridiem.value&&hour.value&&minute.value){let h=Number(hour.value)%12;if(meridiem.value==='pm')h+=12;birthTime=`${String(h).padStart(2,'0')}:${minute.value}`;}
-  if(!name){status.textContent='이름 또는 닉네임을 입력해주세요.';return;}
-  if(!birthDate){status.textContent='태어난 연·월·일을 모두 선택해주세요.';return;}
-  if(!timeUnknown.checked&&(meridiem.value||hour.value||minute.value)&&!birthTime){status.textContent='시간을 입력하려면 오전/오후·시·분을 모두 선택해주세요.';return;}
-  if(!form.elements.consent.checked){status.textContent='분석을 위한 정보 사용에 동의해주세요.';return;}
+  if(!name){status.textContent='이름 또는 닉네임을 입력해주세요.';form.elements.name.focus();return;}
+  if(!birthDate){status.textContent='태어난 연·월·일을 모두 선택해주세요.';year.focus();return;}
+  if(!timeUnknown.checked&&(meridiem.value||hour.value||minute.value)&&!birthTime){status.textContent='시간을 입력하려면 오전/오후·시·분을 모두 선택해주세요.';meridiem.focus();return;}
+  if(!form.elements.consent.checked){status.textContent='분석을 위한 정보 사용에 동의해주세요.';form.elements.consent.focus();return;}
   const c=config[selectedDomain];
-  const payload={name,birthDate,birthTime,birthTimeUnknown:timeUnknown.checked,calendarType:calendar.value,isLeapMonth:Boolean(form.querySelector('#guide-leap')?.checked),gender:form.querySelector('#guide-gender').value,city:form.querySelector('#guide-city').value.trim(),domain:selectedDomain,domainLabel:c.label,situation:selectedSituation,situationLabel:labelFor(c.situations,selectedSituation),blockers:selectedBlockers,blockerLabels:selectedBlockers.map(k=>labelFor(c.blockers,k)),createdAt:Date.now()};
+  const payload={name,birthDate,birthTime,birthTimeUnknown:timeUnknown.checked,calendarType:calendar.value,isLeapMonth:Boolean(calendar.value==='lunar'&&form.querySelector('#guide-leap')?.checked),gender:form.querySelector('#guide-gender').value,city:form.querySelector('#guide-city').value.trim(),domain:selectedDomain,domainLabel:c.label,situation:selectedSituation,situationLabel:labelFor(c.situations,selectedSituation),blockers:selectedBlockers,blockerLabels:selectedBlockers.map(k=>labelFor(c.blockers,k)),createdAt:Date.now()};
   sessionStorage.setItem('jungwoljae_guide_input',JSON.stringify(payload));
+  form.dataset.submitting='true';const submit=form.querySelector('button[type="submit"]');if(submit){submit.disabled=true;submit.setAttribute('aria-busy','true');}
   location.href='./guide-result.html';
 });
