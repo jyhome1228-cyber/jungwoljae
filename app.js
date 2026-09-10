@@ -21,7 +21,7 @@ addStyle('./birth-input-unified.css?v=20260909-2205');
 addStyle('./saju-loading.css?v=20260909-2340');
 if(isResultLike&&!isFortuneResult)addStyle('./brand-contrast-v8.css?v=20260909-0404');
 if(document.body?.classList.contains('about-page'))addStyle('./about.css');
-addStyle('./qa-hardening.css?v=20260910-2140');
+addStyle('./qa-hardening.css?v=20260910-2150');
 
 const existingSajuResultOverlay=currentFile==='saju-result.html'?document.querySelector('[data-saju-result-loading]'):null;
 const useUniversalResultLoader=isResultLike&&!(existingSajuResultOverlay&&!existingSajuResultOverlay.hidden);
@@ -83,7 +83,7 @@ if(isResultLike){
     const math=document.createElement('script');math.type='module';math.src='./result-calculation-v11.js?v=20260909-0750';document.body.appendChild(math);
     const tone=document.createElement('script');tone.src='./saju-tone-v11.js?v=20260909-0750';tone.defer=true;document.body.appendChild(tone);
   }
-  const plain=document.createElement('script');plain.src='./result-plain-language-v2.js?v=20260910-2140';plain.defer=true;document.body.appendChild(plain);
+  const plain=document.createElement('script');plain.src='./result-plain-language-v2.js?v=20260910-2150';plain.defer=true;document.body.appendChild(plain);
 }
 
 function fieldError(form,name,message=''){const node=form.querySelector(`[data-error-for="${name}"]`);if(node)node.textContent=message;}
