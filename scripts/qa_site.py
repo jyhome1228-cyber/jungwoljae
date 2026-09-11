@@ -3,6 +3,8 @@ from __future__ import annotations
 
 import json
 import re
+import shutil
+import subprocess
 import sys
 from collections import Counter
 from html.parser import HTMLParser
@@ -159,7 +161,10 @@ for page in html_files:
         if not target.exists():
             errors.append(f"{rel(page)}: missing local {tag} target {value}")
 
-    for match in re.finditer(r'<script[^>]+src=["\']\./app\.js(?:\?v=([^"\']+))?', text, re.I):
+    app_matches = list(re.finditer(r'<script[^>]+src=["\']\./app\.js(?:\?v=([^"\']+))?', text, re.I))
+    if app_matches and './page.css' not in text:
+        errors.append(f"{rel(page)}: app.js page must load page.css so the first-paint QA layer is available")
+    for match in app_matches:
         version = match.group(1) or "unversioned"
         if version != EXPECTED_APP_VERSION:
             warnings.append(f"{rel(page)}: app.js cache key is {version}; expected {EXPECTED_APP_VERSION}")
@@ -170,6 +175,8 @@ for css in sorted(ROOT.rglob("*.css")):
     if any(part in SKIP_DIRS for part in css.parts):
         continue
     text = css.read_text(encoding="utf-8")
+    if text.count("{") != text.count("}"):
+        errors.append(f"{rel(css)}: unbalanced CSS braces")
     for m in css_ref.finditer(text):
         value = (m.group(1) or m.group(2) or "").strip()
         if value.startswith("data:") or is_external(value):
@@ -178,16 +185,29 @@ for css in sorted(ROOT.rglob("*.css")):
         if target is not None and not target.exists():
             errors.append(f"{rel(css)}: missing local CSS asset {value}")
 
-# Local ES module imports.
+# Local ES module imports and JavaScript syntax.
+js_files = sorted(
+    p for p in ROOT.rglob("*.js")
+    if not any(part in SKIP_DIRS for part in p.parts)
+)
 js_import = re.compile(r'(?:from\s+|import\()\s*["\'](\.[^"\']+)["\']')
-for js in sorted(ROOT.rglob("*.js")):
-    if any(part in SKIP_DIRS for part in js.parts):
-        continue
+for js in js_files:
     text = js.read_text(encoding="utf-8")
     for value in js_import.findall(text):
         target = local_target(js, value)
         if target is not None and not target.exists():
             errors.append(f"{rel(js)}: missing local JS module {value}")
+
+node = shutil.which("node")
+if node:
+    for js in js_files:
+        result = subprocess.run([node, "--check", str(js)], capture_output=True, text=True)
+        if result.returncode != 0:
+            detail = (result.stderr or result.stdout).strip().splitlines()
+            short = detail[-1] if detail else "syntax check failed"
+            errors.append(f"{rel(js)}: JavaScript syntax error: {short}")
+else:
+    warnings.append("node executable not found; JavaScript syntax checks skipped")
 
 # Sitemap targets must exist in the repository.
 sitemap = ROOT / "sitemap.xml"
@@ -204,7 +224,7 @@ if sitemap.exists():
     except Exception as exc:
         errors.append(f"sitemap.xml: parse error: {exc}")
 
-print(f"QA checked {len(html_files)} HTML pages")
+print(f"QA checked {len(html_files)} HTML pages and {len(js_files)} JavaScript files")
 for item in warnings:
     print(f"WARN: {item}")
 for item in errors:
