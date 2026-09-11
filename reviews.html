@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
   <link rel="stylesheet" href="./styles.css" />
   <link rel="stylesheet" href="./page.css" />
+  <link rel="stylesheet" href="./reviews-fix.css?v=20260911-1635" />
 </head>
 <body data-reviews-page="true">
   <a class="skip-link" href="#main">본문 바로가기</a>
@@ -17,15 +18,55 @@
   <main id="main">
     <section class="review-page-hero"><div class="container"><p class="section-label">REVIEW ARCHIVE</p><h1>정월재 이용 후기</h1><p>정월재를 이용한 분들이 남긴 후기를 한곳에서 확인할 수 있습니다. 서비스별 경험과 실제 사용 후 느낀 점을 편하게 살펴보세요.</p></div></section>
     <section class="review-page"><div class="container">
-      <div class="review-stats"><div class="review-stat"><strong data-review-count>0</strong><span>현재 표시 후기</span></div><div class="review-stat is-accent"><strong data-review-average>—</strong><span>표시 후기 평균</span></div><div class="review-stat"><strong>11</strong><span>후기 카테고리</span></div></div>
+      <div class="review-stats"><div class="review-stat"><strong data-review-count>0</strong><span>누적 후기</span></div><div class="review-stat is-accent"><strong data-review-average>—</strong><span>평균 평점</span></div><div class="review-stat"><strong>11</strong><span>후기 카테고리</span></div></div>
 
       <section class="review-composer" data-review-composer hidden>
-        <div class="review-toolbar"><div><p class="section-label">WRITE REVIEW</p><h2>이용한 결과를 골라 후기를 남겨주세요.</h2><p class="review-write-copy">정월록에 저장한 분석 기록 중 하나를 선택한 뒤 후기를 작성합니다. 회원정보의 성함과 이메일은 공개되지 않습니다.</p></div><button class="button button-ghost" type="button" data-review-close>닫기</button></div>
+        <div class="review-toolbar">
+          <div>
+            <p class="section-label">WRITE REVIEW</p>
+            <h2>후기 남기기</h2>
+            <p class="review-write-copy">로그인 없이 누구나 후기를 남길 수 있습니다. 이름과 이메일은 받지 않으며 작성자는 ‘익명 사용자’로 표시됩니다.</p>
+          </div>
+          <button class="button button-ghost" type="button" data-review-close>닫기</button>
+        </div>
         <form data-review-form>
           <div class="review-form-grid">
-            <div class="field full"><label for="review-reading">후기를 남길 이용 기록</label><select id="review-reading" data-review-reading required><option value="">후기를 남길 이용 기록을 선택해주세요</option></select><p class="review-helper">최근 정월록에 저장한 분석을 불러옵니다. 기록이 없다면 먼저 분석 결과를 정월록에 저장해주세요.</p></div>
-            <div class="field"><label for="review-rating">평점</label><select id="review-rating" name="rating"><option value="5">5점 · 매우 만족</option><option value="4">4점 · 만족</option><option value="3">3점 · 보통</option><option value="2">2점 · 아쉬움</option><option value="1">1점 · 매우 아쉬움</option></select></div>
-            <div class="field full"><label for="review-content">후기 내용</label><textarea id="review-content" name="content" maxlength="500" placeholder="이용하면서 느낀 점을 10자 이상 적어주세요." required></textarea><p class="review-helper">후기는 등록 즉시 누적되며 다른 방문자에게도 익명으로 표시됩니다.</p></div>
+            <div class="field">
+              <label for="review-service">이용 서비스</label>
+              <select id="review-service" name="service" required>
+                <option value="">서비스를 선택해주세요</option>
+                <option>오행 분석</option>
+                <option>오늘의 운세</option>
+                <option>내일의 운세</option>
+                <option>연애와 인연</option>
+                <option>궁합</option>
+                <option>일과 재물</option>
+                <option>정월도감</option>
+                <option>정월부적</option>
+                <option>행운의 숫자</option>
+                <option>중요한 날</option>
+                <option>이사 택일</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="review-rating">평점</label>
+              <select id="review-rating" name="rating" required>
+                <option value="5">5점 · 매우 만족</option>
+                <option value="4">4점 · 만족</option>
+                <option value="3">3점 · 보통</option>
+                <option value="2">2점 · 아쉬움</option>
+                <option value="1">1점 · 매우 아쉬움</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="review-content">후기 내용</label>
+              <textarea id="review-content" name="content" maxlength="500" placeholder="이용하면서 느낀 점을 10자 이상 적어주세요." required></textarea>
+              <p class="review-helper">등록한 후기는 즉시 공개되며 다른 방문자에게 익명으로 표시됩니다.</p>
+            </div>
+            <div class="review-honeypot" aria-hidden="true">
+              <label for="review-website">웹사이트</label>
+              <input id="review-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+            </div>
           </div>
           <div class="review-form-actions"><button class="button button-ghost" type="button" data-review-close>취소</button><button class="button button-accent" type="submit">후기 등록하기</button></div>
         </form>
@@ -36,6 +77,9 @@
     </div></section>
   </main>
   <footer class="site-footer"></footer>
-  <script src="./app.js?v=20260911-1218" defer></script><script type="module" src="./reviews.js?v=20260908-1440"></script><script type="module" src="./reviews-real-only-v2.js?v=20260911-1605"></script><script src="./reviews-demo.js?v=20260911-1618" defer></script><script src="./retired-service-cleanup.js?v=20260911-1218" defer></script>
+  <script src="./app.js?v=20260911-1218" defer></script>
+  <script type="module" src="./reviews.js?v=20260911-1635"></script>
+  <script src="./reviews-demo.js?v=20260911-1618" defer></script>
+  <script src="./retired-service-cleanup.js?v=20260911-1218" defer></script>
 </body>
 </html>
