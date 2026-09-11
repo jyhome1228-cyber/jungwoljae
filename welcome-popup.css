@@ -1,0 +1,22 @@
+.jw-welcome-overlay{position:fixed;inset:0;z-index:12000;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(34,26,25,.46);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.jw-welcome-overlay[hidden]{display:none!important}
+.jw-welcome-dialog{position:relative;width:min(100%,510px);padding:34px;border:1px solid #e6dad5;border-radius:24px;background:#fff;color:#2b2524;box-shadow:0 26px 80px rgba(43,37,36,.18)}
+.jw-welcome-close{position:absolute;top:18px;right:18px;display:flex;width:34px;height:34px;align-items:center;justify-content:center;padding:0;border:0;border-radius:50%;background:#f7f3f1;color:#6e615d;font-size:21px;line-height:1;cursor:pointer}
+.jw-welcome-brand{display:flex;align-items:center;gap:10px;margin:0 44px 28px 0}
+.jw-welcome-brand img{width:42px;height:42px;object-fit:contain}
+.jw-welcome-brand span{color:#543a3a;font-size:15px;font-weight:800;letter-spacing:-.02em}
+.jw-welcome-kicker{margin:0 0 9px;color:#8d7670;font-size:10px;font-weight:800;letter-spacing:.08em}
+.jw-welcome-dialog h2{margin:0;color:#2b2524;font-size:28px;line-height:1.3;font-weight:800;letter-spacing:-.04em}
+.jw-welcome-copy{margin:19px 0 0;color:#6f6561;font-size:14px;line-height:1.85;letter-spacing:-.02em;word-break:keep-all}
+.jw-welcome-copy p{margin:0 0 14px}
+.jw-welcome-copy p:last-child{margin-bottom:0}
+.jw-welcome-copy strong{color:#543a3a;font-weight:800}
+.jw-welcome-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:26px}
+.jw-welcome-button{display:flex;min-height:48px;align-items:center;justify-content:center;padding:0 18px;border-radius:12px;font-size:13px;font-weight:800;text-decoration:none;cursor:pointer}
+.jw-welcome-button.primary{border:1px solid #543a3a;background:#543a3a;color:#fff}
+.jw-welcome-button.secondary{border:1px solid #ddd1cc;background:#fff;color:#543a3a}
+.jw-welcome-today{display:flex;width:100%;align-items:center;justify-content:center;gap:7px;margin-top:16px;padding:8px 0;border:0;background:transparent;color:#938783;font-size:11px;font-weight:600;cursor:pointer}
+.jw-welcome-today::before{width:14px;height:14px;border:1px solid #d7cbc6;border-radius:4px;background:#fff;content:''}
+body.jw-welcome-open{overflow:hidden}
+@media(max-width:600px){.jw-welcome-overlay{align-items:flex-end;padding:14px}.jw-welcome-dialog{padding:28px 22px 22px;border-radius:22px}.jw-welcome-brand{margin-bottom:22px}.jw-welcome-brand img{width:38px;height:38px}.jw-welcome-dialog h2{font-size:24px;line-height:1.35}.jw-welcome-copy{font-size:13px;line-height:1.8}.jw-welcome-actions{grid-template-columns:1fr}.jw-welcome-button{min-height:46px}.jw-welcome-close{top:14px;right:14px}}
+@media(prefers-reduced-motion:no-preference){.jw-welcome-overlay{animation:jwWelcomeFade .18s ease both}.jw-welcome-dialog{animation:jwWelcomeUp .24s ease both}@keyframes jwWelcomeFade{from{opacity:0}to{opacity:1}}@keyframes jwWelcomeUp{from{opacity:0;transform:translateY(12px) scale(.99)}to{opacity:1;transform:none}}}
