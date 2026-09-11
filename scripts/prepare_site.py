@@ -3,10 +3,10 @@ from pathlib import Path
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
-APP_VERSION = "20260911-1745"
+APP_VERSION = "20260911-1750"
 STYLE_VERSION = "20260911-1435"
-COPY_VERSION = "20260911-1745"
-RESULT_CLEANUP_VERSION = "20260911-1745"
+COPY_VERSION = "20260911-1750"
+RESULT_CLEANUP_VERSION = "20260911-1750"
 app_pattern = re.compile(r'(<script\b[^>]*\bsrc=["\'])\./app\.js(?:\?v=[^"\']+)?(["\'][^>]*></script>)', re.I)
 page_css_pattern = re.compile(r'(<link\b[^>]*\bhref=["\'])\./page\.css(?:\?v=[^"\']+)?(["\'][^>]*>)', re.I)
 copy_script_pattern = re.compile(r'<script\b[^>]*\bsrc=["\']\./site-copy-cleanup-v1\.js(?:\?v=[^"\']+)?["\'][^>]*></script>', re.I)
@@ -28,9 +28,8 @@ for page in sorted(ROOT.glob('*.html')):
     updated = dedup_script_pattern.sub(rf'\1./result-dedup-v1.js?v={RESULT_CLEANUP_VERSION}\2', updated)
     updated = remove_free_words(updated)
     cleanup_script = f'<script src="./site-copy-cleanup-v1.js?v={COPY_VERSION}" defer></script>'
-    if copy_script_pattern.search(updated):
-        updated = copy_script_pattern.sub(cleanup_script, updated)
-    elif '</body>' in updated.lower():
+    updated = copy_script_pattern.sub('', updated)
+    if '</body>' in updated.lower():
         updated = re.sub(r'</body>', cleanup_script + '</body>', updated, count=1, flags=re.I)
     if updated != text:
         page.write_text(updated, encoding='utf-8')
