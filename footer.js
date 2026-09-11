@@ -2,8 +2,7 @@
   const footer=document.querySelector('.site-footer');
   if(!footer) return;
 
-  // Homepage hero: shared/runtime theme styles can override index.html,
-  // so apply the final contrast rule after those styles have loaded.
+  // Homepage final-pass fixes must run after the shared runtime theme files.
   const currentFile=location.pathname.split('/').pop()||'index.html';
   if(currentFile==='index.html' && !document.getElementById('home-hero-contrast-fix')){
     const style=document.createElement('style');
@@ -17,6 +16,27 @@
       }
       .home-image-hero .button.secondary{
         color:#fff!important;
+      }
+
+      /* Keep Jungwol Dogam identical to the other homepage service cards.
+         theme-polish.css used to make the 7th card span two columns. */
+      .home-services .service-visual-card[href="./guide.html"]{
+        grid-column:auto!important;
+        grid-row:auto!important;
+        width:auto!important;
+        min-width:0!important;
+        background-color:#3a2e2c!important;
+        background-image:url('https://nineworksdatabase.planus253.workers.dev/cdn/uncategorized/20260908-101633-996b4914-fc05-4d0f-a690-8f4b684c6a0b-67d8544d.webp')!important;
+        background-position:center!important;
+        background-size:cover!important;
+        background-repeat:no-repeat!important;
+      }
+      .home-services .service-visual-card[href="./guide.html"]::before{
+        background:linear-gradient(to top,rgba(20,12,12,.94) 0%,rgba(20,12,12,.56) 38%,rgba(20,12,12,.14) 72%,rgba(20,12,12,.05) 100%)!important;
+      }
+      .home-services .service-visual-card[href="./guide.html"]::after{
+        content:none!important;
+        display:none!important;
       }
     `;
     document.head.appendChild(style);
