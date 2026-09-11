@@ -8,7 +8,7 @@ applyBrandFavicon();
 
 const currentFile=location.pathname.split('/').pop()||'index.html';
 const quickProfilePages=new Set(['tomorrow.html','lucky-number.html','important-day.html','moving-day.html']);
-const profilePages=new Set(['saju.html','ohaeng.html','fortune.html','relationship.html','work-money.html','guide.html',...quickProfilePages]);
+const profilePages=new Set(['ohaeng.html','fortune.html','relationship.html','work-money.html','guide.html',...quickProfilePages]);
 const isResultLike=currentFile.endsWith('-result.html')||currentFile==='compatibility-report.html';
 const isFortuneResult=currentFile==='fortune-result.html';
 
@@ -23,18 +23,16 @@ if(isResultLike&&!isFortuneResult)addStyle('./brand-contrast-v8.css?v=20260909-0
 if(document.body?.classList.contains('about-page'))addStyle('./about.css');
 addStyle('./qa-hardening.css?v=20260910-2150');
 
-const existingSajuResultOverlay=currentFile==='saju-result.html'?document.querySelector('[data-saju-result-loading]'):null;
-const useUniversalResultLoader=isResultLike&&!(existingSajuResultOverlay&&!existingSajuResultOverlay.hidden);
+const useUniversalResultLoader=isResultLike;
 const resultMain=useUniversalResultLoader?document.querySelector('main'):null;
 if(resultMain){resultMain.style.visibility='hidden';document.body.classList.add('reading-result-pending');}
 const loaderCopy={
-  'saju-result.html':{eyebrow:'JUNGWOLJAE · SAJU READING',title:'사주를 신중하게 풀어보고 있습니다.',messages:['입력하신 사주 정보를 차분히 살펴보고 있습니다.','타고난 성향과 생활 흐름을 하나씩 정리하고 있습니다.','내용을 다시 살피며 결과를 준비하고 있습니다.']},
   'ohaeng-result.html':{eyebrow:'JUNGWOLJAE · FIVE ELEMENTS',title:'생활 속 다섯 가지 힘을 정리하고 있습니다.',messages:['시작·표현·관리·판단·관찰의 비중을 살펴보고 있습니다.','자연스럽게 잘 쓰는 힘과 한 번 더 챙길 힘을 정리하고 있습니다.','생활에서 바로 이해할 수 있는 말로 결과를 다듬고 있습니다.']},
-  'fortune-result.html':{eyebrow:'JUNGWOLJAE · DAILY FORTUNE',title:'오늘의 흐름을 차분히 읽고 있습니다.',messages:['내 사주와 오늘의 흐름을 맞춰보고 있습니다.','일·재물·인연의 흐름을 각각 살펴보고 있습니다.','오늘에 필요한 핵심 내용을 정리하고 있습니다.']},
+  'fortune-result.html':{eyebrow:'JUNGWOLJAE · DAILY FORTUNE',title:'오늘의 흐름을 차분히 읽고 있습니다.',messages:['내 흐름과 오늘의 흐름을 맞춰보고 있습니다.','일·재물·인연의 흐름을 각각 살펴보고 있습니다.','오늘에 필요한 핵심 내용을 정리하고 있습니다.']},
   'relationship-result.html':{eyebrow:'JUNGWOLJAE · RELATIONSHIP',title:'인연과 관계의 흐름을 살펴보고 있습니다.',messages:['감정 표현과 관계의 리듬을 확인하고 있습니다.','반복되는 패턴과 현재의 흐름을 함께 보고 있습니다.','관계에서 중요한 기준을 차분히 정리하고 있습니다.']},
   'work-money-result.html':{eyebrow:'JUNGWOLJAE · WORK & MONEY',title:'일과 재물의 흐름을 정리하고 있습니다.',messages:['일하는 방식과 돈을 다루는 습관을 살펴보고 있습니다.','강점과 부담이 생기는 지점을 함께 확인하고 있습니다.','현실적으로 참고할 수 있도록 결과를 정리하고 있습니다.']},
   'guide-result.html':{eyebrow:'JUNGWOLJAE · DOGAM',title:'정월도감의 해답을 준비하고 있습니다.',messages:['선택하신 고민과 현재 흐름을 함께 살펴보고 있습니다.','지금 결정에 영향을 주는 조건을 정리하고 있습니다.','바로 이해할 수 있는 기준으로 결과를 다듬고 있습니다.']},
-  'compatibility-report.html':{eyebrow:'JUNGWOLJAE · COMPATIBILITY',title:'두 사람의 관계를 함께 살펴보고 있습니다.',messages:['두 사람의 사주와 생활 성향을 같은 기준으로 비교하고 있습니다.','편한 지점과 부딪히는 지점을 나누어 보고 있습니다.','관계의 구조가 잘 보이도록 결과를 정리하고 있습니다.']}
+  'compatibility-report.html':{eyebrow:'JUNGWOLJAE · COMPATIBILITY',title:'두 사람의 관계를 함께 살펴보고 있습니다.',messages:['두 사람의 생활 성향을 같은 기준으로 비교하고 있습니다.','편한 지점과 부딪히는 지점을 나누어 보고 있습니다.','관계의 구조가 잘 보이도록 결과를 정리하고 있습니다.']}
 };
 if(useUniversalResultLoader){
   import('./saju-loading.js?v=20260909-2340').then(({showSajuLoading})=>showSajuLoading({...loaderCopy[currentFile],duration:3600})).catch(error=>{console.error('reading loader failed',error);}).finally(()=>{if(resultMain)resultMain.style.visibility='';document.body.classList.remove('reading-result-pending','saju-loading-open');});
@@ -45,11 +43,12 @@ function applyBrandLogo(){document.querySelectorAll('.brand').forEach(brand=>{br
 applyBrandLogo();
 
 function normalizeNavigation(){
-  const primaryLinks=[['./saju.html','사주'],['./ohaeng.html','오행'],['./fortune.html','오늘의 운세'],['./tomorrow.html','내일의 운세'],['./relationship.html','인연'],['./compatibility.html','궁합'],['./work-money.html','일·재물'],['./guide.html','정월도감'],['./talisman.html','정월부적'],['./lucky-number.html','행운의 숫자'],['./important-day.html','중요한 날'],['./moving-day.html','이사 택일'],['./archive.html','정월록'],['./reviews.html','후기'],['./about.html','소개']];
+  const primaryLinks=[['./ohaeng.html','오행'],['./fortune.html','오늘의 운세'],['./tomorrow.html','내일의 운세'],['./relationship.html','인연'],['./compatibility.html','궁합'],['./work-money.html','일·재물'],['./guide.html','정월도감'],['./talisman.html','정월부적'],['./lucky-number.html','행운의 숫자'],['./important-day.html','중요한 날'],['./moving-day.html','이사 택일'],['./archive.html','정월록'],['./reviews.html','후기'],['./about.html','소개']];
   document.querySelectorAll('.desktop-nav, .mobile-menu nav').forEach(nav=>{nav.innerHTML=primaryLinks.map(([href,label])=>`<a href="${href}"${currentFile===href.replace('./','')?' aria-current="page"':''}>${label}</a>`).join('');});
-  document.querySelectorAll('.secondary-nav .container').forEach(nav=>{[...nav.querySelectorAll('a')].forEach(link=>{if(link.getAttribute('href')?.includes('fortune.html'))link.textContent='오늘의 운세';});});
+  document.querySelectorAll('.secondary-nav .container').forEach(nav=>{[...nav.querySelectorAll('a')].forEach(link=>{if(link.getAttribute('href')?.includes('fortune.html'))link.textContent='오늘의 운세';if(link.getAttribute('href')?.includes('saju.html'))link.remove();});});
   document.querySelectorAll('.header-cta').forEach(cta=>{cta.href='./signup.html';cta.textContent='회원등록';});
   document.querySelectorAll('a[href="#reviews"]').forEach(link=>link.setAttribute('href','./reviews.html'));
+  document.querySelectorAll('a[href="./saju.html"],a[href="saju.html"],a[href$="/saju.html"]').forEach(link=>link.remove());
 }
 normalizeNavigation();
 
@@ -88,7 +87,7 @@ if(isResultLike){
 
 function fieldError(form,name,message=''){const node=form.querySelector(`[data-error-for="${name}"]`);if(node)node.textContent=message;}
 readingForm?.addEventListener('submit',event=>{
-  if(currentFile==='compatibility.html'||readingForm.matches('[data-saju-form],[data-ohaeng-form],[data-fortune-form],[data-relationship-form]'))return;
+  if(currentFile==='compatibility.html'||readingForm.matches('[data-ohaeng-form],[data-fortune-form],[data-relationship-form]'))return;
   event.preventDefault();formStatus.textContent='';readingForm.querySelectorAll('[data-error-for]').forEach(el=>el.textContent='');const required=[...readingForm.querySelectorAll('[required]')];let firstInvalid=null;
   required.forEach(field=>{const type=field.getAttribute('type');const invalid=(type==='checkbox'&&!field.checked)||(!type||type!=='checkbox')&&!String(field.value||'').trim();if(invalid){firstInvalid||=field;fieldError(readingForm,field.id||field.name,'필수 입력 항목입니다.');}});
   if(firstInvalid){formStatus.textContent='필수 항목을 확인해주세요.';firstInvalid.focus();return;}
