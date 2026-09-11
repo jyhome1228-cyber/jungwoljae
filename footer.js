@@ -2,6 +2,15 @@
   const footer=document.querySelector('.site-footer');
   if(!footer) return;
 
+  // Load the final global cohesion layer after page/theme styles.
+  if(!document.querySelector('link[data-site-cohesion]')){
+    const cohesion=document.createElement('link');
+    cohesion.rel='stylesheet';
+    cohesion.href='./site-cohesion-v19.css?v=20260911-1545';
+    cohesion.dataset.siteCohesion='true';
+    document.head.appendChild(cohesion);
+  }
+
   // Homepage final-pass fixes must run after the shared runtime theme files.
   const currentFile=location.pathname.split('/').pop()||'index.html';
   if(currentFile==='index.html' && !document.getElementById('home-hero-contrast-fix')){
