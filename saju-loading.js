@@ -7,6 +7,11 @@ const defaultMessages = [
 ];
 let activeRun=0;
 
+function isResultPage(){
+  const file=location.pathname.split('/').pop()||'';
+  return file.endsWith('-result.html')||file==='compatibility-report.html';
+}
+
 function ensureOverlay() {
   let overlay = document.querySelector('[data-saju-loading]');
   if (overlay) return overlay;
@@ -38,14 +43,29 @@ function forceClose(overlay){
   if(!overlay)return;
   overlay.classList.remove('is-visible','is-leaving');
   overlay.hidden=true;
+  overlay.setAttribute('hidden','');
+  overlay.style.setProperty('display','none','important');
+  overlay.style.setProperty('pointer-events','none','important');
   document.body.classList.remove('saju-loading-open','reading-result-pending');
-  document.documentElement.classList.remove('jw-entry-first');
+  document.documentElement.classList.remove('jw-entry-first','saju-loading-open','reading-result-pending');
+  document.querySelectorAll('[data-final-state="loading"]').forEach(node=>node.setAttribute('data-final-state','ready'));
   const main=document.querySelector('main');
-  if(main)main.style.visibility='';
+  if(main){
+    main.style.setProperty('visibility','visible','important');
+    main.style.setProperty('opacity','1','important');
+  }
 }
 
 export function showSajuLoading(options = {}) {
   const overlay = ensureOverlay();
+
+  // A result watchdog may have already released the page. A late module import
+  // must never cover the result again.
+  if(isResultPage() && window.__jwResultLoaderReleased){
+    forceClose(overlay);
+    return Promise.resolve();
+  }
+
   const eyebrow = overlay.querySelector('[data-saju-loading-eyebrow]');
   const title = overlay.querySelector('[data-saju-loading-title]');
   const message = overlay.querySelector('[data-saju-loading-message]');
@@ -60,7 +80,10 @@ export function showSajuLoading(options = {}) {
   overlay.setAttribute('aria-label', options.ariaLabel || '분석 결과 준비 중');
 
   document.body.classList.add('saju-loading-open');
+  overlay.style.removeProperty('display');
+  overlay.style.removeProperty('pointer-events');
   overlay.hidden = false;
+  overlay.removeAttribute('hidden');
   overlay.classList.remove('is-leaving');
   message.classList.remove('is-changing');
   message.textContent = messages[0] || defaultMessages[0];
@@ -102,7 +125,7 @@ export function showSajuLoading(options = {}) {
       overlay.classList.add('is-leaving');
       timers.push(setTimeout(finish,280));
     }, duration));
-    // Secondary watchdog: even if animation/timer state breaks, release the page.
-    timers.push(setTimeout(finish,duration+900));
+    // Independent watchdog: never allow an overlay to outlive the result page.
+    timers.push(setTimeout(finish,Math.min(duration+700,4700)));
   });
 }
