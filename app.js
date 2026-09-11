@@ -12,21 +12,22 @@ const profilePages=new Set(['ohaeng.html','fortune.html','relationship.html','wo
 const isResultLike=currentFile.endsWith('-result.html')||currentFile==='compatibility-report.html';
 const isFortuneResult=currentFile==='fortune-result.html';
 
-function addStyle(href){const l=document.createElement('link');l.rel='stylesheet';l.href=href;document.head.appendChild(l);}
+function addStyle(href){if(document.querySelector(`link[href^="${href.split('?')[0]}"]`))return;const l=document.createElement('link');l.rel='stylesheet';l.href=href;document.head.appendChild(l);}
 [['./theme-dark.css'],['./theme-tuning.css'],['./theme-polish.css'],['./footer-fix.css?v=20260907-1548'],['./site-mobile.css?v=20260908-2106'],['./ui-fixes.css?v=20260911-1428'],['./friendly-content.css?v=20260908-1140']].forEach(([href])=>addStyle(href));
 if(profilePages.has(currentFile))addStyle('./basic-profile.css?v=20260908-2106');
 if(isResultLike&&!isFortuneResult){addStyle('./result-readability.css?v=20260907-2257');addStyle('./result-quality-v7.css?v=20260910-2140');}
 addStyle('./universal-structure-v8.css?v=20260909-0404');
 addStyle('./birth-input-unified.css?v=20260909-2205');
-addStyle('./saju-loading.css?v=20260911-1715');
+addStyle('./saju-loading.css?v=20260911-1955');
+if(isResultLike)addStyle('./result-loading-safety.css?v=20260911-1955');
 if(isResultLike&&!isFortuneResult)addStyle('./brand-contrast-v8.css?v=20260909-0404');
 if(document.body?.classList.contains('about-page'))addStyle('./about.css');
 addStyle('./qa-hardening.css?v=20260910-2150');
-addStyle('./welcome-popup.css?v=20260911-1702');
+addStyle('./welcome-popup.css?v=20260911-1955');
 
-const useUniversalResultLoader=isResultLike;
-const resultMain=useUniversalResultLoader?document.querySelector('main'):null;
-if(resultMain){resultMain.style.visibility='hidden';document.body.classList.add('reading-result-pending');}
+const useUniversalResultLoader=isResultLike&&!isFortuneResult;
+const resultMain=isResultLike?document.querySelector('main'):null;
+if(resultMain){resultMain.style.visibility='';document.body.classList.remove('reading-result-pending');}
 const loaderCopy={
   'ohaeng-result.html':{eyebrow:'JUNGWOLJAE · FIVE ELEMENTS',title:'생활 속 다섯 가지 힘을 정리하고 있습니다.',messages:['시작·표현·관리·판단·관찰의 비중을 살펴보고 있습니다.','자연스럽게 잘 쓰는 힘과 한 번 더 챙길 힘을 정리하고 있습니다.','생활에서 바로 이해할 수 있는 말로 결과를 다듬고 있습니다.']},
   'fortune-result.html':{eyebrow:'JUNGWOLJAE · DAILY FORTUNE',title:'오늘의 흐름을 차분히 읽고 있습니다.',messages:['내 흐름과 오늘의 흐름을 맞춰보고 있습니다.','일·재물·인연의 흐름을 각각 살펴보고 있습니다.','오늘에 필요한 핵심 내용을 정리하고 있습니다.']},
@@ -36,7 +37,14 @@ const loaderCopy={
   'compatibility-report.html':{eyebrow:'JUNGWOLJAE · COMPATIBILITY',title:'두 사람의 관계를 함께 살펴보고 있습니다.',messages:['두 사람의 생활 성향을 같은 기준으로 비교하고 있습니다.','편한 지점과 부딪히는 지점을 나누어 보고 있습니다.','관계의 구조가 잘 보이도록 결과를 정리하고 있습니다.']}
 };
 if(useUniversalResultLoader){
-  import('./saju-loading.js?v=20260911-1715').then(({showSajuLoading})=>showSajuLoading({...loaderCopy[currentFile],duration:3600})).catch(error=>{console.error('reading loader failed',error);}).finally(()=>{if(resultMain)resultMain.style.visibility='';document.body.classList.remove('reading-result-pending','saju-loading-open');});
+  import('./saju-loading.js?v=20260911-1955').then(({showSajuLoading})=>showSajuLoading({...loaderCopy[currentFile],duration:3600})).catch(error=>{console.error('reading loader failed',error);}).finally(()=>{if(resultMain)resultMain.style.visibility='';document.body.classList.remove('reading-result-pending','saju-loading-open');});
+}
+
+if(isResultLike&&!document.querySelector('script[src*="result-loader-guard.js"]')){
+  const guard=document.createElement('script');guard.src='./result-loader-guard.js?v=20260911-1955';guard.defer=true;document.body.appendChild(guard);
+}
+if(document.querySelector('input[name="consent"]')&&!document.querySelector('script[src*="consent-guard.js"]')){
+  const consentGuard=document.createElement('script');consentGuard.src='./consent-guard.js?v=20260911-1955';consentGuard.defer=true;document.body.appendChild(consentGuard);
 }
 
 const themeMeta=document.querySelector('meta[name="theme-color"]');if(themeMeta)themeMeta.setAttribute('content','#ffffff');
@@ -98,5 +106,5 @@ readingForm?.addEventListener('submit',event=>{
 if(['lucky-number.html','important-day.html','moving-day.html'].includes(currentFile)){
   const quickPolish=document.createElement('script');quickPolish.src='./quick-result-polish.js?v=20260910-2035';quickPolish.defer=true;document.body.appendChild(quickPolish);
 }
-const welcomePopupScript=document.createElement('script');welcomePopupScript.type='module';welcomePopupScript.src='./welcome-popup.js?v=20260911-1715';document.body.appendChild(welcomePopupScript);
+const welcomePopupScript=document.createElement('script');welcomePopupScript.type='module';welcomePopupScript.src='./welcome-popup.js?v=20260911-1955';document.body.appendChild(welcomePopupScript);
 const qaScript=document.createElement('script');qaScript.src='./qa-hardening.js?v=20260910-2140';qaScript.defer=true;document.body.appendChild(qaScript);
