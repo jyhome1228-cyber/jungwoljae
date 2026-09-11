@@ -66,7 +66,15 @@ function initPage(){
   const form=document.querySelector('[data-review-form]');
   const status=document.querySelector('[data-review-status]');
   const pagination=document.querySelector('.review-pagination');
+  const serviceSelect=form?.querySelector('#review-service');
   if(!grid||!countNode||!avgNode)return;
+
+  const params=new URLSearchParams(location.search);
+  const requestedService=String(params.get('service')||'').trim();
+  const shouldOpen=params.get('write')==='1'||params.get('open')==='1';
+  const hasRequestedService=ALLOWED_SERVICES.has(requestedService);
+  if(hasRequestedService&&serviceSelect)serviceSelect.value=requestedService;
+  if(hasRequestedService&&filter)filter.value=requestedService;
 
   let page=1;
   let items=[];
@@ -110,13 +118,20 @@ function initPage(){
     if(page<totalPages){page++;redraw();}
   });
 
-  open?.addEventListener('click',()=>{
+  const openComposer=()=>{
     if(!composer)return;
     composer.hidden=false;
-    if(status)status.textContent='';
+    if(hasRequestedService&&serviceSelect)serviceSelect.value=requestedService;
+    if(status)status.textContent=hasRequestedService?`${requestedService} 후기를 남겨주세요.`:'';
     composer.scrollIntoView({behavior:'smooth',block:'center'});
-    requestAnimationFrame(()=>document.querySelector('#review-service')?.focus());
-  });
+    requestAnimationFrame(()=>{
+      if(hasRequestedService)document.querySelector('#review-content')?.focus();
+      else serviceSelect?.focus();
+    });
+  };
+
+  open?.addEventListener('click',openComposer);
+  if(shouldOpen)setTimeout(openComposer,120);
 
   closeButtons.forEach(btn=>btn.addEventListener('click',()=>{
     if(composer)composer.hidden=true;
@@ -170,6 +185,7 @@ function initPage(){
       });
       form.reset();
       if(composer)composer.hidden=true;
+      if(filter)filter.value=service;
       status.textContent='후기가 등록되었습니다. 익명으로 바로 공개됩니다.';
       page=1;
     }catch(error){
