@@ -39,6 +39,7 @@ export function showSajuLoading(options = {}) {
   const message = overlay.querySelector('[data-saju-loading-message]');
   const duration = Number(options.duration) || DEFAULT_DURATION;
   const messages = Array.isArray(options.messages) && options.messages.length ? options.messages : defaultMessages;
+  const alreadyVisible = !overlay.hidden && overlay.classList.contains('is-visible');
 
   eyebrow.textContent = options.eyebrow || 'JUNGWOLJAE · READING';
   title.textContent = options.title || '내용을 신중하게 풀어보고 있습니다.';
@@ -46,12 +47,15 @@ export function showSajuLoading(options = {}) {
 
   document.body.classList.add('saju-loading-open');
   overlay.hidden = false;
-  overlay.classList.remove('is-visible', 'is-leaving');
+  overlay.classList.remove('is-leaving');
   message.classList.remove('is-changing');
   message.textContent = messages[0] || defaultMessages[0];
 
-  void overlay.offsetWidth;
-  overlay.classList.add('is-visible');
+  if (!alreadyVisible) {
+    overlay.classList.remove('is-visible');
+    void overlay.offsetWidth;
+    overlay.classList.add('is-visible');
+  }
 
   const timers = [];
   const firstChange = Math.round(duration * 0.31);
@@ -74,6 +78,7 @@ export function showSajuLoading(options = {}) {
         overlay.classList.remove('is-visible', 'is-leaving');
         overlay.hidden = true;
         document.body.classList.remove('saju-loading-open', 'reading-result-pending');
+        document.documentElement.classList.remove('jw-entry-first');
         resolve();
       }, 280));
     }, duration));
