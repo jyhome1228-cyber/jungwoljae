@@ -3,10 +3,10 @@ from pathlib import Path
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
-APP_VERSION = "20260911-1750"
+APP_VERSION = "20260911-1755"
 STYLE_VERSION = "20260911-1435"
-COPY_VERSION = "20260911-1750"
-RESULT_CLEANUP_VERSION = "20260911-1750"
+COPY_VERSION = "20260911-1755"
+RESULT_CLEANUP_VERSION = "20260911-1755"
 app_pattern = re.compile(r'(<script\b[^>]*\bsrc=["\'])\./app\.js(?:\?v=[^"\']+)?(["\'][^>]*></script>)', re.I)
 page_css_pattern = re.compile(r'(<link\b[^>]*\bhref=["\'])\./page\.css(?:\?v=[^"\']+)?(["\'][^>]*>)', re.I)
 copy_script_pattern = re.compile(r'<script\b[^>]*\bsrc=["\']\./site-copy-cleanup-v1\.js(?:\?v=[^"\']+)?["\'][^>]*></script>', re.I)
@@ -18,7 +18,6 @@ def remove_free_words(text: str) -> str:
     text = text.replace('무료', '')
     text = re.sub(r'(?<![A-Za-z0-9_])FREE(?![A-Za-z0-9_])\s*[·:\-]?\s*', '', text)
     return text
-
 
 changed = []
 for page in sorted(ROOT.glob('*.html')):
