@@ -19,10 +19,7 @@ button:disabled,.button:disabled{opacity:.55;cursor:not-allowed}
 @media(max-width:1279px){.desktop-nav{display:none!important}.menu-button{display:inline-flex!important}}
 @media(max-width:767px){.button,.relationship-button,.work-money-button,.work-button,.fortune-button,.saju-button,.ohaeng-button,.result-button,.compatibility-button{min-height:46px}.form-submit-area .button-primary{width:100%!important}}
 
-/* Homepage runtime contrast lock.
-   app.js injects the shared theme styles after first paint, so the homepage needs
-   a final late-loaded rule set that wins the cascade and prevents the white copy
-   from flipping to the light-theme brown after load. */
+/* Homepage runtime contrast lock. */
 html body main#main.home-main .home-image-hero .home-image-hero-inner,
 html body main#main.home-main .home-image-hero .home-image-hero-copy,
 html body main#main.home-main .home-services .service-visual-card>div{
@@ -72,6 +69,59 @@ html body main#main.home-main .home-services .service-visual-card p{
   line-height:19px!important;
 }
 html body main#main.home-main .home-services .service-visual-card .visual-index{display:none!important}
+
+/* Custom image hero runtime lock.
+   These pages load page-specific image hero CSS first and app.js injects shared theme CSS later.
+   Keep image hero type white and keep its intended size after all runtime styles arrive. */
+html body .talisman-image-hero .talisman-image-hero-copy,
+html body .guide-image-hero .guide-image-hero-copy,
+html body .quick-hero .quick-hero-copy,
+html body .sub-hero>.container{
+  position:relative!important;
+  z-index:5!important;
+  opacity:1!important;
+  filter:none!important;
+  mix-blend-mode:normal!important;
+}
+html body .talisman-image-hero .talisman-image-hero-copy .eyebrow,
+html body .guide-image-hero .guide-image-hero-copy .eyebrow,
+html body .quick-hero .quick-hero-copy .eyebrow,
+html body .sub-hero .eyebrow{
+  color:rgba(255,255,255,.78)!important;
+  -webkit-text-fill-color:rgba(255,255,255,.78)!important;
+}
+html body .talisman-image-hero .talisman-image-hero-copy h1,
+html body .guide-image-hero .guide-image-hero-copy h1,
+html body .quick-hero .quick-hero-copy h1,
+html body .sub-hero h1{
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  font-weight:700!important;
+}
+html body .talisman-image-hero .talisman-image-hero-copy h1,
+html body .guide-image-hero .guide-image-hero-copy h1,
+html body .quick-hero .quick-hero-copy h1{
+  font-size:40px!important;
+  line-height:50px!important;
+  letter-spacing:-.035em!important;
+}
+html body .talisman-image-hero .talisman-image-hero-copy>p:not(.eyebrow),
+html body .guide-image-hero .guide-image-hero-copy>p:not(.eyebrow),
+html body .quick-hero .quick-hero-copy>p:not(.eyebrow),
+html body .sub-hero .sub-lead{
+  color:rgba(255,255,255,.84)!important;
+  -webkit-text-fill-color:rgba(255,255,255,.84)!important;
+}
+html body .talisman-image-hero .button,
+html body .guide-image-hero .button{
+  background:#fff!important;
+  border-color:#fff!important;
+  color:#543a3a!important;
+  -webkit-text-fill-color:#543a3a!important;
+}
 @media(max-width:767px){
   html body main#main.home-main .home-image-hero .home-image-hero-copy h1{font-size:30px!important;line-height:39px!important}
+  html body .talisman-image-hero .talisman-image-hero-copy h1,
+  html body .quick-hero .quick-hero-copy h1{font-size:31px!important;line-height:40px!important}
+  html body .guide-image-hero .guide-image-hero-copy h1{font-size:30px!important;line-height:38px!important}
 }
