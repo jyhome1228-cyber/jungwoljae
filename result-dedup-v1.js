@@ -15,6 +15,13 @@
     return !el.hidden&&getComputedStyle(el).display!=='none';
   }
 
+  function plainRelationCopy(label,dayWord){
+    if(/육합|삼합/.test(label))return `${dayWord}은 사람이나 일이 자연스럽게 이어지기 쉬운 편입니다. 기다리기보다 먼저 연락하거나 제안을 꺼내고, 중간에 한 번 의견을 맞추면 흐름이 더 편해집니다.`;
+    if(label==='충')return `${dayWord}은 예상과 다른 요청이나 일정 변화가 생길 수 있습니다. 처음 계획을 끝까지 고집하기보다 중요한 목적만 지키고 방법은 유연하게 바꾸는 편이 좋습니다.`;
+    if(/형|해|파/.test(label))return `${dayWord}은 작은 말이나 일정 차이가 평소보다 크게 느껴질 수 있습니다. 바로 결론 내리기보다 사실을 한 번 확인하고 필요한 말만 짧게 주고받으세요.`;
+    return `${dayWord}은 외부 변수보다 내가 무엇을 먼저 할지 정하는 것이 중요합니다. 해야 할 일의 순서를 줄이고, 가장 중요한 한 가지부터 움직이면 하루가 훨씬 안정적입니다.`;
+  }
+
   function practicalFortuneKey(){
     const grid=$('.fortune-key-grid');
     if(!grid)return;
@@ -24,8 +31,6 @@
     const first=cards[0],second=cards[1],third=cards[2];
     const dayWord=(document.body.innerText||'').includes('내일')?'내일':'오늘';
 
-    // Technical evidence belongs in the expandable interpretation-basis section,
-    // not inside the three things a visitor is supposed to remember.
     const firstSmall=first.querySelector('small');
     const secondSmall=second.querySelector('small');
     if(firstSmall)firstSmall.textContent=`${dayWord}의 첫 번째 행동 기준`;
@@ -49,10 +54,30 @@
     }
   }
 
+  function simplifyFortuneVisibleJargon(){
+    const dayWord=(document.body.innerText||'').includes('내일')?'내일':'오늘';
+    const headline=$('[data-headline]')?.textContent?.trim();
+    const note=$('[data-signal-note]')?.textContent?.trim();
+    const heroSummary=$('[data-summary]');
+    if(heroSummary&&headline)heroSummary.textContent=`${headline}${note?` ${note}`:''}`;
+
+    const meta=[...document.querySelectorAll('.fortune-meta span')];
+    meta.forEach((span,index)=>{if(index>1)hide(span);});
+
+    const pills=[...document.querySelectorAll('.relation-pills span')];
+    const technicalLabel=pills[1]?.textContent?.trim()||'';
+    if(pills[0])pills[0].textContent='나의 기본 흐름';
+    if(pills[1])pills[1].textContent=/육합|삼합/.test(technicalLabel)?'연결이 자연스러운 날':technicalLabel==='충'?'변화가 큰 날':/형|해|파/.test(technicalLabel)?'조정이 필요한 날':'내 선택이 중요한 날';
+    if(pills[2])pills[2].textContent=`${dayWord}의 흐름`;
+
+    const relationText=$('[data-relation-text]');
+    if(relationText)relationText.textContent=plainRelationCopy(technicalLabel,dayWord);
+    const relationTitle=relationText?.closest('.fortune-relation')?.querySelector('h2');
+    if(relationTitle)relationTitle.textContent=`${dayWord}, 사람과 일은 이렇게 흘러갈 가능성이 큽니다.`;
+  }
+
   function apply(){
     if(file==='work-money-result.html'){
-      // MONEY STYLE already covers earning / saving / risk habits.
-      // WORK & MONEY GUIDE repeated the same job / income / money-management advice.
       hide($('.work-guide-section'));
       const summary=$('.work-summary-section');
       if(summary){
@@ -63,11 +88,10 @@
     }
 
     if(file==='fortune-result.html'){
-      // The visible result should answer "what should I do today?" rather than expose
-      // element percentages, weak-element compensation, colors or directions.
       hide($('.fortune-tip-section'));
       hide($('.fortune-total-section'));
       hide($('.fortune-lucky-section'));
+      simplifyFortuneVisibleJargon();
       practicalFortuneKey();
 
       const key=$('.fortune-key-grid')?.closest('.fortune-report');
@@ -76,15 +100,13 @@
         text($('.fortune-label',key),'06 · 행동 기준');
         text($('h2',key),tomorrow?'내일은 이 세 가지만 기억하세요.':'오늘은 이 세 가지만 기억하세요.');
         const intro=key.querySelector('.fortune-key-intro');
-        if(intro)intro.textContent='명리 용어보다 바로 옮길 수 있는 행동 세 가지만 남겼습니다.';
+        if(intro)intro.textContent='어려운 용어보다 바로 옮길 수 있는 행동 세 가지만 남겼습니다.';
       }
       const evidence=$('.fortune-evidence');
       if(evidence)text($('.fortune-label',evidence),'07 · 해석 기준');
     }
 
     if(file==='ohaeng-result.html'){
-      // NATURAL FORCE / BALANCE / DAILY LIFE already explain the same three takeaways.
-      // Keep only one synthesis after those sections.
       hide($('.key-section'));
       const total=$('.total-summary-section');
       if(total){
@@ -94,8 +116,6 @@
     }
 
     if(file==='relationship-result.html'){
-      // RELATIONSHIP GUIDE is already the practical conclusion.
-      // The following TOTAL SUMMARY restated the same type / strength / caution once more.
       hide($('.relationship-summary-section'));
       const guide=$('[data-guide-grid]')?.closest('.relationship-report');
       if(guide){
@@ -105,8 +125,6 @@
     }
 
     if(file==='compatibility-report.html'){
-      // The score hero + four metrics + match/friction + relationship flow already conclude the match.
-      // TOTAL SUMMARY repeats the strongest/weakest metric and score in almost the same words.
       hide($('.relationship-summary-section'));
       const flow=$('[data-advice]')?.closest('.relationship-report');
       if(flow){
