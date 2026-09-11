@@ -18,7 +18,7 @@ if(profilePages.has(currentFile))addStyle('./basic-profile.css?v=20260908-2106')
 if(isResultLike&&!isFortuneResult){addStyle('./result-readability.css?v=20260907-2257');addStyle('./result-quality-v7.css?v=20260910-2140');}
 addStyle('./universal-structure-v8.css?v=20260909-0404');
 addStyle('./birth-input-unified.css?v=20260909-2205');
-addStyle('./saju-loading.css?v=20260909-2340');
+addStyle('./saju-loading.css?v=20260911-1715');
 if(isResultLike&&!isFortuneResult)addStyle('./brand-contrast-v8.css?v=20260909-0404');
 if(document.body?.classList.contains('about-page'))addStyle('./about.css');
 addStyle('./qa-hardening.css?v=20260910-2150');
@@ -36,7 +36,7 @@ const loaderCopy={
   'compatibility-report.html':{eyebrow:'JUNGWOLJAE · COMPATIBILITY',title:'두 사람의 관계를 함께 살펴보고 있습니다.',messages:['두 사람의 생활 성향을 같은 기준으로 비교하고 있습니다.','편한 지점과 부딪히는 지점을 나누어 보고 있습니다.','관계의 구조가 잘 보이도록 결과를 정리하고 있습니다.']}
 };
 if(useUniversalResultLoader){
-  import('./saju-loading.js?v=20260909-2340').then(({showSajuLoading})=>showSajuLoading({...loaderCopy[currentFile],duration:3600})).catch(error=>{console.error('reading loader failed',error);}).finally(()=>{if(resultMain)resultMain.style.visibility='';document.body.classList.remove('reading-result-pending','saju-loading-open');});
+  import('./saju-loading.js?v=20260911-1715').then(({showSajuLoading})=>showSajuLoading({...loaderCopy[currentFile],duration:3600})).catch(error=>{console.error('reading loader failed',error);}).finally(()=>{if(resultMain)resultMain.style.visibility='';document.body.classList.remove('reading-result-pending','saju-loading-open');});
 }
 
 const themeMeta=document.querySelector('meta[name="theme-color"]');if(themeMeta)themeMeta.setAttribute('content','#ffffff');
@@ -98,5 +98,5 @@ readingForm?.addEventListener('submit',event=>{
 if(['lucky-number.html','important-day.html','moving-day.html'].includes(currentFile)){
   const quickPolish=document.createElement('script');quickPolish.src='./quick-result-polish.js?v=20260910-2035';quickPolish.defer=true;document.body.appendChild(quickPolish);
 }
-const welcomePopupScript=document.createElement('script');welcomePopupScript.type='module';welcomePopupScript.src='./welcome-popup.js?v=20260911-1702';document.body.appendChild(welcomePopupScript);
+const welcomePopupScript=document.createElement('script');welcomePopupScript.type='module';welcomePopupScript.src='./welcome-popup.js?v=20260911-1715';document.body.appendChild(welcomePopupScript);
 const qaScript=document.createElement('script');qaScript.src='./qa-hardening.js?v=20260910-2140';qaScript.defer=true;document.body.appendChild(qaScript);
