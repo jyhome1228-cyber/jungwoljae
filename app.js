@@ -13,7 +13,7 @@ const isResultLike=currentFile.endsWith('-result.html')||currentFile==='compatib
 const isFortuneResult=currentFile==='fortune-result.html';
 
 function addStyle(href){const l=document.createElement('link');l.rel='stylesheet';l.href=href;document.head.appendChild(l);}
-[['./theme-dark.css'],['./theme-tuning.css'],['./theme-polish.css'],['./footer-fix.css?v=20260907-1548'],['./site-mobile.css?v=20260908-2106'],['./ui-fixes.css?v=20260911-1415'],['./friendly-content.css?v=20260908-1140']].forEach(([href])=>addStyle(href));
+[['./theme-dark.css'],['./theme-tuning.css'],['./theme-polish.css'],['./footer-fix.css?v=20260907-1548'],['./site-mobile.css?v=20260908-2106'],['./ui-fixes.css?v=20260911-1428'],['./friendly-content.css?v=20260908-1140']].forEach(([href])=>addStyle(href));
 if(profilePages.has(currentFile))addStyle('./basic-profile.css?v=20260908-2106');
 if(isResultLike&&!isFortuneResult){addStyle('./result-readability.css?v=20260907-2257');addStyle('./result-quality-v7.css?v=20260910-2140');}
 addStyle('./universal-structure-v8.css?v=20260909-0404');
