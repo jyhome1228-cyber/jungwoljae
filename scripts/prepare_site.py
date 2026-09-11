@@ -6,9 +6,11 @@ ROOT = Path(__file__).resolve().parents[1]
 APP_VERSION = "20260911-1428"
 STYLE_VERSION = "20260911-1435"
 COPY_VERSION = "20260911-1725"
+RESULT_CLEANUP_VERSION = "20260911-1725"
 app_pattern = re.compile(r'(<script\b[^>]*\bsrc=["\'])\./app\.js(?:\?v=[^"\']+)?(["\'][^>]*></script>)', re.I)
 page_css_pattern = re.compile(r'(<link\b[^>]*\bhref=["\'])\./page\.css(?:\?v=[^"\']+)?(["\'][^>]*>)', re.I)
 copy_script_pattern = re.compile(r'<script\b[^>]*\bsrc=["\']\./site-copy-cleanup-v1\.js(?:\?v=[^"\']+)?["\'][^>]*></script>', re.I)
+dedup_script_pattern = re.compile(r'(<script\b[^>]*\bsrc=["\'])\./result-dedup-v1\.js(?:\?v=[^"\']+)?(["\'][^>]*></script>)', re.I)
 
 
 def remove_free_emphasis(text: str) -> str:
@@ -23,6 +25,7 @@ for page in sorted(ROOT.glob("*.html")):
     text = page.read_text(encoding="utf-8")
     updated = app_pattern.sub(rf'\1./app.js?v={APP_VERSION}\2', text)
     updated = page_css_pattern.sub(rf'\1./page.css?v={STYLE_VERSION}\2', updated)
+    updated = dedup_script_pattern.sub(rf'\1./result-dedup-v1.js?v={RESULT_CLEANUP_VERSION}\2', updated)
     updated = remove_free_emphasis(updated)
 
     cleanup_script = f'<script src="./site-copy-cleanup-v1.js?v={COPY_VERSION}" defer></script>'
