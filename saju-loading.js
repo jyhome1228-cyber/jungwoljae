@@ -1,9 +1,11 @@
 const DEFAULT_DURATION = 3600;
+const MAX_DURATION = 5000;
 const defaultMessages = [
   '입력하신 사주 정보를 차분히 살펴보고 있습니다.',
   '타고난 기운과 현재의 흐름을 하나씩 정리하고 있습니다.',
   '내용을 다시 살피며 결과를 준비하고 있습니다.'
 ];
+let activeRun=0;
 
 function ensureOverlay() {
   let overlay = document.querySelector('[data-saju-loading]');
@@ -32,14 +34,26 @@ function ensureOverlay() {
   return overlay;
 }
 
+function forceClose(overlay){
+  if(!overlay)return;
+  overlay.classList.remove('is-visible','is-leaving');
+  overlay.hidden=true;
+  document.body.classList.remove('saju-loading-open','reading-result-pending');
+  document.documentElement.classList.remove('jw-entry-first');
+  const main=document.querySelector('main');
+  if(main)main.style.visibility='';
+}
+
 export function showSajuLoading(options = {}) {
   const overlay = ensureOverlay();
   const eyebrow = overlay.querySelector('[data-saju-loading-eyebrow]');
   const title = overlay.querySelector('[data-saju-loading-title]');
   const message = overlay.querySelector('[data-saju-loading-message]');
-  const duration = Number(options.duration) || DEFAULT_DURATION;
+  const requested = Number(options.duration) || DEFAULT_DURATION;
+  const duration = Math.min(MAX_DURATION, Math.max(500, requested));
   const messages = Array.isArray(options.messages) && options.messages.length ? options.messages : defaultMessages;
   const alreadyVisible = !overlay.hidden && overlay.classList.contains('is-visible');
+  const runId=++activeRun;
 
   eyebrow.textContent = options.eyebrow || 'JUNGWOLJAE · READING';
   title.textContent = options.title || '내용을 신중하게 풀어보고 있습니다.';
@@ -63,8 +77,10 @@ export function showSajuLoading(options = {}) {
   [firstChange, secondChange].forEach((delay, index) => {
     if (!messages[index + 1]) return;
     timers.push(setTimeout(() => {
+      if(runId!==activeRun)return;
       message.classList.add('is-changing');
       timers.push(setTimeout(() => {
+        if(runId!==activeRun)return;
         message.textContent = messages[index + 1];
         message.classList.remove('is-changing');
       }, 180));
@@ -72,15 +88,21 @@ export function showSajuLoading(options = {}) {
   });
 
   return new Promise(resolve => {
+    let finished=false;
+    const finish=()=>{
+      if(finished)return;
+      finished=true;
+      timers.forEach(clearTimeout);
+      forceClose(overlay);
+      if(typeof window.__jwReleaseResultLoader==='function')window.__jwReleaseResultLoader('loader-finished');
+      resolve();
+    };
     timers.push(setTimeout(() => {
+      if(runId!==activeRun){finish();return;}
       overlay.classList.add('is-leaving');
-      timers.push(setTimeout(() => {
-        overlay.classList.remove('is-visible', 'is-leaving');
-        overlay.hidden = true;
-        document.body.classList.remove('saju-loading-open', 'reading-result-pending');
-        document.documentElement.classList.remove('jw-entry-first');
-        resolve();
-      }, 280));
+      timers.push(setTimeout(finish,280));
     }, duration));
+    // Secondary watchdog: even if animation/timer state breaks, release the page.
+    timers.push(setTimeout(finish,duration+900));
   });
 }
