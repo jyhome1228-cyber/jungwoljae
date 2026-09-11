@@ -3,11 +3,11 @@ from pathlib import Path
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
-APP_VERSION = "20260911-1818"
-STYLE_VERSION = "20260911-1818"
-COPY_VERSION = "20260911-1818"
-RESULT_CLEANUP_VERSION = "20260911-1818"
-RESULT_LOADER_VERSION = "20260911-1818"
+APP_VERSION = "20260911-1822"
+STYLE_VERSION = "20260911-1822"
+COPY_VERSION = "20260911-1822"
+RESULT_CLEANUP_VERSION = "20260911-1822"
+RESULT_LOADER_VERSION = "20260911-1822"
 
 app_pattern = re.compile(r'(<script\b[^>]*\bsrc=["\'])\./app\.js(?:\?v=[^"\']+)?(["\'][^>]*></script>)', re.I)
 page_css_pattern = re.compile(r'(<link\b[^>]*\bhref=["\'])\./page\.css(?:\?v=[^"\']+)?(["\'][^>]*>)', re.I)
@@ -40,7 +40,6 @@ for page in sorted(ROOT.glob('*.html')):
     updated = copy_script_pattern.sub('', updated)
 
     if is_result_page(page):
-        # Always ship the fail-safe CSS and watchdog on every result page.
         safety_link = f'<link rel="stylesheet" href="./result-loading-safety.css?v={RESULT_LOADER_VERSION}" />'
         updated = result_safety_pattern.sub('', updated)
         updated = re.sub(r'</head>', safety_link + '\n</head>', updated, count=1, flags=re.I)
@@ -68,6 +67,11 @@ for js in sorted(ROOT.glob('*.js')):
     if js.name == 'app.js':
         updated = re.sub(r'\.\/saju-loading\.js\?v=[0-9\-]+', f'./saju-loading.js?v={RESULT_LOADER_VERSION}', updated)
         updated = re.sub(r'\.\/welcome-popup\.js\?v=[0-9\-]+', f'./welcome-popup.js?v={RESULT_LOADER_VERSION}', updated)
+        # Result pages may show a loader overlay, but the actual result content must never be hidden.
+        updated = updated.replace(
+            "if(resultMain){resultMain.style.visibility='hidden';document.body.classList.add('reading-result-pending');}",
+            "if(resultMain){resultMain.style.visibility='';document.body.classList.remove('reading-result-pending');}"
+        )
     if updated != text:
         js.write_text(updated, encoding='utf-8')
         changed.append(js.name)
