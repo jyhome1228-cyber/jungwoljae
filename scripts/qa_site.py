@@ -13,7 +13,7 @@ from urllib.parse import urlsplit
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
-EXPECTED_APP_VERSION = "20260911-1130"
+EXPECTED_APP_VERSION = "20260911-1415"
 SKIP_DIRS = {".git", "node_modules"}
 
 errors: list[str] = []
