@@ -55,6 +55,14 @@
 .form-submit-area .form-status{grid-column:1;min-height:0;margin:0}
 .form-submit-area .button-large{grid-column:2;grid-row:1 / span 2;width:auto;min-width:220px;border-radius:999px}
 
+/* Consent guidance */
+.consent-row,.quick-consent{transition:border-color .18s ease,background-color .18s ease,box-shadow .18s ease}
+.consent-row.is-missing,.quick-consent.is-missing{padding:10px 12px!important;border:1px solid #b16d63!important;border-radius:10px!important;background:#fff6f3!important;box-shadow:0 0 0 3px rgba(177,109,99,.08)!important}
+.consent-row.is-missing span,.quick-consent.is-missing span{color:#7a3f38!important;font-weight:700!important}
+.consent-row.is-missing input[type="checkbox"],.quick-consent.is-missing input[type="checkbox"]{outline:3px solid rgba(177,109,99,.14)!important;outline-offset:2px!important}
+.form-status[data-state="error"],.quick-status[data-state="error"]{color:#9a4d43!important;font-weight:700!important}
+.form-status[data-state="ok"],.quick-status[data-state="ok"]{color:#5f514d!important}
+
 /* Archive */
 .archive-grid{display:grid;gap:12px;margin-top:30px;border:0;background:transparent}
 .archive-item{padding:22px;border:1px solid var(--line);border-radius:18px;background:var(--panel)}
