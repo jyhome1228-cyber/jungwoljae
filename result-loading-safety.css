@@ -6,5 +6,15 @@ html body.saju-loading-open main,
   opacity:1!important;
 }
 
-/* The loading overlay is visual only; the JS watchdog removes it within a few seconds. */
+/* Hidden loaders must stay hidden. */
 .saju-loading-overlay[hidden]{display:none!important}
+
+/* Daily fortune renders its loading experience before/around navigation.
+   Never allow a stale cached result-page loader to cover the actual result. */
+body:has([data-fortune-result]) .saju-loading-overlay,
+body:has([data-fortune-result]) [data-saju-loading]{
+  display:none!important;
+  visibility:hidden!important;
+  opacity:0!important;
+  pointer-events:none!important;
+}
