@@ -3,13 +3,13 @@ from pathlib import Path
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
-APP_VERSION = "20260911-1906"
-STYLE_VERSION = "20260911-1906"
-COPY_VERSION = "20260911-1906"
-RESULT_CLEANUP_VERSION = "20260911-1906"
-RESULT_LOADER_VERSION = "20260911-1906"
-FORM_VERSION = "20260911-1906"
-CONSENT_VERSION = "20260911-1912"
+APP_VERSION = "20260911-1945"
+STYLE_VERSION = "20260911-1945"
+COPY_VERSION = "20260911-1945"
+RESULT_CLEANUP_VERSION = "20260911-1945"
+RESULT_LOADER_VERSION = "20260911-1945"
+FORM_VERSION = "20260911-1945"
+CONSENT_VERSION = "20260911-1945"
 
 app_pattern = re.compile(r'(<script\b[^>]*\bsrc=["\'])\./app\.js(?:\?v=[^"\']+)?(["\'][^>]*></script>)', re.I)
 page_css_pattern = re.compile(r'(<link\b[^>]*\bhref=["\'])\./page\.css(?:\?v=[^"\']+)?(["\'][^>]*>)', re.I)
@@ -74,6 +74,10 @@ for js in sorted(ROOT.glob('*.js')):
     if js.name == 'app.js':
         updated = re.sub(r'\.\/saju-loading\.js\?v=[0-9\-]+', f'./saju-loading.js?v={RESULT_LOADER_VERSION}', updated)
         updated = re.sub(r'\.\/welcome-popup\.js\?v=[0-9\-]+', f'./welcome-popup.js?v={RESULT_LOADER_VERSION}', updated)
+        updated = updated.replace(
+            "const useUniversalResultLoader=isResultLike;",
+            "const useUniversalResultLoader=isResultLike&&!isFortuneResult;"
+        )
         updated = updated.replace(
             "if(resultMain){resultMain.style.visibility='hidden';document.body.classList.add('reading-result-pending');}",
             "if(resultMain){resultMain.style.visibility='';document.body.classList.remove('reading-result-pending');}"
