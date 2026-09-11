@@ -4,10 +4,9 @@
   if(!isResult)return;
 
   const startedAt=Date.now();
-  const minVisible=file==='fortune-result.html'?2800:0;
-  const hardLimit=file==='fortune-result.html'?4400:5200;
+  const MIN_VISIBLE=2800;
+  const HARD_RELEASE=4800;
   let released=false;
-  let pendingTimer=null;
   let observer=null;
 
   function forceClosed(){
@@ -31,30 +30,29 @@
     document.documentElement.style.removeProperty('overflow');
   }
 
-  function actuallyRelease(reason='watchdog'){
+  function release(reason='watchdog'){
     if(released)return;
+    const elapsed=Date.now()-startedAt;
+    if(elapsed<MIN_VISIBLE){
+      setTimeout(()=>release(reason),MIN_VISIBLE-elapsed);
+      return;
+    }
     released=true;
     window.__jwResultLoaderReleased=true;
-    clearTimeout(pendingTimer);
     forceClosed();
     window.dispatchEvent(new CustomEvent('jw:result-loader-released',{detail:{reason}}));
   }
 
-  function release(reason='watchdog'){
-    if(released)return;
-    const elapsed=Date.now()-startedAt;
-    if(elapsed<minVisible){
-      clearTimeout(pendingTimer);
-      pendingTimer=setTimeout(()=>actuallyRelease(reason),minVisible-elapsed);
-      return;
-    }
-    actuallyRelease(reason);
-  }
-
   window.__jwReleaseResultLoader=release;
-  window.__jwResultLoaderReleased=false;
+  if(window.__jwResultLoaderReleased!==true)window.__jwResultLoaderReleased=false;
 
-  const hardTimer=setTimeout(()=>release('hard-timeout'),hardLimit);
+  // Only result lifecycle events may end the loader early. Generic JS/network errors
+  // must not make the loading screen disappear immediately.
+  window.addEventListener('jw:result-ready',()=>release('result-ready'),{once:true});
+  window.addEventListener('jw:fortune-rendered',()=>release('fortune-rendered'),{once:true});
+  window.addEventListener('pageshow',event=>{if(event.persisted)release('bfcache');});
+  setTimeout(()=>release('hard-timeout'),HARD_RELEASE);
+
   const startObserver=()=>{
     if(observer||!document.body)return;
     observer=new MutationObserver(()=>{if(released)forceClosed();});
@@ -62,10 +60,4 @@
     setTimeout(()=>{observer?.disconnect();observer=null;},20000);
   };
   if(document.body)startObserver();else document.addEventListener('DOMContentLoaded',startObserver,{once:true});
-
-  window.addEventListener('jw:result-ready',()=>{clearTimeout(hardTimer);release('result-ready');},{once:true});
-  window.addEventListener('jw:fortune-rendered',()=>{clearTimeout(hardTimer);release('fortune-rendered');},{once:true});
-  window.addEventListener('pageshow',event=>{if(event.persisted)setTimeout(()=>release('bfcache'),80);});
-  window.addEventListener('error',()=>setTimeout(()=>release('script-error'),120));
-  window.addEventListener('unhandledrejection',()=>setTimeout(()=>release('promise-error'),120));
 })();
