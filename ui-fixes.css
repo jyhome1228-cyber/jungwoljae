@@ -18,3 +18,60 @@ button:disabled,.button:disabled{opacity:.55;cursor:not-allowed}
 }
 @media(max-width:1279px){.desktop-nav{display:none!important}.menu-button{display:inline-flex!important}}
 @media(max-width:767px){.button,.relationship-button,.work-money-button,.work-button,.fortune-button,.saju-button,.ohaeng-button,.result-button,.compatibility-button{min-height:46px}.form-submit-area .button-primary{width:100%!important}}
+
+/* Homepage runtime contrast lock.
+   app.js injects the shared theme styles after first paint, so the homepage needs
+   a final late-loaded rule set that wins the cascade and prevents the white copy
+   from flipping to the light-theme brown after load. */
+html body main#main.home-main .home-image-hero .home-image-hero-inner,
+html body main#main.home-main .home-image-hero .home-image-hero-copy,
+html body main#main.home-main .home-services .service-visual-card>div{
+  position:relative!important;
+  z-index:5!important;
+  opacity:1!important;
+  filter:none!important;
+  mix-blend-mode:normal!important;
+}
+html body main#main.home-main .home-image-hero .home-image-hero-copy .eyebrow{
+  color:rgba(255,255,255,.82)!important;
+  -webkit-text-fill-color:rgba(255,255,255,.82)!important;
+  font-size:10px!important;
+  line-height:15px!important;
+}
+html body main#main.home-main .home-image-hero .home-image-hero-copy h1{
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  font-size:38px!important;
+  line-height:48px!important;
+  font-weight:700!important;
+}
+html body main#main.home-main .home-image-hero .home-image-hero-copy>p:not(.eyebrow){
+  color:rgba(255,255,255,.92)!important;
+  -webkit-text-fill-color:rgba(255,255,255,.92)!important;
+  font-size:14px!important;
+  line-height:23px!important;
+}
+html body main#main.home-main .home-image-hero .home-image-hero-actions .button.secondary{
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+}
+html body main#main.home-main .home-services .service-visual-card,
+html body main#main.home-main .home-services .service-visual-card h3{
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+}
+html body main#main.home-main .home-services .service-visual-card h3{
+  font-size:19px!important;
+  line-height:27px!important;
+  font-weight:700!important;
+}
+html body main#main.home-main .home-services .service-visual-card p{
+  color:rgba(255,255,255,.92)!important;
+  -webkit-text-fill-color:rgba(255,255,255,.92)!important;
+  font-size:12px!important;
+  line-height:19px!important;
+}
+html body main#main.home-main .home-services .service-visual-card .visual-index{display:none!important}
+@media(max-width:767px){
+  html body main#main.home-main .home-image-hero .home-image-hero-copy h1{font-size:30px!important;line-height:39px!important}
+}
