@@ -54,5 +54,5 @@
     });
   });
   observer.observe(document.documentElement,{subtree:true,childList:true,characterData:true});
-  [250,700,1500,3000,6000].forEach(ms=>setTimeout(()=>apply(),ms));
+  [50,150,300,700,1500,3000,6000,10000].forEach(ms=>setTimeout(()=>apply(),ms));
 })();
