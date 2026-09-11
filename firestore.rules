@@ -48,20 +48,30 @@ service cloud.firestore {
       allow delete: if signedIn() && resource.data.uid == request.auth.uid;
     }
 
+    // Reviews are public and may be submitted without an account.
+    // Public creation is restricted to the exact anonymous review shape below.
     match /reviews/{reviewId} {
       allow read: if true;
-      allow create: if signedIn()
-                    && request.resource.data.keys().hasOnly([
+      allow create: if request.resource.data.keys().hasOnly([
                       'uid', 'authorLabel', 'service', 'rating', 'content', 'status', 'createdAt'
                     ])
-                    && request.resource.data.uid == request.auth.uid
+                    && request.resource.data.authorLabel == '익명 사용자'
                     && request.resource.data.status == 'published'
+                    && request.resource.data.service in [
+                      '오행 분석', '오늘의 운세', '내일의 운세', '연애와 인연', '궁합',
+                      '일과 재물', '정월도감', '정월부적', '행운의 숫자', '중요한 날', '이사 택일'
+                    ]
                     && request.resource.data.rating >= 1
                     && request.resource.data.rating <= 5
                     && request.resource.data.content.size() >= 10
-                    && request.resource.data.content.size() <= 500;
+                    && request.resource.data.content.size() <= 500
+                    && request.resource.data.createdAt == request.time
+                    && (
+                      (signedIn() && request.resource.data.uid == request.auth.uid)
+                      || (!signedIn() && request.resource.data.uid == null)
+                    );
       allow update: if false;
-      allow delete: if isAdmin() || (signedIn() && resource.data.uid == request.auth.uid);
+      allow delete: if isAdmin();
     }
 
     // A result page may append one privacy-restricted reading event after the user submitted
