@@ -2,10 +2,10 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /><meta name="robots" content="noindex, nofollow, noarchive" /><meta name="theme-color" content="#ffffff" /><meta name="description" content="정월재 종합 사주 결과" /><title>종합 사주 결과 — 정월재</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" /><link rel="stylesheet" href="./styles.css" /><link rel="stylesheet" href="./page.css" /><link rel="stylesheet" href="./saju-result.css?v=20260908-1230" /><link rel="stylesheet" href="./saju-result-guide.css?v=20260908-0900" /><link rel="stylesheet" href="./saju-loading.css?v=20260909-2125" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" /><link rel="stylesheet" href="./styles.css" /><link rel="stylesheet" href="./page.css" /><link rel="stylesheet" href="./saju-result.css?v=20260908-1230" /><link rel="stylesheet" href="./saju-result-guide.css?v=20260908-0900" /><link rel="stylesheet" href="./saju-loading.css?v=20260911-1200" />
 </head>
-<body class="saju-loading-open">
-<div class="saju-loading-overlay is-visible" data-saju-result-loading role="status" aria-live="polite" aria-label="사주 분석 준비 중">
+<body>
+<div class="saju-loading-overlay" data-saju-result-loading role="status" aria-live="polite" aria-label="사주 분석 준비 중" hidden>
   <div class="saju-loading-inner">
     <div class="saju-loading-mark" aria-hidden="true"><span class="saju-loading-ring"></span><span class="saju-loading-ring"></span><img class="saju-loading-logo" src="./logo.svg?v=20260909-2125" alt="" /></div>
     <p class="saju-loading-eyebrow">JUNGWOLJAE · SAJU READING</p>
@@ -29,19 +29,6 @@
 <section class="saju-actions no-print"><div class="action-copy"><strong>종합 사주를 기록으로 남겨두세요.</strong><p>보고서용 텍스트를 복사하거나 PDF로 저장하고, 로그인 회원은 정월록과 마이페이지에 보관할 수 있습니다.</p></div><div class="action-buttons"><button type="button" class="saju-button secondary" data-copy>보고서용 텍스트 복사</button><button type="button" class="saju-button secondary" data-pdf>PDF 저장</button><button type="button" class="saju-button primary" data-save>마이페이지에 저장</button></div><p class="action-status" data-action-status></p></section>
 </div></main>
 <footer class="site-footer no-print"></footer>
-<script>
-(()=>{
-  const overlay=document.querySelector('[data-saju-result-loading]');
-  const message=document.querySelector('[data-saju-result-loading-message]');
-  if(!overlay)return;
-  const alreadyShown=sessionStorage.getItem('jungwoljae_saju_loader_shown')==='1';
-  sessionStorage.removeItem('jungwoljae_saju_loader_shown');
-  const finish=()=>{overlay.classList.add('is-leaving');setTimeout(()=>{overlay.hidden=true;document.body.classList.remove('saju-loading-open');},280);};
-  if(alreadyShown){overlay.hidden=true;document.body.classList.remove('saju-loading-open');return;}
-  const messages=['입력하신 사주 정보를 차분히 살펴보고 있습니다.','타고난 성향과 생활 흐름을 하나씩 정리하고 있습니다.','내용을 다시 살피며 결과를 준비하고 있습니다.'];
-  [1100,2200].forEach((delay,i)=>setTimeout(()=>{message.classList.add('is-changing');setTimeout(()=>{message.textContent=messages[i+1];message.classList.remove('is-changing');},180);},delay));
-  setTimeout(finish,3400);
-})();
-</script>
-<script src="./app.js?v=20260910-2150" defer></script><script type="module" src="./saju-result.js?v=20260909-2125"></script><script src="./saju-result-guide.js?v=20260908-0900" defer></script><script src="./saju-result-extra.js?v=20260908-0900" defer></script><script src="./saju-core-plain.js?v=20260910-2155" defer></script><script src="./result-fun-v17.js?v=20260911-1145" defer></script>
+<script src="./saju-result-loader.js?v=20260911-1200" defer></script>
+<script src="./app.js?v=20260911-1130" defer></script><script type="module" src="./saju-result.js?v=20260911-1200"></script><script src="./saju-result-guide.js?v=20260908-0900" defer></script><script src="./saju-result-extra.js?v=20260908-0900" defer></script><script src="./saju-core-plain.js?v=20260910-2155" defer></script>
 </body></html>
