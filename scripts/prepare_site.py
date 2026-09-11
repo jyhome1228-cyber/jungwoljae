@@ -9,7 +9,7 @@ COPY_VERSION = "20260911-1906"
 RESULT_CLEANUP_VERSION = "20260911-1906"
 RESULT_LOADER_VERSION = "20260911-1906"
 FORM_VERSION = "20260911-1906"
-CONSENT_VERSION = "20260911-1906"
+CONSENT_VERSION = "20260911-1912"
 
 app_pattern = re.compile(r'(<script\b[^>]*\bsrc=["\'])\./app\.js(?:\?v=[^"\']+)?(["\'][^>]*></script>)', re.I)
 page_css_pattern = re.compile(r'(<link\b[^>]*\bhref=["\'])\./page\.css(?:\?v=[^"\']+)?(["\'][^>]*>)', re.I)
