@@ -70,58 +70,161 @@ html body main#main.home-main .home-services .service-visual-card p{
 }
 html body main#main.home-main .home-services .service-visual-card .visual-index{display:none!important}
 
-/* Custom image hero runtime lock.
-   These pages load page-specific image hero CSS first and app.js injects shared theme CSS later.
-   Keep image hero type white and keep its intended size after all runtime styles arrive. */
+/* Internal hero system
+   Use the Work & Money page as the reference hierarchy for every image hero. */
+html body .sub-hero,
+html body .talisman-image-hero,
+html body .guide-image-hero,
+html body .quick-hero{
+  position:relative!important;
+  width:min(calc(100% - 64px),1280px)!important;
+  min-height:390px!important;
+  margin:32px auto 48px!important;
+  overflow:hidden!important;
+  border:0!important;
+  border-radius:20px!important;
+  background-size:cover!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+  isolation:isolate!important;
+}
+html body .sub-hero::before,
+html body .talisman-image-hero::before,
+html body .guide-image-hero::before,
+html body .quick-hero::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  background:linear-gradient(90deg,rgba(35,24,24,.72) 0%,rgba(35,24,24,.36) 48%,rgba(35,24,24,.12) 100%)!important;
+  pointer-events:none!important;
+}
+html body .sub-hero>.container,
+html body .talisman-image-hero .talisman-image-hero-inner,
+html body .guide-image-hero .guide-image-hero-inner,
+html body .quick-hero .quick-hero-inner{
+  position:relative!important;
+  z-index:5!important;
+  display:flex!important;
+  width:100%!important;
+  min-height:390px!important;
+  align-items:flex-end!important;
+  margin:0!important;
+  padding:48px!important;
+  opacity:1!important;
+  filter:none!important;
+  mix-blend-mode:normal!important;
+  box-sizing:border-box!important;
+}
 html body .talisman-image-hero .talisman-image-hero-copy,
 html body .guide-image-hero .guide-image-hero-copy,
 html body .quick-hero .quick-hero-copy,
 html body .sub-hero>.container{
-  position:relative!important;
-  z-index:5!important;
-  opacity:1!important;
-  filter:none!important;
-  mix-blend-mode:normal!important;
+  color:#fff!important;
+}
+html body .talisman-image-hero .talisman-image-hero-copy,
+html body .guide-image-hero .guide-image-hero-copy,
+html body .quick-hero .quick-hero-copy{
+  max-width:620px!important;
 }
 html body .talisman-image-hero .talisman-image-hero-copy .eyebrow,
 html body .guide-image-hero .guide-image-hero-copy .eyebrow,
 html body .quick-hero .quick-hero-copy .eyebrow,
 html body .sub-hero .eyebrow{
+  margin:0 0 10px!important;
   color:rgba(255,255,255,.78)!important;
   -webkit-text-fill-color:rgba(255,255,255,.78)!important;
+  font-size:10px!important;
+  line-height:15px!important;
+  font-weight:700!important;
+  letter-spacing:-.01em!important;
 }
 html body .talisman-image-hero .talisman-image-hero-copy h1,
 html body .guide-image-hero .guide-image-hero-copy h1,
 html body .quick-hero .quick-hero-copy h1,
 html body .sub-hero h1{
+  max-width:640px!important;
+  margin:0 0 14px!important;
   color:#fff!important;
   -webkit-text-fill-color:#fff!important;
+  font-size:34px!important;
+  line-height:44px!important;
   font-weight:700!important;
-}
-html body .talisman-image-hero .talisman-image-hero-copy h1,
-html body .guide-image-hero .guide-image-hero-copy h1,
-html body .quick-hero .quick-hero-copy h1{
-  font-size:40px!important;
-  line-height:50px!important;
-  letter-spacing:-.035em!important;
+  letter-spacing:-.02em!important;
 }
 html body .talisman-image-hero .talisman-image-hero-copy>p:not(.eyebrow),
 html body .guide-image-hero .guide-image-hero-copy>p:not(.eyebrow),
 html body .quick-hero .quick-hero-copy>p:not(.eyebrow),
 html body .sub-hero .sub-lead{
-  color:rgba(255,255,255,.84)!important;
-  -webkit-text-fill-color:rgba(255,255,255,.84)!important;
+  max-width:620px!important;
+  margin:0 0 22px!important;
+  color:rgba(255,255,255,.82)!important;
+  -webkit-text-fill-color:rgba(255,255,255,.82)!important;
+  font-size:14px!important;
+  line-height:23px!important;
+  font-weight:400!important;
+  letter-spacing:-.02em!important;
 }
+html body .sub-hero .sub-lead{margin-bottom:0!important}
+html body .sub-hero .breadcrumb{
+  margin-bottom:24px!important;
+  color:rgba(255,255,255,.62)!important;
+  -webkit-text-fill-color:rgba(255,255,255,.62)!important;
+  font-size:11px!important;
+  line-height:18px!important;
+}
+html body .sub-hero .breadcrumb a{color:rgba(255,255,255,.62)!important;-webkit-text-fill-color:rgba(255,255,255,.62)!important}
 html body .talisman-image-hero .button,
 html body .guide-image-hero .button{
+  min-height:42px!important;
+  padding:0 16px!important;
+  border:1px solid #fff!important;
+  border-radius:9px!important;
   background:#fff!important;
-  border-color:#fff!important;
   color:#543a3a!important;
   -webkit-text-fill-color:#543a3a!important;
+  font-size:12px!important;
+  line-height:18px!important;
+  font-weight:700!important;
 }
+
 @media(max-width:767px){
   html body main#main.home-main .home-image-hero .home-image-hero-copy h1{font-size:30px!important;line-height:39px!important}
+  html body .sub-hero,
+  html body .talisman-image-hero,
+  html body .guide-image-hero,
+  html body .quick-hero{
+    width:min(calc(100% - 32px),1280px)!important;
+    min-height:320px!important;
+    margin:16px auto 32px!important;
+    border-radius:16px!important;
+  }
+  html body .sub-hero::before,
+  html body .talisman-image-hero::before,
+  html body .guide-image-hero::before,
+  html body .quick-hero::before{
+    background:linear-gradient(180deg,rgba(35,24,24,.08) 16%,rgba(35,24,24,.32) 50%,rgba(35,24,24,.82) 100%)!important;
+  }
+  html body .sub-hero>.container,
+  html body .talisman-image-hero .talisman-image-hero-inner,
+  html body .guide-image-hero .guide-image-hero-inner,
+  html body .quick-hero .quick-hero-inner{
+    min-height:320px!important;
+    padding:28px 22px!important;
+  }
   html body .talisman-image-hero .talisman-image-hero-copy h1,
-  html body .quick-hero .quick-hero-copy h1{font-size:31px!important;line-height:40px!important}
-  html body .guide-image-hero .guide-image-hero-copy h1{font-size:30px!important;line-height:38px!important}
+  html body .guide-image-hero .guide-image-hero-copy h1,
+  html body .quick-hero .quick-hero-copy h1,
+  html body .sub-hero h1{
+    font-size:29px!important;
+    line-height:38px!important;
+    letter-spacing:-.025em!important;
+  }
+  html body .talisman-image-hero .talisman-image-hero-copy>p:not(.eyebrow),
+  html body .guide-image-hero .guide-image-hero-copy>p:not(.eyebrow),
+  html body .quick-hero .quick-hero-copy>p:not(.eyebrow),
+  html body .sub-hero .sub-lead{
+    font-size:13px!important;
+    line-height:21px!important;
+  }
 }
