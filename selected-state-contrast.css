@@ -1,34 +1,13 @@
-/* Selected-state contrast lock
-   Brown selected cards must never inherit dark text from shared reading-form rules. */
-
-html body .saju-form .focus-card input:checked + span,
+/* Selected-state contrast lock */
 html body .work-form .focus-card input:checked + span,
 html body .relationship-form .relationship-status-card input:checked + span,
-html body .guide-form .guide-choice input:checked + span{
-  border-color:#543a3a!important;
-  background:#543a3a!important;
-}
-
-html body .saju-form .focus-card input:checked + span strong,
+html body .guide-form .guide-choice input:checked + span{border-color:#543a3a!important;background:#543a3a!important}
 html body .work-form .focus-card input:checked + span strong,
 html body .relationship-form .relationship-status-card input:checked + span strong,
-html body .guide-form .guide-choice input:checked + span strong{
-  color:#fff!important;
-  -webkit-text-fill-color:#fff!important;
-}
-
-html body .saju-form .focus-card input:checked + span em,
+html body .guide-form .guide-choice input:checked + span strong{color:#fff!important;-webkit-text-fill-color:#fff!important}
 html body .work-form .focus-card input:checked + span em,
 html body .relationship-form .relationship-status-card input:checked + span em,
-html body .guide-form .guide-choice input:checked + span em{
-  color:rgba(255,255,255,.78)!important;
-  -webkit-text-fill-color:rgba(255,255,255,.78)!important;
-  opacity:1!important;
-}
-
-/* Segmented controls that use the brand brown background. */
-html body .reading-form [role="radio"][aria-checked="true"],
-html body .reading-form .is-selected,
-html body .reading-form .selected{
-  color:#fff;
-}
+html body .guide-form .guide-choice input:checked + span em{color:rgba(255,255,255,.78)!important;-webkit-text-fill-color:rgba(255,255,255,.78)!important;opacity:1!important}
+html body .reading-form [role="radio"][aria-checked="true"],html body .reading-form .is-selected,html body .reading-form .selected{color:#fff}
+/* Retired service: hide any old runtime/static links that may still be generated from cached markup. */
+a[href="./saju.html"],a[href="saju.html"],a[href$="/saju.html"]{display:none!important}
