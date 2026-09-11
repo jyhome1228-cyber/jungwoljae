@@ -18,8 +18,6 @@
         color:#fff!important;
       }
 
-      /* Keep Jungwol Dogam identical to the other homepage service cards.
-         theme-polish.css used to make the 7th card span two columns. */
       .home-services .service-visual-card[href="./guide.html"]{
         grid-column:auto!important;
         grid-row:auto!important;
@@ -40,6 +38,29 @@
       }
     `;
     document.head.appendChild(style);
+
+    const main=document.querySelector('main#main');
+    if(main){
+      const walker=document.createTreeWalker(main,NodeFilter.SHOW_TEXT);
+      const nodes=[];
+      let node;
+      while((node=walker.nextNode()))nodes.push(node);
+      nodes.forEach(textNode=>{
+        const before=textNode.nodeValue||'';
+        let after=before.replace(/무료로\s*/g,'').replace(/무료\s*/g,'');
+        if(after!==before)textNode.nodeValue=after;
+      });
+      const serviceLabel=main.querySelector('.home-services .section-label');
+      if(serviceLabel && serviceLabel.textContent.trim()==='FREE SERVICES')serviceLabel.textContent='SERVICES';
+    }
+
+    document.title='오늘의 운세·궁합·오행 | 정월재';
+    const setMeta=(selector,value)=>{const el=document.querySelector(selector);if(el)el.setAttribute('content',value);};
+    setMeta('meta[name="description"]','정월재에서 오행 분석, 오늘의 운세, 내일의 운세, 궁합, 연애·인연, 일·재물, 택일을 쉽고 차분하게 확인하세요.');
+    setMeta('meta[name="keywords"]','정월재,운세,오늘의운세,오늘의 운세,내일의운세,내일의 운세,궁합,사주궁합,오행분석,오행 분석,오행,음양오행,연애운,인연운,재물운,직업운,택일,이사택일');
+    setMeta('meta[property="og:title"]','오늘의 운세·궁합·오행 | 정월재');
+    setMeta('meta[name="twitter:title"]','오늘의 운세·궁합·오행 | 정월재');
+    setMeta('meta[name="twitter:description"]','오행 분석과 오늘·내일 운세, 궁합, 재물운, 택일을 확인하세요.');
   }
 
   footer.dataset.enhanced='true';
