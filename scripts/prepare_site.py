@@ -3,11 +3,11 @@ from pathlib import Path
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
-APP_VERSION = "20260911-1822"
-STYLE_VERSION = "20260911-1822"
-COPY_VERSION = "20260911-1822"
-RESULT_CLEANUP_VERSION = "20260911-1822"
-RESULT_LOADER_VERSION = "20260911-1822"
+APP_VERSION = "20260911-1828"
+STYLE_VERSION = "20260911-1828"
+COPY_VERSION = "20260911-1828"
+RESULT_CLEANUP_VERSION = "20260911-1828"
+RESULT_LOADER_VERSION = "20260911-1828"
 
 app_pattern = re.compile(r'(<script\b[^>]*\bsrc=["\'])\./app\.js(?:\?v=[^"\']+)?(["\'][^>]*></script>)', re.I)
 page_css_pattern = re.compile(r'(<link\b[^>]*\bhref=["\'])\./page\.css(?:\?v=[^"\']+)?(["\'][^>]*>)', re.I)
@@ -67,7 +67,6 @@ for js in sorted(ROOT.glob('*.js')):
     if js.name == 'app.js':
         updated = re.sub(r'\.\/saju-loading\.js\?v=[0-9\-]+', f'./saju-loading.js?v={RESULT_LOADER_VERSION}', updated)
         updated = re.sub(r'\.\/welcome-popup\.js\?v=[0-9\-]+', f'./welcome-popup.js?v={RESULT_LOADER_VERSION}', updated)
-        # Result pages may show a loader overlay, but the actual result content must never be hidden.
         updated = updated.replace(
             "if(resultMain){resultMain.style.visibility='hidden';document.body.classList.add('reading-result-pending');}",
             "if(resultMain){resultMain.style.visibility='';document.body.classList.remove('reading-result-pending');}"
@@ -75,6 +74,27 @@ for js in sorted(ROOT.glob('*.js')):
     if updated != text:
         js.write_text(updated, encoding='utf-8')
         changed.append(js.name)
+
+# Remove CSS rules that could keep a result page hidden forever if a module stalls.
+css_repairs = {
+    'saju-loading.css': [
+        ('body.reading-result-pending main{visibility:hidden!important}', 'body.reading-result-pending main{visibility:visible!important}')
+    ],
+    'fortune-final-v12.css': [
+        ('.fortune-result-main[data-final-state="loading"]{visibility:hidden}', '.fortune-result-main[data-final-state="loading"]{visibility:visible}')
+    ],
+}
+for css_name, replacements in css_repairs.items():
+    css_path = ROOT / css_name
+    if not css_path.exists():
+        continue
+    text = css_path.read_text(encoding='utf-8')
+    updated = text
+    for old, new in replacements:
+        updated = updated.replace(old, new)
+    if updated != text:
+        css_path.write_text(updated, encoding='utf-8')
+        changed.append(css_name)
 
 page_css = ROOT / 'page.css'
 if page_css.exists():
