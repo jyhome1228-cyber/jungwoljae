@@ -14,9 +14,10 @@ dedup_script_pattern = re.compile(r'(<script\b[^>]*\bsrc=["\'])\./result-dedup-v
 
 
 def remove_free_emphasis(text: str) -> str:
+    # Korean copy is safe to normalize directly in deploy HTML. English FREE is
+    # cleaned from text nodes at runtime so class/id names such as `free-*` stay intact.
     text = re.sub(r'무료로\s*', '', text)
     text = re.sub(r'무료\s*', '', text)
-    text = re.sub(r'\bFREE\b\s*[·:\-]?\s*', '', text, flags=re.I)
     return text
 
 
