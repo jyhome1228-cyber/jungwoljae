@@ -2,7 +2,7 @@
   const footer=document.querySelector('.site-footer');
   if(!footer) return;
 
-  // Load the final global cohesion layer after page/theme styles.
+  // Keep the global cohesion layer that unifies all page geometry.
   if(!document.querySelector('link[data-site-cohesion]')){
     const cohesion=document.createElement('link');
     cohesion.rel='stylesheet';
@@ -56,7 +56,7 @@
       while((node=walker.nextNode()))nodes.push(node);
       nodes.forEach(textNode=>{
         const before=textNode.nodeValue||'';
-        let after=before.replace(/무료로\s*/g,'').replace(/무료\s*/g,'');
+        const after=before.replace(/무료로\s*/g,'').replace(/무료\s*/g,'');
         if(after!==before)textNode.nodeValue=after;
       });
       const serviceLabel=main.querySelector('.home-services .section-label');
@@ -72,39 +72,50 @@
     setMeta('meta[name="twitter:description"]','오행 분석과 오늘·내일 운세, 궁합, 재물운, 택일을 확인하세요.');
   }
 
+  // Restore the original branded footer design.
   footer.dataset.enhanced='true';
+  const year=new Date().getFullYear();
   footer.innerHTML=`
-    <div class="container footer-minimal">
-      <p>대표자 박재영</p>
+    <div class="container footer-shell">
+      <div class="footer-topline">
+        <div class="footer-brand-lockup">
+          <span class="footer-symbol-wrap"><img class="footer-symbol" src="./logo.svg" alt="정월재 심볼"></span>
+          <div class="footer-name"><strong>정월재</strong><span>JEONGWOLJAE · 正月齋</span></div>
+        </div>
+        <p class="footer-tagline">삶의 흐름을 읽는 곳.</p>
+      </div>
+
+      <div class="footer-main">
+        <section class="footer-identity" aria-label="정월재 소개">
+          <p class="footer-intro">정월재는 오래된 명리의 기준을 오늘의 언어로 정돈해 전하는 해석 서비스입니다. 오행과 오늘·내일의 흐름, 관계, 궁합, 일과 재물, 현실의 고민까지 하나의 기준으로 이어서 읽습니다.</p>
+          <p class="footer-intro sub">어려운 용어보다 실제 생활에서 이해하기 쉬운 말과 행동 기준으로 정리합니다.</p>
+          <div class="footer-service-tags" aria-label="정월재 제공 서비스">
+            <a href="./ohaeng.html">오행 분석</a><a href="./fortune.html">오늘의 운세</a><a href="./tomorrow.html">내일의 운세</a><a href="./relationship.html">연애와 인연</a><a href="./compatibility.html">궁합</a><a href="./work-money.html">일과 재물</a><a href="./guide.html">정월도감</a><a href="./talisman.html">정월부적</a><a href="./lucky-number.html">행운의 숫자</a><a href="./important-day.html">중요한 날</a><a href="./moving-day.html">이사 택일</a><a href="./archive.html">정월록</a>
+          </div>
+        </section>
+
+        <div class="footer-links-grid">
+          <section class="footer-column"><h3>서비스</h3><nav aria-label="푸터 서비스 메뉴"><a href="./ohaeng.html">오행 분석</a><a href="./fortune.html">오늘의 운세</a><a href="./tomorrow.html">내일의 운세</a><a href="./relationship.html">연애와 인연</a><a href="./compatibility.html">궁합</a><a href="./work-money.html">일과 재물</a><a href="./guide.html">정월도감</a><a href="./talisman.html">정월부적</a></nav></section>
+          <section class="footer-column"><h3>생활운</h3><nav aria-label="푸터 생활운 메뉴"><a href="./lucky-number.html">행운의 숫자</a><a href="./important-day.html">중요한 날</a><a href="./moving-day.html">이사 택일</a><a href="./archive.html">정월록</a></nav></section>
+          <section class="footer-column"><h3>정월재</h3><nav aria-label="푸터 정월재 메뉴"><a href="./reviews.html">후기</a><a href="./about.html">소개</a><a href="./login.html">로그인</a><a href="./signup.html">회원등록</a><a href="./privacy.html">개인정보처리방침</a></nav></section>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-disclaimer">정월재의 콘텐츠는 전통 명리학 이론과 상징 문화를 바탕으로 한 해석·시각 콘텐츠이며 과학적·의학적·법률적 판단이나 미래 결과, 특정 효험을 보장하지 않습니다. 택일과 숫자 기능은 실제 조건을 대신하지 않는 참고용 콘텐츠입니다.</p>
+        <div class="footer-legal"><span>대표자 박재영</span><a href="./privacy.html">개인정보처리방침</a><span>© ${year} JEONGWOLJAE</span></div>
+      </div>
     </div>`;
 
-  if(!document.getElementById('footer-minimal-style')){
+  // Explicit guard so the restored footer cannot be flattened by later global styles.
+  if(!document.getElementById('footer-restore-guard')){
     const style=document.createElement('style');
-    style.id='footer-minimal-style';
+    style.id='footer-restore-guard';
     style.textContent=`
-      .site-footer{
-        padding:28px 0!important;
-        border-top:1px solid #eee7e3!important;
-        background:#fff!important;
-        color:#8a817d!important;
-      }
-      .site-footer .footer-minimal{
-        display:flex!important;
-        align-items:center!important;
-        justify-content:center!important;
-        width:min(calc(100% - 32px),1280px)!important;
-        margin:0 auto!important;
-        padding:0!important;
-        text-align:center!important;
-      }
-      .site-footer .footer-minimal p{
-        margin:0!important;
-        color:#8a817d!important;
-        font-size:11px!important;
-        font-weight:500!important;
-        line-height:18px!important;
-        letter-spacing:-.01em!important;
-      }
+      .site-footer{display:block!important;visibility:visible!important;opacity:1!important;margin-top:88px!important;padding:0!important;background:#543a3a!important;color:#fff!important;border-top:0!important}
+      .site-footer .footer-shell{display:block!important}
+      @media(max-width:1023px){.site-footer{margin-top:72px!important}}
+      @media(max-width:767px){.site-footer{margin-top:60px!important}}
     `;
     document.head.appendChild(style);
   }
