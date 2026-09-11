@@ -32,12 +32,29 @@
       delete status.dataset.state;
     }
   }
+  function missingConsent(form){
+    const input=form?.querySelector('input[name="consent"]');
+    return input&&!input.checked?input:null;
+  }
+
+  // Button click is checked first so custom guidance still appears even on forms
+  // where native HTML required-validation would otherwise stop the submit event.
+  document.addEventListener('click',event=>{
+    const button=event.target.closest?.('button[type="submit"],input[type="submit"]');
+    if(!button)return;
+    const form=button.form||button.closest('form');
+    const consent=missingConsent(form);
+    if(!consent)return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    showMissing(form,consent);
+  },true);
 
   document.addEventListener('submit',event=>{
     const form=event.target instanceof HTMLFormElement?event.target:null;
     if(!form)return;
-    const consent=form.querySelector('input[name="consent"]');
-    if(!consent||consent.checked)return;
+    const consent=missingConsent(form);
+    if(!consent)return;
     event.preventDefault();
     event.stopImmediatePropagation();
     showMissing(form,consent);
