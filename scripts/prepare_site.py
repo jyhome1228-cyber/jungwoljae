@@ -5,14 +5,32 @@ import re
 ROOT = Path(__file__).resolve().parents[1]
 APP_VERSION = "20260911-1428"
 STYLE_VERSION = "20260911-1435"
+COPY_VERSION = "20260911-1725"
 app_pattern = re.compile(r'(<script\b[^>]*\bsrc=["\'])\./app\.js(?:\?v=[^"\']+)?(["\'][^>]*></script>)', re.I)
 page_css_pattern = re.compile(r'(<link\b[^>]*\bhref=["\'])\./page\.css(?:\?v=[^"\']+)?(["\'][^>]*>)', re.I)
+copy_script_pattern = re.compile(r'<script\b[^>]*\bsrc=["\']\./site-copy-cleanup-v1\.js(?:\?v=[^"\']+)?["\'][^>]*></script>', re.I)
+
+
+def remove_free_emphasis(text: str) -> str:
+    text = re.sub(r'무료로\s*', '', text)
+    text = re.sub(r'무료\s*', '', text)
+    text = re.sub(r'\bFREE\b\s*[·:\-]?\s*', '', text, flags=re.I)
+    return text
+
 
 changed = []
 for page in sorted(ROOT.glob("*.html")):
     text = page.read_text(encoding="utf-8")
     updated = app_pattern.sub(rf'\1./app.js?v={APP_VERSION}\2', text)
     updated = page_css_pattern.sub(rf'\1./page.css?v={STYLE_VERSION}\2', updated)
+    updated = remove_free_emphasis(updated)
+
+    cleanup_script = f'<script src="./site-copy-cleanup-v1.js?v={COPY_VERSION}" defer></script>'
+    if copy_script_pattern.search(updated):
+        updated = copy_script_pattern.sub(cleanup_script, updated)
+    elif '</body>' in updated.lower():
+        updated = re.sub(r'</body>', cleanup_script + '</body>', updated, count=1, flags=re.I)
+
     if updated != text:
         page.write_text(updated, encoding="utf-8")
         changed.append(page.name)
@@ -25,6 +43,6 @@ if page_css.exists():
         page_css.write_text(updated, encoding="utf-8")
         print(f"Normalized typography cache key in page.css to {STYLE_VERSION}.")
 
-print(f"Normalized deploy asset keys on {len(changed)} page(s).")
+print(f"Normalized deploy assets and removed free-service wording on {len(changed)} page(s).")
 if changed:
     print("Pages: " + ", ".join(changed))
