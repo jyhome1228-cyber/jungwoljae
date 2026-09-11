@@ -1,0 +1,10 @@
+/* Result-page fail-safe: loading UI must never make the actual result page inaccessible. */
+html body.reading-result-pending main,
+html body.saju-loading-open main,
+.fortune-result-main[data-final-state="loading"]{
+  visibility:visible!important;
+  opacity:1!important;
+}
+
+/* The loading overlay is visual only; the JS watchdog removes it within a few seconds. */
+.saju-loading-overlay[hidden]{display:none!important}
