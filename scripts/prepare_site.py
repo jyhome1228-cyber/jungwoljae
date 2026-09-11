@@ -3,10 +3,10 @@ from pathlib import Path
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
-APP_VERSION = "20260911-1740"
+APP_VERSION = "20260911-1745"
 STYLE_VERSION = "20260911-1435"
-COPY_VERSION = "20260911-1740"
-RESULT_CLEANUP_VERSION = "20260911-1740"
+COPY_VERSION = "20260911-1745"
+RESULT_CLEANUP_VERSION = "20260911-1745"
 app_pattern = re.compile(r'(<script\b[^>]*\bsrc=["\'])\./app\.js(?:\?v=[^"\']+)?(["\'][^>]*></script>)', re.I)
 page_css_pattern = re.compile(r'(<link\b[^>]*\bhref=["\'])\./page\.css(?:\?v=[^"\']+)?(["\'][^>]*>)', re.I)
 copy_script_pattern = re.compile(r'<script\b[^>]*\bsrc=["\']\./site-copy-cleanup-v1\.js(?:\?v=[^"\']+)?["\'][^>]*></script>', re.I)
@@ -14,36 +14,29 @@ dedup_script_pattern = re.compile(r'(<script\b[^>]*\bsrc=["\'])\./result-dedup-v
 
 
 def remove_free_words(text: str) -> str:
-    # Korean term is safe to strip globally from copy/code because it is not used in identifiers.
     text = text.replace('무료로', '')
     text = text.replace('무료', '')
-    # Remove standalone uppercase FREE used in visible English labels while leaving lowercase
-    # class/id names untouched.
     text = re.sub(r'(?<![A-Za-z0-9_])FREE(?![A-Za-z0-9_])\s*[·:\-]?\s*', '', text)
     return text
 
 
 changed = []
-# Normalize every deploy HTML page and every JS file that can generate visible copy.
 for page in sorted(ROOT.glob('*.html')):
     text = page.read_text(encoding='utf-8')
     updated = app_pattern.sub(rf'\1./app.js?v={APP_VERSION}\2', text)
     updated = page_css_pattern.sub(rf'\1./page.css?v={STYLE_VERSION}\2', updated)
     updated = dedup_script_pattern.sub(rf'\1./result-dedup-v1.js?v={RESULT_CLEANUP_VERSION}\2', updated)
     updated = remove_free_words(updated)
-
     cleanup_script = f'<script src="./site-copy-cleanup-v1.js?v={COPY_VERSION}" defer></script>'
     if copy_script_pattern.search(updated):
         updated = copy_script_pattern.sub(cleanup_script, updated)
     elif '</body>' in updated.lower():
         updated = re.sub(r'</body>', cleanup_script + '</body>', updated, count=1, flags=re.I)
-
     if updated != text:
         page.write_text(updated, encoding='utf-8')
         changed.append(page.name)
 
 for js in sorted(ROOT.glob('*.js')):
-    # Keep cleanup script itself intact so it can still recognize stale cached copy.
     if js.name == 'site-copy-cleanup-v1.js':
         continue
     text = js.read_text(encoding='utf-8')
