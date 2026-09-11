@@ -3,15 +3,14 @@ from pathlib import Path
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
-APP_VERSION = "20260911-1755"
+APP_VERSION = "20260911-1758"
 STYLE_VERSION = "20260911-1435"
-COPY_VERSION = "20260911-1755"
-RESULT_CLEANUP_VERSION = "20260911-1755"
+COPY_VERSION = "20260911-1758"
+RESULT_CLEANUP_VERSION = "20260911-1758"
 app_pattern = re.compile(r'(<script\b[^>]*\bsrc=["\'])\./app\.js(?:\?v=[^"\']+)?(["\'][^>]*></script>)', re.I)
 page_css_pattern = re.compile(r'(<link\b[^>]*\bhref=["\'])\./page\.css(?:\?v=[^"\']+)?(["\'][^>]*>)', re.I)
 copy_script_pattern = re.compile(r'<script\b[^>]*\bsrc=["\']\./site-copy-cleanup-v1\.js(?:\?v=[^"\']+)?["\'][^>]*></script>', re.I)
 dedup_script_pattern = re.compile(r'(<script\b[^>]*\bsrc=["\'])\./result-dedup-v1\.js(?:\?v=[^"\']+)?(["\'][^>]*></script>)', re.I)
-
 
 def remove_free_words(text: str) -> str:
     text = text.replace('무료로', '')
