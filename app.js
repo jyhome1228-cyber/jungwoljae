@@ -22,7 +22,7 @@ addStyle('./saju-loading.css?v=20260909-2340');
 if(isResultLike&&!isFortuneResult)addStyle('./brand-contrast-v8.css?v=20260909-0404');
 if(document.body?.classList.contains('about-page'))addStyle('./about.css');
 addStyle('./qa-hardening.css?v=20260910-2150');
-addStyle('./welcome-popup.css?v=20260911-1642');
+addStyle('./welcome-popup.css?v=20260911-1702');
 
 const useUniversalResultLoader=isResultLike;
 const resultMain=useUniversalResultLoader?document.querySelector('main'):null;
@@ -98,5 +98,5 @@ readingForm?.addEventListener('submit',event=>{
 if(['lucky-number.html','important-day.html','moving-day.html'].includes(currentFile)){
   const quickPolish=document.createElement('script');quickPolish.src='./quick-result-polish.js?v=20260910-2035';quickPolish.defer=true;document.body.appendChild(quickPolish);
 }
-const welcomePopupScript=document.createElement('script');welcomePopupScript.type='module';welcomePopupScript.src='./welcome-popup.js?v=20260911-1642';document.body.appendChild(welcomePopupScript);
+const welcomePopupScript=document.createElement('script');welcomePopupScript.type='module';welcomePopupScript.src='./welcome-popup.js?v=20260911-1702';document.body.appendChild(welcomePopupScript);
 const qaScript=document.createElement('script');qaScript.src='./qa-hardening.js?v=20260910-2140';qaScript.defer=true;document.body.appendChild(qaScript);
