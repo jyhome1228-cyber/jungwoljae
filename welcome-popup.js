@@ -74,7 +74,7 @@ async function runFirstEntryLoading(){
   if(!canRun||hasSeenEntryLoading())return;
   markEntryLoadingSeen();
   try{
-    const {showSajuLoading}=await import('./saju-loading.js?v=20260909-2340');
+    const {showSajuLoading}=await import('./saju-loading.js?v=20260911-1715');
     await showSajuLoading({
       duration:2500,
       eyebrow:'JUNGWOLJAE · WELCOME',
@@ -87,6 +87,9 @@ async function runFirstEntryLoading(){
       ariaLabel:'정월재 시작 화면 준비 중'
     });
   }catch(error){
+    document.querySelector('[data-saju-loading]')?.setAttribute('hidden','');
+    document.documentElement.classList.remove('jw-entry-first');
+    document.body.classList.remove('saju-loading-open');
     console.error('welcome loading failed',error);
   }
 }
