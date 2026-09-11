@@ -30,10 +30,21 @@
     ]
   }
   </script>
+  <script>
+    (()=>{
+      try{
+        if(!sessionStorage.getItem('jw_entry_loading_seen_session_v1')){
+          document.documentElement.classList.add('jw-entry-first');
+        }
+      }catch(error){document.documentElement.classList.add('jw-entry-first');}
+    })();
+  </script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
   <link rel="stylesheet" href="./styles.css" />
   <link rel="stylesheet" href="./page.css" />
+  <link rel="stylesheet" href="./saju-loading.css?v=20260911-1715" />
   <style>
+    html.jw-entry-first,html.jw-entry-first body{background:#f7f3f0}
     .home-main{padding-bottom:96px;background:#fff}
     .home-image-hero{margin:32px auto 0;width:min(calc(100% - 64px),1280px);min-height:540px;position:relative;overflow:hidden;border-radius:20px;background:url('https://nineworksdatabase.planus253.workers.dev/cdn/test/20260907-061515-3-30b351f3.webp') center/cover no-repeat!important}
     .home-image-hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(24,15,15,.82) 0%,rgba(24,15,15,.48) 48%,rgba(24,15,15,.12) 100%)}
@@ -71,6 +82,28 @@
   <link rel="stylesheet" href="./ui-fixes.css?v=20260911-1025" />
 </head>
 <body>
+  <div class="saju-loading-overlay is-visible" data-saju-loading hidden role="status" aria-live="polite" aria-label="정월재 시작 화면 준비 중">
+    <div class="saju-loading-inner">
+      <div class="saju-loading-mark" aria-hidden="true">
+        <span class="saju-loading-ring"></span>
+        <span class="saju-loading-ring"></span>
+        <img class="saju-loading-logo" src="./logo.svg?v=20260909-2340" alt="" />
+      </div>
+      <p class="saju-loading-eyebrow" data-saju-loading-eyebrow>JUNGWOLJAE · WELCOME</p>
+      <h2 class="saju-loading-title" data-saju-loading-title>정월재의 문을 열고 있습니다.</h2>
+      <p class="saju-loading-message" data-saju-loading-message>차분히 둘러볼 수 있도록 공간을 준비하고 있습니다.</p>
+      <div class="saju-loading-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+    </div>
+  </div>
+  <script>
+    (()=>{
+      const loader=document.querySelector('[data-saju-loading]');
+      if(document.documentElement.classList.contains('jw-entry-first')&&loader){
+        loader.hidden=false;
+        document.body.classList.add('saju-loading-open');
+      }
+    })();
+  </script>
   <a class="skip-link" href="#main">본문 바로가기</a>
   <header class="site-header"><div class="wide-container header-inner"><a class="brand" href="./index.html" aria-label="정월재 홈"><span class="brand-hanja">正月齋</span><span class="brand-korean">정월재</span></a><nav class="desktop-nav" aria-label="주요 메뉴"><a href="./ohaeng.html">오행</a><a href="./fortune.html">오늘의 운세</a><a href="./tomorrow.html">내일의 운세</a><a href="./relationship.html">인연</a><a href="./compatibility.html">궁합</a><a href="./work-money.html">일·재물</a><a href="./guide.html">정월도감</a><a href="./talisman.html">정월부적</a><a href="./lucky-number.html">행운의 숫자</a><a href="./important-day.html">중요한 날</a><a href="./moving-day.html">이사 택일</a><a href="./archive.html">정월록</a><a href="./reviews.html">후기</a><a href="./about.html">소개</a></nav><a class="header-cta" href="./signup.html">회원등록</a><button class="menu-button" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu" data-menu-button><span></span><span></span></button></div><div class="mobile-menu" id="mobile-menu" hidden data-mobile-menu><nav class="container"></nav></div></header>
   <main id="main" class="home-main">
@@ -94,6 +127,6 @@
     <section class="home-about-banner"><div class="container"><a href="./about.html"><div><p class="section-label">ABOUT JEONGWOLJAE</p><h2>많은 해석 사이에서, 바른 기준을 만들고 싶었습니다.</h2><p>정월재가 어떤 이론과 태도로 운세와 흐름을 읽고 정리하는지 소개 페이지에서 확인해보세요.</p></div><span class="home-about-arrow">→</span></a></div></section>
   </main>
   <footer class="site-footer"></footer>
-  <script src="./app.js?v=20260911-1215" defer></script>
+  <script src="./app.js?v=20260911-1715" defer></script>
 </body>
 </html>
