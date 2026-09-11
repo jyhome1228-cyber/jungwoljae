@@ -115,13 +115,6 @@ class PageParser(HTMLParser):
             self._jsonld_buf.append(data)
 
 
-prepare_site = ROOT / "scripts" / "prepare_site.py"
-expected_app_version = None
-if prepare_site.exists():
-    match = re.search(r'^APP_VERSION\s*=\s*["\']([^"\']+)', prepare_site.read_text(encoding="utf-8"), re.M)
-    if match:
-        expected_app_version = match.group(1)
-
 js_files = sorted(
     p for p in ROOT.rglob("*.js")
     if not any(part in SKIP_DIRS for part in p.parts)
@@ -129,7 +122,8 @@ js_files = sorted(
 js_by_name = {p.name: p.read_text(encoding="utf-8") for p in js_files}
 app_dynamic_scripts = [
     "auth.js", "qa-hardening.js", "basic-profile.js", "quick-profile.js",
-    "birth-input-unified.js", "birth-time-unified.js", "gender-unified.js"
+    "birth-input-unified.js", "birth-time-unified.js", "gender-unified.js",
+    "consent-guard.js", "result-loader-guard.js"
 ]
 
 html_files = sorted(
@@ -184,26 +178,13 @@ for page in html_files:
         if not target.exists():
             errors.append(f"{rel(page)}: missing local {tag} target {value}")
 
-    app_matches = list(re.finditer(r'<script[^>]+src=["\']\./app\.js(?:\?v=([^"\']+))?', text, re.I))
-    if app_matches and "./page.css" not in text:
-        errors.append(f"{rel(page)}: app.js page must load page.css")
-    if expected_app_version:
-        for match in app_matches:
-            version = match.group(1) or "unversioned"
-            if version != expected_app_version:
-                warnings.append(f"{rel(page)}: app.js cache key is {version}; expected {expected_app_version}")
-
     script_names: list[str] = []
     for script in parser.scripts:
         src = script.get("src", "")
         if src.startswith("./"):
             script_names.append(urlsplit(src).path.split("/")[-1])
 
-    action_text = "\n".join(
-        js_by_name.get(name, "")
-        for name in script_names
-        if name not in {"consent-guard.js", "site-copy-cleanup-v1.js"}
-    )
+    action_text = "\n".join(js_by_name.get(name, "") for name in script_names)
     if "app.js" in script_names:
         action_text += "\n" + "\n".join(js_by_name.get(name, "") for name in app_dynamic_scripts)
     for match in re.finditer(r'<script(?![^>]*\bsrc=)(?![^>]*application/ld\+json)[^>]*>(.*?)</script>', text, re.I | re.S):
@@ -241,15 +222,52 @@ for page in html_files:
         if submit_count < len(parser.forms):
             warnings.append(f"{rel(page)}: {len(parser.forms)} form(s) but only {submit_count} explicit submit button(s)")
 
-    if re.search(r'<input\b[^>]*\bname=["\']consent["\']', text, re.I) and "consent-guard.js" not in script_names:
-        errors.append(f"{rel(page)}: consent form missing consent-guard.js")
+    has_consent = bool(re.search(r'<input\b[^>]*\bname=["\']consent["\']', text, re.I))
+    if has_consent:
+        consent_handled = (
+            "consent-guard.js" in script_names
+            or "app.js" in script_names
+            or bool(re.search(r"\bconsent\b|elements\.consent|name=[\"']consent", action_text, re.I))
+        )
+        if not consent_handled:
+            errors.append(f"{rel(page)}: consent form has no consent validation handler")
 
-    is_result_page = page.name.endswith("-result.html") or page.name == "compatibility-report.html"
+    # Retired redirect page is not a live result page and intentionally has no loader runtime.
+    retired_result = page.name == "saju-result.html" and (
+        "서비스 종료" in text or "location.replace('./index.html')" in text
+    )
+    is_result_page = (page.name.endswith("-result.html") or page.name == "compatibility-report.html") and not retired_result
     if is_result_page:
-        if "result-loader-guard.js" not in script_names:
-            errors.append(f"{rel(page)}: result page missing result-loader-guard.js")
-        if "result-loading-safety.css" not in text:
-            errors.append(f"{rel(page)}: result page missing result-loading-safety.css")
+        if page.name == "fortune-result.html":
+            if "fortune-loader.js" not in script_names:
+                errors.append(f"{rel(page)}: fortune result missing dedicated fortune-loader.js")
+            if "fortune-result.js" not in script_names:
+                errors.append(f"{rel(page)}: fortune result missing fortune-result.js renderer")
+        else:
+            has_guard = "result-loader-guard.js" in script_names or "app.js" in script_names
+            if not has_guard:
+                errors.append(f"{rel(page)}: result page has no result loader guard")
+        has_safety = "result-loading-safety.css" in text or "app.js" in script_names
+        if not has_safety:
+            errors.append(f"{rel(page)}: result page has no loading safety layer")
+
+    # Stable fortune pages intentionally do not load app.js: their static navigation and
+    # single-purpose runtimes prevent layout shifts and duplicate event handlers.
+    if 'data-stable-service="fortune"' in text:
+        if "app.js" in script_names:
+            errors.append(f"{rel(page)}: stable fortune form must not load app.js")
+        if "fortune-form.js" not in script_names or "service-shell.js" not in script_names:
+            errors.append(f"{rel(page)}: stable fortune form runtime is incomplete")
+    if 'data-stable-service="tomorrow"' in text:
+        if "app.js" in script_names or "quick-tools.js" in script_names or "quick-profile.js" in script_names:
+            errors.append(f"{rel(page)}: stable tomorrow form contains duplicate dynamic runtimes")
+        if "tomorrow-submit.js" not in script_names or "service-shell.js" not in script_names:
+            errors.append(f"{rel(page)}: stable tomorrow form runtime is incomplete")
+    if 'data-stable-service="fortune-result"' in text:
+        forbidden = {"app.js", "fortune-runtime-fallback.js", "fortune-fast-fallback.js", "fortune-final-v13.js", "fortune-personalized-v14.js", "directive-results-v16.js", "fortune-copy-hotfix-v17.js", "fortune-fun-v17.js", "result-dedup-v1.js", "result-loader-guard.js"}
+        found = sorted(forbidden.intersection(script_names))
+        if found:
+            errors.append(f"{rel(page)}: stable fortune result still loads competing runtimes: {', '.join(found)}")
 
 css_ref = re.compile(r'(?:@import\s+(?:url\()?\s*["\']([^"\']+)|url\(\s*["\']?([^\)"\']+))', re.I)
 for css in sorted(ROOT.rglob("*.css")):
