@@ -1,0 +1,224 @@
+/* Jungwoljae internal hero system
+   Reference: work-money service page. Keep every internal image hero calm, vertical and readable. */
+
+/* Standard service hero (.sub-hero) — never allow children to become a horizontal grid/flex row. */
+html body main .sub-hero{
+  position:relative!important;
+  display:flex!important;
+  width:min(calc(100% - 64px),1280px)!important;
+  min-height:390px!important;
+  align-items:flex-end!important;
+  margin:32px auto 0!important;
+  padding:0!important;
+  overflow:hidden!important;
+  border:0!important;
+  border-radius:20px!important;
+  background-size:cover!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+  isolation:isolate!important;
+}
+html body main .sub-hero::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  background:linear-gradient(90deg,rgba(35,24,24,.72) 0%,rgba(35,24,24,.36) 48%,rgba(35,24,24,.12) 100%)!important;
+  pointer-events:none!important;
+}
+html body main .sub-hero>.container{
+  position:relative!important;
+  z-index:2!important;
+  display:block!important;
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:48px!important;
+  grid-template-columns:none!important;
+  grid-template-rows:none!important;
+  column-gap:0!important;
+  row-gap:0!important;
+  flex:none!important;
+  align-items:initial!important;
+  justify-content:initial!important;
+  text-align:left!important;
+  box-sizing:border-box!important;
+}
+html body main .sub-hero>.container>.breadcrumb{
+  position:static!important;
+  display:flex!important;
+  width:auto!important;
+  max-width:620px!important;
+  align-items:center!important;
+  gap:7px!important;
+  margin:0 0 20px!important;
+  padding:0!important;
+  float:none!important;
+  transform:none!important;
+  color:rgba(255,255,255,.66)!important;
+  -webkit-text-fill-color:rgba(255,255,255,.66)!important;
+  font-size:11px!important;
+  line-height:18px!important;
+}
+html body main .sub-hero>.container>.breadcrumb a{
+  color:rgba(255,255,255,.66)!important;
+  -webkit-text-fill-color:rgba(255,255,255,.66)!important;
+}
+html body main .sub-hero>.container>.eyebrow{
+  position:static!important;
+  display:block!important;
+  width:auto!important;
+  max-width:620px!important;
+  margin:0 0 8px!important;
+  padding:0!important;
+  float:none!important;
+  transform:none!important;
+  color:rgba(255,255,255,.78)!important;
+  -webkit-text-fill-color:rgba(255,255,255,.78)!important;
+  font-size:10px!important;
+  line-height:15px!important;
+  font-weight:700!important;
+  letter-spacing:-.01em!important;
+}
+html body main .sub-hero>.container>h1{
+  position:static!important;
+  display:block!important;
+  width:auto!important;
+  max-width:640px!important;
+  margin:0!important;
+  padding:0!important;
+  float:none!important;
+  transform:none!important;
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  font-size:34px!important;
+  line-height:44px!important;
+  font-weight:700!important;
+  letter-spacing:-.02em!important;
+  text-align:left!important;
+}
+html body main .sub-hero>.container>.sub-lead{
+  position:static!important;
+  display:block!important;
+  width:auto!important;
+  max-width:620px!important;
+  margin:12px 0 0!important;
+  padding:0!important;
+  float:none!important;
+  transform:none!important;
+  color:rgba(255,255,255,.82)!important;
+  -webkit-text-fill-color:rgba(255,255,255,.82)!important;
+  font-size:14px!important;
+  line-height:23px!important;
+  font-weight:400!important;
+  letter-spacing:-.02em!important;
+  text-align:left!important;
+}
+/* Ohaeng's decorative character strip previously forced the hero into an uneven visual hierarchy. */
+html body main .sub-hero>.container>.element-strip{display:none!important}
+
+/* Bespoke image heroes: preserve their own DOM, only normalize scale and hierarchy. */
+html body main .guide-image-hero,
+html body main .talisman-image-hero,
+html body main .quick-hero{
+  width:min(calc(100% - 64px),1280px)!important;
+  min-height:390px!important;
+  margin:32px auto 48px!important;
+  border-radius:20px!important;
+}
+html body main .guide-image-hero .guide-image-hero-inner,
+html body main .talisman-image-hero .talisman-image-hero-inner,
+html body main .quick-hero .quick-hero-inner{
+  min-height:390px!important;
+  padding:48px!important;
+  align-items:flex-end!important;
+}
+html body main .guide-image-hero .guide-image-hero-copy,
+html body main .talisman-image-hero .talisman-image-hero-copy,
+html body main .quick-hero .quick-hero-copy{
+  display:block!important;
+  max-width:620px!important;
+  text-align:left!important;
+}
+html body main .guide-image-hero .eyebrow,
+html body main .talisman-image-hero .eyebrow,
+html body main .quick-hero .eyebrow{
+  display:block!important;
+  margin:0 0 8px!important;
+  color:rgba(255,255,255,.78)!important;
+  -webkit-text-fill-color:rgba(255,255,255,.78)!important;
+  font-size:10px!important;
+  line-height:15px!important;
+  font-weight:700!important;
+  letter-spacing:-.01em!important;
+}
+html body main .guide-image-hero h1,
+html body main .talisman-image-hero h1,
+html body main .quick-hero h1{
+  display:block!important;
+  max-width:640px!important;
+  margin:0!important;
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  font-size:34px!important;
+  line-height:44px!important;
+  font-weight:700!important;
+  letter-spacing:-.02em!important;
+  text-align:left!important;
+}
+html body main .guide-image-hero .guide-image-hero-copy>p:not(.eyebrow),
+html body main .talisman-image-hero .talisman-image-hero-copy>p:not(.eyebrow),
+html body main .quick-hero .quick-hero-copy>p:not(.eyebrow){
+  display:block!important;
+  max-width:620px!important;
+  margin:12px 0 0!important;
+  color:rgba(255,255,255,.82)!important;
+  -webkit-text-fill-color:rgba(255,255,255,.82)!important;
+  font-size:14px!important;
+  line-height:23px!important;
+  font-weight:400!important;
+  letter-spacing:-.02em!important;
+  text-align:left!important;
+}
+html body main .guide-image-hero .guide-image-hero-copy>.button,
+html body main .talisman-image-hero .talisman-image-hero-copy>.button{
+  margin-top:22px!important;
+}
+
+@media(max-width:767px){
+  html body main .sub-hero,
+  html body main .guide-image-hero,
+  html body main .talisman-image-hero,
+  html body main .quick-hero{
+    width:min(calc(100% - 32px),1280px)!important;
+    min-height:320px!important;
+    margin:16px auto 32px!important;
+    border-radius:16px!important;
+  }
+  html body main .sub-hero::before{
+    background:linear-gradient(180deg,rgba(35,24,24,.08) 16%,rgba(35,24,24,.32) 50%,rgba(35,24,24,.82) 100%)!important;
+  }
+  html body main .sub-hero>.container,
+  html body main .guide-image-hero .guide-image-hero-inner,
+  html body main .talisman-image-hero .talisman-image-hero-inner,
+  html body main .quick-hero .quick-hero-inner{
+    min-height:320px!important;
+    padding:28px 22px!important;
+  }
+  html body main .sub-hero>.container>.breadcrumb{margin-bottom:14px!important}
+  html body main .sub-hero>.container>h1,
+  html body main .guide-image-hero h1,
+  html body main .talisman-image-hero h1,
+  html body main .quick-hero h1{
+    font-size:29px!important;
+    line-height:38px!important;
+    letter-spacing:-.025em!important;
+  }
+  html body main .sub-hero>.container>.sub-lead,
+  html body main .guide-image-hero .guide-image-hero-copy>p:not(.eyebrow),
+  html body main .talisman-image-hero .talisman-image-hero-copy>p:not(.eyebrow),
+  html body main .quick-hero .quick-hero-copy>p:not(.eyebrow){
+    font-size:13px!important;
+    line-height:21px!important;
+  }
+}
