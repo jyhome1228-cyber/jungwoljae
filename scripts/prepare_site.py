@@ -3,15 +3,19 @@ from pathlib import Path
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
-APP_VERSION = "20260911-1828"
-STYLE_VERSION = "20260911-1828"
-COPY_VERSION = "20260911-1828"
-RESULT_CLEANUP_VERSION = "20260911-1828"
-RESULT_LOADER_VERSION = "20260911-1828"
+APP_VERSION = "20260911-1906"
+STYLE_VERSION = "20260911-1906"
+COPY_VERSION = "20260911-1906"
+RESULT_CLEANUP_VERSION = "20260911-1906"
+RESULT_LOADER_VERSION = "20260911-1906"
+FORM_VERSION = "20260911-1906"
+CONSENT_VERSION = "20260911-1906"
 
 app_pattern = re.compile(r'(<script\b[^>]*\bsrc=["\'])\./app\.js(?:\?v=[^"\']+)?(["\'][^>]*></script>)', re.I)
 page_css_pattern = re.compile(r'(<link\b[^>]*\bhref=["\'])\./page\.css(?:\?v=[^"\']+)?(["\'][^>]*>)', re.I)
 copy_script_pattern = re.compile(r'<script\b[^>]*\bsrc=["\']\./site-copy-cleanup-v1\.js(?:\?v=[^"\']+)?["\'][^>]*></script>', re.I)
+consent_script_pattern = re.compile(r'<script\b[^>]*\bsrc=["\']\./consent-guard\.js(?:\?v=[^"\']+)?["\'][^>]*></script>', re.I)
+fortune_form_pattern = re.compile(r'(<script\b[^>]*\bsrc=["\'])\./fortune-form\.js(?:\?v=[^"\']+)?(["\'][^>]*></script>)', re.I)
 dedup_script_pattern = re.compile(r'(<script\b[^>]*\bsrc=["\'])\./result-dedup-v1\.js(?:\?v=[^"\']+)?(["\'][^>]*></script>)', re.I)
 result_guard_pattern = re.compile(r'<script\b[^>]*\bsrc=["\']\./result-loader-guard\.js(?:\?v=[^"\']+)?["\'][^>]*></script>', re.I)
 result_safety_pattern = re.compile(r'<link\b[^>]*\bhref=["\']\./result-loading-safety\.css(?:\?v=[^"\']+)?["\'][^>]*>', re.I)
@@ -33,11 +37,14 @@ for page in sorted(ROOT.glob('*.html')):
     text = page.read_text(encoding='utf-8')
     updated = app_pattern.sub(rf'\1./app.js?v={APP_VERSION}\2', text)
     updated = page_css_pattern.sub(rf'\1./page.css?v={STYLE_VERSION}\2', updated)
+    updated = fortune_form_pattern.sub(rf'\1./fortune-form.js?v={FORM_VERSION}\2', updated)
     updated = dedup_script_pattern.sub(rf'\1./result-dedup-v1.js?v={RESULT_CLEANUP_VERSION}\2', updated)
     updated = remove_free_words(updated)
 
     cleanup_script = f'<script src="./site-copy-cleanup-v1.js?v={COPY_VERSION}" defer></script>'
+    consent_script = f'<script src="./consent-guard.js?v={CONSENT_VERSION}" defer></script>'
     updated = copy_script_pattern.sub('', updated)
+    updated = consent_script_pattern.sub('', updated)
 
     if is_result_page(page):
         safety_link = f'<link rel="stylesheet" href="./result-loading-safety.css?v={RESULT_LOADER_VERSION}" />'
@@ -53,14 +60,14 @@ for page in sorted(ROOT.glob('*.html')):
             updated = re.sub(r'</body>', guard_script + '</body>', updated, count=1, flags=re.I)
 
     if '</body>' in updated.lower():
-        updated = re.sub(r'</body>', cleanup_script + '</body>', updated, count=1, flags=re.I)
+        updated = re.sub(r'</body>', consent_script + cleanup_script + '</body>', updated, count=1, flags=re.I)
 
     if updated != text:
         page.write_text(updated, encoding='utf-8')
         changed.append(page.name)
 
 for js in sorted(ROOT.glob('*.js')):
-    if js.name == 'site-copy-cleanup-v1.js':
+    if js.name in {'site-copy-cleanup-v1.js','consent-guard.js'}:
         continue
     text = js.read_text(encoding='utf-8')
     updated = remove_free_words(text)
@@ -104,6 +111,6 @@ if page_css.exists():
         page_css.write_text(updated, encoding='utf-8')
         print(f'Normalized typography cache key in page.css to {STYLE_VERSION}.')
 
-print(f'Normalized deploy assets and result-loader safety in {len(changed)} file(s).')
+print(f'Normalized deploy assets, form navigation, consent guidance and result-loader safety in {len(changed)} file(s).')
 if changed:
     print('Files: ' + ', '.join(changed))
