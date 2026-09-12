@@ -1,7 +1,7 @@
 (()=>{
   'use strict';
   const file=(location.pathname.split('/').pop()||'').toLowerCase();
-  const supported=new Set(['ohaeng-result.html','relationship-result.html','work-money-result.html','compatibility-report.html']);
+  const supported=new Set(['ohaeng-result.html','relationship-result.html','work-money-result.html','compatibility-report.html','guide-result.html']);
   if(!supported.has(file))return;
 
   const text=node=>String(node?.textContent||'').replace(/\s+/g,' ').trim();
@@ -12,6 +12,23 @@
     p.textContent=copy;
     card.appendChild(p);
   };
+
+  function finishEllipsis(){
+    document.querySelectorAll('.quality-summary-card p').forEach(p=>{
+      const raw=text(p);
+      if(!/…\s*$/.test(raw))return;
+      const base=raw.replace(/…\s*$/,'').trim();
+      const stops=[...base.matchAll(/[.!?]/g)];
+      if(stops.length){
+        const last=stops.at(-1).index;
+        const completed=base.slice(0,last+1).trim();
+        if(completed.length>=45){p.textContent=completed;return;}
+      }
+      const cut=base.lastIndexOf(' ',Math.max(60,Math.floor(base.length*.82)));
+      const safe=(cut>45?base.slice(0,cut):base).replace(/[,:;·\s]+$/,'').trim();
+      p.textContent=`${safe}.`;
+    });
+  }
 
   const cueForOhaeng=(title,body)=>{
     const t=`${title} ${body}`;
@@ -106,6 +123,7 @@
   }
 
   function run(){
+    finishEllipsis();
     if(file==='ohaeng-result.html')polishOhaeng();
     if(file==='relationship-result.html')polishRelationship();
     if(file==='work-money-result.html')polishWork();
