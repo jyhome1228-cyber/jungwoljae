@@ -13,7 +13,7 @@ const ALLOWED_SERVICES=new Set([
 ]);
 
 const stars=rating=>'★'.repeat(Number(rating)||0)+'☆'.repeat(5-(Number(rating)||0));
-const esc=(value='')=>String(value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+const esc=(value='')=>String(value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[ch]));
 const average=items=>items.length?items.reduce((sum,item)=>sum+Number(item.rating||0),0)/items.length:0;
 
 function formatDate(value){
@@ -67,7 +67,7 @@ function initPage(){
   const status=document.querySelector('[data-review-status]');
   const pagination=document.querySelector('.review-pagination');
   const serviceSelect=form?.querySelector('#review-service');
-  if(!grid||!countNode||!avgNode)return;
+  if(!grid)return;
 
   const params=new URLSearchParams(location.search);
   const requestedService=String(params.get('service')||'').trim();
@@ -84,22 +84,29 @@ function initPage(){
     return category==='all'?items:items.filter(item=>item.service===category);
   };
 
+  const emptyMarkup=()=>{
+    const category=filter?.value||'all';
+    const title=category==='all'?'아직 등록된 후기가 없습니다.':`${esc(category)} 후기가 아직 없습니다.`;
+    return `<div class="review-empty"><span class="review-empty-mark" aria-hidden="true">正月齋</span><strong>${title}</strong><p>정월재를 이용한 뒤 경험을 남겨주세요.<br>후기는 익명으로 바로 공개됩니다.</p><button class="button button-accent review-empty-button" type="button" data-review-empty-open>첫 후기 남기기</button></div>`;
+  };
+
   const redraw=()=>{
     const filtered=filteredItems();
     const totalPages=Math.max(1,Math.ceil(filtered.length/PAGE_SIZE));
     page=Math.min(Math.max(1,page),totalPages);
     const chunk=filtered.slice((page-1)*PAGE_SIZE,page*PAGE_SIZE);
 
-    grid.innerHTML=chunk.length
-      ?chunk.map(cardMarkup).join('')
-      :'<div class="review-empty"><strong>아직 등록된 후기가 없습니다.</strong><p>정월재를 이용한 뒤 첫 후기를 남겨주세요.</p></div>';
+    grid.innerHTML=chunk.length?chunk.map(cardMarkup).join(''):emptyMarkup();
+    grid.dataset.empty=chunk.length?'false':'true';
 
-    countNode.textContent=String(filtered.length);
-    avgNode.textContent=filtered.length?average(filtered).toFixed(1):'—';
+    if(countNode)countNode.textContent=String(filtered.length);
+    if(avgNode)avgNode.textContent=filtered.length?average(filtered).toFixed(1):'—';
     if(pageNode)pageNode.textContent=`${page} / ${totalPages}`;
     if(prev)prev.disabled=page<=1;
     if(next)next.disabled=page>=totalPages;
     if(pagination)pagination.hidden=totalPages<=1;
+
+    grid.querySelector('[data-review-empty-open]')?.addEventListener('click',()=>openComposer());
   };
 
   subscribeReviews(nextItems=>{
@@ -118,17 +125,17 @@ function initPage(){
     if(page<totalPages){page++;redraw();}
   });
 
-  const openComposer=()=>{
+  function openComposer(){
     if(!composer)return;
     composer.hidden=false;
     if(hasRequestedService&&serviceSelect)serviceSelect.value=requestedService;
     if(status)status.textContent=hasRequestedService?`${requestedService} 후기를 남겨주세요.`:'';
-    composer.scrollIntoView({behavior:'smooth',block:'center'});
+    composer.scrollIntoView({behavior:'smooth',block:'start'});
     requestAnimationFrame(()=>{
       if(hasRequestedService)document.querySelector('#review-content')?.focus();
       else serviceSelect?.focus();
     });
-  };
+  }
 
   open?.addEventListener('click',openComposer);
   if(shouldOpen)setTimeout(openComposer,120);
