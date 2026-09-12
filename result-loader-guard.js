@@ -9,6 +9,12 @@
   let released=false;
   let observer=null;
 
+  function stopObserver(){
+    if(!observer)return;
+    observer.disconnect();
+    observer=null;
+  }
+
   function forceClosed(){
     document.querySelectorAll('[data-saju-loading],.saju-loading-overlay').forEach(overlay=>{
       overlay.classList.remove('is-visible','is-leaving');
@@ -39,6 +45,9 @@
     }
     released=true;
     window.__jwResultLoaderReleased=true;
+    // Stop observing before changing loader attributes. Otherwise the observer can
+    // react to forceClosed() itself and repeatedly mutate the same DOM.
+    stopObserver();
     forceClosed();
     window.dispatchEvent(new CustomEvent('jw:result-loader-released',{detail:{reason}}));
   }
@@ -54,10 +63,14 @@
   setTimeout(()=>release('hard-timeout'),HARD_RELEASE);
 
   const startObserver=()=>{
-    if(observer||!document.body)return;
-    observer=new MutationObserver(()=>{if(released)forceClosed();});
+    if(observer||released||!document.body)return;
+    observer=new MutationObserver(()=>{
+      // Before release this observer is only a watchdog. Once release starts it is
+      // disconnected first, preventing a self-triggering mutation loop.
+      if(released)stopObserver();
+    });
     observer.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['class','hidden','style']});
-    setTimeout(()=>{observer?.disconnect();observer=null;},20000);
+    setTimeout(stopObserver,20000);
   };
   if(document.body)startObserver();else document.addEventListener('DOMContentLoaded',startObserver,{once:true});
 })();
