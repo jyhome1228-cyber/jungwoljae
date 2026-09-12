@@ -1,0 +1,177 @@
+/* Jungwoljae result editorial polish v21
+   Clearer vertical rhythm + concise practical action cues. */
+
+/* Section title -> content: keep a deliberate pause across every result type. */
+.result-quality-v7 .report-section > h2 + *,
+.result-quality-v7 .relationship-report > h2 + *,
+.result-quality-v7 .work-report > h2 + *,
+.result-quality-v7 .guide-report > h2 + *,
+.result-quality-v7 .saju-report > h2 + *,
+.fortune-result-main .fortune-report > h2 + *{
+  margin-top:26px!important;
+}
+
+/* Rows with a label and heading should not visually collide with their grid. */
+.result-quality-v7 .section-title-row + *,
+.result-quality-v7 .section-heading-row + *,
+.result-quality-v7 .quality-summary-head + *,
+.fortune-result-main .fortune-section-lead + *,
+.fortune-result-main .fortune-tip-lead + *{
+  margin-top:24px!important;
+}
+
+/* Some grids already carry margins; normalize without stacking huge gaps. */
+.result-quality-v7 .compatibility-metric-grid,
+.result-quality-v7 .compatibility-person-grid,
+.result-quality-v7 .compatibility-compare-grid,
+.result-quality-v7 .compatibility-advice,
+.result-quality-v7 .relationship-core-grid,
+.result-quality-v7 .relationship-condition-grid,
+.result-quality-v7 .relationship-guide-grid,
+.result-quality-v7 .work-core-grid,
+.result-quality-v7 .money-grid,
+.result-quality-v7 .life-grid,
+.result-quality-v7 .key-grid,
+.result-quality-v7 .guide-personal-grid,
+.result-quality-v7 .guide-check-grid,
+.result-quality-v7 .guide-action-grid{
+  margin-top:26px!important;
+  gap:16px!important;
+}
+
+/* Card internal rhythm. */
+.result-quality-v7 article > h3 + p,
+.result-quality-v7 article > strong + p,
+.result-quality-v7 article > h3 + div,
+.result-quality-v7 article > strong + div,
+.fortune-result-main article > h3 + p,
+.fortune-result-main article > strong + p{
+  margin-top:10px!important;
+}
+
+.result-quality-v7 article p + p,
+.fortune-result-main article p + p{
+  margin-top:12px!important;
+}
+
+/* Never crop prose cards. */
+.result-quality-v7 .life-card,
+.result-quality-v7 .key-card,
+.result-quality-v7 .relationship-core-card,
+.result-quality-v7 .relationship-condition-card,
+.result-quality-v7 .relationship-guide-card,
+.result-quality-v7 .compatibility-person-card,
+.result-quality-v7 .compatibility-compare-card,
+.result-quality-v7 .work-core-card,
+.result-quality-v7 .money-card,
+.result-quality-v7 .guide-personal-card,
+.result-quality-v7 .guide-check-card,
+.result-quality-v7 .guide-action-card,
+.fortune-result-main .fortune-card,
+.fortune-result-main .fortune-key,
+.fortune-result-main .fortune-time-card{
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  overflow:visible!important;
+}
+
+.result-quality-v7 article p,
+.fortune-result-main article p{
+  -webkit-line-clamp:unset!important;
+  line-clamp:unset!important;
+  display:block!important;
+  overflow:visible!important;
+}
+
+/* Practical cue: one concise action rather than another paragraph of explanation. */
+.result-action-cue{
+  display:flex!important;
+  align-items:flex-start!important;
+  gap:8px!important;
+  margin:16px 0 0!important;
+  padding:13px 0 0!important;
+  border-top:1px solid #eee5e1!important;
+  color:#543a3a!important;
+  font-size:13px!important;
+  line-height:21px!important;
+  font-weight:650!important;
+  letter-spacing:-.015em!important;
+}
+.result-action-cue::before{
+  content:'→';
+  flex:0 0 auto;
+  color:#8b6d68!important;
+  font-weight:800!important;
+}
+
+/* Dark surfaces need a restrained inverse cue. */
+.result-quality-v7 .relationship-pattern-section .result-action-cue,
+.result-quality-v7 .work-summary-section .result-action-cue,
+.result-quality-v7 .flow-section .result-action-cue,
+.result-quality-v7 .daymaster-section .result-action-cue,
+.fortune-result-main .fortune-signal .result-action-cue,
+.fortune-result-main .fortune-tip-final .result-action-cue{
+  border-top-color:rgba(255,255,255,.18)!important;
+  color:#fff!important;
+}
+
+/* Prevent long prose from feeling like a wall. */
+.result-quality-v7 .relationship-insight p,
+.result-quality-v7 .work-insight p,
+.result-quality-v7 .guide-reason-copy p,
+.result-quality-v7 .relationship-pattern p,
+.result-quality-v7 .work-axis-copy p,
+.result-quality-v7 .total-summary-copy p,
+.result-quality-v7 .relationship-total p,
+.result-quality-v7 .work-total p,
+.fortune-result-main .fortune-story p,
+.fortune-result-main .fortune-total p{
+  max-width:860px!important;
+}
+
+@media(max-width:900px){
+  .result-quality-v7 .relationship-core-grid,
+  .result-quality-v7 .relationship-condition-grid,
+  .result-quality-v7 .relationship-guide-grid,
+  .result-quality-v7 .work-core-grid,
+  .result-quality-v7 .money-grid,
+  .result-quality-v7 .life-grid,
+  .result-quality-v7 .key-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+}
+
+@media(max-width:640px){
+  .result-quality-v7 .report-section > h2 + *,
+  .result-quality-v7 .relationship-report > h2 + *,
+  .result-quality-v7 .work-report > h2 + *,
+  .result-quality-v7 .guide-report > h2 + *,
+  .result-quality-v7 .saju-report > h2 + *,
+  .fortune-result-main .fortune-report > h2 + *{
+    margin-top:20px!important;
+  }
+  .result-quality-v7 .compatibility-metric-grid,
+  .result-quality-v7 .compatibility-person-grid,
+  .result-quality-v7 .compatibility-compare-grid,
+  .result-quality-v7 .relationship-core-grid,
+  .result-quality-v7 .relationship-condition-grid,
+  .result-quality-v7 .relationship-guide-grid,
+  .result-quality-v7 .work-core-grid,
+  .result-quality-v7 .money-grid,
+  .result-quality-v7 .life-grid,
+  .result-quality-v7 .key-grid,
+  .result-quality-v7 .guide-personal-grid,
+  .result-quality-v7 .guide-check-grid,
+  .result-quality-v7 .guide-action-grid{
+    grid-template-columns:1fr!important;
+    margin-top:20px!important;
+    gap:12px!important;
+  }
+  .result-action-cue{
+    margin-top:14px!important;
+    padding-top:11px!important;
+    font-size:12.5px!important;
+    line-height:20px!important;
+  }
+}
