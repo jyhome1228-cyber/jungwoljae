@@ -1,20 +1,10 @@
-/* Result-page fail-safe: loading UI must never make the actual result page inaccessible. */
+/* Result-page fail-safe.
+   The dedicated fortune loader is allowed to cover the result while calculation runs. */
 html body.reading-result-pending main,
-html body.saju-loading-open main,
 .fortune-result-main[data-final-state="loading"]{
   visibility:visible!important;
   opacity:1!important;
 }
 
-/* Hidden loaders must stay hidden. */
+/* Once a loader has been explicitly hidden by its runtime it must stay hidden. */
 .saju-loading-overlay[hidden]{display:none!important}
-
-/* Daily fortune renders its loading experience before/around navigation.
-   Never allow a stale cached result-page loader to cover the actual result. */
-body:has([data-fortune-result]) .saju-loading-overlay,
-body:has([data-fortune-result]) [data-saju-loading]{
-  display:none!important;
-  visibility:hidden!important;
-  opacity:0!important;
-  pointer-events:none!important;
-}
