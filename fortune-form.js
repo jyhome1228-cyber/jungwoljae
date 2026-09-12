@@ -1,6 +1,19 @@
 const form=document.querySelector('[data-fortune-form]');
 if(!form)throw new Error('fortune form missing');
 
+const REGIONS=['서울특별시','부산광역시','대구광역시','인천광역시','광주광역시','대전광역시','울산광역시','세종특별자치시','경기도','강원특별자치도','충청북도','충청남도','전북특별자치도','전라남도','경상북도','경상남도','제주특별자치도','해외·기타'];
+const normalizeRegion=value=>{const raw=String(value||'').trim();if(!raw)return '';if(REGIONS.includes(raw))return raw;return REGIONS.find(region=>raw.includes(region.replace('특별자치도','').replace('특별자치시','').replace('광역시','').replace('특별시','').replace('도','')))||'';};
+function ensureRegionSelect(){
+  let select=form.querySelector('#fortune-city');
+  if(select)return select;
+  const row=document.createElement('div');
+  row.className='page-field-row';
+  row.innerHTML=`<div class="field full"><label for="fortune-city">태어난 지역 <span class="optional">선택</span></label><select id="fortune-city" name="city" autocomplete="off"><option value="">지역을 선택해주세요</option>${REGIONS.map(region=>`<option value="${region}">${region}</option>`).join('')}</select></div>`;
+  const submitArea=form.querySelector('.form-submit-area');
+  if(submitArea)submitArea.insertAdjacentElement('beforebegin',row);else form.appendChild(row);
+  return row.querySelector('#fortune-city');
+}
+
 const status=form.querySelector('[data-fortune-status]');
 const profileState=form.querySelector('[data-profile-state]');
 const profileToolStatus=form.querySelector('[data-profile-tool-status]');
@@ -13,6 +26,7 @@ const calendar=form.querySelector('#fortune-calendar');
 const leap=form.querySelector('#fortune-leap');
 const lunarExtra=form.querySelector('[data-lunar-extra]');
 const gender=form.querySelector('#fortune-gender');
+const city=ensureRegionSelect();
 const consent=form.querySelector('input[name="consent"]');
 const consentRow=consent?.closest('.consent-row');
 const submit=form.querySelector('button[type="submit"]');
@@ -61,7 +75,7 @@ function syncCalendar(){
   if(lunarExtra)lunarExtra.hidden=!lunar;
   if(!lunar&&leap)leap.checked=false;
 }
-function formIsEmpty(){return !nameInput.value.trim()&&!birthDateInput.value&&!birthTimeInput.value&&!timeUnknown.checked&&!gender.value;}
+function formIsEmpty(){return !nameInput.value.trim()&&!birthDateInput.value&&!birthTimeInput.value&&!timeUnknown.checked&&!gender.value&&!city?.value;}
 
 function resetTransient(){
   applying=true;
@@ -87,7 +101,8 @@ function readProfile(){
     birthTimeUnknown:Boolean(timeUnknown.checked),
     calendarType:calendar.value||'solar',
     isLeapMonth:Boolean(calendar.value==='lunar'&&leap?.checked),
-    gender:gender.value||''
+    gender:gender.value||'',
+    city:city?.value||''
   };
 }
 function applyProfile(p={}){
@@ -99,6 +114,7 @@ function applyProfile(p={}){
   if(!p.birthTimeUnknown&&p.birthTime)birthTimeInput.value=String(p.birthTime).slice(0,5);
   if(p.calendarType)calendar.value=p.calendarType;
   if(p.gender)gender.value=p.gender;
+  if(city)city.value=normalizeRegion(p.city);
   syncCalendar();
   if(leap)leap.checked=Boolean(p.isLeapMonth)&&calendar.value==='lunar';
   applying=false;
