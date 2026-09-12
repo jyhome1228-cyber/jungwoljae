@@ -30,6 +30,29 @@
     });
   }
 
+  function compactSummaryCards(){
+    document.querySelectorAll('.quality-summary-card p').forEach(p=>{
+      if(p.dataset.editorialCompacted==='true')return;
+      const raw=text(p);
+      if(raw.length<=185){p.dataset.editorialCompacted='true';return;}
+      const sentences=raw.match(/[^.!?]+[.!?]+/g)||[];
+      let next='';
+      for(const sentence of sentences){
+        const candidate=`${next} ${sentence}`.trim();
+        if(candidate.length>190)break;
+        next=candidate;
+        if(next.length>=105)break;
+      }
+      if(!next){
+        const target=Math.min(175,raw.length);
+        const cut=raw.lastIndexOf(' ',target);
+        next=(cut>80?raw.slice(0,cut):raw.slice(0,target)).replace(/[,:;·\s]+$/,'').trim()+'.';
+      }
+      p.textContent=next;
+      p.dataset.editorialCompacted='true';
+    });
+  }
+
   const cueForOhaeng=(title,body)=>{
     const t=`${title} ${body}`;
     if(/생각|행동|시작|결정/.test(t))return '결정할 때 선택지를 세 개 이하로 줄이고, 오늘 할 첫 행동 하나까지 정해보세요.';
@@ -124,6 +147,7 @@
 
   function run(){
     finishEllipsis();
+    compactSummaryCards();
     if(file==='ohaeng-result.html')polishOhaeng();
     if(file==='relationship-result.html')polishRelationship();
     if(file==='work-money-result.html')polishWork();
