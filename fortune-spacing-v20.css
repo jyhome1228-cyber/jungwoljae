@@ -1,0 +1,32 @@
+/* Fortune result spacing v20 */
+.fortune-report > h2 + .fortune-story,
+.fortune-report > h2 + .fortune-grid,
+.fortune-report > h2 + .fortune-key-grid,
+.fortune-report > h2 + .fortune-total,
+.fortune-report > h2 + details{
+  margin-top:26px!important;
+}
+.fortune-report > .fortune-section-lead + .fortune-time-grid,
+.fortune-report > .fortune-section-lead + .fortune-choice-grid,
+.fortune-report > .fortune-tip-lead + .fortune-tip-grid{
+  margin-top:22px!important;
+}
+.fortune-card,.fortune-key,.fortune-time-card,.fortune-tip-card,.fortune-choice-card{
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  overflow:visible!important;
+}
+.fortune-card p,.fortune-key p,.fortune-time-card p,.fortune-tip-card p,.fortune-choice-card li{
+  max-height:none!important;
+  overflow:visible!important;
+  -webkit-line-clamp:unset!important;
+  line-clamp:unset!important;
+}
+@media(max-width:767px){
+  .fortune-report > h2 + .fortune-story,
+  .fortune-report > h2 + .fortune-grid,
+  .fortune-report > h2 + .fortune-key-grid,
+  .fortune-report > h2 + .fortune-total,
+  .fortune-report > h2 + details{margin-top:20px!important}
+}
