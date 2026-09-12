@@ -4,6 +4,20 @@
   const form=document.querySelector('[data-quick-form]');
   if(!form)return;
 
+  const REGIONS=['서울특별시','부산광역시','대구광역시','인천광역시','광주광역시','대전광역시','울산광역시','세종특별자치시','경기도','강원특별자치도','충청북도','충청남도','전북특별자치도','전라남도','경상북도','경상남도','제주특별자치도','해외·기타'];
+  const normalizeRegion=value=>{const raw=String(value||'').trim();if(!raw)return '';if(REGIONS.includes(raw))return raw;return REGIONS.find(region=>raw.includes(region.replace('특별자치도','').replace('특별자치시','').replace('광역시','').replace('특별시','').replace('도','')))||'';};
+  const ensureRegionSelect=()=>{
+    let select=form.querySelector('#quick-city');
+    if(select)return select;
+    const host=form.querySelector('.quick-fields');
+    if(!host)return null;
+    const field=document.createElement('div');
+    field.className='quick-field full';
+    field.innerHTML=`<label for="quick-city">태어난 지역 <span class="optional">선택</span></label><select id="quick-city" name="city" autocomplete="off"><option value="">지역을 선택해주세요</option>${REGIONS.map(region=>`<option value="${region}">${region}</option>`).join('')}</select>`;
+    host.appendChild(field);
+    return field.querySelector('#quick-city');
+  };
+
   const status=form.querySelector('[data-quick-status]');
   const profileState=form.querySelector('[data-profile-state]');
   const profileToolStatus=form.querySelector('[data-profile-tool-status]');
@@ -15,6 +29,7 @@
   const leap=form.querySelector('#quick-leap');
   const lunarExtra=form.querySelector('[data-lunar-extra]');
   const gender=form.querySelector('#quick-gender');
+  const city=ensureRegionSelect();
   const consent=form.querySelector('input[name="consent"]');
   const submit=form.querySelector('button[type="submit"]');
   const loadButton=form.querySelector('[data-profile-load]');
@@ -40,8 +55,8 @@
   const syncCalendar=()=>{const lunar=calendar.value==='lunar';if(lunarExtra)lunarExtra.hidden=!lunar;if(!lunar&&leap)leap.checked=false;};
   const localRead=()=>{try{return JSON.parse(localStorage.getItem(LOCAL_KEY)||'null');}catch(e){return null;}};
   const localWrite=p=>{try{localStorage.setItem(LOCAL_KEY,JSON.stringify({...p,savedAt:Date.now()}));return true;}catch(e){return false;}};
-  const readProfile=()=>({name:(name.value||'').trim(),birthDate:birthDate.value||'',birthTime:timeUnknown.checked?'':(birthTime.value||''),birthTimeUnknown:Boolean(timeUnknown.checked),calendarType:calendar.value||'solar',isLeapMonth:Boolean(calendar.value==='lunar'&&leap?.checked),gender:gender.value||''});
-  const formIsEmpty=()=>!name.value.trim()&&!birthDate.value&&!birthTime.value&&!timeUnknown.checked&&!gender.value;
+  const readProfile=()=>({name:(name.value||'').trim(),birthDate:birthDate.value||'',birthTime:timeUnknown.checked?'':(birthTime.value||''),birthTimeUnknown:Boolean(timeUnknown.checked),calendarType:calendar.value||'solar',isLeapMonth:Boolean(calendar.value==='lunar'&&leap?.checked),gender:gender.value||'',city:city?.value||''});
+  const formIsEmpty=()=>!name.value.trim()&&!birthDate.value&&!birthTime.value&&!timeUnknown.checked&&!gender.value&&!city?.value;
   const applyProfile=p=>{
     applying=true;
     if(p?.name)name.value=p.name;
@@ -50,6 +65,7 @@
     if(!p?.birthTimeUnknown&&p?.birthTime)birthTime.value=String(p.birthTime).slice(0,5);
     if(p?.calendarType)calendar.value=p.calendarType;
     if(p?.gender)gender.value=p.gender;
+    if(city)city.value=normalizeRegion(p?.city);
     syncCalendar();if(leap)leap.checked=Boolean(p?.isLeapMonth)&&calendar.value==='lunar';
     applying=false;
   };
