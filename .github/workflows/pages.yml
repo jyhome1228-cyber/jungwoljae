@@ -15,6 +15,7 @@ concurrency:
 jobs:
   qa:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -22,3 +23,21 @@ jobs:
         run: python3 scripts/qa_site.py
       - name: Header consistency QA
         run: python3 scripts/qa_header.py
+      - name: Install browser QA runtime
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local site
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/jungwoljae-http.log 2>&1 &
+          echo $! > /tmp/jungwoljae-http.pid
+          for i in {1..20}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 0.5
+          done
+          cat /tmp/jungwoljae-http.log
+          exit 1
+      - name: Browser runtime QA
+        env:
+          QA_BASE_URL: http://127.0.0.1:4173
+        run: node scripts/qa_runtime.mjs
