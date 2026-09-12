@@ -76,6 +76,41 @@
     if(relationTitle)relationTitle.textContent=`${dayWord}, 사람과 일은 이렇게 흘러갈 가능성이 큽니다.`;
   }
 
+  function finishTruncated(node){
+    if(!node)return;
+    const original=String(node.textContent||'').replace(/\s+/g,' ').trim();
+    if(!/(?:…|\.\.\.)$/.test(original))return;
+    const body=original.replace(/(?:…|\.\.\.)$/,'').trim();
+    let cut=-1;
+    for(const mark of ['.','!','?','。'])cut=Math.max(cut,body.lastIndexOf(mark));
+    if(cut>=Math.min(48,Math.floor(body.length*.45))){node.textContent=body.slice(0,cut+1).trim();return;}
+    const comma=Math.max(body.lastIndexOf(','),body.lastIndexOf('·'));
+    if(comma>32){node.textContent=`${body.slice(0,comma).trim()}.`;return;}
+    node.textContent=body.replace(/[\s,·]+$/,'')+'.';
+  }
+
+  function polishCompatibilitySummary(){
+    if(file!=='compatibility-report.html')return;
+    const summary=$('[data-quality-summary]');
+    if(!summary)return;
+    const cards=[...summary.querySelectorAll('.quality-summary-card')];
+    if(cards.length<3)return;
+    const compare=[...document.querySelectorAll('[data-compare-grid] .compatibility-compare-card')];
+    const advice=[...document.querySelectorAll('[data-advice] article')];
+    const scoreCopy=$('[data-score-copy]');
+    const sources=[compare[0]?.querySelector('p'),compare[1]?.querySelector('p')||advice[0]?.querySelector('p'),scoreCopy||advice[1]?.querySelector('p')||advice[0]?.querySelector('p')];
+    sources.forEach((source,index)=>{
+      const target=cards[index]?.querySelector('p');
+      const value=String(source?.textContent||'').replace(/\s+/g,' ').trim();
+      if(target&&value&&target.textContent!==value)target.textContent=value;
+    });
+  }
+
+  function polishVisibleEndings(){
+    polishCompatibilitySummary();
+    document.querySelectorAll('main p,main li').forEach(finishTruncated);
+  }
+
   function apply(){
     if(file==='work-money-result.html'){
       hide($('.work-guide-section'));
@@ -132,14 +167,21 @@
         text($('h2',flow),'두 사람이 오래 편하려면 이것만 기억하세요.');
       }
     }
+
+    polishVisibleEndings();
   }
 
   apply();
-  [100,250,500,900,1400,2200,3600,5200].forEach(ms=>setTimeout(apply,ms));
+  [100,250,500,900,1400,2200,3600,5200,7000].forEach(ms=>setTimeout(apply,ms));
 
   const root=document.querySelector('main');
   if(root){
-    const observer=new MutationObserver(()=>apply());
+    let scheduled=false;
+    const observer=new MutationObserver(()=>{
+      if(scheduled)return;
+      scheduled=true;
+      requestAnimationFrame(()=>{scheduled=false;apply();});
+    });
     observer.observe(root,{subtree:true,childList:true,characterData:true});
     setTimeout(()=>observer.disconnect(),8000);
   }
