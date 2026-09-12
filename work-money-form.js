@@ -44,7 +44,31 @@ function fillProfile(p){
   if(p.city)form.elements.city.value=p.city;
 }
 
+function recoverFromHistory(){
+  // Chrome/Safari may restore the exact submitted DOM from BFCache when the user
+  // presses Back. Clear the transient submitting/loading state so the form is usable.
+  form.dataset.submitting='false';
+  const submit=form.querySelector('button[type="submit"]');
+  if(submit){
+    submit.disabled=false;
+    submit.removeAttribute('aria-busy');
+  }
+  document.querySelectorAll('[data-saju-loading],.saju-loading-overlay').forEach(overlay=>{
+    overlay.classList.remove('is-visible','is-leaving');
+    overlay.hidden=true;
+    overlay.setAttribute('hidden','');
+    overlay.style.setProperty('display','none','important');
+    overlay.style.setProperty('pointer-events','none','important');
+  });
+  document.body.classList.remove('saju-loading-open','reading-result-pending','menu-open');
+  document.documentElement.classList.remove('saju-loading-open','reading-result-pending','jw-entry-first');
+  document.body.style.removeProperty('overflow');
+  document.documentElement.style.removeProperty('overflow');
+  if(status&&/준비|분석|이동|로딩|처리 중/.test(status.textContent||''))status.textContent='';
+}
+
 populate();year.addEventListener('change',fillDays);month.addEventListener('change',fillDays);timeUnknown.addEventListener('change',syncTime);calendar.addEventListener('change',syncCalendar);focusInputs.forEach(i=>i.addEventListener('change',()=>syncFocus(i)));syncTime();syncCalendar();
+window.addEventListener('pageshow',event=>{if(event.persisted)recoverFromHistory();});
 
 onAuthStateChanged(auth,async user=>{
   if(!user){profileState.textContent='비회원 분석입니다. 직접 입력한 정보로 결과를 계산합니다.';return;}
