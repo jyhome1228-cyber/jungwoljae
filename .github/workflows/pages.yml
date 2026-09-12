@@ -41,3 +41,7 @@ jobs:
         env:
           QA_BASE_URL: http://127.0.0.1:4173
         run: node scripts/qa_runtime.mjs
+      - name: Editorial result QA
+        env:
+          QA_BASE_URL: http://127.0.0.1:4173
+        run: node scripts/qa_editorial.mjs
