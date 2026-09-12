@@ -2,6 +2,32 @@
   const footer=document.querySelector('.site-footer');
   if(!footer) return;
 
+  // Recover transient submit/loading state when a page is restored from the
+  // browser back-forward cache. Without this, submitted forms can come back
+  // with a disabled aria-busy button or a stale full-screen loader.
+  window.addEventListener('pageshow',event=>{
+    if(!event.persisted)return;
+    document.querySelectorAll('form[data-submitting="true"]').forEach(form=>{
+      form.dataset.submitting='false';
+      form.querySelectorAll('button[type="submit"][aria-busy="true"],button[type="submit"]:disabled').forEach(button=>{
+        button.disabled=false;
+        button.removeAttribute('aria-busy');
+      });
+    });
+    document.querySelectorAll('[data-saju-loading],.saju-loading-overlay').forEach(overlay=>{
+      overlay.classList.remove('is-visible','is-leaving');
+      overlay.hidden=true;
+      overlay.setAttribute('hidden','');
+      overlay.style.setProperty('display','none','important');
+      overlay.style.setProperty('pointer-events','none','important');
+    });
+    document.body.classList.remove('saju-loading-open','reading-result-pending','menu-open');
+    document.documentElement.classList.remove('jw-entry-first','saju-loading-open','reading-result-pending');
+    document.body.style.removeProperty('overflow');
+    document.documentElement.style.removeProperty('overflow');
+    document.querySelectorAll('main[aria-busy="true"]').forEach(main=>main.removeAttribute('aria-busy'));
+  });
+
   // Keep the global cohesion layer that unifies all page geometry.
   if(!document.querySelector('link[data-site-cohesion]')){
     const cohesion=document.createElement('link');
