@@ -54,8 +54,27 @@
     return '';
   };
 
+  function rewriteOhaengLifeCard(card,title){
+    const p=card?.querySelector(':scope > p');
+    if(!p||p.dataset.editorialRewritten==='true')return;
+    const current=text(p);
+    if(!/기운|역할|의도적|의식적|균형|도움|유리/.test(current))return;
+    const replacements={
+      '생각과 행동':'빠르게 시작하는 장점은 그대로 두되, 큰 결정일수록 빠진 조건이 없는지 마지막에 한 번 확인하는 편이 좋습니다.',
+      '사람과 관계':'내가 익숙한 반응을 반복하기보다, 상대에게 확인할 것과 내가 원하는 것을 한 문장씩 나눠 말하는 편이 관계가 덜 꼬입니다.',
+      '일과 선택':'시작하는 힘보다 마무리 구조가 약해지기 쉬우니, 일을 시작할 때 마감일·담당·완료 기준을 함께 정해두는 편이 맞습니다.',
+      '돈과 생활':'감각으로만 판단하기보다 고정지출·변동지출·예외지출을 나눠 기록해두면 돈의 흐름을 훨씬 안정적으로 볼 수 있습니다.'
+    };
+    if(replacements[title]){p.textContent=replacements[title];p.dataset.editorialRewritten='true';}
+  }
+
   function polishOhaeng(){
-    document.querySelectorAll('[data-life-grid] .life-card,.insight-card').forEach(card=>{
+    document.querySelectorAll('[data-life-grid] .life-card').forEach(card=>{
+      const title=text(card.querySelector('h3,strong'));
+      rewriteOhaengLifeCard(card,title);
+      addCue(card,cueForOhaeng(title,text(card.querySelector('p'))));
+    });
+    document.querySelectorAll('.insight-card').forEach(card=>{
       const title=text(card.querySelector('h2,h3,strong'));
       const body=text(card.querySelector('p,div'));
       addCue(card,cueForOhaeng(title,body));
@@ -71,7 +90,7 @@
   }
 
   function polishWork(){
-    document.querySelectorAll('[data-core-grid] .work-core-card,.work-insight,[data-money-grid] .money-card').forEach(card=>{
+    document.querySelectorAll('[data-core-grid] .work-core-card,.work-insight,[data-money-grid] .money-card,[data-guide-grid] .work-guide-card').forEach(card=>{
       const title=text(card.querySelector('h2,h3,strong'));
       const body=text(card.querySelector('p,div'));
       addCue(card,cueForWork(title,body));
