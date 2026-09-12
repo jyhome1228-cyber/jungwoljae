@@ -1,4 +1,17 @@
 (()=>{
+  // Shared result bootstrap: every long-form result page already loads this file,
+  // so keep editorial spacing/action polish in one place without duplicating HTML tags.
+  const resultFile=(location.pathname.split('/').pop()||'').toLowerCase();
+  const longResult=resultFile.endsWith('-result.html')||resultFile==='compatibility-report.html';
+  if(longResult){
+    if(!document.querySelector('link[href^="./result-editorial-v21.css"]')){
+      const style=document.createElement('link');style.rel='stylesheet';style.href='./result-editorial-v21.css?v=20260912-2210';document.head.appendChild(style);
+    }
+    if(!document.querySelector('script[src^="./result-editorial-v21.js"]')){
+      const editorial=document.createElement('script');editorial.src='./result-editorial-v21.js?v=20260912-2210';editorial.defer=true;document.body.appendChild(editorial);
+    }
+  }
+
   const SERVICE_PATHS={
     '오행 분석':'/ohaeng.html','오늘의 운세':'/fortune.html','내일의 운세':'/tomorrow.html','연애와 인연':'/relationship.html','궁합':'/compatibility.html','일과 재물':'/work-money.html','정월도감':'/guide.html','정월부적':'/talisman.html','행운의 숫자':'/lucky-number.html','중요한 날':'/important-day.html','이사 택일':'/moving-day.html'
   };
