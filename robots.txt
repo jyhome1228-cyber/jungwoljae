@@ -2,6 +2,10 @@ User-agent: *
 Allow: /
 
 Disallow: /admin.html
+Disallow: /login.html
+Disallow: /signup.html
+Disallow: /mypage.html
+Disallow: /archive.html
 Disallow: /firebase-debug.html
 
 Sitemap: https://jungwoljae.com/sitemap.xml
