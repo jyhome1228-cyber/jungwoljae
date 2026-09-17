@@ -24,7 +24,8 @@ if(config){
     const primary=input.personA||input;
     const partner=input.personB||null;
     const isTomorrow=file==='fortune-result.html'&&input.mode==='tomorrow';
-    const serviceKey=isTomorrow?'tomorrow':config.key;
+    const serviceKey=config.key;
+    const serviceVariant=isTomorrow?'tomorrow':serviceKey;
     const serviceLabel=isTomorrow?'내일의 운세':config.label;
 
     const app=getApps().length?getApp():initializeApp(firebaseConfig);
@@ -54,7 +55,7 @@ if(config){
     };
 
     const signature=JSON.stringify({
-      service:serviceKey,
+      service:serviceVariant,
       name:normalized.name,
       birthDate:normalized.birthDate,
       birthTime:normalized.birthTime,
@@ -66,7 +67,7 @@ if(config){
     });
     let hash=0;
     for(let i=0;i<signature.length;i++)hash=((hash<<5)-hash+signature.charCodeAt(i))|0;
-    const sessionKey=`jungwoljae_reading_event_${serviceKey}_${Math.abs(hash)}`;
+    const sessionKey=`jungwoljae_reading_event_${serviceVariant}_${Math.abs(hash)}`;
 
     let already=false;
     try{already=sessionStorage.getItem(sessionKey)==='1';}catch(e){}
