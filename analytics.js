@@ -13,7 +13,7 @@ if(!excluded.has(file)){
     'ohaeng.html':'오행 분석','ohaeng-result.html':'오행 분석 결과',
     'fortune.html':'오늘의 운세','tomorrow.html':'내일의 운세','fortune-result.html':'오늘·내일 운세 결과',
     'relationship.html':'연애와 인연','relationship-result.html':'연애와 인연 결과',
-    'compatibility.html':'궁합','compatibility-result.html':'궁합 결과',
+    'compatibility.html':'궁합','compatibility-result.html':'궁합 결과','compatibility-report.html':'궁합 결과',
     'work-money.html':'일과 재물','work-money-result.html':'일과 재물 결과',
     'guide.html':'정월도감','guide-result.html':'정월도감 결과','talisman.html':'정월부적',
     'lucky-number.html':'행운의 숫자','important-day.html':'중요한 날','moving-day.html':'이사 택일',
