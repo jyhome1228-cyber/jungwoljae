@@ -143,7 +143,7 @@ async function flowFortune(route, modeLabel) {
     await waitForLoaderGone(page);
     await page.waitForSelector('[data-fortune-result]', { state: 'visible', timeout: 8000 });
     const headline = (await page.locator('[data-headline]').textContent())?.trim() || '';
-    if (!headline || /읽는 중|준비|로딩/.test(headline)) fail(runtime.label, `result headline not finalized: ${headline}`);
+    if (!headline || /읽는 중|준비 중|로딩/.test(headline)) fail(runtime.label, `result headline not finalized: ${headline}`);
     await assertHealthy(runtime, { allowErrors: [/permission/i, /firebase/i] });
     if (!(await backUsable(page, formSelector))) fail(runtime.label, 'submit button stayed disabled after back navigation');
     pass(runtime.label, 'result rendered, loader released, back navigation usable');
