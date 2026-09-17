@@ -85,7 +85,7 @@ if(profilePages.has(currentFile)){
 }
 
 if(isResultLike){
-  if(currentFile.endsWith('-result.html')){const e=document.createElement('script');e.type='module';e.src='./reading-event.js?v=20260908-0620';document.body.appendChild(e);}
+  if(currentFile.endsWith('-result.html')||currentFile==='compatibility-report.html'){const e=document.createElement('script');e.type='module';e.src='./reading-event.js?v=20260918-0812';document.body.appendChild(e);}
   if(!isFortuneResult){
     setTimeout(()=>{const q=document.createElement('script');q.src='./result-quality-v7.js?v=20260908-2235';q.defer=true;document.body.appendChild(q);},1800);
     const math=document.createElement('script');math.type='module';math.src='./result-calculation-v11.js?v=20260909-0750';document.body.appendChild(math);
