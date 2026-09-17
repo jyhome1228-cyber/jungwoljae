@@ -46,13 +46,14 @@ const n=v=>new Intl.NumberFormat('ko-KR').format(Number(v)||0);
 const resultServices={
   '/saju-result.html':'종합 사주',
   '/ohaeng-result.html':'오행 분석',
-  '/fortune-result.html':'오늘의 운세',
+  '/fortune-result.html':'오늘·내일 운세',
   '/relationship-result.html':'연애와 인연',
   '/compatibility-result.html':'궁합',
+  '/compatibility-report.html':'궁합',
   '/work-money-result.html':'일과 재물',
   '/guide-result.html':'정월도감'
 };
-const readingServiceLabels={saju:'종합 사주',ohaeng:'오행 분석',fortune:'오늘의 운세',relationship:'연애와 인연',compatibility:'궁합','work-money':'일과 재물',guide:'정월도감'};
+const readingServiceLabels={saju:'종합 사주',ohaeng:'오행 분석',fortune:'오늘의 운세',tomorrow:'내일의 운세',relationship:'연애와 인연',compatibility:'궁합','work-money':'일과 재물',guide:'정월도감'};
 const genderLabels={male:'남성',female:'여성'};
 const focusLabels={personality:'나의 성향',future:'앞으로의 흐름',career:'일·직업',money:'재물',love:'연애와 인연',people:'가족·인간관계',change:'변화·이동',overall:'전체적으로 보기',organization:'조직과 독립',business:'사업과 창업',growth:'수입과 축적'};
 const domainLabels={work:'일',money:'돈',love:'연애',people:'사람',change:'변화',mind:'마음',choice:'선택'};
