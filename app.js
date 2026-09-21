@@ -107,7 +107,7 @@ if(['lucky-number.html','important-day.html','moving-day.html'].includes(current
   const quickPolish=document.createElement('script');quickPolish.src='./quick-result-polish.js?v=20260910-2035';quickPolish.defer=true;document.body.appendChild(quickPolish);
 }
 if(currentFile==='lucky-number.html'){
-  const numberGames=document.createElement('script');numberGames.src='./lucky-number-games.js?v=20260921-1535';numberGames.defer=true;document.body.appendChild(numberGames);
+  const numberGames=document.createElement('script');numberGames.src='./lucky-number-games.js?v=20260921-1600';numberGames.defer=true;document.body.appendChild(numberGames);
 }
 const welcomePopupScript=document.createElement('script');welcomePopupScript.type='module';welcomePopupScript.src='./welcome-popup.js?v=20260911-1955';document.body.appendChild(welcomePopupScript);
 const qaScript=document.createElement('script');qaScript.src='./qa-hardening.js?v=20260910-2140';qaScript.defer=true;document.body.appendChild(qaScript);
