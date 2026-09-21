@@ -199,8 +199,8 @@ function runLucky(){
   const seed=hashSeed(`${b.birthDate}|${b.birthTime}|${b.calendarType}|${b.isLeapMonth}|${natal.pillar}|${today.pillar}|${seoulToday()}`),rnd=randomFromSeed(seed),nums=[];
   while(nums.length<6){const n=1+Math.floor(rnd()*45);if(!nums.includes(n))nums.push(n);}nums.sort((a,c)=>a-c);
   const key=nums[Math.floor(rnd()*nums.length)];
-  showResult(`${b.name}님의 오늘 행운 숫자`,`오늘 일진 ${today.pillar}과 ${b.name}님의 일주 ${natal.pillar}을 겹쳐 여섯 숫자를 뽑았습니다.`,
-  `<div class="number-set">${nums.map(n=>`<span class="number-ball${n===key?' is-key':''}">${n}</span>`).join('')}</div><div class="quick-card-grid"><article class="quick-card"><small>오늘의 중심 숫자</small><strong>${key}</strong><p>${key}을 중심으로 여섯 숫자의 흐름을 봅니다. 번호·순서·좌석처럼 숫자를 고르는 장면에서 오늘의 기운으로 써보세요.</p></article><article class="quick-card"><small>명리 조합</small><strong>${natal.pillar} × ${today.pillar}</strong><p>내 일주와 오늘 일주의 천간·지지 조합을 숫자 시드에 함께 반영했습니다.</p></article></div>`);
+  showResult(`${b.name}님의 오늘 행운 숫자`,`오늘 일진 ${today.pillar}과 ${b.name}님의 일주 ${natal.pillar}을 겹쳐 오늘의 행운 번호 6개를 정했습니다. 같은 날 같은 정보로 확인하면 번호는 바뀌지 않습니다.`,
+  `<div class="quick-note" style="margin:0 0 16px"><strong>오늘의 지정 번호</strong> · 아래 여섯 숫자가 ${b.name}님의 오늘 행운 번호입니다. 다시 뽑는 무작위 번호가 아니라 오늘 하루 고정되는 결과입니다.</div><div class="number-set">${nums.map(n=>`<span class="number-ball${n===key?' is-key':''}">${n}</span>`).join('')}</div><div class="quick-card-grid"><article class="quick-card"><small>오늘의 중심 숫자</small><strong>${key}</strong><p>${key}을 중심으로 여섯 숫자의 흐름을 봅니다. 번호·순서·좌석처럼 숫자를 고르는 장면에서 오늘의 기운으로 써보세요.</p></article><article class="quick-card"><small>오늘의 행운 번호</small><strong>${nums.join(' · ')}</strong><p>내 일주와 오늘 일주의 천간·지지 조합을 반영해 정해진 오늘의 고정 번호입니다.</p></article></div>`);
 }
 function runImportant(){
   const start=form.querySelector('#quick-start').value,end=form.querySelector('#quick-end').value,purpose=form.querySelector('#quick-purpose').value;
