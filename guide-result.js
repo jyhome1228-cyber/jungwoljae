@@ -82,7 +82,7 @@ function answerCopy(rule,d){const e=elementEasy[d.strongest];return {headline:ru
 function buildReport(d,rule){const checks=rule.checks.map((x,i)=>`${i+1}. ${x[0]}\n${x[1]}`).join('\n\n');const actions=rule.actions.map((x,i)=>`${i+1}. ${x[0]}\n${x[1]}`).join('\n\n');const ans=answerCopy(rule,d);return `정월도감 · ${input.domainLabel}\n${input.name}님의 고민: ${input.situationLabel}\n걸리는 점: ${(input.blockerLabels||[]).join(', ')}\n\n[지금 고민의 핵심]\n${rule.core}\n\n[현실에서 확인할 것]\n${checks}\n\n[지금 해볼 일]\n${actions}\n\n[조심할 판단]\n${rule.warning.join('\n')}\n\n[정월재의 답]\n${ans.headline}\n${ans.paras.join('\n\n')}\n\n※ 정월도감은 전통 명리를 참고해 선택의 기준을 정리하는 콘텐츠이며 중요한 법률·의료·투자 결정은 관련 전문가와 실제 조건을 함께 확인하세요.`;}
 function render(d){
   const rule=domainRules[input.domain]||domainRules.choice;const ans=answerCopy(rule,d);
-  $('[data-name]').textContent=input.name;$('[data-lead]').textContent=`‘${input.situationLabel}’ 고민을 사주의 판단 습관과 현재 선택 조건을 함께 놓고 정리했습니다.`;
+  $('[data-name]').textContent=input.name;$('[data-lead]').textContent=`‘${input.situationLabel}’ 고민에 대해 지금 움직여도 좋은지, 기다려야 하는지와 주의할 점을 풀이했습니다.`;
   $('[data-meta]').innerHTML=`<span>${input.domainLabel}</span><span>${input.situationLabel}</span>${(input.blockerLabels||[]).map(x=>`<span>${x}</span>`).join('')}`;
   $('[data-problem]').innerHTML=problemCopy();
   $('[data-personal-grid]').innerHTML=personalCards(d).map(([n,l,t,p])=>`<article class="guide-personal-card"><span>${n} · ${l}</span><strong>${t}</strong><p>${p}</p></article>`).join('');
