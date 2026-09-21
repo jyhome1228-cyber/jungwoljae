@@ -52,7 +52,7 @@ function applyBrandLogo(){document.querySelectorAll('.brand').forEach(brand=>{br
 applyBrandLogo();
 
 function normalizeNavigation(){
-  const primaryLinks=[['./ohaeng.html','오행'],['./fortune.html','오늘의 운세'],['./tomorrow.html','내일의 운세'],['./relationship.html','인연'],['./compatibility.html','궁합'],['./work-money.html','일·재물'],['./guide.html','정월도감'],['./talisman.html','정월부적'],['./lucky-number.html','행운의 숫자'],['./important-day.html','중요한 날'],['./moving-day.html','이사 택일'],['./archive.html','정월록'],['./reviews.html','후기'],['./about.html','소개']];
+  const primaryLinks=[['./fortune.html','오늘의 운세'],['./tomorrow.html','내일의 운세'],['./relationship.html','인연'],['./compatibility.html','궁합'],['./work-money.html','일·재물'],['./guide.html','정월도감'],['./talisman.html','정월부적'],['./lucky-number.html','행운의 숫자'],['./important-day.html','중요한 날'],['./moving-day.html','이사 택일'],['./archive.html','정월록'],['./reviews.html','후기'],['./about.html','소개']];
   document.querySelectorAll('.desktop-nav, .mobile-menu nav').forEach(nav=>{nav.innerHTML=primaryLinks.map(([href,label])=>`<a href="${href}"${currentFile===href.replace('./','')?' aria-current="page"':''}>${label}</a>`).join('');});
   document.querySelectorAll('.secondary-nav .container').forEach(nav=>{[...nav.querySelectorAll('a')].forEach(link=>{if(link.getAttribute('href')?.includes('fortune.html'))link.textContent='오늘의 운세';if(link.getAttribute('href')?.includes('saju.html'))link.remove();});});
   document.querySelectorAll('.header-cta').forEach(cta=>{cta.href='./signup.html';cta.textContent='회원등록';});
@@ -73,7 +73,7 @@ function scrollToTarget(target){const el=document.querySelector(target);if(!el)r
 document.addEventListener('click',event=>{const anchor=event.target.closest('a[href^="#"]');if(!anchor)return;const href=anchor.getAttribute('href');if(!href||href==='#')return;const target=document.querySelector(href);if(!target)return;event.preventDefault();scrollToTarget(href);});
 
 const reviewsSection=document.querySelector('#reviews');if(reviewsSection){const s=document.createElement('script');s.type='module';s.src='./reviews.js?v=20260907-02';document.body.appendChild(s);}
-const footer=document.querySelector('.site-footer');if(footer&&!footer.dataset.enhanced){footer.dataset.enhanced='true';const s=document.createElement('script');s.src='./footer.js?v=20260908-1255';s.defer=true;document.body.appendChild(s);}
+const footer=document.querySelector('.site-footer');if(footer&&!footer.dataset.enhanced){footer.dataset.enhanced='true';const s=document.createElement('script');s.src='./footer.js?v=20260921-1730';s.defer=true;document.body.appendChild(s);}
 const authScript=document.createElement('script');authScript.type='module';authScript.src='./auth.js?v=20260908-0731';document.body.appendChild(authScript);
 const analyticsScript=document.createElement('script');analyticsScript.type='module';analyticsScript.src='./analytics.js?v=20260918-0812';document.body.appendChild(analyticsScript);
 ['./birth-input-unified.js?v=20260910-2005','./birth-time-unified.js?v=20260910-2005','./gender-unified.js?v=20260910-2005'].forEach(src=>{const s=document.createElement('script');s.src=src;s.defer=true;document.body.appendChild(s);});
