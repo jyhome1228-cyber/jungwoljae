@@ -225,13 +225,18 @@ function decisiveAreaCopy(v){
         ?`상대의 말과 행동을 다르게 받아들여 오해가 생기기 쉬운 날입니다. 답장이 늦거나 표현이 무뚝뚝하더라도 성급하게 마음을 단정하지 마세요. 오늘은 감정을 쏟아내기보다 사실을 직접 확인하는 대화가 관계를 지켜줍니다.`
         :`애정운은 편안하게 흐르는 날입니다. 새로운 관계를 억지로 만들기보다 이미 가까운 사람과 자연스럽게 대화할 때 마음이 이어집니다. 익숙함 때문에 표현을 줄이면 관계가 단조롭게 느껴질 수 있으니 짧게라도 마음을 전하세요.`,
     work:favorable
-      ?`일과 학업에서 준비해 온 능력을 보여주기 좋은 날입니다. 제안, 발표, 제출, 면접처럼 결과를 밖으로 드러내는 일에서 긍정적인 평가를 받을 가능성이 높습니다. 주변의 조언을 활용하면 혼자 진행할 때보다 더 빠르게 성과를 만들 수 있습니다.`
+      ?`직장과 사업의 흐름이 살아나는 날입니다. 제안, 발표, 보고, 면접처럼 나의 능력과 결과를 밖으로 보여주는 일에서 긍정적인 평가를 받을 가능성이 높습니다. 혼자 완벽하게 처리하려 하기보다 경험 있는 사람의 조언이나 협조를 구하면 일이 더 빠르게 풀립니다. 다만 자신감이 앞서 약속의 범위를 크게 잡으면 이후 부담이 될 수 있으니, ${dayWord} 확실하게 마무리할 수 있는 선까지 제안하는 것이 좋습니다.`
       :tense
-        ?`업무와 학업에서 예상하지 못한 수정이나 일정 변경이 생길 수 있습니다. 서두르면 누락과 실수가 반복될 수 있으니 새로운 일을 벌이기보다 진행 중인 과제를 먼저 마무리하세요. 중요한 연락과 제출물은 보내기 전에 반드시 다시 확인해야 합니다.`
-        :`일의 흐름은 안정적이지만 집중력이 쉽게 분산될 수 있는 날입니다. 해야 할 일을 늘리기보다 가장 중요한 한 가지를 먼저 끝내면 성과가 분명해집니다. 혼자 판단이 서지 않는 문제는 경험 있는 사람의 조언에서 답을 찾게 됩니다.`,
+        ?`직장이나 사업에서는 예상하지 못한 수정 요청과 일정 변경이 생기기 쉬운 날입니다. 상대의 요구가 처음과 달라지거나 책임의 범위가 애매해질 수 있으니 말로만 넘기지 말고 일정과 조건을 기록으로 남겨두세요. 서두르면 누락과 실수가 반복될 수 있으므로 새로운 일을 벌이기보다 진행 중인 업무를 먼저 마무리하는 편이 안전합니다. 중요한 연락, 계약, 제출 자료는 보내기 전에 반드시 한 번 더 확인해야 합니다.`
+        :`직장과 사업의 흐름은 무난하지만 집중력이 여러 곳으로 나뉘기 쉬운 날입니다. 요청받은 일을 모두 붙잡기보다 결과에 직접 영향을 주는 한 가지부터 끝내야 성과가 분명해집니다. 혼자 판단이 서지 않는 문제는 오래 고민하기보다 경험 있는 사람에게 구체적으로 질문하면 답을 찾을 수 있습니다. ${dayWord}은 일을 크게 확장하는 것보다 기존 일정과 역할을 정리하고 신뢰를 쌓는 데 힘을 쓰는 편이 좋습니다.`,
+    study:favorable
+      ?`학업과 성취운이 좋은 날입니다. 이해가 막혔던 내용에서 핵심이 보이거나, 준비해 온 과제와 시험에서 실력을 안정적으로 보여줄 수 있습니다. 읽기만 반복하기보다 문제를 풀고 글로 정리하고 누군가에게 설명하는 방식이 특히 효과적입니다. 진학, 자격증, 취업 준비처럼 방향을 정해야 하는 일도 ${dayWord}은 목표와 기한을 분명하게 적어두면 실행으로 이어질 가능성이 높습니다.`
+      :tense
+        ?`공부를 시작해도 생각이 쉽게 분산되고, 진로나 취업에 대한 고민이 집중을 방해할 수 있는 날입니다. 한꺼번에 많은 분량을 채우려 하면 피로만 쌓이기 쉬우니 30분에서 50분 단위로 목표를 작게 나누세요. 새로운 교재나 계획을 계속 추가하기보다 이미 정한 범위를 복습하고 틀린 부분을 확인하는 것이 더 유리합니다. 중요한 시험이나 제출을 앞두고 있다면 감에 의존하지 말고 체크리스트로 빠진 항목을 확인해야 합니다.`
+        :`학업운은 안정적이지만 공부를 더 이어갈지 취업과 실무에 집중할지 마음이 흔들릴 수 있습니다. ${dayWord} 당장 인생의 방향을 결론 내리기보다 각각 필요한 조건과 기한을 적어 비교해보는 것이 좋습니다. 집중력이 오래 유지되지는 않을 수 있으므로 휴대전화와 알림을 치우고 짧은 시간 동안 한 과목이나 한 과제에만 몰입하세요. 작은 분량이라도 끝낸 흔적을 남기면 다음 단계가 훨씬 선명해집니다.`,
     health:tense
       ?`큰 질환보다 피로와 스트레스가 몸으로 나타나기 쉬운 날입니다. 소화불량, 두통, 목과 어깨의 긴장처럼 신경성 증상을 가볍게 넘기지 마세요. 식사를 거르거나 늦게까지 무리하면 회복이 더뎌질 수 있으니 오늘은 휴식 시간을 먼저 확보해야 합니다.`
-      :`건강운에는 큰 문제가 없지만 체력을 한꺼번에 소모하면 저녁에 피로가 몰릴 수 있습니다. 식사 시간을 지키고 짧게라도 몸을 움직이면 컨디션을 안정적으로 유지할 수 있습니다. 과음과 수면 부족만 피하면 무난하게 지나갑니다.`
+      :`건강운에는 큰 문제가 없지만 체력을 한꺼번에 소모하면 저녁에 피로가 몰릴 수 있습니다. 마음이 바빠질수록 식사 시간이 흐트러지고 위장이 예민해질 수 있으니 공복에 카페인을 많이 마시는 행동은 줄이는 편이 좋습니다. 짧게라도 몸을 움직이고 목과 어깨를 풀어주면 컨디션을 안정적으로 유지할 수 있습니다. 과음과 수면 부족을 피하고 평소보다 조금 일찍 쉬면 무난하게 지나갑니다.`
   };
 }
 
@@ -295,27 +300,30 @@ function renderFull(v){
     <p>${esc(`${v.godPack.action} 관계에서는 ${v.dayRel.copy} 일에서는 ${v.monthRel.copy}`)}</p>`;
 
   $('[data-fortune-story]').innerHTML=`
-    <p><strong>${dayWord}의 전체 흐름</strong> ${esc(v.impact.title)}. 평소에는 ‘${esc(balancePack[v.balance.dominant].keyword)}’ 쪽의 힘을 많이 쓰는 편이고, ‘${esc(balancePack[v.supportEl].keyword)}’ 쪽은 상대적으로 덜 쓰는 편입니다. ${esc(v.impact.copy)}</p>
-    <p><strong>실제로는</strong> ${esc(v.godPack.action)} ${esc(v.monthRel.copy)} ${v.h?esc(`하루 후반에는 ${v.hourRel.copy}`):'출생시간이 없어 저녁 흐름은 연·월·일주와 전체 균형을 기준으로 정리했습니다.'}</p>`;
+    <p><strong>${dayWord}의 전체 흐름</strong> ${esc(v.impact.title)}. 평소에는 ‘${esc(balancePack[v.balance.dominant].keyword)}’ 쪽의 힘을 많이 쓰는 편이고, ‘${esc(balancePack[v.supportEl].keyword)}’ 쪽은 상대적으로 덜 쓰는 편입니다. ${esc(v.impact.copy)} 따라서 ${dayWord}은 익숙한 방식만 고집하기보다 부족한 부분을 한 가지 보완할 때 전체 흐름이 안정됩니다.</p>
+    <p><strong>대외적인 일에서는</strong> ${esc(v.monthRel.copy)} 연락, 보고, 협의처럼 다른 사람과 연결되는 일은 상대의 반응을 추측하지 말고 일정과 조건을 분명하게 확인하세요. 여러 일을 동시에 해결하려 하기보다 결과가 필요한 한 가지를 먼저 정리해야 실제 성과로 이어집니다.</p>
+    <p><strong>개인적인 흐름에서는</strong> ${esc(v.godPack.action)} ${esc(v.dayRel.copy)} ${v.h?esc(`하루 후반에는 ${v.hourRel.copy}`):'저녁에는 새로운 일을 더 벌이기보다 오늘 처리한 내용을 정리하고 몸과 마음의 긴장을 풀어주는 것이 좋습니다.'}</p>`;
 
   const areaCopy=decisiveAreaCopy(v);
   const money=areaCopy.money;
   const love=areaCopy.love;
   const work=areaCopy.work;
+  const study=areaCopy.study;
   const life=areaCopy.health;
 
   $('[data-area-grid]').innerHTML=[
     ['01','재물운',money,'재물'],
     ['02','애정운',love,'인연'],
-    ['03','직장·학업운',work,'일'],
-    ['04','건강운',life,'건강']
+    ['03','직장·사업운',work,'대외운'],
+    ['04','학업·성취운',study,'성취'],
+    ['05','건강운',life,'건강']
   ].map(([n,title,copy,badge])=>`<article class="fortune-card"><span>${n}</span><h3>${title}</h3><p>${esc(copy)}</p><strong>${badge}</strong></article>`).join('');
 
-  const morning=`${v.godPack.action} 오전에는 하루의 기준을 잡는 일이 가장 중요합니다.`;
-  const afternoon=`${relationSentence(v.monthRel.label,'work')} 사람과 일이 몰리면 가장 중요한 한 가지를 중심에 두세요.`;
+  const morning=`${v.godPack.action} 오전에는 연락과 알림부터 확인하기보다 ${dayWord} 반드시 끝낼 일 한 가지를 먼저 정하세요. 판단력이 비교적 선명한 시간에 문서 작성, 공부, 중요한 결정을 배치하면 흐름을 효율적으로 사용할 수 있습니다.`;
+  const afternoon=`${relationSentence(v.monthRel.label,'work')} 오후에는 사람과 일이 한꺼번에 몰릴 수 있으니 요청받은 순서가 아니라 중요도와 마감에 따라 처리하세요. 대화가 엇갈리면 추측하지 말고 일정과 역할을 다시 확인하는 것이 좋습니다.`;
   const evening=v.h
-    ?`${relationSentence(v.hourRel.label,'work')} 하루를 끝낼 때는 새 일을 벌이기보다 오늘 처리한 것을 정리해보세요.`
-    :`‘${balancePack[v.supportEl].keyword}’을 보완하는 휴식이나 정리 시간을 남겨보세요.`;
+    ?`${relationSentence(v.hourRel.label,'work')} 저녁에는 낮 동안 미뤄둔 감정이나 피로가 올라올 수 있습니다. 새 일을 벌이기보다 오늘 처리한 내용을 정리하고, 짧게 몸을 움직인 뒤 평소보다 일찍 쉬는 편이 좋습니다.`
+    :`저녁에는 ‘${balancePack[v.supportEl].keyword}’을 보완하는 휴식이나 정리 시간을 남겨보세요. 낮에 해결하지 못한 문제를 억지로 붙잡기보다 내일 가장 먼저 할 일을 적어두고 생각을 멈추는 것이 회복에 도움이 됩니다.`;
 
   $('[data-time-grid]').innerHTML=[
     ['01 · 오전','가장 먼저 할 일',morning],
@@ -397,7 +405,7 @@ function renderFallback(v){
   $('[data-fortune-story]').innerHTML=`<p><strong>${dayWord}의 전체 흐름</strong> ${esc(v.pack.headline)}. ${esc(v.dayRel.copy)}</p><p><strong>실제로는</strong> ${esc(v.pack.work)} ${esc(v.stemText)}</p>`;
   const fallbackAreas=decisiveAreaCopy(v);
   $('[data-area-grid]').innerHTML=[
-    ['01','재물운',fallbackAreas.money,'재물'],['02','애정운',fallbackAreas.love,'인연'],['03','직장·학업운',fallbackAreas.work,'일'],['04','건강운',fallbackAreas.health,'건강']
+    ['01','재물운',fallbackAreas.money,'재물'],['02','애정운',fallbackAreas.love,'인연'],['03','직장·사업운',fallbackAreas.work,'대외운'],['04','학업·성취운',fallbackAreas.study,'성취'],['05','건강운',fallbackAreas.health,'건강']
   ].map(([n,title,copy,badge])=>`<article class="fortune-card"><span>${n}</span><h3>${title}</h3><p>${esc(copy)}</p><strong>${badge}</strong></article>`).join('');
   $('[data-time-grid]').innerHTML=`
     <article class="fortune-time-card"><span>01 · 오전</span><strong>중요한 일부터 시작하세요.</strong><p>${esc(v.pack.work)}</p></article>
