@@ -1,0 +1,27 @@
+.quick-form>.quick-basic-profile{margin:20px 0 0!important}
+.quick-form>.quick-basic-profile+.quick-fields{padding-top:20px!important}
+.number-playground{margin-top:22px;padding:30px;border:1px solid var(--line);border-radius:20px;background:#fff}
+.number-playground-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding-bottom:20px;border-bottom:1px solid var(--line)}
+.number-playground-head span,.number-game-title small{display:block;margin-bottom:7px;color:var(--brand);font-size:11px;font-weight:800;letter-spacing:.04em}
+.number-playground-head h2{margin:0!important;color:var(--ink)!important;font-size:25px!important;line-height:1.42!important}
+.number-playground-head>p{max-width:310px;margin:0!important;color:#817773!important;font-size:13px!important;line-height:1.7!important;text-align:right}
+.number-game-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding-top:20px}
+.number-game-card{min-width:0;padding:22px;border:1px solid var(--line);border-radius:16px;background:#faf8f7}
+.number-game-title{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.number-game-title h3{margin:0!important;color:var(--ink)!important;font-size:19px!important;line-height:1.4!important}
+.number-game-desc{margin:12px 0 18px!important;color:#756b67!important;font-size:13px!important;line-height:1.7!important}
+.number-action{min-height:40px;padding:0 13px;border:1px solid var(--brand);border-radius:10px;background:var(--brand);color:#fff;font:inherit;font-size:12px;font-weight:750;cursor:pointer}
+.number-action.secondary{border-color:#d9ceca;background:#fff;color:var(--brand)}
+.number-action:focus-visible,.pachinko-draw:focus-visible{outline:3px solid rgba(84,58,58,.22);outline-offset:2px}
+.lotto-sets{display:grid;gap:9px}.lotto-row{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:center;padding:9px 10px;border:1px solid #ece4e0;border-radius:12px;background:#fff}
+.lotto-row>strong{color:#9a8d87;font-size:11px;text-align:center}.lotto-balls{display:flex;flex-wrap:wrap;gap:6px}
+.lotto-ball,.history-ball{display:grid;place-items:center;border-radius:50%;color:#fff;font-weight:800}.lotto-ball{width:34px;height:34px;font-size:12px}
+.lotto-ball.range-1,.history-ball.range-1{background:#d6a827}.lotto-ball.range-2,.history-ball.range-2{background:#4f8ec7}.lotto-ball.range-3,.history-ball.range-3{background:#c75f58}.lotto-ball.range-4,.history-ball.range-4{background:#74706f}.lotto-ball.range-5,.history-ball.range-5{background:#65966c}
+.pachinko-machine{display:grid;justify-items:center;gap:14px;padding:8px 0 20px}.pachinko-display{display:grid;width:116px;height:116px;place-items:center;border:8px solid #eee7e3;border-radius:50%;background:#543a3a;box-shadow:inset 0 0 0 3px rgba(255,255,255,.16),0 10px 24px rgba(84,58,58,.15);color:#fff}
+.pachinko-display span{font-size:40px;font-weight:850;line-height:1}.pachinko-display.is-spinning{animation:pachinkoPulse .22s ease-in-out infinite alternate}
+.pachinko-draw{min-width:150px;min-height:46px;border:0;border-radius:12px;background:#543a3a;color:#fff;font:inherit;font-size:14px;font-weight:800;cursor:pointer}.pachinko-draw:disabled{cursor:wait;opacity:.62}
+.pachinko-history{padding-top:15px;border-top:1px solid #e8dfdb}.pachinko-history>strong{display:block;margin-bottom:10px;color:var(--ink);font-size:12px}.pachinko-history-balls{display:flex;min-height:30px;flex-wrap:wrap;gap:6px}.pachinko-history-balls p{margin:0!important;color:#918681!important;font-size:12px!important;line-height:30px!important}.history-ball{width:30px;height:30px;font-size:11px}
+.number-playground-note{margin:16px 0 0!important;padding-top:14px;border-top:1px solid var(--line);color:#968b87!important;font-size:11.5px!important;line-height:1.65!important}
+@keyframes pachinkoPulse{from{transform:scale(.98)}to{transform:scale(1.03)}}
+@media(max-width:1120px){.number-playground-head{display:block}.number-playground-head>p{max-width:none;margin-top:8px!important;text-align:left}}
+@media(max-width:767px){.number-playground{padding:22px;border-radius:16px}.number-game-grid{grid-template-columns:1fr}.number-game-title{align-items:flex-start}.number-action{min-height:42px}.lotto-row{grid-template-columns:22px 1fr;padding:8px 7px}.lotto-balls{gap:4px}.lotto-ball{width:31px;height:31px;font-size:11px}}
