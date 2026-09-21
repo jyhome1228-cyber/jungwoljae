@@ -277,7 +277,38 @@ function decisiveAreaCopy(v){
       ?alternate.health.favorable
       :`건강운이 비교적 안정적으로 받쳐주는 날입니다. 몸을 움직였을 때 평소보다 개운함을 느끼기 쉬우므로 산책이나 가벼운 운동을 일정에 넣어보세요. 미뤄둔 건강검진 예약이나 생활 습관 점검을 시작하기에도 좋습니다. 다만 컨디션이 좋다고 식사와 수면을 줄이면 다음 날 피로가 남을 수 있으니 기본적인 생활 리듬은 지켜야 합니다.`;
   }else if(variantFor('health'))base.health=alternate.health[healthTone];
+  const naturalOpenings=[
+    ['재물의 흐름이 살아나는 날입니다. 미뤄졌던 정산이나 계약, 수입과 관련된 연락에서 반가운 결과가 들어올 수 있습니다.','미뤄졌던 정산이나 계약, 수입과 관련된 연락에서 반가운 결과가 들어올 수 있습니다.'],
+    ['금전운은 무난하지만 큰 이익을 기대하기에는 힘이 부족한 날입니다.','큰 이익을 기대하기보다는 이미 손에 잡힌 돈과 진행 중인 정산을 챙기는 편이 유리합니다.'],
+    ['재물운은 크게 흔들리지 않지만','큰돈의 움직임은 없지만'],
+    ['애정운이 상승하는 날입니다.','마음에 둔 사람과 거리가 가까워지기 좋은 날입니다.'],
+    ['애정운은 편안하게 흐르는 날입니다.','가까운 사람과 편안하게 마음을 나누기 좋은 날입니다.'],
+    ['애정운은 잔잔하게 이어지지만','잔잔하게 마음은 이어지지만'],
+    ['직장과 사업의 흐름이 살아나는 날입니다.','직장이나 사업에서 준비해온 능력을 인정받기 좋은 날입니다.'],
+    ['직장과 사업의 흐름은 무난하지만','직장과 사업에서 큰 문제는 없지만'],
+    ['학업과 성취운이 좋은 날입니다.','배운 것이 머리에 잘 들어오고 준비한 실력을 보여주기 좋은 날입니다.'],
+    ['학업운은 안정적이지만','공부는 무난하게 이어지지만'],
+    ['학업운은 무난하지만','공부에 큰 어려움은 없지만'],
+    ['건강운에는 큰 문제가 없지만','몸에 큰 탈은 없지만'],
+    ['건강운은 평이하지만','몸 상태는 무난하지만'],
+    ['건강운이 비교적 안정적으로 받쳐주는 날입니다.','몸이 가볍고 기운도 비교적 안정적인 날입니다.']
+  ];
+  Object.keys(base).forEach(area=>{
+    naturalOpenings.forEach(([from,to])=>{base[area]=base[area].replace(from,to);});
+  });
   return base;
+}
+
+function overallNarrative(v){
+  const help=['육합','삼합'].includes(v.dayRel.label);
+  const friction=['충','형','해','파'].includes(v.dayRel.label);
+  if(v.score>=58){
+    return `<p>주변의 도움을 받기 쉽고, 평소 성실하게 이어온 일이 좋은 평가로 돌아오는 ${dayWord}입니다. 혼자 해결하려 애쓰기보다 믿을 만한 사람에게 먼저 의견을 구하면 생각보다 수월하게 답을 찾을 수 있습니다. 사소한 배려와 따뜻한 말 한마디가 관계를 더욱 원만하게 만들어줄 것입니다.</p><p>돈과 일에서는 미뤄졌던 정산이나 연락이 풀릴 가능성이 있습니다. 이미 충분히 검토한 계획이라면 실행에 옮겨도 좋지만, 운이 좋다는 생각만으로 금액이나 약속의 범위를 지나치게 키우지는 마세요. 들어오는 기회를 차분히 골라 잡을 때 만족할 만한 결과가 오래 이어집니다.</p>`;
+  }
+  if(v.score<44){
+    return `<p>마음이 앞서면 말과 행동이 엇갈리기 쉬운 ${dayWord}입니다. 서둘러 결론을 내리거나 상대의 뜻을 미리 단정하면 작은 문제가 오래 남을 수 있으니, 중요한 대화와 결정은 한 번 더 확인하는 편이 좋습니다. 새로운 일을 벌이기보다 이미 시작한 일을 정리하면 불필요한 손실을 줄일 수 있습니다.</p><p>돈과 건강도 무리하지 않는 것이 중요합니다. 계획에 없던 지출과 충동적인 투자는 피하고, 피로가 느껴지면 일정을 줄여 쉬어가세요. ${friction?'가까운 사람과의 오해는 감정적으로 대응하기보다 사실을 확인하면 어렵지 않게 풀립니다.':'차분하게 순서를 지키면 큰 문제 없이 하루를 마무리할 수 있습니다.'}</p>`;
+  }
+  return `<p>크게 들뜨거나 가라앉는 일 없이 평소 해오던 일을 차분히 이어가기 좋은 ${dayWord}입니다. 눈에 띄는 변화는 적더라도 맡은 일을 성실하게 마무리하면 주변의 신뢰가 쌓이고 다음 기회로 이어질 수 있습니다. ${help?'도움을 주고받는 과정에서 뜻밖의 좋은 소식도 기대할 수 있습니다.':'혼자 판단하기 어려운 일은 경험 있는 사람에게 물으면 쉽게 풀릴 수 있습니다.'}</p><p>재물과 관계에서는 욕심을 내기보다 현재 가진 것을 잘 지키는 편이 좋습니다. 작은 지출이 반복되지 않는지 살피고, 가까운 사람에게는 익숙하다는 이유로 표현을 줄이지 마세요. 무리하지 않고 생활의 균형을 지키면 편안하게 하루를 마칠 수 있습니다.</p>`;
 }
 
 function tomorrowPreparation(v){
@@ -430,11 +461,7 @@ function renderFull(v){
     <article class="fortune-tip-card"><span>03</span><h3>재물</h3><p>${esc(v.godPack.money)}</p></article>`;
   $('[data-tip-final]').textContent=tomorrow?`오늘 준비할 일을 줄여두면 내일의 흐름이 더 선명해집니다. ${forDay(v.godPack.action)}`:`${v.impact.title}. ${forDay(v.godPack.action)}`;
 
-  $('[data-total-summary]').innerHTML=`
-    <p><span class="fortune-summary-label">OVERALL</span><strong>${esc(`${dayWord}은 ${v.impact.title}입니다.`)}</strong>${esc(`${v.godPack.title}. ${v.impact.copy}`)}</p>
-    <p><span class="fortune-summary-label">WORK · RELATION</span><strong>일은 ${esc(relationPlain(v.monthRel.label))}, 관계는 ${esc(relationPlain(v.dayRel.label))}입니다.</strong>${esc(`${v.monthRel.copy} ${v.dayRel.copy}`)}</p>
-    <p><span class="fortune-summary-label">BALANCE</span><strong>${esc(balancePack[v.balance.dominant].keyword)}은 강점으로, ${esc(balancePack[v.supportEl].keyword)}은 보완 포인트로 보세요.</strong>${esc(`${dayWord}은 잘하는 방식을 억지로 줄이기보다 부족한 행동 하나를 더하는 편이 좋습니다.`)}</p>
-    ${tomorrow?`<p><span class="fortune-summary-label">PREPARE TONIGHT</span><strong>오늘 준비할수록 내일의 변수가 줄어듭니다.</strong>${esc(tomorrowPreparation(v))}</p>`:''}`;
+  $('[data-total-summary]').innerHTML=overallNarrative(v);
 
   $('[data-evidence]').innerHTML=`
     <article class="fortune-evidence-item"><strong>四柱 · 개인 명식</strong><p>연주 ${v.natal.year}, 월주 ${v.natal.month}, 일주 ${v.natal.day}${v.h?`, 시주 ${v.natal.hour}`:'이며 출생시간이 없어 시주는 제외'}했습니다.</p></article>
@@ -481,7 +508,7 @@ function renderFallback(v){
   if(lucky)lucky.innerHTML=`<p class="fortune-label">07 · PERSONAL BALANCE</p><h2>${dayWord}의 균형 포인트</h2><p class="fortune-lucky-lead">현재 네트워크 연결 상태로 인해 전체 명식 대신 일주 중심으로 계산했습니다.</p><div class="fortune-lucky-note">페이지를 새로고침하면 전체 명식 계산이 다시 시도됩니다. 현재 결과도 ${dayWord}의 기본 흐름을 보는 데에는 사용할 수 있습니다.</div>`;
   $('[data-tip-grid]').innerHTML=`<article class="fortune-tip-card"><span>01</span><h3>일</h3><p>${esc(v.pack.work)}</p></article><article class="fortune-tip-card"><span>02</span><h3>인연</h3><p>${esc(v.pack.love)}</p></article><article class="fortune-tip-card"><span>03</span><h3>재물</h3><p>${esc(v.pack.money)}</p></article>`;
   $('[data-tip-final]').textContent=`${v.pack.headline}. ${v.dayRel.copy}`;
-  $('[data-total-summary]').innerHTML=`<p><span class="fortune-summary-label">OVERALL</span><strong>${esc(`${dayWord}은 ${v.pack.headline}입니다.`)}</strong>${esc(v.dayRel.copy)}</p><p><span class="fortune-summary-label">ACTION</span><strong>${esc(v.pack.work)}</strong>${esc(v.stemText)}</p>${tomorrow?`<p><span class="fortune-summary-label">PREPARE TONIGHT</span><strong>오늘 준비할수록 내일의 변수가 줄어듭니다.</strong>${esc(tomorrowPreparation(v))}</p>`:''}`;
+  $('[data-total-summary]').innerHTML=overallNarrative(v);
   $('[data-evidence]').innerHTML=`<article class="fortune-evidence-item"><strong>일주 중심 계산</strong><p>내 일주 ${v.natal.day}와 ${dayWord} 일진 ${v.target.pillar}의 관계를 우선 반영했습니다.</p></article><article class="fortune-evidence-item"><strong>계산 상태</strong><p>전체 사주 계산 모듈 연결이 지연되어 연주·월주·시주 개인화는 이번 결과에서 제외했습니다.</p></article>`;
   root.dataset.personalized='fallback';
 }
