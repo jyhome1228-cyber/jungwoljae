@@ -30,6 +30,7 @@ const elementWork={wood:'방향·성장',fire:'표현·실행',earth:'관리·�
 const generates={wood:'fire',fire:'earth',earth:'metal',metal:'water',water:'wood'};
 const controls={wood:'earth',earth:'water',water:'fire',fire:'metal',metal:'wood'};
 const focusLabels={career:'직업 성향',organization:'조직과 독립',change:'이직과 변화',business:'사업과 창업',money:'재물 관리',growth:'수입과 축적'};
+const statusLabels={employee:'직장인·조직 근무',jobseeker:'취업·이직 준비',business:'사업자·창업 준비',freelance:'프리랜서·독립 활동',student:'학생·진로 탐색'};
 const yukhap=[['자','축'],['인','해'],['묘','술'],['진','유'],['사','신'],['오','미']];
 const chung=[['자','오'],['축','미'],['인','신'],['묘','유'],['진','술'],['사','해']];
 const pairHas=(arr,a,b)=>arr.some(p=>p.includes(a)&&p.includes(b));
@@ -93,6 +94,35 @@ function organizationText(d){
   if(d.orgIndex<=35)return '자율성과 주도권이 큰 환경에서 힘이 살아나는 편에 가깝습니다. 독립·프리랜스·사업 자체가 무조건 맞는다는 뜻은 아니며, 스스로 기준과 일정, 수입 구조를 관리할 수 있을 때 장점이 유지됩니다. 자유만 크고 운영 구조가 없으면 오히려 에너지가 분산될 수 있습니다.';
   return '조직과 독립 중 한쪽만이 정답이라기보다, 기본 틀은 있으면서 실행 방법에는 자율성이 있는 환경이 잘 맞는 편입니다. 역할의 기준은 분명하되 지나친 통제는 적고, 결과로 책임을 확인하는 구조에서 장점을 쓰기 쉽습니다.';
 }
+function situationText(d){
+  const strong=elementWork[d.strongest],weak=elementWork[d.weakest];
+  const map={
+    employee:[
+      `현재 직장이나 조직 안에서는 직책의 이름보다 실제로 맡고 있는 권한과 책임의 범위를 먼저 살펴보는 것이 중요합니다. ${strong} 역할을 충분히 쓸 수 있다면 성과와 평가가 자연스럽게 따라올 수 있지만, 강점과 무관한 보조 업무만 반복되면 일에 비해 인정이 부족하다고 느끼기 쉽습니다. 상사나 동료의 기대를 모두 맞추기보다 내가 책임질 결과와 협조가 필요한 부분을 분명하게 나누세요.`,
+      `이직을 고민한다면 현재의 불편함만으로 결정하지 말고 역할·보상·성장 가능성·생활 리듬을 각각 비교해야 합니다. 특히 ${weak} 과정이 약점으로 반복된다면 회사를 바꾸는 것만으로 같은 문제가 사라지지 않을 수 있습니다. 다음 조직에서는 그 역할을 교육, 시스템, 협업으로 보완할 수 있는지 확인하는 것이 좋습니다. 급여는 총액뿐 아니라 업무 범위와 추가 노동까지 함께 계산해야 현실적인 선택이 됩니다.`
+    ],
+    jobseeker:[
+      `취업이나 이직을 준비하는 시기에는 지원하는 회사의 수를 늘리기보다 내가 잘하는 ${strong} 역할이 채용 공고의 실제 업무와 맞는지 확인하는 것이 먼저입니다. 자기소개서와 면접에서는 성격을 추상적으로 설명하기보다 문제를 어떻게 판단했고 어떤 결과를 만들었는지를 구체적인 사례로 보여주세요. 부족한 자격을 모두 채운 뒤 지원하려 하면 기회를 놓칠 수 있으니 필수 조건과 우대 조건을 구분하는 것이 좋습니다.`,
+      `재물 면에서는 준비 기간이 길어질 가능성을 고려해 생활비와 교육비의 한도를 먼저 정해야 합니다. 불안한 마음으로 자격증이나 강의를 계속 추가하기보다 목표 직무에 실제로 필요한 한두 가지에 집중하세요. 제안을 받았을 때는 연봉만 보지 말고 수습 조건, 계약 형태, 출퇴근 비용과 성장 가능성까지 확인해야 합니다. 당장의 조급함보다 오래 유지할 수 있는 선택이 중요합니다.`
+    ],
+    business:[
+      `사업이나 창업에서는 아이디어의 매력보다 고객이 실제로 돈을 지불하는지 확인하는 과정이 중요합니다. ${strong} 강점은 상품과 서비스를 만드는 데 활용하고, 상대적으로 약한 ${weak} 과정은 계약서·견적·일정표·업무 도구처럼 반복 가능한 구조로 보완하세요. 처음부터 인력과 고정비를 크게 늘리기보다 작은 단위로 판매하고 고객 반응과 수익성을 확인한 뒤 확장하는 편이 안전합니다.`,
+      `재물운은 매출액보다 현금흐름을 중심으로 봐야 합니다. 매출이 생겨도 입금 시점이 늦거나 원가와 세금, 외주비가 먼저 빠져나가면 실제 운영은 어려워질 수 있습니다. 개인 생활비와 사업 자금을 분리하고, 계약금·중도금·잔금의 기준을 명확하게 두세요. 새로운 투자는 기대 수익보다 실패했을 때 감당할 수 있는 손실 범위를 먼저 계산해야 합니다.`
+    ],
+    freelance:[
+      `프리랜서나 독립 활동에서는 실력만큼 업무의 범위와 수정 기준을 설명하는 능력이 중요합니다. ${strong} 역할을 대표 서비스로 분명하게 만들고, 모든 요청을 맞춤형으로 받아들이기보다 반복해서 제공할 수 있는 작업 과정과 가격 기준을 정하세요. 일이 몰릴 때 혼자 모두 처리하면 품질과 일정이 동시에 흔들릴 수 있으므로 외주, 협업, 자동화가 필요한 지점을 미리 구분하는 것이 좋습니다.`,
+      `수입이 일정하지 않다면 월별 매출보다 최소 생활비와 고정비를 몇 개월간 유지할 수 있는지를 기준으로 관리해야 합니다. 입금 예정액을 실제 잔액처럼 사용하지 말고, 세금과 운영비를 먼저 분리한 뒤 사용할 금액을 정하세요. 단가를 올릴 때는 막연한 자신감보다 작업 범위, 제공 가치, 소요 시간의 근거를 함께 제시하면 거래 관계를 안정적으로 유지할 수 있습니다.`
+    ],
+    student:[
+      `학생이나 진로 탐색 단계에서는 직업명을 하나로 확정하기보다 ${strong} 역할을 실제 과제와 프로젝트에서 반복해보는 것이 좋습니다. 관심 분야가 많다면 생각만으로 비교하지 말고 짧은 결과물을 각각 만들어 어떤 과정에서 집중력이 오래 유지되는지 확인하세요. 성적과 자격증뿐 아니라 문제를 발견하고 해결한 과정, 협업 경험, 완성한 결과물을 기록해두면 이후 취업과 진학에서 중요한 근거가 됩니다.`,
+      `돈과 관련해서는 큰 수익을 서두르기보다 생활비와 학습비를 구분하는 습관을 먼저 만드는 것이 중요합니다. 아르바이트나 외주를 선택할 때 당장의 금액뿐 아니라 시간 소모와 학업에 미치는 영향까지 계산하세요. 교육비는 많이 쓰는 것보다 실제 결과물과 경험으로 이어지는지가 중요합니다. 진학과 취업 사이에서 고민한다면 필요한 기간과 비용, 얻을 수 있는 기회를 숫자로 비교해보는 것이 좋습니다.`
+    ]
+  };
+  return map[input.workStatus]||[
+    `${input.name}님의 강점은 ${strong} 역할에서 잘 드러납니다. 현재 상황에서 이 강점을 실제 성과로 연결할 수 있는 업무와 책임을 먼저 확인하세요.`,
+    `${weak} 과정은 의지만으로 버티기보다 시스템과 협업으로 보완하는 편이 좋습니다. 일과 돈의 선택은 실제 조건과 숫자를 함께 비교해야 합니다.`
+  ];
+}
 function moneyCards(d){
   const wealth=d.wealthPct;
   return [
@@ -130,17 +160,18 @@ function totalSummary(d){
 function evidence(d){return `<p><strong>명식</strong> ${d.pillars.year} · ${d.pillars.month} · ${d.pillars.day}${d.timeKnown?` · ${d.pillars.hour}`:''}을 기준으로 일간과 오행을 계산했습니다.</p><p><strong>십성</strong> 보이는 천간을 일간과 비교해 비겁·식상·재성·관성·인성의 역할을 참고했습니다.</p><p><strong>조직/독립 지표</strong> 관성·인성과 식상·비겁의 상대 작동, 오행의 분포를 조합한 내부 참고 지표이며 절대 점수가 아닙니다.</p><p><strong>재물 해석</strong> 일간이 극하는 오행을 재성의 역할로 보고 전체 오행 안에서의 상대 비중을 참고했습니다. 투자 수익이나 실제 자산 규모를 예측하는 지표가 아닙니다.</p>`;}
 function reportText(d){
   const lines=['정월재 일과 재물 분석',`대상: ${input.name}`,`기준: ${input.birthDate} · ${input.calendarType==='lunar'?'음력':'양력'} · ${d.timeKnown?input.birthTime:'출생시간 모름'}`,'',summary(d),'','업무 핵심'];coreCards(d).forEach(x=>lines.push(`${x[1]}: ${x[2]} — ${x[3]}`));
-  lines.push('','성과가 잘 나는 조건',strengthText(d).replace(/<[^>]+>/g,' '),'','피로가 쌓이는 조건',pressureText(d).replace(/<[^>]+>/g,' '),'','조직과 독립',organizationText(d),'','재물');moneyCards(d).forEach(x=>lines.push(`${x[1]}: ${x[2]}`));
+  lines.push('','성과가 잘 나는 조건',strengthText(d).replace(/<[^>]+>/g,' '),'','피로가 쌓이는 조건',pressureText(d).replace(/<[^>]+>/g,' '),'','조직과 독립',organizationText(d),'',`현재 상황 · ${statusLabels[input.workStatus]||'전체'}`,...situationText(d),'','재물');moneyCards(d).forEach(x=>lines.push(`${x[1]}: ${x[2]}`));
   lines.push('','올해와 다음 해');d.years.forEach(y=>lines.push(yearText(d,y)));
   if(input.focus?.length){lines.push('','관심 영역 심화');input.focus.forEach(k=>{lines.push(focusLabels[k]);focusText(d,k).forEach(p=>lines.push(p));});}
   lines.push('','총평');totalSummary(d).forEach(p=>lines.push(p));lines.push('','※ 본 내용은 전통 명리학을 바탕으로 한 해석 콘텐츠이며 직업·사업·투자·재무 결과를 보장하지 않습니다.');return lines.join('\n');
 }
 function render(d){
   $('[data-name]').textContent=input.name;$('[data-summary]').textContent=summary(d);
-  $('[data-meta]').innerHTML=`<span>${input.birthDate}</span><span>${input.calendarType==='lunar'?'음력':'양력'}</span><span>${d.timeKnown?`출생시간 ${input.birthTime}`:'출생시간 모름'}</span><span>일간 ${d.dayStem}</span>`;
+  $('[data-meta]').innerHTML=`<span>${input.birthDate}</span><span>${input.calendarType==='lunar'?'음력':'양력'}</span><span>${d.timeKnown?`출생시간 ${input.birthTime}`:'출생시간 모름'}</span><span>일간 ${d.dayStem}</span><span>${statusLabels[input.workStatus]||'전체 분석'}</span>`;
   $('[data-core-grid]').innerHTML=coreCards(d).map(([n,l,v,p])=>`<article class="work-core-card"><span>${n} · ${l}</span><strong>${v}</strong><p>${p}</p></article>`).join('');
   $('[data-strength-text]').innerHTML=strengthText(d);$('[data-pressure-text]').innerHTML=pressureText(d);
   $('[data-organization-axis]').innerHTML=`<div class="axis-labels"><span>독립·자율</span><span>조직·기준</span></div><div class="axis-track"><div class="axis-fill" style="width:${d.orgIndex}%"></div><i class="axis-marker" style="left:${d.orgIndex}%"></i></div>`;$('[data-organization-text]').textContent=organizationText(d);
+  $('[data-situation-text]').innerHTML=situationText(d).map(p=>`<p>${p}</p>`).join('');
   $('[data-money-grid]').innerHTML=moneyCards(d).map(([n,t,p])=>`<article class="money-card"><span>${n}</span><h3>${t}</h3><p>${p}</p></article>`).join('');
   $('[data-year-grid]').innerHTML=d.years.map(y=>`<article class="year-card"><small>${y.year} · ${y.god}</small><strong>${y.pillar}</strong><p>${yearText(d,y)}</p></article>`).join('');
   if(input.focus?.length){$('[data-focus-section]').hidden=false;$('[data-focus-grid]').innerHTML=input.focus.map((k,i)=>`<article class="focus-result-card"><span>${String(i+1).padStart(2,'0')} · ${focusLabels[k]}</span><h3>${focusLabels[k]}</h3>${focusText(d,k).map(p=>`<p>${p}</p>`).join('')}</article>`).join('');}
