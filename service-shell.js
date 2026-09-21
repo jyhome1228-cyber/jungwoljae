@@ -3,7 +3,6 @@
 
   const currentFile=location.pathname.split('/').pop()||'index.html';
   const primaryLinks=[
-    ['./ohaeng.html','오행'],
     ['./fortune.html','오늘의 운세'],
     ['./tomorrow.html','내일의 운세'],
     ['./relationship.html','인연'],
