@@ -333,7 +333,7 @@ function renderFull(v){
   const name=input.name||'회원';
   const dateLabel=new Intl.DateTimeFormat('ko-KR',{month:'long',day:'numeric',weekday:'short'}).format(new Date(`${v.expected}T12:00:00+09:00`));
   const heroTitle=root.querySelector('.fortune-hero h1');
-  if(heroTitle)heroTitle.innerHTML=`<span data-name>${esc(name)}</span>님,<br />${dayWord}의 흐름을 정리했습니다.`;
+  if(heroTitle)heroTitle.innerHTML=`<span data-name>${esc(name)}</span>님,<br />${dayWord}의 운세를 풀이했습니다.`;
 
   $('[data-summary]').textContent=tomorrow
     ?`${name}님의 연·월·일${v.h?'·시':''} 흐름과 내일 날짜를 미리 살펴보았습니다. ${v.godPack.title}이 두드러지고, ${v.impact.copy}`
@@ -453,7 +453,7 @@ function renderFallback(v){
   const name=input.name||'회원';
   const dateLabel=new Intl.DateTimeFormat('ko-KR',{month:'long',day:'numeric',weekday:'short'}).format(new Date(`${v.expected}T12:00:00+09:00`));
   const heroTitle=root.querySelector('.fortune-hero h1');
-  if(heroTitle)heroTitle.innerHTML=`<span data-name>${esc(name)}</span>님,<br />${dayWord}의 흐름을 정리했습니다.`;
+  if(heroTitle)heroTitle.innerHTML=`<span data-name>${esc(name)}</span>님,<br />${dayWord}의 운세를 풀이했습니다.`;
   $('[data-summary]').textContent=tomorrow
     ?`${name}님의 일주와 내일 날짜의 흐름을 미리 계산했습니다. ${v.pack.headline}. ${v.dayRel.copy}`
     :`${name}님의 일주와 오늘 날짜의 흐름을 계산했습니다. ${v.pack.headline}. ${v.dayRel.copy}`;
