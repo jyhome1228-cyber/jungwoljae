@@ -63,6 +63,7 @@
           <div class="page-field-row"><div class="field full"><label>태어난 날짜</label><div class="date-selects"><select id="work-year"><option value="">연도</option></select><select id="work-month"><option value="">월</option></select><select id="work-day"><option value="">일</option></select></div></div></div>
           <div class="page-field-row"><div class="field full"><label>태어난 시간 <span class="optional">선택</span></label><div class="time-selects"><select id="work-meridiem"><option value="">오전/오후</option><option value="am">오전</option><option value="pm">오후</option></select><select id="work-hour"><option value="">시</option></select><select id="work-minute"><option value="">분</option></select></div><label class="work-check"><input id="work-time-unknown" type="checkbox" /><span>태어난 시간을 모릅니다</span></label></div></div>
           <div class="page-field-row"><div class="field"><label for="work-calendar">달력 기준</label><select id="work-calendar" name="calendarType"><option value="solar">양력</option><option value="lunar">음력</option></select></div><div class="field"><label for="work-gender">성별</label><select id="work-gender" name="gender"><option value="">선택하지 않음</option><option value="male">남성</option><option value="female">여성</option></select></div></div>
+          <div class="page-field-row"><div class="field full"><label for="work-status">현재 일과 진로 상태</label><select id="work-status" name="workStatus" required><option value="">현재 상태를 선택해주세요</option><option value="employee">직장인·조직 근무</option><option value="jobseeker">취업·이직 준비</option><option value="business">사업자·창업 준비</option><option value="freelance">프리랜서·독립 활동</option><option value="student">학생·진로 탐색</option></select></div></div>
           <div class="page-field-row lunar-extra" data-lunar-extra hidden><div class="field full"><label class="work-check"><input id="work-leap" name="isLeapMonth" type="checkbox" /><span>입력한 음력 월이 윤달입니다.</span></label></div></div>
           <div class="page-field-row"><div class="field full"><label for="work-city">출생 지역 <span class="optional">시 단위</span></label><input id="work-city" name="city" type="text" placeholder="예: 서울특별시, 인천광역시" /></div></div>
 
@@ -87,6 +88,6 @@
 
   <footer class="site-footer"></footer>
   <script src="./app.js?v=20260911-1130" defer></script>
-  <script type="module" src="./work-money-form.js?v=20260907-01"></script>
+  <script type="module" src="./work-money-form.js?v=20260921-1505"></script>
 </body>
 </html>
