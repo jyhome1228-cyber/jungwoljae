@@ -114,12 +114,7 @@
   function apply(){
     if(file==='work-money-result.html'){
       hide($('.work-guide-section'));
-      const summary=$('.work-summary-section');
-      if(summary){
-        const focusVisible=isVisible($('[data-focus-section]'));
-        text($('.work-label',summary),`${focusVisible?'08':'07'} · 결론`);
-        text($('h2',summary),'일과 돈에서 가장 중요한 기준만 남기면');
-      }
+      hide($('.work-summary-section'));
     }
 
     if(file==='fortune-result.html'){
@@ -143,11 +138,7 @@
 
     if(file==='ohaeng-result.html'){
       hide($('.key-section'));
-      const total=$('.total-summary-section');
-      if(total){
-        text($('.section-label',total),'06 · 결론');
-        text($('h2',total),`${$('[data-summary-name]')?.textContent?.trim()||'회원'}님의 생활 성향을 마지막으로 정리하면`);
-      }
+      hide($('.total-summary-section'));
     }
 
     if(file==='relationship-result.html'){
