@@ -116,12 +116,12 @@
           <p class="footer-intro">정월재는 오래된 명리의 기준을 오늘의 언어로 정돈해 전하는 해석 서비스입니다. 오행과 오늘·내일의 흐름, 관계, 궁합, 일과 재물, 현실의 고민까지 하나의 기준으로 이어서 읽습니다.</p>
           <p class="footer-intro sub">어려운 용어보다 실제 생활에서 이해하기 쉬운 말과 행동 기준으로 정리합니다.</p>
           <div class="footer-service-tags" aria-label="정월재 제공 서비스">
-            <a href="./ohaeng.html">오행 분석</a><a href="./fortune.html">오늘의 운세</a><a href="./tomorrow.html">내일의 운세</a><a href="./relationship.html">연애와 인연</a><a href="./compatibility.html">궁합</a><a href="./work-money.html">일과 재물</a><a href="./guide.html">정월도감</a><a href="./talisman.html">정월부적</a><a href="./lucky-number.html">행운의 숫자</a><a href="./important-day.html">중요한 날</a><a href="./moving-day.html">이사 택일</a><a href="./archive.html">정월록</a>
+            <a href="./fortune.html">오늘의 운세</a><a href="./tomorrow.html">내일의 운세</a><a href="./relationship.html">연애와 인연</a><a href="./compatibility.html">궁합</a><a href="./work-money.html">일과 재물</a><a href="./guide.html">정월도감</a><a href="./talisman.html">정월부적</a><a href="./lucky-number.html">행운의 숫자</a><a href="./important-day.html">중요한 날</a><a href="./moving-day.html">이사 택일</a><a href="./archive.html">정월록</a>
           </div>
         </section>
 
         <div class="footer-links-grid">
-          <section class="footer-column"><h3>서비스</h3><nav aria-label="푸터 서비스 메뉴"><a href="./ohaeng.html">오행 분석</a><a href="./fortune.html">오늘의 운세</a><a href="./tomorrow.html">내일의 운세</a><a href="./relationship.html">연애와 인연</a><a href="./compatibility.html">궁합</a><a href="./work-money.html">일과 재물</a><a href="./guide.html">정월도감</a><a href="./talisman.html">정월부적</a></nav></section>
+          <section class="footer-column"><h3>서비스</h3><nav aria-label="푸터 서비스 메뉴"><a href="./fortune.html">오늘의 운세</a><a href="./tomorrow.html">내일의 운세</a><a href="./relationship.html">연애와 인연</a><a href="./compatibility.html">궁합</a><a href="./work-money.html">일과 재물</a><a href="./guide.html">정월도감</a><a href="./talisman.html">정월부적</a></nav></section>
           <section class="footer-column"><h3>생활운</h3><nav aria-label="푸터 생활운 메뉴"><a href="./lucky-number.html">행운의 숫자</a><a href="./important-day.html">중요한 날</a><a href="./moving-day.html">이사 택일</a><a href="./archive.html">정월록</a></nav></section>
           <section class="footer-column"><h3>정월재</h3><nav aria-label="푸터 정월재 메뉴"><a href="./reviews.html">후기</a><a href="./about.html">소개</a><a href="./login.html">로그인</a><a href="./signup.html">회원등록</a><a href="./privacy.html">개인정보처리방침</a></nav></section>
         </div>
