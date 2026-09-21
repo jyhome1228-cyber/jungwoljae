@@ -122,7 +122,7 @@ function reportText(d){
 }
 function render(d){
   $('[data-person-a]').textContent=d.a.person.name;$('[data-person-b]').textContent=d.b.person.name;$('[data-overall-score]').textContent=d.overall;
-  $('[data-summary]').textContent=`${d.a.person.name}님과 ${d.b.person.name}님의 사주·오행을 같은 기준으로 비교해 감정, 대화, 생활, 갈등 회복의 네 영역으로 정리했습니다.`;
+  $('[data-summary]').textContent=`${d.a.person.name}님과 ${d.b.person.name}님의 생년월일을 비교해 애정·대화·생활·갈등 궁합과 주의할 점을 풀이했습니다.`;
   $('[data-meta]').innerHTML=`<span>${d.a.person.name} · ${d.a.person.city}</span><span>${d.b.person.name} · ${d.b.person.city}</span><span>${d.branch.label}</span>`;
   $('[data-score-title]').textContent=overallTitle(d.overall);
   $('[data-score-copy]').textContent=`네 항목의 평균과 일지 관계, 일간 오행의 연결 방식을 함께 반영한 참고 점수입니다. 가장 높은 항목은 ${Object.entries(d.metrics).sort((x,y)=>y[1]-x[1])[0][0]==='emotion'?'감정 호흡':Object.entries(d.metrics).sort((x,y)=>y[1]-x[1])[0][0]==='communication'?'대화 방식':Object.entries(d.metrics).sort((x,y)=>y[1]-x[1])[0][0]==='lifestyle'?'생활 리듬':'갈등 회복'}입니다.`;
