@@ -118,7 +118,7 @@ import './fortune-final-v12.js?v=20260909-0805';
     }
 
     const evidence=$('[data-evidence]')?.closest('.fortune-report');
-    if(evidence){const label=evidence.querySelector('.fortune-label');if(label)label.textContent='09 · INTERPRETATION BASIS';}
+    if(evidence){const label=evidence.querySelector('.fortune-label');if(label)label.textContent='05 · INTERPRETATION BASIS';}
     root.dataset.repeatPolished='true';
   }
 
