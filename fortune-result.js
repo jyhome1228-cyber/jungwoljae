@@ -208,6 +208,33 @@ function luckyNumbers(seed){
 }
 function listItem(title,body,index){return `<li data-index="${String(index).padStart(2,'0')}"><div><strong>${esc(title)}</strong><span>${esc(body)}</span></div></li>`;}
 
+function decisiveAreaCopy(v){
+  const favorable=v.score>=58;
+  const tense=v.score<44;
+  const connected=['육합','삼합'].includes(v.dayRel.label);
+  const conflicted=['충','형','해','파'].includes(v.dayRel.label);
+  return {
+    money:favorable
+      ?`재물의 흐름이 살아나는 날입니다. 미뤄졌던 정산이나 계약, 수입과 관련된 연락에서 반가운 결과가 들어올 수 있습니다. 이미 충분히 검토한 계획이라면 실행으로 옮겨도 좋습니다. 다만 기대감만으로 금액을 키우거나 충동적으로 투자하는 행동은 피해야 합니다.`
+      :tense
+        ?`돈이 들어오는 속도보다 나가는 속도가 빨라질 수 있는 날입니다. 예상하지 못한 비용이나 추가 결제가 생길 수 있으니 큰 지출과 신규 투자는 미루는 편이 안전합니다. 오늘은 수익을 늘리는 것보다 손실을 막고 미수금과 고정비를 정리하는 것이 중요합니다.`
+        :`금전운은 무난하지만 큰 이익을 기대하기에는 힘이 부족한 날입니다. 새로운 투자보다 이미 진행 중인 계약과 정산을 챙기면 실속을 얻을 수 있습니다. 사람의 말만 믿고 돈을 움직이거나 필요 이상의 지출을 만드는 것은 피해야 합니다.`,
+    love:connected
+      ?`애정운이 상승하는 날입니다. 마음에 둔 사람이 있다면 먼저 연락하거나 약속을 잡았을 때 좋은 반응을 얻을 가능성이 높습니다. 연인이 있다면 솔직한 표현이 관계를 한층 가깝게 만듭니다. 다만 상대의 답을 재촉하면 좋은 흐름이 부담으로 바뀔 수 있습니다.`
+      :conflicted
+        ?`상대의 말과 행동을 다르게 받아들여 오해가 생기기 쉬운 날입니다. 답장이 늦거나 표현이 무뚝뚝하더라도 성급하게 마음을 단정하지 마세요. 오늘은 감정을 쏟아내기보다 사실을 직접 확인하는 대화가 관계를 지켜줍니다.`
+        :`애정운은 편안하게 흐르는 날입니다. 새로운 관계를 억지로 만들기보다 이미 가까운 사람과 자연스럽게 대화할 때 마음이 이어집니다. 익숙함 때문에 표현을 줄이면 관계가 단조롭게 느껴질 수 있으니 짧게라도 마음을 전하세요.`,
+    work:favorable
+      ?`일과 학업에서 준비해 온 능력을 보여주기 좋은 날입니다. 제안, 발표, 제출, 면접처럼 결과를 밖으로 드러내는 일에서 긍정적인 평가를 받을 가능성이 높습니다. 주변의 조언을 활용하면 혼자 진행할 때보다 더 빠르게 성과를 만들 수 있습니다.`
+      :tense
+        ?`업무와 학업에서 예상하지 못한 수정이나 일정 변경이 생길 수 있습니다. 서두르면 누락과 실수가 반복될 수 있으니 새로운 일을 벌이기보다 진행 중인 과제를 먼저 마무리하세요. 중요한 연락과 제출물은 보내기 전에 반드시 다시 확인해야 합니다.`
+        :`일의 흐름은 안정적이지만 집중력이 쉽게 분산될 수 있는 날입니다. 해야 할 일을 늘리기보다 가장 중요한 한 가지를 먼저 끝내면 성과가 분명해집니다. 혼자 판단이 서지 않는 문제는 경험 있는 사람의 조언에서 답을 찾게 됩니다.`,
+    health:tense
+      ?`큰 질환보다 피로와 스트레스가 몸으로 나타나기 쉬운 날입니다. 소화불량, 두통, 목과 어깨의 긴장처럼 신경성 증상을 가볍게 넘기지 마세요. 식사를 거르거나 늦게까지 무리하면 회복이 더뎌질 수 있으니 오늘은 휴식 시간을 먼저 확보해야 합니다.`
+      :`건강운에는 큰 문제가 없지만 체력을 한꺼번에 소모하면 저녁에 피로가 몰릴 수 있습니다. 식사 시간을 지키고 짧게라도 몸을 움직이면 컨디션을 안정적으로 유지할 수 있습니다. 과음과 수면 부족만 피하면 무난하게 지나갑니다.`
+  };
+}
+
 async function build(){
   const expected=seoulDate(tomorrow?1:0);
   const knownTime=!input.birthTimeUnknown&&Boolean(input.birthTime);
@@ -271,17 +298,18 @@ function renderFull(v){
     <p><strong>${dayWord}의 전체 흐름</strong> ${esc(v.impact.title)}. 평소에는 ‘${esc(balancePack[v.balance.dominant].keyword)}’ 쪽의 힘을 많이 쓰는 편이고, ‘${esc(balancePack[v.supportEl].keyword)}’ 쪽은 상대적으로 덜 쓰는 편입니다. ${esc(v.impact.copy)}</p>
     <p><strong>실제로는</strong> ${esc(v.godPack.action)} ${esc(v.monthRel.copy)} ${v.h?esc(`하루 후반에는 ${v.hourRel.copy}`):'출생시간이 없어 저녁 흐름은 연·월·일주와 전체 균형을 기준으로 정리했습니다.'}</p>`;
 
-  const money=`${v.godPack.money} ${v.impact.type==='over'?'기분이나 분위기에 따라 금액 범위가 커지는지만 확인하세요.':v.impact.type==='fill'?'미뤄둔 정산이나 꼭 필요한 지출을 정리하기 좋습니다.':'큰 선택보다 실제 필요와 예산을 먼저 맞춰보세요.'}`;
-  const love=`${v.godPack.love} ${relationSentence(v.dayRel.label,'love')}`;
-  const work=`${v.godPack.work} ${relationSentence(v.monthRel.label,'work')}`;
-  const life=`평소 강한 ‘${balancePack[v.balance.dominant].keyword}’은 장점으로 쓰고, 상대적으로 약한 ‘${balancePack[v.supportEl].keyword}’을 조금 보완해보세요. ${v.impact.copy}`;
+  const areaCopy=decisiveAreaCopy(v);
+  const money=areaCopy.money;
+  const love=areaCopy.love;
+  const work=areaCopy.work;
+  const life=areaCopy.health;
 
   $('[data-area-grid]').innerHTML=[
-    ['01','재물운','돈의 흐름은 오늘의 행동 성향과 내 균형을 함께 봅니다.',money,'재물'],
-    ['02','연애운','관계는 내 기본 반응과 오늘의 관계 변화를 중심으로 봅니다.',love,'인연'],
-    ['03','일·학업운','일은 평소 사회적 리듬과 오늘의 변화를 더 크게 반영합니다.',work,'일'],
-    ['04','생활운','생활은 평소 강한 방식과 부족한 방식을 함께 조절합니다.',life,'생활']
-  ].map(([n,title,lead,copy,badge])=>`<article class="fortune-card"><span>${n}</span><h3>${title}</h3><p><strong>${esc(lead)}</strong>${esc(copy)}</p><strong>${badge}</strong></article>`).join('');
+    ['01','재물운',money,'재물'],
+    ['02','애정운',love,'인연'],
+    ['03','직장·학업운',work,'일'],
+    ['04','건강운',life,'건강']
+  ].map(([n,title,copy,badge])=>`<article class="fortune-card"><span>${n}</span><h3>${title}</h3><p>${esc(copy)}</p><strong>${badge}</strong></article>`).join('');
 
   const morning=`${v.godPack.action} 오전에는 하루의 기준을 잡는 일이 가장 중요합니다.`;
   const afternoon=`${relationSentence(v.monthRel.label,'work')} 사람과 일이 몰리면 가장 중요한 한 가지를 중심에 두세요.`;
@@ -367,8 +395,9 @@ function renderFallback(v){
   $('[data-relation-pills]').innerHTML=`<span>내 일주 ${v.natal.day}</span><span>${relationPlain(v.dayRel.label)}</span><span>${dayWord} ${v.target.pillar}</span>`;
   $('[data-relation-text]').textContent=`관계에서는 ${v.dayRel.copy} ${v.stemText}`;
   $('[data-fortune-story]').innerHTML=`<p><strong>${dayWord}의 전체 흐름</strong> ${esc(v.pack.headline)}. ${esc(v.dayRel.copy)}</p><p><strong>실제로는</strong> ${esc(v.pack.work)} ${esc(v.stemText)}</p>`;
+  const fallbackAreas=decisiveAreaCopy(v);
   $('[data-area-grid]').innerHTML=[
-    ['01','재물운',v.pack.money,'재물'],['02','연애운',v.pack.love,'인연'],['03','일·학업운',v.pack.work,'일'],['04','생활운',v.pack.life,'생활']
+    ['01','재물운',fallbackAreas.money,'재물'],['02','애정운',fallbackAreas.love,'인연'],['03','직장·학업운',fallbackAreas.work,'일'],['04','건강운',fallbackAreas.health,'건강']
   ].map(([n,title,copy,badge])=>`<article class="fortune-card"><span>${n}</span><h3>${title}</h3><p>${esc(copy)}</p><strong>${badge}</strong></article>`).join('');
   $('[data-time-grid]').innerHTML=`
     <article class="fortune-time-card"><span>01 · 오전</span><strong>중요한 일부터 시작하세요.</strong><p>${esc(v.pack.work)}</p></article>
