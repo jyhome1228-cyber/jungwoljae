@@ -9,18 +9,26 @@
   const host=result?.parentElement;
   if(!host||host.querySelector('[data-number-playground]'))return;
 
+  const formHead=document.querySelector('.quick-form-head');
+  if(formHead&&!formHead.querySelector('[data-lucky-result-guide]')){
+    const guide=document.createElement('p');
+    guide.className='lucky-result-guide';guide.dataset.luckyResultGuide='';
+    guide.textContent='오늘의 번호를 확인하면 결과에서 오늘의 행운 번호 6개와 중심 숫자를 함께 볼 수 있습니다.';
+    formHead.appendChild(guide);
+  }
+
   const section=document.createElement('section');
   section.className='number-playground';section.dataset.numberPlayground='';
   section.setAttribute('aria-labelledby','number-playground-title');
   section.innerHTML=`
     <div class="number-playground-head">
       <div><span>NUMBER PLAYGROUND</span><h2 id="number-playground-title">1부터 45까지, 숫자를 재미있게 뽑아보세요.</h2></div>
-      <p>오늘의 행운 숫자와 별개로 자유롭게 다시 뽑을 수 있는 숫자 놀이입니다.</p>
+      <p>오늘의 추천 조합은 하루 동안 고정되며, 무작위 추첨은 빠칭코에서만 할 수 있습니다.</p>
     </div>
     <div class="number-game-grid">
       <article class="number-game-card">
-        <div class="number-game-title"><div><small>LOTTO PICK</small><h3>로또 번호 추천</h3></div><button class="number-action" type="button" data-lotto-generate>새 조합 5개 뽑기</button></div>
-        <p class="number-game-desc">1~45 중 중복 없이 여섯 숫자를 골라 다섯 조합으로 보여드립니다.</p>
+        <div class="number-game-title"><div><small>DAILY LOTTO PICK</small><h3>오늘의 로또 번호 추천</h3></div><span class="number-fixed-badge">오늘 고정</span></div>
+        <p class="number-game-desc">오늘 날짜를 기준으로 정해진 다섯 조합입니다. 같은 날에는 추천 번호가 바뀌지 않습니다.</p>
         <div class="lotto-sets" data-lotto-sets aria-live="polite"></div>
       </article>
       <article class="number-game-card">
@@ -44,15 +52,18 @@
     if(globalThis.crypto?.getRandomValues){const value=new Uint32Array(1);globalThis.crypto.getRandomValues(value);return value[0]%max;}
     return Math.floor(Math.random()*max);
   }
-  function pick(count=6){
+  function hashSeed(value){let hash=2166136261;for(const char of value){hash^=char.charCodeAt(0);hash=Math.imul(hash,16777619);}return hash>>>0;}
+  function seededRandom(seed){let value=seed||1;return ()=>{value^=value<<13;value^=value>>>17;value^=value<<5;return (value>>>0)/4294967296;};}
+  function pick(count=6,random=Math.random){
     const numbers=Array.from({length:45},(_,index)=>index+1),selected=[];
-    while(selected.length<count)selected.push(numbers.splice(randomIndex(numbers.length),1)[0]);
+    while(selected.length<count)selected.push(numbers.splice(Math.floor(random()*numbers.length),1)[0]);
     return selected.sort((a,b)=>a-b);
   }
   const range=value=>`range-${Math.ceil(value/10)}`;
   const ball=(value,className='lotto-ball')=>`<span class="${className} ${range(value)}">${value}</span>`;
   function renderLotto(){
-    lottoSets.innerHTML=Array.from({length:5},(_,index)=>`<div class="lotto-row"><strong>${index+1}</strong><div class="lotto-balls">${pick().map(value=>ball(value)).join('')}</div></div>`).join('');
+    const date=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+    lottoSets.innerHTML=Array.from({length:5},(_,index)=>{const random=seededRandom(hashSeed(`${date}|jungwoljae|lotto|${index}`));return `<div class="lotto-row"><strong>${index+1}</strong><div class="lotto-balls">${pick(6,random).map(value=>ball(value)).join('')}</div></div>`;}).join('');
   }
   function renderHistory(){
     count.textContent=String(drawn.length);
@@ -77,7 +88,6 @@
     },850);
   }
 
-  section.querySelector('[data-lotto-generate]').addEventListener('click',renderLotto);
   section.querySelector('[data-pachinko-reset]').addEventListener('click',reset);
   drawButton.addEventListener('click',draw);
   renderLotto();reset();
