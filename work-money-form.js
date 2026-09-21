@@ -88,8 +88,9 @@ form.addEventListener('submit',e=>{
   if(!name){status.textContent='이름 또는 닉네임을 입력해주세요.';form.elements.name.focus();return;}
   if(!birthDate){status.textContent='태어난 연·월·일을 모두 선택해주세요.';year.focus();return;}
   if(!timeUnknown.checked&&(meridiem.value||hour.value||minute.value)&&!birthTime){status.textContent='시간을 입력하려면 오전/오후·시·분을 모두 선택해주세요.';meridiem.focus();return;}
+  if(!form.elements.workStatus.value){status.textContent='현재 일과 진로 상태를 선택해주세요.';form.elements.workStatus.focus();return;}
   if(!form.elements.consent.checked){status.textContent='분석을 위한 정보 사용에 동의해주세요.';form.elements.consent.focus();return;}
-  const payload={name,birthDate,birthTime,birthTimeUnknown:timeUnknown.checked,calendarType:calendar.value,isLeapMonth:Boolean(form.elements.isLeapMonth?.checked),gender:form.elements.gender.value,city:form.elements.city.value.trim(),focus:focusInputs.filter(x=>x.checked).map(x=>x.value),createdAt:new Date().toISOString()};
+  const payload={name,birthDate,birthTime,birthTimeUnknown:timeUnknown.checked,calendarType:calendar.value,isLeapMonth:Boolean(form.elements.isLeapMonth?.checked),gender:form.elements.gender.value,city:form.elements.city.value.trim(),workStatus:form.elements.workStatus.value,focus:focusInputs.filter(x=>x.checked).map(x=>x.value),createdAt:new Date().toISOString()};
   sessionStorage.setItem('jungwoljae_work_money_input',JSON.stringify(payload));
   form.dataset.submitting='true';const submit=form.querySelector('button[type="submit"]');if(submit){submit.disabled=true;submit.setAttribute('aria-busy','true');}
   location.href='./work-money-result.html';
