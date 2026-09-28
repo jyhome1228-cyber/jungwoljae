@@ -34,7 +34,7 @@ if(config){
     const clean=v=>String(v??'').trim().slice(0,120);
     const bool=v=>Boolean(v);
 
-    const normalized={
+    const baseEvent={
       service:serviceKey,
       serviceLabel,
       name:clean(primary.name||primary.profileName),
@@ -49,21 +49,19 @@ if(config){
       situation:clean(input.situation||input.guideSituation),
       blockers:Array.isArray(input.blockers||input.guideBlockers)?(input.blockers||input.guideBlockers).map(clean).slice(0,4):[],
       partnerName:clean(partner?.name||input.partnerName),
-      partnerBirthDate:clean(partner?.birthDate||input.partnerBirthDate),
-      uid:null,
-      createdAt:serverTimestamp()
+      partnerBirthDate:clean(partner?.birthDate||input.partnerBirthDate)
     };
 
     const signature=JSON.stringify({
       service:serviceVariant,
-      name:normalized.name,
-      birthDate:normalized.birthDate,
-      birthTime:normalized.birthTime,
-      domain:normalized.domain,
-      situation:normalized.situation,
-      focus:normalized.focus,
-      partnerName:normalized.partnerName,
-      partnerBirthDate:normalized.partnerBirthDate
+      name:baseEvent.name,
+      birthDate:baseEvent.birthDate,
+      birthTime:baseEvent.birthTime,
+      domain:baseEvent.domain,
+      situation:baseEvent.situation,
+      focus:baseEvent.focus,
+      partnerName:baseEvent.partnerName,
+      partnerBirthDate:baseEvent.partnerBirthDate
     });
     let hash=0;
     for(let i=0;i<signature.length;i++)hash=((hash<<5)-hash+signature.charCodeAt(i))|0;
@@ -73,25 +71,48 @@ if(config){
     try{already=sessionStorage.getItem(sessionKey)==='1';}catch(e){}
 
     if(!already){
-      let settled=false;
-      let stop=()=>{};
-      stop=onAuthStateChanged(auth,async user=>{
-        if(settled)return;
-        settled=true;
-        try{stop();}catch(e){}
-        normalized.uid=user?.uid||null;
+      let writing=false;
+      const writeEvent=async user=>{
+        if(writing)return;
+        writing=true;
+        const normalized={...baseEvent,uid:user?.uid||null,createdAt:serverTimestamp()};
         try{
           await addDoc(collection(db,'reading_events'),normalized);
           try{sessionStorage.setItem(sessionKey,'1');}catch(e){}
         }catch(error){
+          writing=false;
           console.warn('[Jungwoljae reading event]',error?.code||error?.message||error);
         }
-      },error=>{
-        if(settled)return;
-        settled=true;
-        try{stop();}catch(e){}
-        console.warn('[Jungwoljae reading event auth]',error?.code||error?.message||error);
-      });
+      };
+
+      // Do not block anonymous usage logging on Firebase Auth initialization.
+      // Most reading traffic is anonymous, and waiting indefinitely for auth can
+      // make a valid result view disappear from reading_events.
+      const currentUser=auth.currentUser;
+      if(currentUser){
+        writeEvent(currentUser);
+      }else{
+        const fallback=setTimeout(()=>writeEvent(null),700);
+        let stop=()=>{};
+        try{
+          stop=onAuthStateChanged(auth,user=>{
+            clearTimeout(fallback);
+            try{stop();}catch(e){}
+            writeEvent(user||null);
+          },error=>{
+            clearTimeout(fallback);
+            try{stop();}catch(e){}
+            console.warn('[Jungwoljae reading event auth]',error?.code||error?.message||error);
+            writeEvent(null);
+          });
+        }catch(error){
+          clearTimeout(fallback);
+          console.warn('[Jungwoljae reading event auth init]',error?.code||error?.message||error);
+          writeEvent(null);
+        }
+      }
     }
+  }else{
+    console.warn('[Jungwoljae reading event] 결과 입력값을 찾지 못해 분석 기록을 저장하지 않았습니다.',config.storage);
   }
 }
