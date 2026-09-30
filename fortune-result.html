@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="./fortune-result.css?v=20260908-1230" />
   <link rel="stylesheet" href="./fortune-final-v13.css?v=20260912-0920" />
   <link rel="stylesheet" href="./fortune-spacing-v20.css?v=20260912-2148" />
+  <link rel="stylesheet" href="./fortune-simple-v1.css?v=20260930-1749" />
   <link rel="stylesheet" href="./result-share.css?v=20260911-1655" />
   <link rel="stylesheet" href="./saju-loading.css?v=20260912-0920" />
   <link rel="stylesheet" href="./result-loading-safety.css?v=20260912-0920" />
@@ -45,6 +46,73 @@
 
   <main class="fortune-result-main" data-fortune-result data-final-state="loading">
     <div class="fortune-result-container">
+      <section class="daily-simple" data-daily-simple hidden>
+        <header class="daily-simple-head">
+          <p class="daily-simple-kicker">正月齋 · DAILY FORTUNE</p>
+          <h1 data-simple-title>오늘의 운세</h1>
+          <p class="daily-simple-date" data-simple-date></p>
+          <p class="daily-simple-phrase">오늘의 흐름을 차분히 살펴보세요</p>
+        </header>
+
+        <section class="daily-card daily-summary-card">
+          <div class="daily-score-block">
+            <span class="daily-score-label" data-simple-score-label>오늘의 총운</span>
+            <strong class="daily-total-score"><span data-simple-total>--</span><small>점</small></strong>
+          </div>
+          <div class="daily-summary-copy">
+            <strong data-simple-headline>오늘의 흐름을 정리하고 있습니다.</strong>
+            <p data-simple-summary></p>
+          </div>
+          <div class="daily-flow-badge" data-simple-badge>좋은 흐름이<br>머무는 날</div>
+        </section>
+
+        <section class="daily-card">
+          <div class="daily-card-head">
+            <h2 data-simple-index-title>오늘의 운세 지수</h2>
+            <p>길게 읽지 않아도 오늘의 흐름을 한눈에 볼 수 있어요.</p>
+          </div>
+          <div class="daily-index-list" data-simple-index></div>
+        </section>
+
+        <section class="daily-card">
+          <div class="daily-card-head">
+            <h2>오늘의 포인트</h2>
+            <p>좋은 선택이 하루의 흐름을 바꿉니다.</p>
+          </div>
+          <div class="daily-points">
+            <article class="daily-point">
+              <span>BEST</span>
+              <strong data-simple-best></strong>
+            </article>
+            <article class="daily-point caution">
+              <span>CAUTION</span>
+              <strong data-simple-caution></strong>
+            </article>
+          </div>
+        </section>
+
+        <section class="daily-card">
+          <div class="daily-card-head">
+            <h2>행운 키워드</h2>
+            <p>오늘 가볍게 참고해볼 작은 힌트입니다.</p>
+          </div>
+          <div class="daily-lucky-grid" data-simple-lucky></div>
+        </section>
+
+        <section class="daily-card daily-mission">
+          <div class="daily-card-head">
+            <h2>오늘의 작은 미션</h2>
+            <p>작은 실천이 좋은 하루를 만듭니다.</p>
+          </div>
+          <div class="daily-mission-box">
+            <span class="daily-mission-mark">正</span>
+            <div>
+              <strong data-simple-mission></strong>
+              <p>부담 없이 한 가지만 실천해보세요.</p>
+            </div>
+          </div>
+        </section>
+      </section>
       <section class="fortune-report fortune-hero">
         <p class="fortune-kicker">FORTUNE · 正月齋</p>
         <h1><span data-name>회원</span>님,<br />오늘의 운세를 풀이하고 있습니다.</h1>
@@ -147,7 +215,7 @@
   <script src="./fortune-loader.js?v=20260912-0920"></script>
   <script src="./service-shell.js?v=20260921-1730" defer></script>
   <script src="./footer.js?v=20260921-1730" defer></script>
-  <script type="module" src="./fortune-result.js?v=20260921-2230"></script>
+  <script type="module" src="./fortune-result.js?v=20260930-1749"></script>
   <script src="./result-share.js?v=20260911-1655" defer></script>
 <script type="module" src="./analytics.js?v=20260918-0812"></script><script type="module" src="./reading-event.js?v=20260918-0812"></script></body>
 </html>
