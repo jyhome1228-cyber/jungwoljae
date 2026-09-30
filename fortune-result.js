@@ -513,6 +513,131 @@ function renderFallback(v){
   root.dataset.personalized='fallback';
 }
 
+
+function simpleClampScore(value){
+  return Math.max(42,Math.min(98,Math.round(value)));
+}
+function simpleSentence(text,count=1){
+  const parts=String(text||'').match(/[^.!?。！？]+[.!?。！？]?/g)||[];
+  return parts.slice(0,count).join(' ').trim();
+}
+function simpleAreaScores(v){
+  const base=Number(v.score)||62;
+  const rel=Number(v.dayRel?.score)||0;
+  const monthRel=Number(v.monthRel?.score)||0;
+  const seed=hash(`${input.birthDate}|${input.birthTime||''}|${v.expected}|simple-score`);
+  const jitter=i=>(((seed>>>(i*4))&15)-7);
+  const god=String(v.god||'');
+  const moneyBoost=/재/.test(god)?8:/관/.test(god)?3:0;
+  const workBoost=/관|재/.test(god)?6:/인/.test(god)?3:0;
+  const studyBoost=/인/.test(god)?8:/식|상/.test(god)?4:0;
+  const healthPenalty=['over','pressure'].includes(v.impact?.type)?-7:2;
+  return {
+    money:simpleClampScore(base+moneyBoost+jitter(0)),
+    work:simpleClampScore(base+workBoost+monthRel*3+jitter(1)),
+    love:simpleClampScore(base+rel*4+jitter(2)),
+    study:simpleClampScore(base+studyBoost+jitter(3)),
+    health:simpleClampScore(base+healthPenalty+jitter(4))
+  };
+}
+function simpleLuckyPack(v){
+  const element=v.supportEl||v.targetEl||'earth';
+  const map={
+    wood:{direction:'동쪽',color:'청록 · 연두',food:'신선한 채소 요리',drink:'녹차',item:'작은 노트'},
+    fire:{direction:'남쪽',color:'버건디 · 코랄',food:'따뜻한 볶음 요리',drink:'허브티',item:'붉은 포인트 소품'},
+    earth:{direction:'남서쪽',color:'베이지 · 브라운',food:'든든한 한 끼',drink:'라테',item:'수첩 · 정리함'},
+    metal:{direction:'서쪽',color:'아이보리 · 실버',food:'담백한 구이',drink:'탄산수',item:'은색 액세서리'},
+    water:{direction:'북쪽',color:'네이비 · 블루',food:'국물 요리',drink:'물 · 차',item:'이어폰 · 물병'}
+  };
+  const base=map[element]||map.earth;
+  const nums=luckyNumbers(hash(`${input.birthDate}|${input.birthTime||''}|${v.expected}|lucky-simple`));
+  return {...base,number:nums[0]};
+}
+function renderSimple(v){
+  const simple=root.querySelector('[data-daily-simple]');
+  if(!simple)return;
+
+  const date=new Date(`${v.expected}T12:00:00+09:00`);
+  const dateLabel=new Intl.DateTimeFormat('ko-KR',{year:'numeric',month:'2-digit',day:'2-digit',weekday:'long'}).format(date);
+  const area=decisiveAreaCopy(v);
+  const scores=simpleAreaScores(v);
+  const total=Math.round((scores.money+scores.work+scores.love+scores.study+scores.health)/5);
+  const full=Boolean(v.full&&v.godPack);
+  const title=tomorrow?'내일의 운세':'오늘의 운세';
+  const dayLabel=tomorrow?'내일':'오늘';
+
+  const headline=full
+    ? String(v.godPack.title||v.impact?.title||'차분하게 흐름을 이어가기 좋은 날').replace(/\s*흐름$/,'')
+    : String(v.pack?.headline||'차분하게 흐름을 이어가기 좋은 날').replace(/[.]$/,'');
+  const summary=full
+    ? `${simpleSentence(forDay(v.godPack.action),1)} ${simpleSentence(v.dayRel.copy,1)}`
+    : `${simpleSentence(v.pack?.work||v.stemText,1)} ${simpleSentence(v.dayRel.copy,1)}`;
+
+  const rows=[
+    ['money','재물',scores.money,area.money],
+    ['work','직장',scores.work,area.work],
+    ['love','애정',scores.love,area.love],
+    ['study','학업',scores.study,area.study],
+    ['health','건강',scores.health,area.health]
+  ];
+  const rowLabel={money:'재물',work:'직장',love:'애정',study:'학업',health:'건강'};
+
+  simple.querySelector('[data-simple-title]').textContent=title;
+  simple.querySelector('[data-simple-date]').textContent=dateLabel;
+  simple.querySelector('[data-simple-score-label]').textContent=`${dayLabel}의 총운`;
+  simple.querySelector('[data-simple-total]').textContent=String(total);
+  simple.querySelector('[data-simple-headline]').textContent=`${headline}이에요.`;
+  simple.querySelector('[data-simple-summary]').textContent=summary;
+  simple.querySelector('[data-simple-badge]').innerHTML=total>=82?'좋은 흐름이<br>머무는 날':total>=68?'차분히 밀어가면<br>좋은 날':'서두르지 않으면<br>괜찮은 날';
+  simple.querySelector('[data-simple-index-title]').textContent=`${dayLabel}의 운세 지수`;
+  simple.querySelector('[data-simple-index]').innerHTML=rows.map(([key,label,score,copy])=>`
+    <div class="daily-index-row" data-area="${key}">
+      <strong class="daily-index-name">${label}</strong>
+      <div class="daily-index-track" aria-hidden="true"><i style="--score:${score}%"></i></div>
+      <strong class="daily-index-score">${score}점</strong>
+      <p class="daily-index-note">${esc(simpleSentence(copy,1))}</p>
+    </div>`).join('');
+
+  const best=[];
+  if(scores.money>=78)best.push('정산 확인');
+  if(scores.work>=78)best.push('연락하기');
+  if(scores.love>=78)best.push('마음 표현하기');
+  if(scores.study>=78)best.push('집중해서 끝내기');
+  if(!best.length)best.push('우선순위 정리');
+  const elementAction={wood:'새 일 시작하기',fire:'표현하기',earth:'정리하기',metal:'결정하기',water:'한 번 더 확인하기'}[v.supportEl||v.targetEl||'earth'];
+  if(elementAction&&!best.includes(elementAction))best.push(elementAction);
+  if(best.length<3)best.push('한 가지 마무리하기');
+
+  const caution=[];
+  if(scores.money<62)caution.push('충동구매');
+  if(scores.love<62)caution.push('감정적인 단정');
+  if(scores.work<62)caution.push('일정 과하게 잡기');
+  if(v.impact?.type==='over')caution.push('무리하게 밀어붙이기');
+  if(!caution.length)caution.push('성급한 결정','일정 과하게 채우기');
+
+  simple.querySelector('[data-simple-best]').textContent=best.slice(0,3).join(' · ');
+  simple.querySelector('[data-simple-caution]').textContent=[...new Set(caution)].slice(0,2).join(' · ');
+
+  const lucky=simpleLuckyPack(v);
+  const luckyItems=[
+    ['숫자',lucky.number],
+    ['방향',lucky.direction],
+    ['컬러',lucky.color],
+    ['음식',lucky.food],
+    ['음료',lucky.drink],
+    ['아이템',lucky.item]
+  ];
+  simple.querySelector('[data-simple-lucky]').innerHTML=luckyItems.map(([label,value])=>`
+    <div class="daily-lucky-item"><span>${label}</span><strong>${esc(value)}</strong></div>`).join('');
+
+  let mission=full?forDay(v.godPack.action):(v.pack?.work||'가장 중요한 일 하나를 먼저 끝내보세요.');
+  mission=simpleSentence(mission,1);
+  simple.querySelector('[data-simple-mission]').textContent=mission;
+
+  simple.hidden=false;
+  root.classList.add('is-simple');
+}
+
 function reportText(v){
   const cards=[...root.querySelectorAll('[data-area-grid] .fortune-card')].map(card=>`${card.querySelector('h3')?.textContent||''}: ${card.querySelector('p')?.innerText||''}`);
   const key=[...root.querySelectorAll('[data-key-grid] .fortune-key-card')].map(card=>`- ${card.querySelector('strong')?.textContent||''}`);
@@ -585,6 +710,7 @@ async function setupActions(v){
 try{
   const value=await build();
   if(value.full)renderFull(value);else renderFallback(value);
+  renderSimple(value);
   root.dataset.finalState='ready';
   window.__jwFortuneResultReady=true;
   setupActions(value);
