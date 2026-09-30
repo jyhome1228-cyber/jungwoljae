@@ -562,12 +562,13 @@ function renderSimple(v){
   const area=decisiveAreaCopy(v);
   const scores=simpleAreaScores(v);
   const total=Math.round((scores.money+scores.work+scores.love+scores.study+scores.health)/5);
+  v.simpleScore=total;
   const full=Boolean(v.full&&v.godPack);
   const title=tomorrow?'내일의 운세':'오늘의 운세';
   const dayLabel=tomorrow?'내일':'오늘';
 
   const headline=full
-    ? String(v.godPack.title||v.impact?.title||'차분하게 흐름을 이어가기 좋은 날').replace(/\s*흐름$/,'')
+    ? String(v.godPack.title||v.impact?.title||'차분하게 흐름을 이어가기 좋은 날').replace(/[.]$/,'')
     : String(v.pack?.headline||'차분하게 흐름을 이어가기 좋은 날').replace(/[.]$/,'');
   const summary=full
     ? `${simpleSentence(forDay(v.godPack.action),1)} ${simpleSentence(v.dayRel.copy,1)}`
@@ -693,7 +694,7 @@ async function setupActions(v){
         natalDayPillar:v.natal.day,
         targetDayPillar:v.target.pillar,
         relation:v.dayRel.label,
-        score:v.score,
+        score:v.simpleScore??v.score,
         personalized:v.full?'full-pillars':'day-pillar-fallback',
         reportText:reportText(v),
         createdAt:dbMod.serverTimestamp()
