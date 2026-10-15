@@ -20,7 +20,7 @@
 .jw-editorial{font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;color:#302827;word-break:keep-all;overflow-wrap:break-word}
 .jw-editorial :is(p,h1,h2,h3){margin:0}
 .jw-editorial :is(p,div,article){letter-spacing:-.022em}
-.jw-reading-hero{position:relative;padding:32px 40px 34px 4px;border-bottom:1px solid #d7cbc2}
+.jw-reading-hero{position:relative;padding:32px 40px 34px 4px;border-bottom:0}
 .jw-hero-kicker{color:#7f3c3a;font-size:11px;font-weight:800;letter-spacing:.15em}
 .jw-hero-title{margin:12px 0 13px!important;font-size:clamp(34px,4.5vw,56px);font-weight:750;line-height:1.16;letter-spacing:-.058em;color:#292120}
 .jw-hero-date{font-size:14px;font-weight:600;color:#7f7069}
@@ -33,7 +33,7 @@
 .jw-category-symbol{width:56px;height:56px;display:grid;place-items:center;border:1px solid #e7dbd2;border-radius:50%;background:#ede7df;color:#81514a;font-family:"Noto Serif KR",serif;font-size:23px;font-weight:600;line-height:1}
 .jw-category-total .jw-category-symbol{border-color:#985954;background:#81504b;color:#fff}
 .jw-overall{margin:24px 0 40px;padding:42px 50px 38px;background:#fffefa;border:1px solid #e4dbd3;border-radius:16px;box-shadow:0 12px 32px rgba(50,30,25,.035);scroll-margin-top:30px}
-.jw-overall-labels{display:flex;align-items:center;justify-content:space-between;gap:15px;padding-bottom:18px;border-bottom:1px solid #eae1d9}
+.jw-overall-labels{display:flex;align-items:center;justify-content:space-between;gap:15px;padding-bottom:8px;border-bottom:0}
 .jw-overall-tag{font-size:13px;line-height:1.4;font-weight:750;color:#8a4442}
 .jw-overall-date{font-size:12px;color:#91827a}
 .jw-overall-headline{margin:28px 0 22px!important;font-size:clamp(22px,2.6vw,30px);line-height:1.42;letter-spacing:-.045em;font-weight:750;color:#302321}
@@ -56,15 +56,15 @@
 .jw-area-overline{font-size:10px;color:#98766d;letter-spacing:.14em;font-weight:750}
 .jw-area-name{margin:4px 0 6px!important;font-size:21px;line-height:1.35;font-weight:750;letter-spacing:-.045em;color:#302321}
 .jw-area-hint{font-size:12px;color:#9a8d86}
-.jw-area-body{min-width:0;border-left:1px solid #eee4de;padding-left:27px}
+.jw-area-body{min-width:0;padding-left:8px;border-left:0}
 .jw-area-lead{display:block;margin:0 0 13px;font-size:17px;line-height:1.72;letter-spacing:-.035em;font-weight:750;color:#46312f}
 .jw-area-copy{color:#5b4e48;font-size:15px;line-height:1.98}
 .jw-point-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
 .jw-point-card{padding:28px 30px;background:#fffefa;border:1px solid #e2d9d2;border-radius:14px}
-.jw-point-card.is-helpful{border-top:3px solid #956d59}
-.jw-point-card.is-caution{border-top:3px solid #995957}
+.jw-point-card.is-helpful{border:1px solid #e2d9d2}
+.jw-point-card.is-caution{border:1px solid #e2d9d2}
 .jw-point-kicker{display:block;margin-bottom:21px;font-size:13px;font-weight:800;color:#7a5149}
-.jw-point-detail + .jw-point-detail{margin-top:20px;padding-top:20px;border-top:1px solid #eee5de}
+.jw-point-detail + .jw-point-detail{margin-top:20px;padding-top:0;border-top:0}
 .jw-point-detail strong{display:block;margin-bottom:7px;font-size:16px;line-height:1.5;color:#3f302c}
 .jw-point-detail p,.jw-point-card>p{font-size:14px;line-height:1.85;color:#6d5a53}
 .jw-rhythm-list{background:#fffefa;border:1px solid #e5ddd5;border-radius:14px;padding:4px 28px}
@@ -74,6 +74,9 @@
 .jw-rhythm-period{color:#8a5651;font-size:11px;font-weight:750;letter-spacing:.08em}
 .jw-rhythm-copy h3{margin:5px 0 8px!important;font-size:17px;line-height:1.5;color:#3f312d}
 .jw-rhythm-copy p{font-size:14px;line-height:1.9;color:#685b54}
+/* 내일 운세의 별도 사전 준비 안내도 겹선 없는 단일 보더를 사용합니다. */
+.jw-preparation-copy{padding:25px 29px;background:#fffefa;border:1px solid #e2d9d2;border-radius:14px}
+.jw-preparation-copy p{margin:0;color:#584940;font-size:15px;line-height:1.95;word-break:keep-all}
 .jw-lucky-tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
 .jw-lucky-tile{min-height:100px;padding:18px;border:1px solid #e3d9d2;background:#fffefa;border-radius:12px;display:flex;flex-direction:column;gap:12px}
 .jw-lucky-tile span{font-size:12px;color:#9a8077}
@@ -115,6 +118,8 @@
  .jw-area-copy{font-size:14px;line-height:1.9}
  .jw-point-grid{grid-template-columns:1fr;gap:11px}
  .jw-point-card{padding:23px}
+ .jw-preparation-copy{padding:20px}
+ .jw-preparation-copy p{font-size:14px;line-height:1.9}
  .jw-lucky-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
  .jw-ending{padding:29px 23px}
  .jw-ending h2{font-size:22px}
