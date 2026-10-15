@@ -52,7 +52,7 @@ function applyBrandLogo(){document.querySelectorAll('.brand').forEach(brand=>{br
 applyBrandLogo();
 
 function normalizeNavigation(){
-  const primaryLinks=[['./fortune.html','오늘의 운세'],['./tomorrow.html','내일의 운세'],['./relationship.html','인연'],['./compatibility.html','궁합'],['./work-money.html','일·재물'],['./guide.html','정월도감'],['./talisman.html','정월부적'],['./lucky-number.html','행운의 숫자'],['./important-day.html','중요한 날'],['./moving-day.html','이사 택일'],['./archive.html','정월록'],['./reviews.html','후기'],['./about.html','소개']];
+  const primaryLinks=[['./ohaeng.html','오행'],['./fortune.html','오늘의 운세'],['./tomorrow.html','내일의 운세'],['./relationship.html','인연'],['./compatibility.html','궁합'],['./work-money.html','일·재물'],['./guide.html','정월도감'],['./talisman.html','정월부적'],['./lucky-number.html','행운의 숫자'],['./important-day.html','중요한 날'],['./moving-day.html','이사 택일'],['./archive.html','정월록'],['./reviews.html','후기'],['./about.html','소개']];
   document.querySelectorAll('.desktop-nav, .mobile-menu nav').forEach(nav=>{nav.innerHTML=primaryLinks.map(([href,label])=>`<a href="${href}"${currentFile===href.replace('./','')?' aria-current="page"':''}>${label}</a>`).join('');});
   document.querySelectorAll('.secondary-nav .container').forEach(nav=>{[...nav.querySelectorAll('a')].forEach(link=>{if(link.getAttribute('href')?.includes('fortune.html'))link.textContent='오늘의 운세';if(link.getAttribute('href')?.includes('saju.html'))link.remove();});});
   document.querySelectorAll('.header-cta').forEach(cta=>{cta.href='./signup.html';cta.textContent='회원등록';});
