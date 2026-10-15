@@ -62,6 +62,11 @@
     var oneLine=text(panel.querySelector('[data-simple-summary]'));
     var mission=text(panel.querySelector('[data-simple-mission]'));
     var overview=Array.from(root.querySelectorAll('[data-total-summary] > p')).map(text).filter(Boolean);
+    // 내일의 운세에서는 계산 단계에서 생성한 실제 사전 준비 안내를 추가합니다.
+    var prepParagraph=Array.from(root.querySelectorAll('[data-fortune-story] > p')).find(function(p){
+      return text(p.querySelector('strong'))==='오늘 미리 준비할 것';
+    });
+    var tomorrowPrep=prepParagraph ? text(prepParagraph).replace(/^오늘 미리 준비할 것\s*/,'') : '';
     var dayparts=Array.from(root.querySelectorAll('[data-time-grid] .fortune-time-card')).slice(0,3).map(function(card){
       return {period:text(card.querySelector('span')),title:text(card.querySelector('strong')),copy:text(card.querySelector('p'))};
     });
@@ -107,7 +112,7 @@
     }
     if(oneLine){
       var note=add(overall,'div','jw-overall-takeaway');
-      add(note,'span','jw-takeaway-label','오늘의 한마디');
+      add(note,'span','jw-takeaway-label',day+'의 한마디');
       add(note,'p','',oneLine);
     }
 
@@ -131,7 +136,15 @@
     });
     page.appendChild(areas);
 
-    var points=makeSection('GOOD & CAREFUL',day+' 기억할 두 가지','오늘 해보면 좋은 행동과 한 번 더 살피면 좋은 행동입니다.');
+    if(isTomorrow&&tomorrowPrep){
+      var preparation=makeSection('PREPARE FOR TOMORROW','오늘 미리 준비할 것','내일의 운세를 보고 지금부터 준비할 수 있는 내용을 담았습니다.');
+      preparation.classList.add('jw-tomorrow-preparation');
+      var prepBox=add(preparation,'div','jw-preparation-copy');
+      add(prepBox,'p','',tomorrowPrep);
+      page.appendChild(preparation);
+    }
+
+    var points=makeSection('GOOD & CAREFUL',day+' 기억할 두 가지',day+' 해보면 좋은 행동과 한 번 더 살피면 좋은 행동입니다.');
     var pointGrid=add(points,'div','jw-point-grid');
     function pointCard(cls,kicker,list,alternative){
       var card=add(pointGrid,'article','jw-point-card '+cls);
