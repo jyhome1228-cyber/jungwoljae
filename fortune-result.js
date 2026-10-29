@@ -107,12 +107,19 @@ async function calculatePillars(dateString,{time='12:00',lunar=false,leap=false,
   if(module?.calculateFourPillars){
     const [year,month,day]=String(dateString).split('-').map(Number);
     const [hour,minute]=String(time||'12:00').split(':').map(Number);
-    const result=module.calculateFourPillars({
+    let result;
+    try {
+      result=module.calculateFourPillars({
       year,month,day,
       hour:Number.isFinite(hour)?hour:12,
       minute:Number.isFinite(minute)?minute:0,
       isLunar:lunar,isLeapMonth:leap,gender:gender||undefined
-    });
+      });
+    } catch (error) {
+      console.warn('[Jungwoljae fortune] calculator failed',error);
+      if(lunar)throw error;
+      result=null;
+    }
     const object=typeof result?.toObject==='function'?result.toObject():result;
     const full={
       year:pillarString(object?.year),
@@ -713,13 +720,15 @@ try{
   if(value.full)renderFull(value);else renderFallback(value);
   renderSimple(value);
   root.dataset.finalState='ready';
+  root.dataset.calculationStatus='success';
   window.__jwFortuneResultReady=true;
   setupActions(value);
   window.dispatchEvent(new CustomEvent('jw:fortune-rendered'));
   window.dispatchEvent(new CustomEvent('jw:result-ready'));
 }catch(error){
   console.error('fortune result failed',error);
-  root.dataset.finalState='ready';
+  root.dataset.finalState='error';
+  root.dataset.calculationStatus='failed';
   const container=root.querySelector('.fortune-result-container');
   if(container)container.innerHTML=`<section class="fortune-report"><p class="fortune-label">FORTUNE</p><h1>운세 계산 연결이 지연되고 있습니다.</h1><p class="fortune-lead">${input.calendarType==='lunar'?'음력 날짜 계산 모듈을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.':'입력 정보를 다시 확인한 뒤 운세를 다시 확인해주세요.'}</p><a class="fortune-button primary" href="${tomorrow?'./tomorrow.html':'./fortune.html'}">다시 입력하기</a></section>`;
   window.dispatchEvent(new CustomEvent('jw:fortune-rendered'));
