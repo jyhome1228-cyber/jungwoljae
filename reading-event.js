@@ -71,6 +71,25 @@ if(config){
     try{already=sessionStorage.getItem(sessionKey)==='1';}catch(e){}
 
     if(!already){
+      // Daily fortunes log only after the calculation has produced a result.
+      // Other services retain their existing result-page logging lifecycle.
+      const dailyFortune=file==='fortune-result.html';
+      let resultReady=!dailyFortune;
+      if(dailyFortune){
+        const resultRoot=document.querySelector('[data-fortune-result]');
+        resultReady=resultRoot?.dataset.calculationStatus==='success';
+        if(!resultReady){
+          const onReady=()=>{
+            if(resultRoot?.dataset.calculationStatus!=='success')return;
+            resultReady=true;
+            window.removeEventListener('jw:fortune-rendered',onReady);
+            window.removeEventListener('jw:result-ready',onReady);
+            if(!already)startWriting();
+          };
+          window.addEventListener('jw:fortune-rendered',onReady);
+          window.addEventListener('jw:result-ready',onReady);
+        }
+      }
       let writing=false;
       const writeEvent=async user=>{
         if(writing)return;
@@ -85,6 +104,7 @@ if(config){
         }
       };
 
+      const startWriting=()=>{if(!resultReady)return;
       // Do not block anonymous usage logging on Firebase Auth initialization.
       // Most reading traffic is anonymous, and waiting indefinitely for auth can
       // make a valid result view disappear from reading_events.
@@ -111,6 +131,8 @@ if(config){
           writeEvent(null);
         }
       }
+      };
+      if(resultReady)startWriting();
     }
   }else{
     console.warn('[Jungwoljae reading event] 결과 입력값을 찾지 못해 분석 기록을 저장하지 않았습니다.',config.storage);
