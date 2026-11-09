@@ -91,17 +91,34 @@ if(config){
         }
       }
       let writing=false;
+      const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+      const retryable=error=>['unavailable','deadline-exceeded','resource-exhausted','aborted','internal'].some(code=>String(error?.code||'').includes(code));
       const writeEvent=async user=>{
         if(writing)return;
         writing=true;
         const normalized={...baseEvent,uid:user?.uid||null,createdAt:serverTimestamp()};
-        try{
-          await addDoc(collection(db,'reading_events'),normalized);
-          try{sessionStorage.setItem(sessionKey,'1');}catch(e){}
-        }catch(error){
-          writing=false;
-          console.warn('[Jungwoljae reading event]',error?.code||error?.message||error);
+        let lastError=null;
+        for(let attempt=0;attempt<3;attempt++){
+          try{
+            await addDoc(collection(db,'reading_events'),normalized);
+            try{
+              sessionStorage.setItem(sessionKey,'1');
+              sessionStorage.removeItem('jungwoljae_reading_event_last_error');
+            }catch(e){}
+            window.dispatchEvent(new CustomEvent('jw:reading-event-saved',{detail:{service:serviceVariant}}));
+            writing=false;
+            return;
+          }catch(error){
+            lastError=error;
+            if(!retryable(error)||attempt===2)break;
+            await sleep(500*(attempt+1));
+          }
         }
+        writing=false;
+        const code=lastError?.code||lastError?.message||'unknown';
+        try{sessionStorage.setItem('jungwoljae_reading_event_last_error',JSON.stringify({service:serviceVariant,code:String(code),at:Date.now()}));}catch(e){}
+        console.warn('[Jungwoljae reading event]',code);
+        window.dispatchEvent(new CustomEvent('jw:reading-event-error',{detail:{service:serviceVariant,code:String(code)}}));
       };
 
       const startWriting=()=>{if(!resultReady)return;
