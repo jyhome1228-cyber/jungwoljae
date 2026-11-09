@@ -75,7 +75,7 @@ document.addEventListener('click',event=>{const anchor=event.target.closest('a[h
 const reviewsSection=document.querySelector('#reviews');if(reviewsSection){const s=document.createElement('script');s.type='module';s.src='./reviews.js?v=20260907-02';document.body.appendChild(s);}
 const footer=document.querySelector('.site-footer');if(footer&&!footer.dataset.enhanced){footer.dataset.enhanced='true';const s=document.createElement('script');s.src='./footer.js?v=20260921-1730';s.defer=true;document.body.appendChild(s);}
 const authScript=document.createElement('script');authScript.type='module';authScript.src='./auth.js?v=20260908-0731';document.body.appendChild(authScript);
-const analyticsScript=document.createElement('script');analyticsScript.type='module';analyticsScript.src='./analytics.js?v=20260918-0812';document.body.appendChild(analyticsScript);
+if(!document.querySelector('script[src*="analytics.js"]')){const analyticsScript=document.createElement('script');analyticsScript.type='module';analyticsScript.src='./analytics.js?v=20261109-01';document.body.appendChild(analyticsScript);}
 ['./birth-input-unified.js?v=20260910-2005','./birth-time-unified.js?v=20260910-2005','./gender-unified.js?v=20260910-2005'].forEach(src=>{const s=document.createElement('script');s.src=src;s.defer=true;document.body.appendChild(s);});
 
 if(profilePages.has(currentFile)){
@@ -85,7 +85,7 @@ if(profilePages.has(currentFile)){
 }
 
 if(isResultLike){
-  if(currentFile.endsWith('-result.html')||currentFile==='compatibility-report.html'){const e=document.createElement('script');e.type='module';e.src='./reading-event.js?v=20260918-0812';document.body.appendChild(e);}
+  if((currentFile.endsWith('-result.html')||currentFile==='compatibility-report.html')&&!document.querySelector('script[src*="reading-event.js"]')){const e=document.createElement('script');e.type='module';e.src='./reading-event.js?v=20261109-01';document.body.appendChild(e);}
   if(!isFortuneResult){
     setTimeout(()=>{const q=document.createElement('script');q.src='./result-quality-v7.js?v=20260908-2235';q.defer=true;document.body.appendChild(q);},1800);
     const math=document.createElement('script');math.type='module';math.src='./result-calculation-v11.js?v=20260909-0750';document.body.appendChild(math);
