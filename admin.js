@@ -36,6 +36,8 @@ let dashboardLoaded=false;
 let adminAuthorized=false;
 let readingEvents=[];
 let readingsLoaded=false;
+let resultPageViewsToday=0;
+let resultPageViews7d=0;
 
 const esc=(v='')=>String(v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 const toDate=value=>value?.toDate?value.toDate():value?new Date(value):null;
@@ -121,7 +123,7 @@ function dayLabel(dateKey){const [,m,d]=dateKey.split('-');return `${Number(m)}/
 async function visitorCount(dateKey){const ref=collection(db,'analytics_daily',dateKey,'visitors');try{return Number((await getCountFromServer(ref)).data().count||0);}catch(error){try{return (await getDocs(ref)).size;}catch(fallback){throw fallback;}}}
 async function loadTrafficDay(dateKey){const dailyRef=doc(db,'analytics_daily',dateKey);const pageRef=collection(db,'analytics_daily',dateKey,'pages');const [dailySnap,visitors,pageSnap]=await Promise.all([getDoc(dailyRef),visitorCount(dateKey),getDocs(pageRef)]);return {dateKey,pageViews:dailySnap.exists()?Number(dailySnap.data().pageViews||0):0,visitors:Number(visitors||0),pages:pageSnap.docs||[]};}
 function renderTraffic(days){const node=document.querySelector('[data-traffic-chart]');if(!node)return;const max=Math.max(1,...days.map(x=>x.pageViews));const hasData=days.some(x=>x.pageViews||x.visitors);node.innerHTML=hasData?days.map(x=>`<div class="traffic-day"><div class="traffic-bar-wrap" title="${esc(x.dateKey)} · ${n(x.pageViews)} PV · ${n(x.visitors)}명"><div class="traffic-bar" style="height:${Math.max(3,Math.round(x.pageViews/max*100))}%"></div></div><div class="traffic-label"><strong>${n(x.pageViews)}</strong><span>${dayLabel(x.dateKey)} · ${n(x.visitors)}명</span></div></div>`).join(''):`<div class="admin-data-empty" style="grid-column:1/-1"><strong>아직 방문 데이터가 없습니다.</strong>analytics.js 적용 이후 실제 방문부터 날짜별로 누적됩니다. 사이트 메인과 서비스 페이지를 한 번 열어본 뒤 새로고침해보세요.</div>`;}
-function renderServiceUsage(days){const counts={};Object.values(resultServices).forEach(label=>counts[label]=0);days.forEach(day=>day.pages.forEach(s=>{const row=s.data();const label=resultServices[row.path];if(label)counts[label]+=Number(row.pageViews||0);}));const items=Object.entries(counts).sort((a,b)=>b[1]-a[1]);const max=Math.max(1,...items.map(x=>x[1]));const node=document.querySelector('[data-service-usage]');if(!node)return;node.innerHTML=items.map(([label,count])=>`<div class="service-row"><span>${esc(label)}</span><div class="service-track"><div class="service-fill" style="width:${count?Math.max(5,Math.round(count/max*100)):0}%"></div></div><strong>${n(count)}</strong></div>`).join('');}
+function renderServiceUsage(days){const counts={};Object.values(resultServices).forEach(label=>counts[label]=0);days.forEach(day=>day.pages.forEach(s=>{const row=s.data();const label=resultServices[row.path];if(label)counts[label]+=Number(row.pageViews||0);}));resultPageViews7d=Object.values(counts).reduce((sum,count)=>sum+Number(count||0),0);const today=days.at(-1);resultPageViewsToday=today?today.pages.reduce((sum,s)=>sum+(resultServices[s.data().path]?Number(s.data().pageViews||0):0),0):0;const items=Object.entries(counts).sort((a,b)=>b[1]-a[1]);const max=Math.max(1,...items.map(x=>x[1]));const node=document.querySelector('[data-service-usage]');if(!node)return;node.innerHTML=items.map(([label,count])=>`<div class="service-row"><span>${esc(label)}</span><div class="service-track"><div class="service-fill" style="width:${count?Math.max(5,Math.round(count/max*100)):0}%"></div></div><strong>${n(count)}</strong></div>`).join('');}
 function renderPages(pageDocs,total){const tbody=document.querySelector('[data-page-table]');const totalNode=document.querySelector('[data-pages-total]');if(totalNode)totalNode.textContent=`오늘 ${n(total)} PV`;if(!tbody)return;const rows=pageDocs.map(s=>s.data()).sort((a,b)=>Number(b.pageViews||0)-Number(a.pageViews||0));tbody.innerHTML=rows.length?rows.map(row=>`<tr><td><strong>${esc(row.label||row.path)}</strong></td><td>${esc(row.path||'—')}</td><td class="num">${n(row.pageViews)}</td><td class="num">${total?Math.round(Number(row.pageViews||0)/total*100):0}%</td></tr>`).join(''):'<tr><td colspan="4">오늘 집계된 페이지뷰가 없습니다.</td></tr>';}
 function renderReviews(reviewDocs){const node=document.querySelector('[data-review-list]');if(!node)return;const recent=reviewDocs.slice(0,8);node.innerHTML=recent.length?recent.map(s=>{const d=s.data();return `<article class="admin-review"><div class="admin-review-meta"><span>${esc(d.authorLabel||'익명 회원')} · ${esc(d.service||'정월재')}</span><small>${formatDateTime(d.createdAt)}</small></div><p>${esc(d.content||'')}</p><div class="admin-review-actions"><span class="admin-review-rating">★ ${Number(d.rating||0).toFixed(1)}</span></div></article>`;}).join(''):'<p class="admin-caption">아직 등록된 후기가 없습니다.</p>';}
 function firestoreHint(error){const code=String(error?.code||error?.message||'');if(code.includes('permission-denied'))return 'Firestore Rules 최신본을 Firebase 콘솔에서 게시하거나 관리자 권한을 확인해주세요.';if(code.includes('unavailable'))return 'Firebase 연결이 일시적으로 불안정합니다. 잠시 후 다시 시도해주세요.';return 'Firebase 프로젝트와 Firestore 상태를 확인해주세요.';}
@@ -205,10 +207,15 @@ async function loadReadingData(){
     readingEvents=recentSnap.docs.map(s=>({id:s.id,...s.data()}));
     const todayMetric=document.querySelector('[data-metric-readings-today]');
     const totalMetric=document.querySelector('[data-metric-readings-total]');
-    if(todayMetric)todayMetric.textContent=n(todaySnap.data().count||0);
-    if(totalMetric)totalMetric.textContent=n(totalSnap.data().count||0);
+    const todayCount=Number(todaySnap.data().count||0);
+    const totalCount=Number(totalSnap.data().count||0);
+    if(todayMetric)todayMetric.textContent=n(todayCount);
+    if(totalMetric)totalMetric.textContent=n(totalCount);
     readingsLoaded=true;
     renderReadingTable();
+    if(readingSummary&&resultPageViewsToday>0&&todayCount===0){
+      readingSummary.textContent=`오늘 결과 페이지는 ${n(resultPageViewsToday)}회 열렸지만 분석 기록은 0건입니다. reading-event.js 또는 Firestore Rules를 확인해주세요.`;
+    }
   }catch(error){
     console.error('[Jungwoljae Admin readings]',error);
     readingsLoaded=false;
