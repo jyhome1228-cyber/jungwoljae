@@ -238,6 +238,10 @@ for page in html_files:
     )
     is_result_page = (page.name.endswith("-result.html") or page.name == "compatibility-report.html") and not retired_result
     if is_result_page:
+        if "analytics.js" not in script_names:
+            errors.append(f"{rel(page)}: result page must load analytics.js directly")
+        if "reading-event.js" not in script_names:
+            errors.append(f"{rel(page)}: result page must load reading-event.js directly")
         if page.name == "fortune-result.html":
             if "fortune-loader.js" not in script_names:
                 errors.append(f"{rel(page)}: fortune result missing dedicated fortune-loader.js")
